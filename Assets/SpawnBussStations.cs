@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Mapbox.Examples;
 using Mapbox.Unity.Map;
 using Mapbox.Unity.Utilities;
 using Mapbox.Utils;
@@ -15,8 +16,8 @@ public class SpawnBussStations : MonoBehaviour
     [FormerlySerializedAs("_spawnScale")] [SerializeField]
     private float spawnScale = 100f;
 
-    [FormerlySerializedAs("_markerPrefab")] [SerializeField]
-    private GameObject markerPrefab;
+    [SerializeField]
+    private PoiLabelTextSetter marker;
 
     private List<GameObject> _spawnedObjects;
     
@@ -31,10 +32,13 @@ public class SpawnBussStations : MonoBehaviour
         {
             var locationString = bussStopsStopPoint.GeoCoords;
             _locations[i] = Conversions.StringToLatLon(locationString);
-            var instance = Instantiate(markerPrefab);
-            instance.transform.localPosition = map.GeoToWorldPosition(_locations[i], true);
+            var instance = Instantiate(marker);
+            instance.Set(bussStopsStopPoint.name);
+            Vector3 pos = map.GeoToWorldPosition(_locations[i], true);
+            pos.y += 5;
+            instance.transform.localPosition = pos;
             instance.transform.localScale = new Vector3(spawnScale, spawnScale, spawnScale);
-            _spawnedObjects.Add(instance);
+            _spawnedObjects.Add(instance.gameObject);
             i++;
         }
         
@@ -47,7 +51,10 @@ public class SpawnBussStations : MonoBehaviour
         {
             var spawnedObject = _spawnedObjects[i];
             var location = _locations[i];
-            spawnedObject.transform.localPosition = map.GeoToWorldPosition(location, true);
+            
+            Vector3 pos = map.GeoToWorldPosition(location, true);
+            pos.y += 1.5f;
+            spawnedObject.transform.localPosition = pos;
             spawnedObject.transform.localScale = new Vector3(spawnScale, spawnScale, spawnScale);
         }
     }

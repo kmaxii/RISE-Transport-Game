@@ -1,3 +1,5 @@
+ using System;
+
  namespace Mapbox.Examples
 {
 	using Mapbox.Unity.MeshGeneration.Interfaces;
@@ -12,6 +14,12 @@
 		[SerializeField]
 		Image _background;
 
+
+		public void Set(String text)
+		{
+			_text.text = text;
+			RefreshBackground();
+		}
 		public void Set(Dictionary<string, object> props)
 		{
 			_text.text = "";
