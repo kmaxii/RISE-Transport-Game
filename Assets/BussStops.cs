@@ -3,34 +3,59 @@ using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 using UnityEngine;
-[CreateAssetMenu(menuName = "custom/BussStopsList")]
-public class BussStops : ScriptableObject
+
+public class BussStops
 {
-    [SerializeField] private String jsonFileName;
+    private static String jsonFileName = "bussstations.json";
 
-    [SerializeField] private bool singleStopPerName = true;
+    private bool singleStopPerName = true;
 
-    private HashSet<StopPoint> uniqueStopPoints;
+    private HashSet<StopPoint> _uniqueStopPoints;
 
-    private void Awake()
+    public HashSet<StopPoint> StopPoints
     {
-        ProcessStopPointsFromFile(jsonFileName);
+        get => _uniqueStopPoints;
     }
 
-    private void ProcessStopPointsFromFile(string jsonFileName)
+    //Singleton
+    private static BussStops _instance;
+
+    public static BussStops Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = new BussStops();
+            }
+
+            return _instance;
+        }
+    }
+
+    private BussStops()
+    {
+        ProcessStopPointsFromFile();
+
+    }
+
+    private void ProcessStopPointsFromFile()
     {
         try
         {
             string jsonString = File.ReadAllText("Assets/" + jsonFileName);
             StopPointsData data = JsonConvert.DeserializeObject<StopPointsData>(jsonString);
 
-            uniqueStopPoints = singleStopPerName ? new HashSet<StopPoint>(new StopPointComparer()) : new HashSet<StopPoint>();
+            _uniqueStopPoints = singleStopPerName
+                ? new HashSet<StopPoint>(new StopPointComparer())
+                : new HashSet<StopPoint>();
 
             foreach (var stopPoint in data.stopPoints)
             {
-                if (uniqueStopPoints.Add(stopPoint))
+                if (_uniqueStopPoints.Add(stopPoint))
                 {
-                    Debug.Log($"Added: {stopPoint.name}, Northing: {stopPoint.geometry.northingCoordinate}, Easting: {stopPoint.geometry.eastingCoordinate}");
+                    Debug.Log(
+                        $"Added: {stopPoint.name}, Northing: {stopPoint.geometry.northingCoordinate}, Easting: {stopPoint.geometry.eastingCoordinate}");
                 }
                 else
                 {
@@ -43,8 +68,8 @@ public class BussStops : ScriptableObject
             Debug.LogError($"Error reading or processing file: {ex.Message}");
         }
     }
-    
-        
+
+
     private class StopPointComparer : IEqualityComparer<StopPoint>
     {
         public bool Equals(StopPoint x, StopPoint y)
