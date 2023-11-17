@@ -1,4 +1,7 @@
-﻿namespace Mapbox.Examples
+﻿using System;
+using UnityEngine.Serialization;
+
+namespace Mapbox.Examples
 {
 	using UnityEngine;
 	using Mapbox.Utils;
@@ -12,9 +15,10 @@
 		[SerializeField]
 		AbstractMap _map;
 
+		[FormerlySerializedAs("_locationStrings")]
 		[SerializeField]
 		[Geocode]
-		string[] _locationStrings;
+		protected List<String> locationStrings;
 		Vector2d[] _locations;
 
 		[SerializeField]
@@ -27,11 +31,11 @@
 
 		void Start()
 		{
-			_locations = new Vector2d[_locationStrings.Length];
+			_locations = new Vector2d[locationStrings.Count];
 			_spawnedObjects = new List<GameObject>();
-			for (int i = 0; i < _locationStrings.Length; i++)
+			for (int i = 0; i < locationStrings.Count; i++)
 			{
-				var locationString = _locationStrings[i];
+				var locationString = locationStrings[i];
 				_locations[i] = Conversions.StringToLatLon(locationString);
 				var instance = Instantiate(_markerPrefab);
 				instance.transform.localPosition = _map.GeoToWorldPosition(_locations[i], true);
