@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5853602840370560830}
   m_Layer: 10
   m_Name: LabelIcon
-  m_TagString: BussStation
+  m_TagString: MapInteractable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -335,7 +335,7 @@ GameObject:
   - component: {fileID: 114604851063711006}
   m_Layer: 10
   m_Name: Text
-  m_TagString: Untagged
+  m_TagString: MapInteractable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
