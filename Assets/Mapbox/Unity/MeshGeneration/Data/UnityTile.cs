@@ -1,3 +1,4 @@
+using System.IO;
 using Mapbox.Unity.Map.Interfaces;
 
 namespace Mapbox.Unity.MeshGeneration.Data
@@ -14,6 +15,10 @@ namespace Mapbox.Unity.MeshGeneration.Data
 
 	public class UnityTile : MonoBehaviour
 	{
+
+		[SerializeField] private String savePath = "Assets/pngs/";
+		private static int id = 0;
+		
 		public TileTerrainType ElevationType;
 
 		[SerializeField]
@@ -305,6 +310,17 @@ namespace Mapbox.Unity.MeshGeneration.Data
 				MeshRenderer.sharedMaterial.mainTexture = _rasterData;
 
 				RasterDataState = TilePropertyState.Loaded;
+				
+				
+				
+				/*
+				// Save the texture to a file if a path is provided
+				if (!string.IsNullOrEmpty(savePath))
+				{
+					byte[] bytes = _rasterData.EncodeToPNG(); // or EncodeToJPG()
+					File.WriteAllBytes(savePath + id + ".png", bytes);
+					id++;
+				}*/
 			}
 		}
 

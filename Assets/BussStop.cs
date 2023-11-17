@@ -5,7 +5,6 @@ public class BussStop : MapInteractable
 {
 
     [SerializeField] private Text stationName;
-
     
     public override void Interact()
     {

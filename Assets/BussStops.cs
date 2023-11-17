@@ -57,12 +57,12 @@ public class BussStops
             {
                 if (_uniqueStopPoints.Add(stopPoint))
                 {
-                    Debug.Log($"Added: {stopPoint.name}, Northing: {stopPoint.geometry.northingCoordinate}, Easting: {stopPoint.geometry.eastingCoordinate}");
+//                    Debug.Log($"Added: {stopPoint.name}, Northing: {stopPoint.geometry.northingCoordinate}, Easting: {stopPoint.geometry.eastingCoordinate}");
                     _stopPoints.Add(stopPoint.name, stopPoint.geometry);
                 }
                 else
                 {
-                    Debug.Log($"Duplicate found, skipped: {stopPoint.name}");
+  //                  Debug.Log($"Duplicate found, skipped: {stopPoint.name}");
                 }
             }
         }

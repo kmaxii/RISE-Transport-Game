@@ -23,7 +23,6 @@ public class MapInteractor : MonoBehaviour
         
         _interactables.Add(mapInteractable);
         
-        Debug.Log("Found interactable " + mapInteractable.GetName());
 
         if (!_canInteract)
         {
