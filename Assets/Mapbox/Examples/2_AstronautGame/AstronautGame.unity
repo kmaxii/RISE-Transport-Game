@@ -2095,11 +2095,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4aaeb14479a8c14468cf357b14264372, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _map: {fileID: 159634025}
-  locationStrings: []
-  _spawnScale: 1
-  _markerPrefab: {fileID: 6889012064505072077, guid: d76cb216f7e609c4c929d2d209d3b88a, type: 3}
-  jsoFileName: bussstations.json
+  map: {fileID: 159634025}
+  spawnScale: 1
+  markerPrefab: {fileID: 6889012064505072077, guid: d76cb216f7e609c4c929d2d209d3b88a, type: 3}
 --- !u!4 &2104720038
 Transform:
   m_ObjectHideFlags: 0
