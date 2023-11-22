@@ -2455,7 +2455,7 @@ MonoBehaviour:
   mapRectTransform: {fileID: 0}
   zoomSpeed: 0.5
   maxZoom: 5
-  minZoom: 1
+  minZoom: 0.5
   tileSize: 256
   maxTiles: 21
   bussStationSprite: {fileID: 21300000, guid: fec5572521f52453397f564f556c168e, type: 3}
