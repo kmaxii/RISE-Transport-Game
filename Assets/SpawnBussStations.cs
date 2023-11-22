@@ -41,7 +41,10 @@ public class SpawnBussStations : MonoBehaviour
             instance.transform.localScale = new Vector3(spawnScale, spawnScale, spawnScale);
             _spawnedObjects.Add(instance.gameObject);
             i++;
-            tileManagerUI.AddPOI(CoordinateUtils.ConvertLatLongToGameCoords(bussStopsStopPoint.NorthingCoord, bussStopsStopPoint.EasternCoord));
+            tileManagerUI.AddPOI(
+                CoordinateUtils.ConvertLatLongToGameCoords(bussStopsStopPoint.NorthingCoord, bussStopsStopPoint.EasternCoord),
+                PoiType.BussStation,
+                bussStopsStopPoint.name);
         }
         
     }

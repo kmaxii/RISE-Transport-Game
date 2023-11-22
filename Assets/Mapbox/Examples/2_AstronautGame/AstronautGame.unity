@@ -2458,7 +2458,9 @@ MonoBehaviour:
   minZoom: 1
   tileSize: 256
   maxTiles: 21
-  poiPrefab: {fileID: 6408269136564017131, guid: b6a0ccf0e1c0f3640b4d24cd233bb460, type: 3}
+  bussStationSprite: {fileID: 21300000, guid: fec5572521f52453397f564f556c168e, type: 3}
+  eScooterSprite: {fileID: 21300000, guid: 240e67c92465d4af09e98ac0ff6cb4e5, type: 3}
+  poiPrefab: {fileID: 9204104365709305428, guid: b6a0ccf0e1c0f3640b4d24cd233bb460, type: 3}
 --- !u!222 &1592593444
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2911,6 +2913,7 @@ MonoBehaviour:
   map: {fileID: 159634025}
   spawnScale: 1
   marker: {fileID: 114652372319761880, guid: 22150daba6e8b47b69fd30f00b9c56cd, type: 3}
+  tileManagerUI: {fileID: 1592593443}
 --- !u!4 &2104720038
 Transform:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -10,6 +11,15 @@ public class MiniMapPOI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public float hoverScale = 1.2f; // Scale factor for when the mouse hovers over
     private Vector3 _originalScale;
+    
+
+
+    public void Setup(Sprite sprite, String text)
+    {
+        textMesh.text = text;
+
+        imageTransform.GetComponent<Image>().sprite = sprite;
+    }
 
     private void Start()
     {
@@ -22,6 +32,8 @@ public class MiniMapPOI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         // When the mouse hovers over, enlarge the image and show the text
         imageTransform.localScale = _originalScale * hoverScale;
         textMesh.gameObject.SetActive(true);
+        transform.SetAsLastSibling(); // Move this GameObject to be the last child
+
     }
 
     public void OnPointerExit(PointerEventData eventData)

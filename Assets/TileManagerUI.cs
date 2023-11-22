@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -13,6 +14,9 @@ public class TileManagerUI : MonoBehaviour, IDragHandler, IScrollHandler
 
     private RawImage[,] tiles;
     private Vector3 originalScale;
+
+    [SerializeField] private Sprite bussStationSprite;
+    [SerializeField] private Sprite eScooterSprite;
 
     private void Awake()
     {
@@ -30,16 +34,31 @@ public class TileManagerUI : MonoBehaviour, IDragHandler, IScrollHandler
     }
 
     
-    public GameObject poiPrefab; // Assign this in the Unity Editor
+    public MiniMapPOI poiPrefab; // Assign this in the Unity Editor
 
-    public void AddPOI(Vector2 poiCoordinates)
+    public void AddPOI(Vector2 poiCoordinates, PoiType poiType, String message)
     {
         // Convert POI coordinates to map's local coordinates
         Vector2 localPos = ConvertCoordinatesToLocalPosition(poiCoordinates);
 
         // Instantiate the POI prefab and position it
-        GameObject poi = Instantiate(poiPrefab, mapRectTransform);
+        MiniMapPOI poi = Instantiate(poiPrefab, mapRectTransform);
         poi.GetComponent<RectTransform>().anchoredPosition = localPos;
+
+        switch (poiType)
+        {
+            case PoiType.BussStation:
+            {
+                poi.Setup(bussStationSprite, message);
+                break;
+            }
+            case PoiType.EScooter:
+            {
+                poi.Setup(eScooterSprite, message);
+                break;
+            }
+        }
+        
     }
 
     private Vector2 ConvertCoordinatesToLocalPosition(Vector2 poiCoordinates)
