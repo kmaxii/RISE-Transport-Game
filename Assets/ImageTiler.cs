@@ -27,10 +27,6 @@ public class ImageTiler
     public static Texture2D GetTileTexture(int x, int y)
     {
         string imageName = GetTileImage(x, y);
-        
-        var texture = GetTextureByName(imageName);
-        Debug.Log(texture);
-        
         return GetTextureByName(imageName);
     }
 

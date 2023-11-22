@@ -8,4 +8,7 @@ public class StopPoint
     public Geometry geometry;
     
     public String GeoCoords => $"{geometry.northingCoordinate}, {geometry.eastingCoordinate}";
+
+    public float NorthingCoord => geometry.northingCoordinate;
+    public float EasternCoord => geometry.eastingCoordinate;
 }

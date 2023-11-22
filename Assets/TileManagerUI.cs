@@ -1,7 +1,6 @@
-using System.ComponentModel;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class TileManagerUI : MonoBehaviour, IDragHandler, IScrollHandler
 {
@@ -15,18 +14,47 @@ public class TileManagerUI : MonoBehaviour, IDragHandler, IScrollHandler
     private RawImage[,] tiles;
     private Vector3 originalScale;
 
-    private void Start()
+    private void Awake()
     {
         if (mapRectTransform == null)
         {
             mapRectTransform = GetComponent<RectTransform>();
         }
+
         originalScale = mapRectTransform.localScale;
 
         tiles = new RawImage[maxTiles, maxTiles];
         UpdateVisibleTiles();
+        
+       // AddPOI(CoordinateUtils.ConvertLatLongToGameCoords(57.70755463163524d, 11.973603733465872d));
     }
 
+    
+    public GameObject poiPrefab; // Assign this in the Unity Editor
+
+    public void AddPOI(Vector2 poiCoordinates)
+    {
+        // Convert POI coordinates to map's local coordinates
+        Vector2 localPos = ConvertCoordinatesToLocalPosition(poiCoordinates);
+
+        // Instantiate the POI prefab and position it
+        GameObject poi = Instantiate(poiPrefab, mapRectTransform);
+        poi.GetComponent<RectTransform>().anchoredPosition = localPos;
+    }
+
+    private Vector2 ConvertCoordinatesToLocalPosition(Vector2 poiCoordinates)
+    {
+        // Assuming the total size of your map is 10752x10752 pixels
+        float mapSize = 10752f;
+
+        // Convert global map coordinates to local UI coordinates
+        float localX = (poiCoordinates.x - mapSize / 2f) / mapSize * (tileSize * maxTiles);
+        float localY = (mapSize / 2f - poiCoordinates.y) / mapSize * (tileSize * maxTiles);
+
+        return new Vector2(localX, localY);
+    }
+    
+    
     private void Update()
     {
         UpdateVisibleTiles();
@@ -40,7 +68,8 @@ public class TileManagerUI : MonoBehaviour, IDragHandler, IScrollHandler
     public void OnScroll(PointerEventData eventData)
     {
         Vector2 cursorPosition = eventData.position;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(mapRectTransform, cursorPosition, eventData.pressEventCamera, out Vector2 localCursor);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(mapRectTransform, cursorPosition,
+            eventData.pressEventCamera, out Vector2 localCursor);
 
         float scroll = eventData.scrollDelta.y;
         Vector3 oldScale = mapRectTransform.localScale;
@@ -100,16 +129,17 @@ public class TileManagerUI : MonoBehaviour, IDragHandler, IScrollHandler
     {
         Texture2D tileTexture = ImageTiler.GetTileTexture(x, y);
         RawImage tileImage = new GameObject("Tile_" + x + "_" + y).AddComponent<RawImage>();
-        
+
 
         tileImage.texture = tileTexture;
         tileImage.rectTransform.SetParent(mapRectTransform, false);
-        
+
         // Calculate the offset to center the map
         float centerX = (maxTiles * tileSize) / 2f;
         float centerY = (maxTiles * tileSize) / 2f;
-        
-        tileImage.rectTransform.anchoredPosition = new Vector2((x * tileSize) - centerX, ((maxTiles - 1 - y) * tileSize) - centerY);
+
+        tileImage.rectTransform.anchoredPosition =
+            new Vector2((x * tileSize) - centerX, ((maxTiles - 1 - y) * tileSize) - centerY);
         tileImage.rectTransform.sizeDelta = new Vector2(tileSize, tileSize);
 
         tiles[x, y] = tileImage;
@@ -120,5 +150,4 @@ public class TileManagerUI : MonoBehaviour, IDragHandler, IScrollHandler
         Destroy(tiles[x, y].gameObject);
         tiles[x, y] = null;
     }
-    
 }

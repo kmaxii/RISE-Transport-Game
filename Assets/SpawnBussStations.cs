@@ -20,7 +20,8 @@ public class SpawnBussStations : MonoBehaviour
     private PoiLabelTextSetter marker;
 
     private List<GameObject> _spawnedObjects;
-    
+
+    [SerializeField] private TileManagerUI tileManagerUI;
     
     void Start()
     {
@@ -40,6 +41,7 @@ public class SpawnBussStations : MonoBehaviour
             instance.transform.localScale = new Vector3(spawnScale, spawnScale, spawnScale);
             _spawnedObjects.Add(instance.gameObject);
             i++;
+            tileManagerUI.AddPOI(CoordinateUtils.ConvertLatLongToGameCoords(bussStopsStopPoint.NorthingCoord, bussStopsStopPoint.EasternCoord));
         }
         
     }
