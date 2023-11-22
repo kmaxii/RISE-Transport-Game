@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Mapbox.Unity.Map;
+using UnityEngine.EventSystems;
 
 namespace Mapbox.Examples
 {
@@ -49,6 +50,19 @@ namespace Mapbox.Examples
 			}
 		}
 
+		public bool IsMouseOverUIElement()
+		{
+			PointerEventData pointerData = new PointerEventData(EventSystem.current)
+			{
+				position = Input.mousePosition
+			};
+
+			List<RaycastResult> results = new List<RaycastResult>();
+			EventSystem.current.RaycastAll(pointerData, results);
+
+			return results.Count > 0; // Returns true if any UI element is hit
+		}
+		
 		void Update()
 		{
 			if (characterDisabled)
@@ -74,8 +88,14 @@ namespace Mapbox.Examples
 			{
 				ray = cam.ScreenPointToRay(Input.mousePosition);
 
-				if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+				if (!IsMouseOverUIElement() && Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
 				{
+					Debug.Log("Hit object: " + hit.transform.name + " on layer: " + hit.collider.gameObject.layer);
+					if (hit.collider.gameObject.layer != 0)
+					{
+						return;
+					}
+
 					startPoint.position = transform.localPosition;
 					endPoint.position = hit.point;
 					MovementEndpointControl(hit.point, true);

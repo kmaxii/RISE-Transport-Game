@@ -2072,7 +2072,7 @@ MonoBehaviour:
   _movementEndPoint: {fileID: 1538829360}
   layerMask:
     serializedVersion: 2
-    m_Bits: 131072
+    m_Bits: 1
   cam: {fileID: 234181019}
 --- !u!95 &1176362811 stripped
 Animator:
@@ -2268,7 +2268,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
+  m_BlockingObjects: 3
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -2915,7 +2915,7 @@ GameObject:
   - component: {fileID: 1746432972}
   - component: {fileID: 1746432971}
   - component: {fileID: 1746432970}
-  m_Layer: 17
+  m_Layer: 0
   m_Name: RaycastPlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
