@@ -176,7 +176,6 @@ MonoBehaviour:
   - 37.8045, -122.2714
   - 37.2751, -121.8261
   _heading: 0
-  idx: -1
 --- !u!114 &136780554 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114577273954003758, guid: 98be219873e6d4dffb5949746f515a33, type: 3}
@@ -225,13 +224,19 @@ MonoBehaviour:
     extentOptions:
       extentType: 0
       defaultExtents:
-        cameraBoundsOptions: {camera: {fileID: 234181019}, visibleBuffer: 0, disposeBuffer: 0}
+        cameraBoundsOptions:
+          camera: {fileID: 234181019}
+          visibleBuffer: 0
+          disposeBuffer: 0
         rangeAroundCenterOptions:
           west: 1
           north: 1
           east: 1
           south: 1
-        rangeAroundTransformOptions: {targetTransform: {fileID: 0}, visibleBuffer: 0, disposeBuffer: 0}
+        rangeAroundTransformOptions:
+          targetTransform: {fileID: 0}
+          visibleBuffer: 0
+          disposeBuffer: 0
     placementOptions:
       placementType: 1
       snapMapToZero: 0
@@ -255,7 +260,6 @@ MonoBehaviour:
         useRetina: 0
         useCompression: 0
         useMipMap: 0
-    _imageFactory: {fileID: 0}
   _terrain:
     _layerProperty:
       sourceType: 0
@@ -282,7 +286,6 @@ MonoBehaviour:
         isActive: 0
         wallHeight: 10
         wallMaterial: {fileID: 0}
-    _elevationFactory: {fileID: 0}
   _vectorData:
     _layerProperty:
       tileJsonData:
@@ -368,11 +371,7 @@ MonoBehaviour:
           atlasInfo: {fileID: 0}
           lightStyleOpacity: 1
           darkStyleOpacity: 1
-          colorStyleColor:
-            r: 1
-            g: 1
-            b: 1
-            a: 1
+          colorStyleColor: {r: 1, g: 1, b: 1, a: 1}
           samplePalettes: 0
           colorPalette: {fileID: 0}
           customStyleOptions:
@@ -423,7 +422,6 @@ MonoBehaviour:
             Min: 0
             Max: 0
             filterOperator: 0
-            _delimiters: []
           - Key: class
             KeyDescription: 'One of: ''motorway'', ''motorway_link'', ''trunk'',
               ''primary'', ''secondary'', ''tertiary'', ''link'', ''street'', ''street_limited'',
@@ -433,7 +431,6 @@ MonoBehaviour:
             Min: 0
             Max: 0
             filterOperator: 0
-            _delimiters: []
           - Key: class
             KeyDescription: 'One of: ''motorway'', ''motorway_link'', ''trunk'',
               ''primary'', ''secondary'', ''tertiary'', ''link'', ''street'', ''street_limited'',
@@ -443,7 +440,6 @@ MonoBehaviour:
             Min: 0
             Max: 0
             filterOperator: 0
-            _delimiters: []
           - Key: class
             KeyDescription: 'One of: ''motorway'', ''motorway_link'', ''trunk'',
               ''primary'', ''secondary'', ''tertiary'', ''link'', ''street'', ''street_limited'',
@@ -453,7 +449,6 @@ MonoBehaviour:
             Min: 0
             Max: 0
             filterOperator: 0
-            _delimiters: []
           - Key: class
             KeyDescription: 'One of: ''motorway'', ''motorway_link'', ''trunk'',
               ''primary'', ''secondary'', ''tertiary'', ''link'', ''street'', ''street_limited'',
@@ -463,7 +458,6 @@ MonoBehaviour:
             Min: 0
             Max: 0
             filterOperator: 0
-            _delimiters: []
           combinerType: 0
         extrusionOptions:
           _selectedLayerName: road
@@ -487,11 +481,7 @@ MonoBehaviour:
           atlasInfo: {fileID: 0}
           lightStyleOpacity: 1
           darkStyleOpacity: 1
-          colorStyleColor:
-            r: 1
-            g: 1
-            b: 1
-            a: 1
+          colorStyleColor: {r: 1, g: 1, b: 1, a: 1}
           samplePalettes: 0
           colorPalette: {fileID: 0}
           customStyleOptions:
@@ -556,11 +546,7 @@ MonoBehaviour:
           atlasInfo: {fileID: 11400000, guid: c422f39ca8fe566479230c87805b3301, type: 2}
           lightStyleOpacity: 1
           darkStyleOpacity: 1
-          colorStyleColor:
-            r: 0.1764706
-            g: 0.8509805
-            b: 1
-            a: 1
+          colorStyleColor: {r: 0.1764706, g: 0.8509805, b: 1, a: 1}
           samplePalettes: 0
           colorPalette: {fileID: 0}
           customStyleOptions:
@@ -584,25 +570,9 @@ MonoBehaviour:
         _maskValue: 0
         selectedTypes: 
       locationPrefabList: []
-    _vectorTileFactory: {fileID: 0}
   _tileProvider: {fileID: 0}
   _previewOptions:
     isPreviewEnabled: 0
-  _mapVisualizer: {fileID: 0}
-  _unityTileSize: 1
-  _worldHeightFixed: 0
-  _initialZoom: 0
-  _centerLatitudeLongitude:
-    x: 0
-    y: 0
-  _centerMercator:
-    x: 0
-    y: 0
-  _worldRelativeScale: 0
-  _mapScaleFactor: {x: 0, y: 0, z: 0}
-  _cachedPosition: {x: 0, y: 0, z: 0}
-  _cachedRotation: {x: 0, y: 0, z: 0, w: 0}
-  _cachedScale: {x: 1, y: 1, z: 1}
 --- !u!114 &159634026
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1118,8 +1088,6 @@ MonoBehaviour:
   _rotateZ: 0
   _useNegativeAngle: 0
   _useTransformLocationProvider: 0
-  _targetRotation: {x: 0, y: 0, z: 0, w: 0}
-  _targetPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &397025670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1132,8 +1100,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7760043eea2cd452ba7117f2c97e0038, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isInitialized: 0
-  _targetPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &419442332
 GameObject:
   m_ObjectHideFlags: 0
@@ -1315,7 +1281,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _updateDistanceInMeters: 0
   _updateTimeInMilliSeconds: 500
-  _disposed: 0
 --- !u!1 &639410717
 GameObject:
   m_ObjectHideFlags: 0
@@ -1533,13 +1498,19 @@ MonoBehaviour:
     extentOptions:
       extentType: 1
       defaultExtents:
-        cameraBoundsOptions: {camera: {fileID: 234181019}, visibleBuffer: 0, disposeBuffer: 0}
+        cameraBoundsOptions:
+          camera: {fileID: 234181019}
+          visibleBuffer: 0
+          disposeBuffer: 0
         rangeAroundCenterOptions:
           west: 10
           north: 10
           east: 10
           south: 10
-        rangeAroundTransformOptions: {targetTransform: {fileID: 0}, visibleBuffer: 0, disposeBuffer: 0}
+        rangeAroundTransformOptions:
+          targetTransform: {fileID: 0}
+          visibleBuffer: 0
+          disposeBuffer: 0
     placementOptions:
       placementType: 1
       snapMapToZero: 0
@@ -1563,7 +1534,6 @@ MonoBehaviour:
         useRetina: 0
         useCompression: 0
         useMipMap: 0
-    _imageFactory: {fileID: 0}
   _terrain:
     _layerProperty:
       sourceType: 0
@@ -1590,7 +1560,6 @@ MonoBehaviour:
         isActive: 0
         wallHeight: 10
         wallMaterial: {fileID: 0}
-    _elevationFactory: {fileID: 0}
   _vectorData:
     _layerProperty:
       tileJsonData:
@@ -1637,25 +1606,9 @@ MonoBehaviour:
         entityPerCoroutine: 20
       vectorSubLayers: []
       locationPrefabList: []
-    _vectorTileFactory: {fileID: 0}
   _tileProvider: {fileID: 0}
   _previewOptions:
     isPreviewEnabled: 0
-  _mapVisualizer: {fileID: 0}
-  _unityTileSize: 1
-  _worldHeightFixed: 0
-  _initialZoom: 0
-  _centerLatitudeLongitude:
-    x: 0
-    y: 0
-  _centerMercator:
-    x: 0
-    y: 0
-  _worldRelativeScale: 0
-  _mapScaleFactor: {x: 0, y: 0, z: 0}
-  _cachedPosition: {x: 0, y: 0, z: 0}
-  _cachedRotation: {x: 0, y: 0, z: 0, w: 0}
-  _cachedScale: {x: 1, y: 1, z: 1}
 --- !u!4 &767772677
 Transform:
   m_ObjectHideFlags: 0
@@ -1911,8 +1864,6 @@ MonoBehaviour:
   _sendEvent: 0
   _latitudeLongitude: 57.7086, 11.9733
   _targetTransform: {fileID: 0}
-  _map: {fileID: 0}
-  _mapInitialized: 0
 --- !u!1 &1136482693
 GameObject:
   m_ObjectHideFlags: 0
@@ -1996,9 +1947,6 @@ MonoBehaviour:
   _editorDebuggingOnly:
     _mockUnityInputLocation: 0
     _locationLogFile: {fileID: 0}
-  _lastLocationTimestamp: 0
-  _maxLastPositions: 5
-  _minDistanceOldestNewestPosition: 1.5
 --- !u!1 &1176362809 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1438539700862716, guid: b4281c0219e45624e855839527bdc6f1, type: 3}
@@ -2026,19 +1974,9 @@ MonoBehaviour:
   rayPlane: {fileID: 1746432969}
   _movementEndPoint: {fileID: 1538829360}
   layerMask:
+    serializedVersion: 2
     m_Bits: 1
-  raycastPlane:
-    m_Bits: 0
-  clicktime: 0
-  moving: 0
-  characterDisabled: 0
-  futurePositions: []
-  interruption: 0
-  nextPos: {x: 0, y: 0, z: 0}
-  prevPos: {x: 0, y: 0, z: 0}
   cam: {fileID: 234181019}
-  previousPos: {x: 0, y: 0, z: 0}
-  deltaPos: {x: 0, y: 0, z: 0}
 --- !u!95 &1176362811 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 95022966287224496, guid: b4281c0219e45624e855839527bdc6f1, type: 3}
@@ -2056,7 +1994,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3590ab21d4bcb49ba8fd090c53a5fc51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _map: {fileID: 0}
 --- !u!4 &1176362814 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4601729990306218, guid: b4281c0219e45624e855839527bdc6f1, type: 3}
@@ -2088,17 +2025,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30ec434a073e259469b3c2aa9b09c4e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _canInteract: 0
   canNowInteract:
     m_PersistentCalls:
       m_Calls:
-      - {m_Target: {fileID: 2133725135}, m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine, m_MethodName: SetActive, m_Mode: 6, m_Arguments: {m_ObjectArgument: {fileID: 0}, m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, m_IntArgument: 0, m_FloatArgument: 0, m_StringArgument: , m_BoolArgument: 1}, m_CallState: 2}
-    m_CallsDirty: 1
+      - m_Target: {fileID: 2133725135}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   canNoLongerInteract:
     m_PersistentCalls:
-      m_Calls:
-      - {m_Target: {fileID: 2133725135}, m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine, m_MethodName: SetActive, m_Mode: 6, m_Arguments: {m_ObjectArgument: {fileID: 0}, m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, m_IntArgument: 0, m_FloatArgument: 0, m_StringArgument: , m_BoolArgument: 0}, m_CallState: 2}
-    m_CallsDirty: 1
+      m_Calls: []
 --- !u!54 &1176362818
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2302,7 +2246,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _statusText: {fileID: 1962332873}
-  _locationProvider: {fileID: 0}
+--- !u!1 &1294006275
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1294006277}
+  - component: {fileID: 1294006276}
+  m_Layer: 0
+  m_Name: VasttrafikAuth
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1294006276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294006275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5980c1b7491dcb45b751df51609aa04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  accessToken: eyJ4NXQiOiJaV05sTURNNE56SmpZelZrT1dFNU16RTFNalF5TTJaaE5XSm1ORE0zWkRVMk9HRXdOVGxqWVRjNE1tWTNPRGcwWW1JeFlqSTFPVGMzTjJWallqZzRNdyIsImtpZCI6IlpXTmxNRE00TnpKall6VmtPV0U1TXpFMU1qUXlNMlpoTldKbU5ETTNaRFUyT0dFd05UbGpZVGM0TW1ZM09EZzBZbUl4WWpJMU9UYzNOMlZqWWpnNE13X1JTMjU2IiwiYWxnIjoiUlMyNTYifQ.eyJzdWIiOiJKN0cyaThtN0pRM01ad1pQQWRVd3dRZl93TVVhIiwiYXV0IjoiQVBQTElDQVRJT04iLCJiaW5kaW5nX3R5cGUiOiJyZXF1ZXN0IiwiaXNzIjoiaHR0cHM6XC9cL2V4dC1hcGkudmFzdHRyYWZpay5zZVwvdG9rZW4iLCJ0aWVySW5mbyI6eyJVbmxpbWl0ZWQiOnsidGllclF1b3RhVHlwZSI6InJlcXVlc3RDb3VudCIsImdyYXBoUUxNYXhDb21wbGV4aXR5IjowLCJncmFwaFFMTWF4RGVwdGgiOjAsInN0b3BPblF1b3RhUmVhY2giOnRydWUsInNwaWtlQXJyZXN0TGltaXQiOjAsInNwaWtlQXJyZXN0VW5pdCI6bnVsbH19LCJrZXl0eXBlIjoiUFJPRFVDVElPTiIsInN1YnNjcmliZWRBUElzIjpbeyJzdWJzY3JpYmVyVGVuYW50RG9tYWluIjoiY2FyYm9uLnN1cGVyIiwibmFtZSI6ImFwaTAwMTMtcHIiLCJjb250ZXh0IjoiXC9wclwvdjQiLCJwdWJsaXNoZXIiOiJhZG1pbiIsInZlcnNpb24iOiJ2NCIsInN1YnNjcmlwdGlvblRpZXIiOiJVbmxpbWl0ZWQifSx7InN1YnNjcmliZXJUZW5hbnREb21haW4iOiJjYXJib24uc3VwZXIiLCJuYW1lIjoiYXBpMDA1OS1nZW8iLCJjb250ZXh0IjoiXC9nZW9cL3YyIiwicHVibGlzaGVyIjoiYWRtaW4iLCJ2ZXJzaW9uIjoidjIiLCJzdWJzY3JpcHRpb25UaWVyIjoiVW5saW1pdGVkIn1dLCJhdWQiOiJodHRwczpcL1wvZXh0LWFwaS52YXN0dHJhZmlrLnNlIiwibmJmIjoxNzAwNzU1MjQwLCJhcHBsaWNhdGlvbiI6eyJvd25lciI6Iko3RzJpOG03SlEzTVp3WlBBZFV3d1FmX3dNVWEiLCJ0aWVyUXVvdGFUeXBlIjpudWxsLCJ0aWVyIjoiVW5saW1pdGVkIiwibmFtZSI6IlJpc2VUcmFuc3BvcnRHYW1lIiwiaWQiOjE3MjEsInV1aWQiOiIzOWU1MDM3My0xODE2LTQ3NjMtODdkMC0zOTFhNzRkZWY3MzEifSwiYXpwIjoiSjdHMmk4bTdKUTNNWndaUEFkVXd3UWZfd01VYSIsInNjb3BlIjoiYXBpbTpzdWJzY3JpYmUiLCJleHAiOjE3MDA4NDE2NDAsImlhdCI6MTcwMDc1NTI0MCwiYmluZGluZ19yZWYiOiJlZTdlYTgyYWY5OTI2MDk2Zjc0OTg1MTIxMzY2MTA2MCIsImp0aSI6IjZlZDBjZGI2LWVhYzktNDU1Ni05M2I4LTY1NmM4ZTZhN2Q1MiJ9.XLYVFQsxTHdtc3oUPFSOMXTfXn8DcGkPFL0zVORg6jVjO_MKAkXmKpuCKru9hGIL1vCf558ZXiVGfiIbwJSKoPfrXvBQaA1djcoBfCwGWLD6SufsixPFtTAmO-mDwl3UfVvheyaULtAGUMqXNJqXCUwDc3FAyH18z4g2s_jjYmwO8YIx0hQ7fU1HxmtZ8L4ygjLxQIg_wXAzIPWDH58d3-eyJ9gdvf4iZJmzxhZ4H8dGEhYMQVup8I1xAOb6Z6bytpIUcTQ9oTdoFG67coNZM8Ea4WSyCU0XV3IqdCTkyNrVrUEPIIK3kVdT6xYa6if7A9T45vC-tk_lun3HUyF3sg
+--- !u!4 &1294006277
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294006275}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1351294045
 GameObject:
   m_ObjectHideFlags: 0
@@ -2468,7 +2456,6 @@ MonoBehaviour:
   Materials:
   - {fileID: 2100000, guid: 5ac0ac96d738c0845b30185d2838f299, type: 2}
   Speed: -0.1
-  _offset: {x: 0, y: 0}
 --- !u!4 &1466573011
 Transform:
   m_ObjectHideFlags: 0
@@ -2749,7 +2736,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fdb9708048afa34e8968e4ecbbead2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactingBussStop: {fileID: 0}
   map: {fileID: 1760020115}
   closeButton: {fileID: 1534589187}
 --- !u!1 &1746432969
@@ -2881,7 +2867,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fdb9708048afa34e8968e4ecbbead2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactingBussStop: {fileID: 0}
   map: {fileID: 0}
   closeButton: {fileID: 0}
 --- !u!114 &1760020117
@@ -2902,7 +2887,6 @@ MonoBehaviour:
   minZoom: 0.5
   tileSize: 256
   maxTiles: 21
-  originalScale: {x: 0, y: 0, z: 0}
   bussStationSprite: {fileID: 21300000, guid: fec5572521f52453397f564f556c168e, type: 3}
   eScooterSprite: {fileID: 21300000, guid: 240e67c92465d4af09e98ac0ff6cb4e5, type: 3}
   poiPrefab: {fileID: 9204104365709305428, guid: b6a0ccf0e1c0f3640b4d24cd233bb460, type: 3}
@@ -3162,11 +3146,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70b41194454b67946920c25dbc944374, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mapRectTransform: {fileID: 0}
   zoomSpeed: 0.5
   maxZoom: 5
   minZoom: 0.5
-  _originalScale: {x: 0, y: 0, z: 0}
 --- !u!1 &2104720036
 GameObject:
   m_ObjectHideFlags: 0
@@ -3197,10 +3179,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: {fileID: 159634025}
-  _locations: []
   spawnScale: 1
   marker: {fileID: 114652372319761880, guid: 22150daba6e8b47b69fd30f00b9c56cd, type: 3}
-  _spawnedObjects: []
   tileManagerUI: {fileID: 1760020117}
 --- !u!4 &2104720038
 Transform:
