@@ -8,7 +8,7 @@ public class BussStop : MapInteractable
     
     public override void Interact()
     {
-        throw new System.NotImplementedException();
+        FullScreenMap.Instance.InteractingBussStop = this;
     }
 
     public override string GetName()
