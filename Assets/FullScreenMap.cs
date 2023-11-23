@@ -1,3 +1,5 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FullScreenMap : MonoBehaviour
@@ -44,5 +46,30 @@ public class FullScreenMap : MonoBehaviour
     private void Awake()
     {
         _instance = this;
+    }
+
+    public void ClickedPoi(string name, PoiType poiType)
+    {
+        switch (poiType)
+        {
+            case PoiType.BussStation:
+                HandleBussStationClick(name);
+                break;
+        }
+    }
+
+    private void HandleBussStationClick(String name)
+    {
+        if (!_interactingBussStop)
+            return;
+        
+        if (_interactingBussStop.name == name)
+        {
+            Debug.Log("HANDLE CLICK ON SELF IN THE FUTURE");
+            return;
+        }
+        
+        
+        
     }
 }
