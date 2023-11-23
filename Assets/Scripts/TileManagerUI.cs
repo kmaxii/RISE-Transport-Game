@@ -49,12 +49,12 @@ public class TileManagerUI : MonoBehaviour, IDragHandler, IScrollHandler
         {
             case PoiType.BussStation:
             {
-                poi.Setup(bussStationSprite, message);
+                poi.Setup(bussStationSprite, message, poiType);
                 break;
             }
             case PoiType.EScooter:
             {
-                poi.Setup(eScooterSprite, message);
+                poi.Setup(eScooterSprite, message, poiType);
                 break;
             }
         }
