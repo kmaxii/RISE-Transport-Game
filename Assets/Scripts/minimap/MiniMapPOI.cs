@@ -1,10 +1,10 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using TMPro;
 
-public class MiniMapPOI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler 
+public class MiniMapPOI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     public RectTransform imageTransform; // Assign the RectTransform of the POI image
     public TextMeshProUGUI textMesh; // Assign the TextMeshPro component
@@ -12,12 +12,15 @@ public class MiniMapPOI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public float hoverScale = 1.2f; // Scale factor for when the mouse hovers over
     private Vector3 _originalScale;
 
-    private PoiType _poiType;
 
-    public void Setup(Sprite sprite, String text, PoiType poiType)
+    public string GetText()
+    {
+        return textMesh.text;
+    }
+    
+    public void Setup(Sprite sprite, String text)
     {
         textMesh.text = text;
-        _poiType = poiType;
 
         imageTransform.GetComponent<Image>().sprite = sprite;
     }
@@ -34,7 +37,6 @@ public class MiniMapPOI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         imageTransform.localScale = _originalScale * hoverScale;
         textMesh.gameObject.SetActive(true);
         transform.SetAsLastSibling();
-
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -43,9 +45,9 @@ public class MiniMapPOI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         imageTransform.localScale = _originalScale;
         textMesh.gameObject.SetActive(false);
     }
-    
+
     public void OnPointerClick(PointerEventData eventData)
     {
-        FullScreenMap.Instance.ClickedPoi(textMesh.text, _poiType);
+        FullScreenMap.Instance.ClickedPoi(this);
     }
 }

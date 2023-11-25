@@ -6,6 +6,7 @@ public class StopPoint
 {
     public string name;
     public Geometry geometry;
+    public string gid;
     
     public String GeoCoords => $"{geometry.northingCoordinate}, {geometry.eastingCoordinate}";
 

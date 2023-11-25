@@ -11,8 +11,13 @@ public class BussStops
     private bool singleStopPerName = true;
 
     private HashSet<StopPoint> _uniqueStopPoints;
-    private Dictionary<String, Geometry> _stopPoints;
+    private Dictionary<String, StopPoint> _stopPoints;
 
+    public StopPoint GetStop(string name)
+    {
+        return _stopPoints[name];
+    }
+    
     public HashSet<StopPoint> StopPoints
     {
         get => _uniqueStopPoints;
@@ -36,7 +41,7 @@ public class BussStops
 
     private BussStops()
     {
-        _stopPoints = new Dictionary<string, Geometry>();
+        _stopPoints = new Dictionary<string, StopPoint>();
         ProcessStopPointsFromFile();
         
 
@@ -58,7 +63,7 @@ public class BussStops
                 if (_uniqueStopPoints.Add(stopPoint))
                 {
 //                    Debug.Log($"Added: {stopPoint.name}, Northing: {stopPoint.geometry.northingCoordinate}, Easting: {stopPoint.geometry.eastingCoordinate}");
-                    _stopPoints.Add(stopPoint.name, stopPoint.geometry);
+                    _stopPoints.Add(stopPoint.name, stopPoint);
                 }
                 else
                 {

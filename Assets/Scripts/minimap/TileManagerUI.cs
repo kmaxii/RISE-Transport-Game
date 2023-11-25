@@ -29,36 +29,45 @@ public class TileManagerUI : MonoBehaviour, IDragHandler, IScrollHandler
 
         tiles = new RawImage[maxTiles, maxTiles];
         UpdateVisibleTiles();
-        
-       // AddPOI(CoordinateUtils.ConvertLatLongToGameCoords(57.70755463163524d, 11.973603733465872d));
+
+        // AddPOI(CoordinateUtils.ConvertLatLongToGameCoords(57.70755463163524d, 11.973603733465872d));
     }
 
-    
-    public MiniMapPOI poiPrefab; // Assign this in the Unity Editor
+
+    [SerializeField] MiniMapPOI poiPrefab; // Assign this in the Unity Editor
+    [SerializeField] MiniMapPOI bussPoiPrefab; // Assign this in the Unity Editor
 
     public void AddPOI(Vector2 poiCoordinates, PoiType poiType, String message)
     {
         // Convert POI coordinates to map's local coordinates
         Vector2 localPos = ConvertCoordinatesToLocalPosition(poiCoordinates);
 
-        // Instantiate the POI prefab and position it
-        MiniMapPOI poi = Instantiate(poiPrefab, mapRectTransform);
+        MiniMapPOI poi;
+        switch (poiType)
+        {
+            case PoiType.BussStation:
+                poi = Instantiate(bussPoiPrefab, mapRectTransform);
+                break;
+            default:
+                poi = Instantiate(poiPrefab, mapRectTransform);
+                break;
+        }
+
         poi.GetComponent<RectTransform>().anchoredPosition = localPos;
 
         switch (poiType)
         {
             case PoiType.BussStation:
             {
-                poi.Setup(bussStationSprite, message, poiType);
+                poi.Setup(bussStationSprite, message);
                 break;
             }
             case PoiType.EScooter:
             {
-                poi.Setup(eScooterSprite, message, poiType);
+                poi.Setup(eScooterSprite, message);
                 break;
             }
         }
-        
     }
 
     private Vector2 ConvertCoordinatesToLocalPosition(Vector2 poiCoordinates)
@@ -72,8 +81,8 @@ public class TileManagerUI : MonoBehaviour, IDragHandler, IScrollHandler
 
         return new Vector2(localX, localY);
     }
-    
-    
+
+
     private void Update()
     {
         UpdateVisibleTiles();

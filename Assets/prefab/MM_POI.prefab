@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 727410479783676253}
   - component: {fileID: 9204104365709305428}
   m_Layer: 5
-  m_Name: MiniMapPOI
+  m_Name: MM_POI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

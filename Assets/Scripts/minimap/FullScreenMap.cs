@@ -1,4 +1,5 @@
 using System;
+using minimap;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -13,6 +14,12 @@ public class FullScreenMap : MonoBehaviour
     [SerializeField] private GameObject map;
     [SerializeField] private GameObject closeButton;
 
+    private void Awake()
+    {
+        _instance = this;
+        Debug.Log("Spawned FullScreenMap");
+    }
+    
     public BussStop InteractingBussStop
     {
         get => _interactingBussStop;
@@ -35,40 +42,36 @@ public class FullScreenMap : MonoBehaviour
         closeButton.SetActive(false);
         _interactingBussStop = null;
     }
+    
 
-
-    public void ResetInteractingBussStop()
-    {
-        InteractingBussStop = null;
-    }
-
-
-    private void Awake()
-    {
-        _instance = this;
-    }
-
-    public void ClickedPoi(string name, PoiType poiType)
+    public void ClickedPoi(MiniMapPOI poiType)
     {
         switch (poiType)
         {
-            case PoiType.BussStation:
-                HandleBussStationClick(name);
+            case BussStopPoi poi:
+                HandleBussStationClick(poi);
                 break;
         }
     }
 
-    private void HandleBussStationClick(String name)
+    private void HandleBussStationClick(MiniMapPOI miniMapPoi)
     {
+        Debug.Log("buss stop poi " + miniMapPoi.GetText());
+
+        StopPoint stopPoint = BussStops.Instance.GetStop(miniMapPoi.GetText());
+        
         if (!_interactingBussStop)
             return;
         
-        if (_interactingBussStop.name == name)
+        Debug.Log("Interacting buss stop: " + _interactingBussStop.GetName());
+
+        if (_interactingBussStop.GetName() == stopPoint.name)
         {
             Debug.Log("HANDLE CLICK ON SELF IN THE FUTURE");
             return;
         }
         
+        Debug.Log("Clicked on " + stopPoint.name);
         
         
     }
