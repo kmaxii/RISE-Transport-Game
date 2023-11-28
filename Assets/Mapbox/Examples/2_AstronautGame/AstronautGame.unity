@@ -2982,7 +2982,6 @@ GameObject:
   - component: {fileID: 1760020119}
   - component: {fileID: 1760020118}
   - component: {fileID: 1760020117}
-  - component: {fileID: 1760020116}
   m_Layer: 5
   m_Name: FullScreenUIMap (2)
   m_TagString: Untagged
@@ -2990,20 +2989,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1760020116
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1760020115}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fdb9708048afa34e8968e4ecbbead2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  map: {fileID: 0}
-  closeButton: {fileID: 0}
 --- !u!114 &1760020117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3025,6 +3010,7 @@ MonoBehaviour:
   bussStationSprite: {fileID: 21300000, guid: fec5572521f52453397f564f556c168e, type: 3}
   eScooterSprite: {fileID: 21300000, guid: 240e67c92465d4af09e98ac0ff6cb4e5, type: 3}
   poiPrefab: {fileID: 9204104365709305428, guid: b6a0ccf0e1c0f3640b4d24cd233bb460, type: 3}
+  bussPoiPrefab: {fileID: 2917301271372369144, guid: be840b16362987f44ac8dac633e9eb75, type: 3}
 --- !u!222 &1760020118
 CanvasRenderer:
   m_ObjectHideFlags: 0

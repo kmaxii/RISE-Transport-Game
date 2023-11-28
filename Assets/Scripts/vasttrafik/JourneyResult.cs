@@ -122,6 +122,9 @@ namespace vasttrafik
         public List<TripLeg> tripLegs ;
         public List<ConnectionLink> connectionLinks ;
         public bool isDeparted ;
+        
+       public string leaveTime => tripLegs[0].origin.plannedTime;
+       public string destinationTime => tripLegs[^1].destination.plannedTime;
     }
 
     [Serializable]

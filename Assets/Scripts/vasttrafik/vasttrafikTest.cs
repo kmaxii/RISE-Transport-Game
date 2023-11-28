@@ -10,7 +10,7 @@ namespace vasttrafik
 
             Debug.Log("Size: " + journeyResult.results.Count);
 
-            foreach (var journeyResultResult in journeyResult.results)
+            foreach (Result journeyResultResult in journeyResult.results)
             {
                 var departureTime = journeyResultResult.tripLegs[0].origin.plannedTime;
                 var arrivalTime = journeyResultResult.tripLegs[^1].destination.plannedTime;

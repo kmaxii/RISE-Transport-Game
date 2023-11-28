@@ -1,7 +1,6 @@
-using System;
 using minimap;
-using Unity.VisualScripting;
 using UnityEngine;
+using vasttrafik;
 
 public class FullScreenMap : MonoBehaviour
 {
@@ -9,7 +8,7 @@ public class FullScreenMap : MonoBehaviour
 
     public static FullScreenMap Instance => _instance;
 
-    private BussStop _interactingBussStop = null;
+    private StopPoint _interactingBussStop = null;
 
     [SerializeField] private GameObject map;
     [SerializeField] private GameObject closeButton;
@@ -19,13 +18,12 @@ public class FullScreenMap : MonoBehaviour
         _instance = this;
         Debug.Log("Spawned FullScreenMap");
     }
-    
+
     public BussStop InteractingBussStop
     {
-        get => _interactingBussStop;
         set
         {
-            _interactingBussStop = value;
+            _interactingBussStop = BussStops.Instance.GetStop(value.GetName());
             ShowMap();
         }
     }
@@ -41,8 +39,9 @@ public class FullScreenMap : MonoBehaviour
         map.SetActive(false);
         closeButton.SetActive(false);
         _interactingBussStop = null;
+        _lastClicked = null;
     }
-    
+
 
     public void ClickedPoi(MiniMapPOI poiType)
     {
@@ -59,20 +58,48 @@ public class FullScreenMap : MonoBehaviour
         Debug.Log("buss stop poi " + miniMapPoi.GetText());
 
         StopPoint stopPoint = BussStops.Instance.GetStop(miniMapPoi.GetText());
-        
-        if (!_interactingBussStop)
-            return;
-        
-        Debug.Log("Interacting buss stop: " + _interactingBussStop.GetName());
 
-        if (_interactingBussStop.GetName() == stopPoint.name)
+        if (_interactingBussStop == null)
+        {
+            HandlePlanningClick(stopPoint);
+            return;
+        }
+
+        HandleGoing(stopPoint);
+    }
+
+    private async void HandleGoing(StopPoint stopPoint)
+    {
+        Debug.Log("Interacting buss stop: " + _interactingBussStop.name);
+
+        if (_interactingBussStop.name == stopPoint.name)
         {
             Debug.Log("HANDLE CLICK ON SELF IN THE FUTURE");
             return;
         }
-        
+
         Debug.Log("Clicked on " + stopPoint.name);
         
+        JourneyResult result = await VasttrafikAPI.GetJourneyJson(_interactingBussStop.gid, stopPoint.gid, 1);
         
+        
+    }
+
+    private StopPoint _lastClicked;
+
+    private async void HandlePlanningClick(StopPoint stopPoint)
+    {
+        if (_lastClicked == null || _lastClicked == stopPoint)
+        {
+            _lastClicked = stopPoint;
+            return;
+        }
+
+        JourneyResult journey = await VasttrafikAPI.GetJourneyJson(_lastClicked.gid, stopPoint.gid, 7);
+        for (var i = 0; i < journey.results.Count; i++)
+        {
+            Result trip = journey.results[i];
+            Debug.Log($"Leave time: {trip.leaveTime}, arrive time: {trip.destinationTime}");
+        }
     }
 }
