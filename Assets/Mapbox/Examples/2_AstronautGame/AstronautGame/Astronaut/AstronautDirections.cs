@@ -29,6 +29,7 @@ namespace Mapbox.Examples
 			_map = map;
 
 			var wp = new Vector2d[2];
+			Debug.Log($"Center mercator: {_map.CenterMercator} world relative scale: {_map.WorldRelativeScale}" );
 			wp[0] = start.GetGeoPosition(_map.CenterMercator, _map.WorldRelativeScale);
 			wp[1] = end.GetGeoPosition(_map.CenterMercator, _map.WorldRelativeScale);
 			var _directionResource = new DirectionResource(wp, RoutingProfile.Walking);

@@ -1,11 +1,16 @@
-﻿using UnityEngine;
+﻿using Mapbox.Unity.Map;
+using Mapbox.Unity.Utilities;
+using UnityEngine;
 
 namespace vasttrafik
 {
     public class VasttrafikTest : MonoBehaviour
     {
+
+
         private async void Start()
         {
+
             JourneyResult journeyResult = await VasttrafikAPI.GetJourneyJson();
 
             Debug.Log("Size: " + journeyResult.results.Count);

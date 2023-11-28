@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Mapbox.Examples;
 using Mapbox.Unity.Map;
@@ -28,6 +29,13 @@ public class SpawnBussStations : MonoBehaviour
         _locations = new Vector2d[BussStops.Instance.StopPoints.Count];
         _spawnedObjects = new List<GameObject>();
 
+        StartCoroutine(LateStart());
+    }
+
+
+    private IEnumerator LateStart()
+    {
+        yield return new WaitForSeconds(0.1f);
         int i = 0;
         foreach (var bussStopsStopPoint in BussStops.Instance.StopPoints)
         {
@@ -42,12 +50,14 @@ public class SpawnBussStations : MonoBehaviour
             _spawnedObjects.Add(instance.gameObject);
             i++;
             tileManagerUI.AddPOI(
-                CoordinateUtils.ConvertLatLongToGameCoords(bussStopsStopPoint.NorthingCoord, bussStopsStopPoint.EasternCoord),
+                CoordinateUtils.ToUiCoords(pos),
                 PoiType.BussStation,
                 bussStopsStopPoint.name);
         }
         
     }
+
+
 
     private void Update()
     {

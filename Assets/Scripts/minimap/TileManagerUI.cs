@@ -1,4 +1,6 @@
 using System;
+using Mapbox.Unity.Map;
+using Mapbox.Unity.Utilities;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -14,6 +16,7 @@ public class TileManagerUI : MonoBehaviour, IDragHandler, IScrollHandler
 
     private RawImage[,] tiles;
     private Vector3 originalScale;
+    [SerializeField] private AbstractMap _map;
 
     [SerializeField] private Sprite bussStationSprite;
     [SerializeField] private Sprite eScooterSprite;
@@ -73,13 +76,12 @@ public class TileManagerUI : MonoBehaviour, IDragHandler, IScrollHandler
     private Vector2 ConvertCoordinatesToLocalPosition(Vector2 poiCoordinates)
     {
         // Assuming the total size of your map is 10752x10752 pixels
-        float mapSize = 10752f;
+        float mapSize = CoordinateUtils.MapSize;
 
-        // Convert global map coordinates to local UI coordinates
         float localX = (poiCoordinates.x - mapSize / 2f) / mapSize * (tileSize * maxTiles);
-        float localY = (mapSize / 2f - poiCoordinates.y) / mapSize * (tileSize * maxTiles);
+        float localY = (poiCoordinates.y - mapSize / 2f) / mapSize * (tileSize * maxTiles);
 
-        return new Vector2(localX, localY);
+        return new Vector2(localX -141.5f, localY - 101);
     }
 
 
