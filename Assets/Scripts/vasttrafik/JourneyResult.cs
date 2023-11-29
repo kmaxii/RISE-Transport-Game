@@ -7,186 +7,276 @@ namespace vasttrafik
     public class JourneyResult
     {
         public List<Result> results;
+        public Pagination pagination;
         public Links links;
     }
 
-    [Serializable]
-
     // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
+    [Serializable]
+    public class ArrivalAccessLink
+    {
+        public string transportMode;
+        public string transportSubMode;
+        public Origin origin;
+        public Destination destination;
+        public List<Note> notes;
+        public int distanceInMeters;
+        public string plannedDepartureTime;
+        public string plannedArrivalTime;
+        public int plannedDurationInMinutes;
+        public string estimatedDepartureTime;
+        public string estimatedArrivalTime;
+        public int estimatedDurationInMinutes;
+        public int estimatedNumberOfSteps;
+        public List<LinkCoordinate> linkCoordinates;
+        public List<Segment> segments;
+    }
+
+    [Serializable]
     public class ConnectionLink
     {
-        public int journeyLegIndex ;
-        public string transportMode ;
-        public string transportSubMode ;
-        public Origin origin ;
-        public Destination destination ;
-        public List<object> notes ;
-        public int distanceInMeters ;
-        public string plannedDepartureTime ;
-        public string plannedArrivalTime ;
-        public int plannedDurationInMinutes ;
-        public string estimatedDepartureTime ;
-        public string estimatedArrivalTime ;
-        public int estimatedDurationInMinutes ;
-        public int estimatedNumberOfSteps ;
-        public List<LinkCoordinate> linkCoordinates ;
+        public string transportMode;
+        public string transportSubMode;
+        public Origin origin;
+        public Destination destination;
+        public List<Note> notes;
+        public int distanceInMeters;
+        public string plannedDepartureTime;
+        public string plannedArrivalTime;
+        public int plannedDurationInMinutes;
+        public string estimatedDepartureTime;
+        public string estimatedArrivalTime;
+        public int estimatedDurationInMinutes;
+        public int estimatedNumberOfSteps;
+        public List<LinkCoordinate> linkCoordinates;
+        public List<Segment> segments;
+        public int journeyLegIndex;
     }
-    [Serializable]
 
+    [Serializable]
     public class DepartureAccessLink
     {
-        public string transportMode ;
-        public string transportSubMode ;
-        public Origin origin ;
-        public Destination destination ;
-        public List<object> notes ;
-        public int distanceInMeters ;
-        public string plannedDepartureTime ;
-        public string plannedArrivalTime ;
-        public int plannedDurationInMinutes ;
-        public string estimatedDepartureTime ;
-        public string estimatedArrivalTime ;
-        public int estimatedDurationInMinutes ;
-        public int estimatedNumberOfSteps ;
-        public List<LinkCoordinate> linkCoordinates ;
+        public string transportMode;
+        public string transportSubMode;
+        public Origin origin;
+        public Destination destination;
+        public List<Note> notes;
+        public int distanceInMeters;
+        public string plannedDepartureTime;
+        public string plannedArrivalTime;
+        public int plannedDurationInMinutes;
+        public string estimatedDepartureTime;
+        public string estimatedArrivalTime;
+        public int estimatedDurationInMinutes;
+        public int estimatedNumberOfSteps;
+        public List<LinkCoordinate> linkCoordinates;
+        public List<Segment> segments;
     }
-    [Serializable]
 
+    [Serializable]
     public class Destination
     {
-        public StopPoint stopPoint ;
-        public string plannedTime ;
-        public string estimatedTime ;
-        public string estimatedOtherwisePlannedTime ;
-        public List<object> notes ;
+        public StopPoint stopPoint;
+        public string plannedTime;
+        public string estimatedTime;
+        public string estimatedOtherwisePlannedTime;
+        public List<Note> notes;
+        public string gid;
+        public string name;
+        public string locationType;
+        public int latitude;
+        public int longitude;
     }
-    [Serializable]
 
+    [Serializable]
+    public class DestinationLink
+    {
+        public string transportMode;
+        public string transportSubMode;
+        public Origin origin;
+        public Destination destination;
+        public List<Note> notes;
+        public int distanceInMeters;
+        public string plannedDepartureTime;
+        public string plannedArrivalTime;
+        public int plannedDurationInMinutes;
+        public string estimatedDepartureTime;
+        public string estimatedArrivalTime;
+        public int estimatedDurationInMinutes;
+        public int estimatedNumberOfSteps;
+        public List<LinkCoordinate> linkCoordinates;
+        public List<Segment> segments;
+    }
+
+    [Serializable]
     public class Line
     {
-        public string shortName ;
-        public string designation ;
-        public bool isWheelchairAccessible ;
-        public string name ;
-        public string backgroundColor ;
-        public string foregroundColor ;
-        public string borderColor ;
-        public string transportMode ;
-        public string transportSubMode ;
+        public string name;
+        public string backgroundColor;
+        public string foregroundColor;
+        public string borderColor;
+        public string transportMode;
+        public string transportSubMode;
+        public string shortName;
+        public string designation;
+        public bool isWheelchairAccessible;
     }
-    [Serializable]
 
+    [Serializable]
     public class LinkCoordinate
     {
-        public double latitude ;
-        public double longitude ;
+        public int latitude;
+        public int longitude;
+        public int elevation;
+        public bool isOnTripLeg;
+        public bool isTripLegStart;
+        public bool isTripLegStop;
     }
-    [Serializable]
 
+    [Serializable]
     public class Links
     {
-        public string previous ;
-        public string next ;
-        public string current ;
+        public string previous;
+        public string next;
+        public string current;
     }
-    [Serializable]
 
+    [Serializable]
     public class Note
     {
-        public string type ;
-        public string severity ;
-        public string text ;
+        public string type;
+        public string severity;
+        public string text;
     }
-    [Serializable]
 
+    [Serializable]
+    public class Occupancy
+    {
+        public string level;
+        public string source;
+    }
+
+    [Serializable]
     public class Origin
     {
-        public string gid ;
-        public string name ;
-        public string locationType ;
-        public double latitude ;
-        public double longitude ;
-        public string plannedTime ;
-        public string estimatedTime ;
-        public string estimatedOtherwisePlannedTime ;
-        public List<object> notes ;
-        public StopPoint stopPoint ;
+        public string gid;
+        public string name;
+        public string locationType;
+        public int latitude;
+        public int longitude;
+        public string plannedTime;
+        public string estimatedTime;
+        public string estimatedOtherwisePlannedTime;
+        public List<Note> notes;
+        public StopPoint stopPoint;
+    }
+
+    [Serializable]
+    public class Pagination
+    {
+        public int limit;
+        public int offset;
+        public int size;
     }
 
     [Serializable]
     public class Result
     {
-        public string reconstructionReference ;
-        public string detailsReference ;
-        public DepartureAccessLink departureAccessLink ;
-        public List<TripLeg> tripLegs ;
-        public List<ConnectionLink> connectionLinks ;
-        public bool isDeparted ;
-        
-       public string leaveTime => tripLegs[0].origin.plannedTime;
-       public string destinationTime => tripLegs[^1].destination.plannedTime;
+        public string reconstructionReference;
+        public string detailsReference;
+        public DepartureAccessLink departureAccessLink;
+        public List<TripLeg> tripLegs;
+        public List<ConnectionLink> connectionLinks;
+        public ArrivalAccessLink arrivalAccessLink;
+        public DestinationLink destinationLink;
+        public bool isDeparted;
+        public Occupancy occupancy;
+        public string LeaveTime => tripLegs[0]?.origin?.plannedTime;
+        public string DestinationTime => tripLegs[^1]?.destination?.plannedTime;
+    }
+
+
+    [Serializable]
+    public class Segment
+    {
+        public string name;
+        public string maneuver;
+        public string orientation;
+        public string maneuverDescription;
+        public int distanceInMeters;
     }
 
     [Serializable]
-
     public class ServiceJourney
     {
-        public string gid ;
-        public string direction ;
-        public string number ;
-        public Line line ;
+        public string gid;
+        public string direction;
+        public string number;
+        public Line line;
     }
-    [Serializable]
 
+    [Serializable]
     public class StopArea
     {
-        public string gid ;
-        public string name ;
-        public double latitude ;
-        public double longitude ;
-        public TariffZone1 tariffZone1 ;
+        public string gid;
+        public string name;
+        public int latitude;
+        public int longitude;
+        public TariffZone1 tariffZone1;
+        public TariffZone2 tariffZone2;
     }
-    [Serializable]
 
+    [Serializable]
     public class StopPoint
     {
-        public string gid ;
-        public string name ;
-        public string platform ;
-        public StopArea stopArea ;
+        public string gid;
+        public string name;
+        public string platform;
+        public int latitude;
+        public int longitude;
+        public StopArea stopArea;
     }
-    [Serializable]
 
+    [Serializable]
     public class TariffZone1
     {
-        public string gid ;
-        public string name ;
-        public int number ;
-        public string shortName ;
+        public string gid;
+        public string name;
+        public int number;
+        public string shortName;
     }
-    [Serializable]
 
+    [Serializable]
+    public class TariffZone2
+    {
+        public string gid;
+        public string name;
+        public int number;
+        public string shortName;
+    }
+
+    [Serializable]
     public class TripLeg
     {
-        public Origin origin ;
-        public Destination destination ;
-        public bool isCancelled ;
-        public bool isPartCancelled ;
-        public ServiceJourney serviceJourney ;
-        public List<Note> notes ;
-        public string plannedDepartureTime ;
-        public string plannedArrivalTime ;
-        public int plannedDurationInMinutes ;
-        public string estimatedDepartureTime ;
-        public string estimatedArrivalTime ;
-        public int estimatedDurationInMinutes ;
-        public string estimatedOtherwisePlannedArrivalTime ;
-        public string estimatedOtherwisePlannedDepartureTime ;
-        public int journeyLegIndex ;
-        public int? plannedConnectingTimeInMinutes ;
-        public int? estimatedConnectingTimeInMinutes ;
-        public bool? isRiskOfMissingConnection ;
+        public Origin origin;
+        public Destination destination;
+        public bool isCancelled;
+        public bool isPartCancelled;
+        public ServiceJourney serviceJourney;
+        public List<Note> notes;
+        public int estimatedDistanceInMeters;
+        public int plannedConnectingTimeInMinutes;
+        public int estimatedConnectingTimeInMinutes;
+        public bool isRiskOfMissingConnection;
+        public string plannedDepartureTime;
+        public string plannedArrivalTime;
+        public int plannedDurationInMinutes;
+        public string estimatedDepartureTime;
+        public string estimatedArrivalTime;
+        public int estimatedDurationInMinutes;
+        public string estimatedOtherwisePlannedArrivalTime;
+        public string estimatedOtherwisePlannedDepartureTime;
+        public Occupancy occupancy;
+        public int journeyLegIndex;
     }
-
-
 }

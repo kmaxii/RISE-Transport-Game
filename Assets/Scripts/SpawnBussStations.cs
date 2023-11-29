@@ -44,6 +44,7 @@ public class SpawnBussStations : MonoBehaviour
             var instance = Instantiate(marker);
             instance.Set(bussStopsStopPoint.name);
             Vector3 pos = map.GeoToWorldPosition(_locations[i], true);
+            bussStopsStopPoint.pos3d = pos;
             pos.y += 5;
             instance.transform.localPosition = pos;
             instance.transform.localScale = new Vector3(spawnScale, spawnScale, spawnScale);
