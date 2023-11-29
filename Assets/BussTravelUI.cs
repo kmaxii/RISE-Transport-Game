@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Editor;
 using TMPro;
 using Unity.Collections;
 using UnityEngine;
@@ -18,8 +19,11 @@ public class BussTravelUI : MonoBehaviour
     [SerializeField] [TextArea] private string travelInfoTemplate;
     [SerializeField] private TMP_Text travelInfoText;
 
+    [SerializeField] private TimeVariable timeVariable;
+    
     private StopPoint _showingInfoFrom;
     private StopPoint _showingInfoTo;
+    private Result _showingResult;
 
     private GameObject[] _children;
     void Start()
@@ -37,6 +41,7 @@ public class BussTravelUI : MonoBehaviour
     {
         GameObject.FindWithTag("Player").transform.position = _showingInfoTo.pos3d;
         HideTravelOption();
+        timeVariable.Time24H = new Time24H(_showingResult.DestinationTime);
     }
 
     public void HideTravelOption()
@@ -47,7 +52,7 @@ public class BussTravelUI : MonoBehaviour
 
     public void ShowTravelOption(StopPoint from, StopPoint to, Result result)
     {
-        
+        _showingResult = result;
         Debug.Log("Trip leg count: " + result.tripLegs.Count);
         ShowChildren(true);
         travelInfoText.text = travelInfoTemplate

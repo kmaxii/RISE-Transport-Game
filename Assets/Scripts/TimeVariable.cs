@@ -10,7 +10,14 @@ public class TimeVariable : DataCarrier
     [SerializeField] private Time24H time24H;
 
     [SerializeField] private GameEvent onResetHour;
-    
+
+
+
+    public Time24H Time24H
+    {
+        get =>time24H;
+        set => time24H = value;
+    }
 
     //Increase time by Time24H
     public void IncreaseTime(Time24H toIncrease)
@@ -23,7 +30,6 @@ public class TimeVariable : DataCarrier
         {
             onResetHour.Raise();
         }
-        
     }
 
     public override string ToString()

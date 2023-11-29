@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Utils;
 
 namespace Editor
 {
@@ -15,12 +16,22 @@ namespace Editor
             this.minute = Mathf.Clamp(minute, 0, 59);
         }
 
+        public Time24H(DateTimeFormatter timeFormatter)
+            : this(timeFormatter.Hour, timeFormatter.Minute)
+        {
+        }
+
+        public Time24H(string time)
+            : this(new DateTimeFormatter(time))
+        {
+        }
+
         public override string ToString()
         {
             return $"{hour:00}:{minute:00}";
         }
 
-    
+
         public static Time24H operator +(Time24H a, Time24H b)
         {
             int totalMinutes = a.minute + b.minute;
@@ -32,7 +43,7 @@ namespace Editor
 
             return new Time24H(totalHours, totalMinutes);
         }
-        
+
         public static bool WillHourResetToZero(Time24H a, Time24H b)
         {
             int totalMinutes = a.minute + b.minute;
