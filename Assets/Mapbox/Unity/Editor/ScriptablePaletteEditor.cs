@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 
 [CustomEditor(typeof(ScriptablePalette))]
-public class ScriptablePaletteEditor : Editor
+public class ScriptablePaletteEditor : UnityEditor.Editor
 {
     private const int _NUM_COLORS_MIN = 3;
     private const int _NUM_COLORS_MAX = 10;

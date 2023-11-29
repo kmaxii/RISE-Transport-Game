@@ -32,7 +32,7 @@ namespace WoLfulus.LineEnding
 
             if (_type == null)
             {
-                Assembly assembly = Assembly.GetAssembly(typeof(Editor));
+                Assembly assembly = Assembly.GetAssembly(typeof(UnityEditor.Editor));
                 _type = assembly.GetType("UnityEditorInternal.LogEntries");
                 if (_type == null) // 2017 Fix
                 {
