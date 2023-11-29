@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.Collections;
 using UnityEngine;
+using Utils;
 using vasttrafik;
 
 public class BussTravelUI : MonoBehaviour
@@ -51,9 +52,9 @@ public class BussTravelUI : MonoBehaviour
         ShowChildren(true);
         travelInfoText.text = travelInfoTemplate
             .Replace("%FN", from.name)
-            .Replace("%FT", result.LeaveTime)
+            .Replace("%FT", new DateTimeFormatter(result.LeaveTime).HourMinute)
             .Replace("%TN", to.name)
-            .Replace("%TT", result.DestinationTime)
+            .Replace("%TT", new DateTimeFormatter(result.DestinationTime).HourMinute)
             .Replace("%BA", result.tripLegs[0].journeyLegIndex + "")
             .Replace("%BI", "NOT IMPLEMENTED");
         _showingInfoFrom = from;

@@ -9,7 +9,7 @@ namespace minimap
 
         public static FullScreenMap Instance => _instance;
 
-        private StopPoint _interactingBussStop = null;
+        private StopPoint _interactingBussStop;
 
         [SerializeField] private GameObject map;
         [SerializeField] private GameObject closeButton;
@@ -105,9 +105,8 @@ namespace minimap
             }
 
             JourneyResult journey = await VasttrafikAPI.GetJourneyJson(_lastClicked.gid, stopPoint.gid, 7);
-            for (var i = 0; i < journey.results.Count; i++)
+            foreach (var trip in journey.results)
             {
-                Result trip = journey.results[i];
                 Debug.Log($"Leave time: {trip.LeaveTime}, arrive time: {trip.DestinationTime}");
             }
         }
