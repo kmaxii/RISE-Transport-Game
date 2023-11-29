@@ -14,6 +14,18 @@ public class MiniMapPOI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     private Vector3 _originalScale;
 
 
+    private RectTransform _rectTransform;
+
+    public Vector2 Position
+    {
+        set => _rectTransform.anchoredPosition = value;
+    }
+
+    private void Awake()
+    {
+        _rectTransform = GetComponent<RectTransform>();
+    }
+
     public string GetText()
     {
         return textMesh.text;
@@ -23,7 +35,7 @@ public class MiniMapPOI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     {
         textMesh.text = text;
 
-        imageTransform.GetComponent<Image>().sprite = sprite;
+       // imageTransform.GetComponent<Image>().sprite = sprite;
     }
 
     private void Start()

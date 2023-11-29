@@ -3,4 +3,5 @@
     BussStation,
     EScooter,
     Activity,
+    Player
 }

@@ -4,6 +4,7 @@ using Mapbox.Examples;
 using Mapbox.Unity.Map;
 using Mapbox.Unity.Utilities;
 using Mapbox.Utils;
+using minimap;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -50,7 +51,7 @@ public class SpawnBussStations : MonoBehaviour
             instance.transform.localScale = new Vector3(spawnScale, spawnScale, spawnScale);
             _spawnedObjects.Add(instance.gameObject);
             i++;
-            tileManagerUI.AddPOI(
+            tileManagerUI.AddPoi(
                 CoordinateUtils.ToUiCoords(pos),
                 PoiType.BussStation,
                 bussStopsStopPoint.name);

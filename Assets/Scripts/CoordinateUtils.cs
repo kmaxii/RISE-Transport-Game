@@ -23,9 +23,6 @@ public class CoordinateUtils
         double normalizedX = (worldCoords.x - minX1) / (maxX1 - minX1);
         double normalizedZ = (worldCoords.z - minZ1) / (maxZ1 - minZ1);
 
-        // Log the normalized x and z
-        Debug.Log($"{normalizedX}, {normalizedZ}");
-
         // Scale the normalized coordinates to the second coordinate system
         double convertedX = normalizedX * MapSize;
         double convertedZ = normalizedZ * MapSize;
