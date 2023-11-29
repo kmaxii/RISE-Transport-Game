@@ -8,8 +8,6 @@ namespace MaxisGeneralPurpose.Scriptable_objects
     public class IntVariable : DataCarrier
     {
         [SerializeField] private int value;
-        public GameEvent raiseOnValueChanged;
-
         public int Value
         {
             get => value;
