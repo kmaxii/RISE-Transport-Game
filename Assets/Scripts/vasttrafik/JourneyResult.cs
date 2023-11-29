@@ -193,6 +193,9 @@ namespace vasttrafik
         public Occupancy occupancy;
         public string LeaveTime => tripLegs[0]?.origin?.plannedTime;
         public string DestinationTime => tripLegs[^1]?.destination?.plannedTime;
+
+        public int SwitchesAmount => tripLegs.Count - 1;
+        
     }
 
 

@@ -55,7 +55,7 @@ public class BussTravelUI : MonoBehaviour
             .Replace("%FT", new DateTimeFormatter(result.LeaveTime).HourMinute)
             .Replace("%TN", to.name)
             .Replace("%TT", new DateTimeFormatter(result.DestinationTime).HourMinute)
-            .Replace("%BA", result.tripLegs[0].journeyLegIndex + "")
+            .Replace("%BA", result.SwitchesAmount + "")
             .Replace("%BI", "NOT IMPLEMENTED");
         _showingInfoFrom = from;
         _showingInfoTo = to;
