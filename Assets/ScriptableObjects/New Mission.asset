@@ -15,15 +15,15 @@ MonoBehaviour:
   missionName: exampleName
   isFixed: 0
   timeItTakes:
-    hour: 0
+    hour: 1
     minute: 0
   isSetTime: 0
   earliestTime:
     hour: 0
     minute: 0
   latestTime:
-    hour: 0
-    minute: 0
+    hour: 23
+    minute: 59
   hasChainedTask: 0
   childMission: {fileID: 0}
   isChainedTask: 0
