@@ -6,6 +6,7 @@ using Mapbox.Unity.Utilities;
 using Mapbox.Utils;
 using minimap;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PoiSpawner : MonoBehaviour
 {
@@ -13,7 +14,8 @@ public class PoiSpawner : MonoBehaviour
     
     [SerializeField] private float spawnScale = 1f;
 
-    [SerializeField] private PoiLabelTextSetter marker;
+    [FormerlySerializedAs("marker")] [SerializeField] private PoiLabelTextSetter bussStopMarker;
+    [SerializeField] private PoiLabelTextSetter missionMarker;
     
     [SerializeField] private TileManagerUI tileManagerUI;
 
@@ -57,7 +59,7 @@ public class PoiSpawner : MonoBehaviour
         foreach (var missionLocation in locations)
         {
             Vector2d loc = Conversions.StringToLatLon(missionLocation.LocationString);
-            var instance = Instantiate(marker);
+            var instance = Instantiate(missionMarker);
             instance.Set(mission.name);
             Vector3 pos = map.GeoToWorldPosition(loc);
             pos.y += 5;
@@ -68,6 +70,9 @@ public class PoiSpawner : MonoBehaviour
                 CoordinateUtils.ToUiCoords(pos),
                 PoiType.Mission,
                 mission.name);
+            
+            miniMapPoi.SetImage(mission.Sprite);
+            
             spawned.Add(new KeyValuePair<PoiLabelTextSetter, MiniMapPOI>(instance, miniMapPoi));
         }
         _spawnedMissions.Add(mission, spawned.ToArray());
@@ -79,7 +84,7 @@ public class PoiSpawner : MonoBehaviour
         {
             var locationString = bussStopsStopPoint.GeoCoords;
             Vector2d loc = Conversions.StringToLatLon(locationString);
-            var instance = Instantiate(marker);
+            var instance = Instantiate(bussStopMarker);
             instance.Set(bussStopsStopPoint.name);
             Vector3 pos = map.GeoToWorldPosition(loc);
             bussStopsStopPoint.pos3d = pos;

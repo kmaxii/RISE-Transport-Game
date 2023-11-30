@@ -20,7 +20,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7e38749a821a3ff4b80fcdcb58938bad, type: 2}
   - {fileID: 11400000, guid: 1510923bc55b30f4ca64bb27419d91ab, type: 2}
   canBeDoneAtAllLocation: 1
-  isFixed: 1
+  isFixed: 0
   timeItTakes:
     hour: 1
     minute: 0
