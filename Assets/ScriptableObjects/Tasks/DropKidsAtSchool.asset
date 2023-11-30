@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0c7e2810d564534aa1c6e1a2aeb79aa, type: 3}
+  m_Name: DropKidsAtSchool
+  m_EditorClassIdentifier: 
+  missionName: "L\xE4mna barnen i skolan"
+  isFixed: 1
+  timeItTakes:
+    hour: 0
+    minute: 3
+  isSetTime: 1
+  earliestTime:
+    hour: 7
+    minute: 0
+  latestTime:
+    hour: 8
+    minute: 0
+  hasChainedTask: 1
+  childMission: {fileID: 11400000, guid: 571ced9591dd8a2469f9af73ff85ee9e, type: 2}
+  isChainedTask: 0
+  parentMission: {fileID: 0}
+  moneyReward: 0
+  stressChange: -3
+  comfortChange: 0
+  moneyPunishment: 0
+  stressPunishment: 5
+  comfortPunishment: 0
