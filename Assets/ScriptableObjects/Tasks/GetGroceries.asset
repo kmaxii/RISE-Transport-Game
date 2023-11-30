@@ -10,27 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c0c7e2810d564534aa1c6e1a2aeb79aa, type: 3}
-  m_Name: GoToGym
+  m_Name: GetGroceries
   m_EditorClassIdentifier: 
-  missionName: "Tr\xE4na p\xE5 gym"
-  isFixed: 1
+  missionName: "K\xF6p mj\xF6lk"
+  isFixed: 0
   timeItTakes:
-    hour: 1
-    minute: 0
-  isSetTime: 0
+    hour: 0
+    minute: 6
+  isSetTime: 1
   earliestTime:
-    hour: 7
-    minute: 30
+    hour: 6
+    minute: 0
   latestTime:
-    hour: 8
-    minute: 1
+    hour: 19
+    minute: 0
   hasChainedTask: 0
   childMission: {fileID: 0}
   isChainedTask: 0
   parentMission: {fileID: 11400000, guid: aa9cbe89fd6ab67448f0c1600f98a108, type: 2}
-  moneyReward: 0
-  stressChange: -10
-  comfortChange: 5
+  moneyReward: -20
+  stressChange: 0
+  comfortChange: 0
   moneyPunishment: 0
-  stressPunishment: 0
-  comfortPunishment: -5
+  stressPunishment: -5
+  comfortPunishment: 0
