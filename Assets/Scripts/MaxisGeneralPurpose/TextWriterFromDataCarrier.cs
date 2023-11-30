@@ -23,19 +23,11 @@ namespace MaxisGeneralPurpose
             OnEventRaised();
         }
 
-        
-        public void Setup(IntVariable intVariable)
+        private void OnEnable()
         {
-            if (!_textMesh)
-            {
-                _textMesh = GetComponent<TMP_Text>();
-            }
-
-            value = intVariable;
-            OnEventRaised();
             value.raiseOnValueChanged.RegisterListener(this);
-        }
 
+        }
 
         private void OnDisable()
         {

@@ -31,6 +31,8 @@ namespace Editor
             return $"{hour:00}:{minute:00}";
         }
 
+        public string Rfc3339 => TimeUtils.ConvertToRfc3339(this);
+
 
         public static Time24H operator +(Time24H a, Time24H b)
         {
