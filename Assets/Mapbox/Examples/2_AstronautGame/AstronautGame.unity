@@ -1410,7 +1410,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   travelInfoTemplate: "Fr\xE5n: %FN %FT\nTill: %TN %TT\nByten: %BA\n\n"
   travelInfoText: {fileID: 945961420}
-  timeVariable: {fileID: 0}
+  timeVariable: {fileID: 11400000, guid: 3e013dc3110bf9b4ca29f5af6ac7195e, type: 2}
 --- !u!222 &679950603
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3488,7 +3488,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   map: {fileID: 1760020115}
   closeButton: {fileID: 1534589187}
-  bussTravelUI: {fileID: 679950602}
+  tripPlanner:
+    bussTravelUI: {fileID: 679950602}
+    time: {fileID: 11400000, guid: 3e013dc3110bf9b4ca29f5af6ac7195e, type: 2}
 --- !u!21 &1624672643
 Material:
   serializedVersion: 8
