@@ -1561,10 +1561,10 @@ MonoBehaviour:
       latitudeLongitude: 57.7086, 11.9733
       zoom: 16
     extentOptions:
-      extentType: 1
+      extentType: 0
       defaultExtents:
         cameraBoundsOptions:
-          camera: {fileID: 234181019}
+          camera: {fileID: 1351294047}
           visibleBuffer: 0
           disposeBuffer: 0
         rangeAroundCenterOptions:
@@ -3909,6 +3909,10 @@ MonoBehaviour:
   toSetArray:
   - value: 300
     intVariable: {fileID: 11400000, guid: 5b165bbb0d2f70e4fbab476614247608, type: 2}
+  time: {fileID: 11400000, guid: 3e013dc3110bf9b4ca29f5af6ac7195e, type: 2}
+  startTime:
+    hour: 8
+    minute: 0
 --- !u!4 &1794904671
 Transform:
   m_ObjectHideFlags: 0

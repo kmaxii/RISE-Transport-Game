@@ -1,4 +1,3 @@
-using System;
 using Editor;
 using MaxisGeneralPurpose.Event;
 using Scriptable_objects;
@@ -12,11 +11,15 @@ public class TimeVariable : DataCarrier
     [SerializeField] private GameEvent onResetHour;
 
 
-
     public Time24H Time24H
     {
-        get =>time24H;
-        set => time24H = value;
+        get => time24H;
+        set
+        {
+            time24H = value;
+            if (raiseOnValueChanged)
+                raiseOnValueChanged.Raise();
+        }
     }
 
     //Increase time by Time24H

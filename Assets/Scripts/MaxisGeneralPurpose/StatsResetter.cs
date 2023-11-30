@@ -1,4 +1,5 @@
 using System;
+using Editor;
 using MaxisGeneralPurpose.Scriptable_objects;
 using Scriptable_objects;
 using UnityEngine;
@@ -7,6 +8,10 @@ public class StatsResetter : MonoBehaviour
 {
     [NonReorderable]
     [SerializeField] private IntVariableAndInt[] toSetArray;
+    
+    [NonReorderable]
+    [SerializeField] private TimeVariable time;
+    [SerializeField] private Time24H startTime;
 
     // Start is called before the first frame update
     void Start()
@@ -15,6 +20,7 @@ public class StatsResetter : MonoBehaviour
         {
             toSet.intVariable.Value = toSet.value;
         }
+        time.Time24H = startTime;
     }
 }
 
