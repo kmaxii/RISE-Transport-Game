@@ -11,7 +11,7 @@ public class StopPoint
     
     public Vector3 pos3d { get; set; }
 
-    public String GeoCoords => $"{geometry.northingCoordinate}, {geometry.eastingCoordinate}";
+    public String GeoCoords => ($"{geometry.northingCoordinate}").Replace(",", ".") + ", " +($"{geometry.eastingCoordinate}").Replace(",", ".");
 
     public float NorthingCoord => geometry.northingCoordinate;
     public float EasternCoord => geometry.eastingCoordinate;
