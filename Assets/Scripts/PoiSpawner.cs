@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using Mapbox.Examples.Scripts;
 using Mapbox.Unity.Map;
 using Mapbox.Unity.Utilities;
@@ -15,12 +16,14 @@ public class PoiSpawner : MonoBehaviour
     [SerializeField] private PoiLabelTextSetter marker;
     
     [SerializeField] private TileManagerUI tileManagerUI;
-    
-    
-    
+
+    private Dictionary<Mission, KeyValuePair<PoiLabelTextSetter, MiniMapPOI>[]> _spawnedMissions;
+
+
     void Start()
     {
         StartCoroutine(LateStart());
+        _spawnedMissions = new Dictionary<Mission, KeyValuePair<PoiLabelTextSetter, MiniMapPOI>[]>();
     }
 
 
@@ -30,10 +33,27 @@ public class PoiSpawner : MonoBehaviour
         SpawnBussStations();
     }
 
+    public void DestroyMission(Mission mission)
+    {
+        if (_spawnedMissions.TryGetValue(mission, out var spawned))
+        {
+            foreach (var pair in spawned)
+            {
+                Destroy(pair.Key.gameObject);
+                Destroy(pair.Value.gameObject);
+            }
+            
+            _spawnedMissions.Remove(mission);
+        }
+    }
+
     public void SpawnMission(Mission mission)
     {
         MissionLocation[] locations = mission.MissionLocations;
 
+        List<KeyValuePair<PoiLabelTextSetter, MiniMapPOI>> spawned =
+            new List<KeyValuePair<PoiLabelTextSetter, MiniMapPOI>>();
+        
         foreach (var missionLocation in locations)
         {
             Vector2d loc = Conversions.StringToLatLon(missionLocation.LocationString);
@@ -44,11 +64,13 @@ public class PoiSpawner : MonoBehaviour
             var transform1 = instance.transform;
             transform1.localPosition = pos;
             transform1.localScale = new Vector3(spawnScale, spawnScale, spawnScale);
-            tileManagerUI.AddPoi(
+            MiniMapPOI miniMapPoi = tileManagerUI.AddPoi(
                 CoordinateUtils.ToUiCoords(pos),
                 PoiType.Mission,
                 mission.name);
+            spawned.Add(new KeyValuePair<PoiLabelTextSetter, MiniMapPOI>(instance, miniMapPoi));
         }
+        _spawnedMissions.Add(mission, spawned.ToArray());
     }
 
     private void SpawnBussStations()
