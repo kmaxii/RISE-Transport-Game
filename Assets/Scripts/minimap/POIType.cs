@@ -1,7 +1,10 @@
-﻿public enum PoiType
+﻿namespace minimap
 {
-    BussStation,
-    EScooter,
-    Activity,
-    Player
+    public enum PoiType
+    {
+        BussStation,
+        EScooter,
+        Mission,
+        Player
+    }
 }

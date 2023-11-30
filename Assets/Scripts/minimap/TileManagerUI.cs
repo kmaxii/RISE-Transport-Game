@@ -18,7 +18,10 @@ namespace minimap
 
         private RawImage[,] _tiles;
         private Vector3 _originalScale;
-        [FormerlySerializedAs("_map")] [SerializeField] private AbstractMap map;
+
+        [FormerlySerializedAs("_map")] [SerializeField]
+        private AbstractMap map;
+
         [SerializeField] private Transform player;
 
         [SerializeField] private Sprite bussStationSprite;
@@ -39,7 +42,6 @@ namespace minimap
 
             _playerPoi = AddPoi(player.position, PoiType.Player, "You");
         }
-        
 
 
         [SerializeField] MiniMapPOI poiPrefab; // Assign this in the Unity Editor
@@ -66,26 +68,16 @@ namespace minimap
                 case PoiType.Player:
                     poi = Instantiate(playerPoiPrefab, mapRectTransform);
                     break;
+                case PoiType.Mission:
+                    poi = Instantiate(poiPrefab, mapRectTransform);
+                    break;
                 default:
                     poi = Instantiate(poiPrefab, mapRectTransform);
                     break;
             }
 
             poi.Position = localPos;
-
-            switch (poiType)
-            {
-                case PoiType.BussStation:
-                {
-                    poi.Setup(bussStationSprite, message);
-                    break;
-                }
-                case PoiType.EScooter:
-                {
-                    poi.Setup(eScooterSprite, message);
-                    break;
-                }
-            }
+            poi.Setup(message);
 
             return poi;
         }
@@ -104,7 +96,7 @@ namespace minimap
             float localX = (poiCoordinates.x - mapSize / 2f) / mapSize * (tileSize * maxTiles);
             float localY = (poiCoordinates.y - mapSize / 2f) / mapSize * (tileSize * maxTiles);
 
-            return new Vector2(localX -141.5f, localY - 101);
+            return new Vector2(localX - 141.5f, localY - 101);
         }
 
 
@@ -142,7 +134,8 @@ namespace minimap
 
             // Calculate the ratio of change in scale
             Vector3 scaleRatioChange = newScale - oldScale;
-            Vector2 adjustedCursorPos = new Vector2(localCursor.x * scaleRatioChange.x, localCursor.y * scaleRatioChange.y);
+            Vector2 adjustedCursorPos =
+                new Vector2(localCursor.x * scaleRatioChange.x, localCursor.y * scaleRatioChange.y);
 
             // Adjust the position to keep the cursor point stationary
             Vector2 newPosition = mapRectTransform.anchoredPosition - adjustedCursorPos;

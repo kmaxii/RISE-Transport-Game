@@ -6,14 +6,28 @@ public class Mission : ScriptableObject
 {
     [SerializeField] private string missionName = "exampleName";
 
-    [Header("Appearance")]
+    [Tooltip("The picture of how this mission")]
+    [SerializeField] private Sprite sprite;
     
-
+    [Header("Appearance")]
     [SerializeField] private MissionLocation[] missionLocations;
     
     [Tooltip("If false, a random location is chosen. If true, can be done at all")]
     [SerializeField] private bool canBeDoneAtAllLocation; // Visibility managed in custom editor
 
+    public  MissionLocation[] MissionLocations
+    {
+        get
+        {
+            if (missionLocations.Length <= 1 || canBeDoneAtAllLocation)
+                return missionLocations;
+            
+            //Return an array with one element that is a random location from missionLocations
+            MissionLocation[] newMissionLocations = new MissionLocation[1];
+            newMissionLocations[0] = missionLocations[Random.Range(0, missionLocations.Length)];
+            return newMissionLocations;
+        }
+    }
 
     [Tooltip("Does task appear at the start of the day? If not it will appear randomly")] [SerializeField]
     private bool isFixed;

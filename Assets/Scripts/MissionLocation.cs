@@ -10,6 +10,7 @@ public class MissionLocation : ScriptableObject
     [SerializeField] private string location;
 
     public Vector2 Location => _loc;
+    public string LocationString => location;
     
     private void Awake()
     {

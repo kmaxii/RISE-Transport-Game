@@ -6,6 +6,7 @@ namespace Editor
     public class MissionEditor : UnityEditor.Editor
     {
         SerializedProperty missionName;
+        SerializedProperty sprite;
         SerializedProperty canBeDoneAtAllLocation;
         SerializedProperty missionLocations;
         SerializedProperty isFixed;
@@ -27,6 +28,7 @@ namespace Editor
         private void OnEnable()
         {
             missionName = serializedObject.FindProperty("missionName");
+            sprite = serializedObject.FindProperty("sprite");
             canBeDoneAtAllLocation = serializedObject.FindProperty("canBeDoneAtAllLocation");
             missionLocations = serializedObject.FindProperty("missionLocations");
             isFixed = serializedObject.FindProperty("isFixed");
@@ -51,7 +53,8 @@ namespace Editor
             serializedObject.Update();
 
             EditorGUILayout.PropertyField(missionName);
-            
+            EditorGUILayout.PropertyField(sprite);
+
  
             EditorGUILayout.PropertyField(missionLocations);
 
