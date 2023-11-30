@@ -26,12 +26,16 @@ namespace vasttrafik
             {
                 Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AccessToken);
                 string url =
-                    $"{BaseUrl}/journeys?originGid={originGid}&destinationGid={destinationGid}&limit={resultLimit}";
+                    $"{BaseUrl}/journeys?originGid={originGid}" +
+                    $"&destinationGid={destinationGid}" +
+                    $"&limit={resultLimit}" +
+                    $"&onlyDirectConnections=false" +
+                    $"&includeNearbyStopAreas=true";
 
-                Debug.Log("Time: " + time);
                 
                 if (time != null)
                     url += $"&dateTime={Uri.EscapeDataString(time)}";
+                
                 
                 HttpResponseMessage response = await Client.GetAsync(url);
                 if (response.IsSuccessStatusCode)

@@ -26,7 +26,7 @@ namespace Utils
             DateTime cetDateTime = TimeZoneInfo.ConvertTimeFromUtc(utcDateTime, cetZone);
 
             // Format the DateTime object to RFC-3339 format with manual offset for CET
-            string rfc3339String = cetDateTime.ToString("yyyy-MM-dd'T'HH:mm:ss.fff", CultureInfo.InvariantCulture) + "+01:00";
+            string rfc3339String = cetDateTime.ToString("yyyy-MM-dd'T'HH:mm:ss.fff", CultureInfo.InvariantCulture) + "+02:00";
 
             return rfc3339String;
         }
