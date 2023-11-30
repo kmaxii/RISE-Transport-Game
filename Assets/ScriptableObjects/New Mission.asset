@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: New Mission
   m_EditorClassIdentifier: 
   missionName: exampleName
+  missionLocations: []
+  canBeDoneAtAllLocation: 0
   isFixed: 0
   timeItTakes:
     hour: 1

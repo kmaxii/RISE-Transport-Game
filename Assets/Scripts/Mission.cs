@@ -6,9 +6,20 @@ public class Mission : ScriptableObject
 {
     [SerializeField] private string missionName = "exampleName";
 
+    [Header("Appearance")]
+    
+
+    [SerializeField] private MissionLocation[] missionLocations;
+    
+    [Tooltip("If false, a random location is chosen. If true, can be done at all")]
+    [SerializeField] private bool canBeDoneAtAllLocation; // Visibility managed in custom editor
+
+
     [Tooltip("Does task appear at the start of the day? If not it will appear randomly")] [SerializeField]
     private bool isFixed;
 
+    [Header("Time")]
+    
     [SerializeField] private Time24H timeItTakes = new Time24H(1, 0);
 
     [Tooltip("If true, needs to be performed before set time. If false, can be performed any time")] [SerializeField]
@@ -20,6 +31,7 @@ public class Mission : ScriptableObject
     [Tooltip("When is the task considered failed?")] [SerializeField]
     private Time24H latestTime = new Time24H(23, 59); // Visibility managed in custom editor
 
+    [Header("Chained Task")]
     [Tooltip("Does doing this task create other tasks")] [SerializeField]
     private bool hasChainedTask;
 
