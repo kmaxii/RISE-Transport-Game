@@ -1,29 +1,26 @@
-using System.IO;
+using System;
+using System.Collections.Generic;
+using Mapbox.Map;
+using Mapbox.Unity.Map;
 using Mapbox.Unity.Map.Interfaces;
+using Mapbox.Unity.MeshGeneration.Enums;
+using Mapbox.Unity.Utilities;
+using Mapbox.Utils;
+using UnityEngine;
 
 namespace Mapbox.Unity.MeshGeneration.Data
 {
-	using UnityEngine;
-	using Mapbox.Unity.MeshGeneration.Enums;
-	using Mapbox.Unity.Utilities;
-	using Utils;
-	using Mapbox.Map;
-	using System;
-	using Mapbox.Unity.Map;
-	using System.Collections.Generic;
-	using Mapbox.Unity.MeshGeneration.Factories;
-
 	public class UnityTile : MonoBehaviour
 	{
 
-		[SerializeField] private String savePath = "Assets/pngs/";
-		private static int id = 0;
+	//	[SerializeField] private String savePath = "Assets/pngs/";
+	//	private static int id = 0;
 		
 		public TileTerrainType ElevationType;
 
 		[SerializeField]
 		private Texture2D _rasterData;
-		public VectorTile VectorData { get; private set; }
+		public Mapbox.Map.VectorTile VectorData { get; private set; }
 		private Texture2D _heightTexture;
 		public float[] HeightData;
 
@@ -324,7 +321,7 @@ namespace Mapbox.Unity.MeshGeneration.Data
 			}
 		}
 
-		public void SetVectorData(VectorTile vectorTile)
+		public void SetVectorData(Mapbox.Map.VectorTile vectorTile)
 		{
 			if (VectorDataState != TilePropertyState.Unregistered)
 			{

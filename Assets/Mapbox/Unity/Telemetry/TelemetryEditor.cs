@@ -74,7 +74,6 @@ namespace Mapbox.Unity.Telemetry
 		{
 			byte[] bodyRaw = Encoding.UTF8.GetBytes(bodyJsonString);
 
-#if UNITY_2017_1_OR_NEWER
 			UnityWebRequest postRequest = new UnityWebRequest(url, "POST");
 			postRequest.SetRequestHeader("Content-Type", "application/json");
 
@@ -85,21 +84,8 @@ namespace Mapbox.Unity.Telemetry
 
 			while (!postRequest.isDone) { yield return null; }
 
-			if (!postRequest.isNetworkError)
+			if (postRequest.result != UnityWebRequest.Result.ConnectionError)
 			{
-#else
-				var headers = new Dictionary<string, string>();
-				headers.Add("Content-Type", "application/json");
-				headers.Add("user-agent", GetUserAgent());
-				var www = new WWW(url, bodyRaw, headers);
-				yield return www;
-
-				while (!www.isDone) { yield return null; }
-
-				// www doesn't expose HTTP status code, relay on 'error' property
-				if (!string.IsNullOrEmpty(www.error))
-				{
-#endif
 				PlayerPrefs.SetString(Constants.Path.TELEMETRY_TURNSTILE_LAST_TICKS_EDITOR_KEY, "0");
 			}
 			else

@@ -17,7 +17,6 @@ namespace minimap
         private void Awake()
         {
             _instance = this;
-            Debug.Log("Spawned FullScreenMap");
         }
 
         public BussStop InteractingBussStop

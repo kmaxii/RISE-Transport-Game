@@ -1,31 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
 using Editor;
 using TMPro;
-using Unity.Collections;
 using UnityEngine;
 using Utils;
 using vasttrafik;
 
 public class BussTravelUI : MonoBehaviour
 {
-
-    [TextArea] [ReadOnly] private string textReplacements = "%FN: From Name " +
+    /*[TextArea] [ReadOnly] private string textReplacements = "%FN: From Name " +
                                                                              "\n%FT: From Time" +
                                                                              "\n%TN: To Name" +
                                                                              "\n%TT: To time " +
                                                                              "\n%BA: Byten amount" +
-                                                                             "\n%BI: Byten info";
+                                                                             "\n%BI: Byten info";*/
     [SerializeField] [TextArea] private string travelInfoTemplate;
     [SerializeField] private TMP_Text travelInfoText;
 
     [SerializeField] private TimeVariable timeVariable;
-    
+
     private StopPoint _showingInfoFrom;
     private StopPoint _showingInfoTo;
     private Result _showingResult;
 
     private GameObject[] _children;
+
     void Start()
     {
         //Put all of this children into the children array
@@ -33,7 +30,6 @@ public class BussTravelUI : MonoBehaviour
         for (int i = 0; i < transform.childCount; i++)
         {
             _children[i] = transform.GetChild(i).gameObject;
-
         }
     }
 
