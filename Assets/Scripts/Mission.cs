@@ -39,6 +39,9 @@ public class Mission : ScriptableObject
     [Tooltip("The comfort amount change after mission. Use - to make it go down")] [SerializeField]
     private int comfortChange;
 
+    [Tooltip("The energy amount change after mission. Use - to make it go down")] [SerializeField]
+    private int energyChange;
+
     [Header("Failure")] [Tooltip("The money change on failure. Use - to make it go down")] [SerializeField]
     private int moneyPunishment;
 
