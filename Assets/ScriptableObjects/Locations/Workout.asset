@@ -10,11 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c0c7e2810d564534aa1c6e1a2aeb79aa, type: 3}
-  m_Name: New Mission
+  m_Name: Workout
   m_EditorClassIdentifier: 
-  missionName: exampleName
-  missionLocations: []
-  canBeDoneAtAllLocation: 0
+  missionName: Workout
+  missionLocations:
+  - {fileID: 11400000, guid: 2c524100467a7f2468650c2cf1efb109, type: 2}
+  - {fileID: 11400000, guid: af6fc45ba84b93b4890d5d330ce6667f, type: 2}
+  - {fileID: 11400000, guid: 7e38749a821a3ff4b80fcdcb58938bad, type: 2}
+  - {fileID: 11400000, guid: 1510923bc55b30f4ca64bb27419d91ab, type: 2}
+  canBeDoneAtAllLocation: 1
   isFixed: 0
   timeItTakes:
     hour: 1
