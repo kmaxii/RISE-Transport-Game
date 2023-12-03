@@ -726,6 +726,7 @@ MonoBehaviour:
         MeshModifiers: []
         GoModifiers:
         - {fileID: 11400000, guid: 113e567e8aeae3d42af96bda8c36b0a8, type: 2}
+        - {fileID: 11400000, guid: 73695ca3e97dc0949adf5ec8a08a15ec, type: 2}
         presetFeatureType: 1
         _maskValue: 0
         selectedTypes: 

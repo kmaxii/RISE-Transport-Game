@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4644f4fa4408d144a9c7927401f3807, type: 3}
-  m_Name: NewLayerModifier
+  m_Script: {fileID: 11500000, guid: 288d05a2dbabb0f46a5fa6c85102780a, type: 3}
+  m_Name: MeshColliderModifer
   m_EditorClassIdentifier: 
   Active: 1
-  _layerId: 8
+  _options:
+    colliderType: 2
