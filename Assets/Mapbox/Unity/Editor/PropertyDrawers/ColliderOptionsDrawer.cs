@@ -42,7 +42,16 @@
 			}
 
 			EditorGUI.BeginChangeCheck();
-			colliderTypeProperty.enumValueIndex = EditorGUILayout.Popup(colliderTypeLabel, colliderTypeProperty.enumValueIndex, colliderTypeContent);
+		//	colliderTypeProperty.enumValueIndex = EditorGUILayout.Popup(colliderTypeLabel, colliderTypeProperty.enumValueIndex, colliderTypeContent);
+			
+		int selectedIndex = EditorGUI.Popup(new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight), colliderTypeLabel, colliderTypeProperty.enumValueIndex, colliderTypeContent);
+		if (selectedIndex != colliderTypeProperty.enumValueIndex)
+		{
+			colliderTypeProperty.enumValueIndex = selectedIndex;
+		}
+
+			
+			
 			if(EditorGUI.EndChangeCheck())
 			{
 				EditorHelper.CheckForModifiedProperty(property);
