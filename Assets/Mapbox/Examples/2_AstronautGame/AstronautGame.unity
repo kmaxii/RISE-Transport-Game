@@ -418,15 +418,6 @@ MonoBehaviour:
               ''primary'', ''secondary'', ''tertiary'', ''link'', ''street'', ''street_limited'',
               ''pedestrian'', ''construction'', ''track'', ''service'', ''ferry'',
               ''path'', ''golf'''
-            PropertyValue: major
-            Min: 0
-            Max: 0
-            filterOperator: 0
-          - Key: class
-            KeyDescription: 'One of: ''motorway'', ''motorway_link'', ''trunk'',
-              ''primary'', ''secondary'', ''tertiary'', ''link'', ''street'', ''street_limited'',
-              ''pedestrian'', ''construction'', ''track'', ''service'', ''ferry'',
-              ''path'', ''golf'''
             PropertyValue: street
             Min: 0
             Max: 0

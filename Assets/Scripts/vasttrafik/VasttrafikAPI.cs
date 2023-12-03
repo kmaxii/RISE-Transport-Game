@@ -11,9 +11,7 @@ namespace vasttrafik
     {
         private static readonly HttpClient Client = new HttpClient();
         private const string BaseUrl = "https://ext-api.vasttrafik.se/pr/v4";
-
-        private const string AccessToken =
-            "SjdHMmk4bTdKUTNNWndaUEFkVXd3UWZfd01VYTpSNzYwR3BWM2NmVWFTSk5BT0hLQjhaSnpxc2dh";
+        
 
         [ItemCanBeNull]
         public static async Task<JourneyResult> GetJourneyJson(string originGid,
@@ -23,7 +21,7 @@ namespace vasttrafik
             Debug.Log($"Sending request with {originGid} to {destinationGid}");
             try
             {
-                Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", AccessToken);
+                Client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await VasttrafikAccessToken.GetAccessTokenAsync());
                 string url =
                     $"{BaseUrl}/journeys?originGid={originGid}" +
                     $"&destinationGid={destinationGid}" +
