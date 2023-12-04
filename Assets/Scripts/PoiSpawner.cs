@@ -22,10 +22,14 @@ public class PoiSpawner : MonoBehaviour
     private Dictionary<Mission, KeyValuePair<PoiLabelTextSetter, MiniMapPOI>[]> _spawnedMissions;
 
 
+    private void Awake()
+    {
+        _spawnedMissions = new Dictionary<Mission, KeyValuePair<PoiLabelTextSetter, MiniMapPOI>[]>();
+    }
+
     void Start()
     {
         StartCoroutine(LateStart());
-        _spawnedMissions = new Dictionary<Mission, KeyValuePair<PoiLabelTextSetter, MiniMapPOI>[]>();
     }
 
 
@@ -61,6 +65,7 @@ public class PoiSpawner : MonoBehaviour
             Vector2d loc = Conversions.StringToLatLon(missionLocation.LocationString);
             var instance = Instantiate(missionMarker);
             instance.Set(mission.name);
+            instance.SetImage(mission.Sprite);
             Vector3 pos = map.GeoToWorldPosition(loc);
             pos.y += 5;
             var transform1 = instance.transform;
@@ -98,20 +103,4 @@ public class PoiSpawner : MonoBehaviour
                 bussStopsStopPoint.name);
         }
     }
-
-
-    /*private void Update()
-    {
-        int count = _spawnedObjects.Count;
-        for (int i = 0; i < count; i++)
-        {
-            var spawnedObject = _spawnedObjects[i];
-            var location = _locations[i];
-            
-            Vector3 pos = map.GeoToWorldPosition(location);
-            pos.y += 1.5f;
-            spawnedObject.transform.localPosition = pos;
-            spawnedObject.transform.localScale = new Vector3(spawnScale, spawnScale, spawnScale);
-        }
-    }*/
 }

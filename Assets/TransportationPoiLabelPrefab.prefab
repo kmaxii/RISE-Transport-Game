@@ -202,6 +202,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 114331597656622048}
   background: {fileID: 114702148998547232}
+  inWorldImage: {fileID: 212423247285982060}
+  onTopImage: {fileID: 5721115637094673139}
 --- !u!1 &1418439391676942
 GameObject:
   m_ObjectHideFlags: 0

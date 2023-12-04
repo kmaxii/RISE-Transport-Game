@@ -15,11 +15,22 @@
 		Image background;
 
 
+		[SerializeField] private Renderer inWorldImage;
+		[SerializeField] private Renderer onTopImage;
+		private static readonly int MainTex = Shader.PropertyToID("_MainTex");
+
 		public void Set(String text)
 		{
 			this.text.text = text;
 			RefreshBackground();
 		}
+
+		public void SetImage(Sprite sprite)
+		{
+			inWorldImage.GetComponent<SpriteRenderer>().sprite = sprite;
+			onTopImage.material.SetTexture(MainTex, sprite.texture);
+		}
+		
 		public void Set(Dictionary<string, object> props)
 		{
 			text.text = "";

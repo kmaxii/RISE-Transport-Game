@@ -1,5 +1,6 @@
 using Editor;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "New Mission", menuName = "Rise/Mission")]
 public class Mission : ScriptableObject
@@ -10,6 +11,7 @@ public class Mission : ScriptableObject
     [SerializeField] private Sprite sprite;
     
     public Sprite Sprite => sprite;
+    public Texture Texture => sprite.texture;
     
     [Header("Appearance")]
     [SerializeField] private MissionLocation[] missionLocations;
