@@ -30,6 +30,11 @@
 			inWorldImage.GetComponent<SpriteRenderer>().sprite = sprite;
 			onTopImage.material.SetTexture(MainTex, sprite.texture);
 		}
+
+		public void SetBackgroundColor(Color color)
+		{
+			background.color = color;
+		}
 		
 		public void Set(Dictionary<string, object> props)
 		{

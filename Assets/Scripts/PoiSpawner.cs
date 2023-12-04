@@ -66,6 +66,7 @@ public class PoiSpawner : MonoBehaviour
             var instance = Instantiate(missionMarker);
             instance.Set(mission.name);
             instance.SetImage(mission.Sprite);
+            instance.SetBackgroundColor(mission.Color);
             Vector3 pos = map.GeoToWorldPosition(loc);
             pos.y += 5;
             var transform1 = instance.transform;

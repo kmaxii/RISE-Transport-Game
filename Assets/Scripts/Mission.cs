@@ -9,9 +9,11 @@ public class Mission : ScriptableObject
 
     [Tooltip("The picture of how this mission")]
     [SerializeField] private Sprite sprite;
-    
     public Sprite Sprite => sprite;
-    public Texture Texture => sprite.texture;
+
+    [SerializeField] private Color color;
+    public Color Color => color;
+    
     
     [Header("Appearance")]
     [SerializeField] private MissionLocation[] missionLocations;

@@ -7,6 +7,7 @@ namespace Editor
     {
         SerializedProperty missionName;
         SerializedProperty sprite;
+        SerializedProperty color;
         SerializedProperty canBeDoneAtAllLocation;
         SerializedProperty missionLocations;
         SerializedProperty isFixed;
@@ -29,6 +30,7 @@ namespace Editor
         {
             missionName = serializedObject.FindProperty("missionName");
             sprite = serializedObject.FindProperty("sprite");
+            color = serializedObject.FindProperty("color");
             canBeDoneAtAllLocation = serializedObject.FindProperty("canBeDoneAtAllLocation");
             missionLocations = serializedObject.FindProperty("missionLocations");
             isFixed = serializedObject.FindProperty("isFixed");
@@ -54,6 +56,7 @@ namespace Editor
 
             EditorGUILayout.PropertyField(missionName);
             EditorGUILayout.PropertyField(sprite);
+            EditorGUILayout.PropertyField(color);
 
  
             EditorGUILayout.PropertyField(missionLocations);
