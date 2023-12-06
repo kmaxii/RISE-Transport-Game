@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float rayDistance = 1.0f;
     [SerializeField] private int rayCount = 30;
     [SerializeField] private float moveSpeed = 5.0f;
+
+    [SerializeField] private float rayYOffset;
     
     
     private Vector3 _inputDirection;
@@ -30,11 +32,14 @@ public class PlayerController : MonoBehaviour
         float closestDot = -Mathf.Infinity;
 
         Transform selfTransform = transform;
+
+        Vector3 offset = new Vector3(0, rayYOffset, 0);
+        
         for (int i = 0; i < rayCount; i++)
         {
             float angle = (360f / rayCount) * i;
             Vector3 dir = Quaternion.Euler(0, angle, 0) * Vector3.forward;
-            Ray ray = new Ray(transform.position + dir * rayDistance, Vector3.down);
+            Ray ray = new Ray(transform.position + dir * rayDistance + offset, Vector3.down);
 
             if (Physics.Raycast(ray, out var hit, rayDistance, ground))
             {
@@ -60,11 +65,14 @@ public class PlayerController : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
+        Vector3 offset = new Vector3(0, rayYOffset, 0);
+
+        
         for (int i = 0; i < rayCount; i++)
         {
             float angle = (360f / rayCount) * i;
             Vector3 dir = Quaternion.Euler(0, angle, 0) * Vector3.forward;
-            Vector3 rayOrigin = transform.position + dir * rayDistance;
+            Vector3 rayOrigin = transform.position + dir * rayDistance + offset;
 
             Gizmos.DrawLine(rayOrigin, rayOrigin + Vector3.down * rayDistance);
         }

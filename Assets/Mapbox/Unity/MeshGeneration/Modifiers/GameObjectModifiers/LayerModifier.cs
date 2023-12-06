@@ -13,6 +13,7 @@ namespace Mapbox.Unity.MeshGeneration.Modifiers
 		public override void Run(VectorEntity ve, UnityTile tile)
         {
             ve.GameObject.layer = _layerId;
+            ve.GameObject.AddComponent<MeshCollider>();
         }
     }
 }

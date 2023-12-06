@@ -113,7 +113,7 @@ namespace Mapbox.Unity.Utilities
             public Routine(IEnumerator a_enumerator)
             {
                 m_Enumerator = a_enumerator;
-                Runnable.Instance.StartCoroutine(this);
+                Instance.StartCoroutine(this);
                 Stop = false;
                 ID = Runnable.Instance.m_NextRoutineId++;
 
