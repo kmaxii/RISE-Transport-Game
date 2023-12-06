@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        if (!TryGetComponent(out _animator))
         {
             Debug.LogError(transform.name + " is missing an animator");
         }
