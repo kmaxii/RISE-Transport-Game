@@ -1,111 +1,72 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed = 5.0f;
-    public float maxDistanceToGround = 1.0f;
-    public float moveSmoothTime = 0.1f;
-
     [SerializeField] private LayerMask ground;
 
-    private HashSet<Collider> _currentColliding = new HashSet<Collider>();
-    private SphereCollider _sphereCollider;
+    [SerializeField] private float rayDistance = 1.0f;
+    [SerializeField] private int rayCount = 30;
+    [SerializeField] private float moveSpeed = 5.0f;
+    
+    
+    private Vector3 _inputDirection;
 
-    private Vector3 _velocity;
-
-    private void Awake()
-    {
-        _sphereCollider = GetComponent<SphereCollider>();
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        _currentColliding.Add(other);
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        _currentColliding.Remove(other);
-    }
 
     void FixedUpdate()
     {
-        MovePlayer();
-      //  KeepPlayerOnGround();
+        // Get input direction (modify based on your input system)
+        _inputDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+
+        // Only move if there is input
+        if (_inputDirection != Vector3.zero)
+        {
+            MovePlayer();
+        }
     }
 
     void MovePlayer()
     {
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
+        Vector3 bestDirection = Vector3.zero;
+        float closestDot = -Mathf.Infinity;
 
-        Vector3 targetMovement = new Vector3(moveHorizontal, 0.0f, moveVertical);//.normalized * speed;
-
-        Vector3 targetPos = FindNearestRoadPoint(transform.position - targetMovement);
-        targetMovement = transform.position - targetPos;
-        
-        
-        
-        _velocity = Vector3.Lerp(_velocity, targetMovement, moveSmoothTime);
-        transform.position += _velocity * Time.fixedDeltaTime;
-    }
-
-    void KeepPlayerOnGround()
-    {
-        if (!Physics.Raycast(transform.position, -Vector3.up, out RaycastHit hit, maxDistanceToGround, ground))
+        Transform selfTransform = transform;
+        for (int i = 0; i < rayCount; i++)
         {
-            Vector3 nearestPoint = FindNearestRoadPoint(transform.position);
-            transform.position = nearestPoint; //Vector3.MoveTowards(transform.position, nearestPoint, speed * Time.fixedDeltaTime);
-        }
-    }
+            float angle = (360f / rayCount) * i;
+            Vector3 dir = Quaternion.Euler(0, angle, 0) * Vector3.forward;
+            Ray ray = new Ray(transform.position + dir * rayDistance, Vector3.down);
 
-    private Vector3 FindNearestRoadPoint(Vector3 pos)
-    {
-        float closestDistance = Mathf.Infinity;
-        Vector3 closestPoint = Vector3.zero;
-
-        foreach (var col in _currentColliding)
-        {
-            if (CheckSphereExtra(col, _sphereCollider, pos, out Vector3 closestPointOnCollider, out Vector3 surfaceNormal))
+            if (Physics.Raycast(ray, out var hit, rayDistance, ground))
             {
-                float distance = Vector3.Distance(transform.position, closestPointOnCollider);
+                Vector3 hitDirection = new Vector3(hit.point.x, transform.position.y, hit.point.z) - selfTransform.position;
+                float dotProduct = Vector3.Dot(_inputDirection.normalized, hitDirection.normalized);
 
-                if (distance < closestDistance)
+                if (dotProduct > closestDot)
                 {
-                    closestDistance = distance;
-                    closestPoint = closestPointOnCollider;
+                    closestDot = dotProduct;
+                    bestDirection = hitDirection;
                 }
             }
         }
 
-        Debug.Log(closestDistance);
-
-
-        closestPoint.y = 1;
-        return closestPoint;
+        if (bestDirection != Vector3.zero)
+        {
+            // Lerp towards the best direction
+            selfTransform.position = Vector3.Lerp(transform.position, selfTransform.position + bestDirection,
+                moveSpeed * Time.deltaTime);
+        }
     }
 
-    private static bool CheckSphereExtra(Collider targetCollider, SphereCollider sphereCollider, Vector3 pos,
-        out Vector3 closestPoint, out Vector3 surfaceNormal)
+    void OnDrawGizmos()
     {
-        closestPoint = Vector3.zero;
-        surfaceNormal = Vector3.zero;
-
-      //  Vector3 spherePos = sphereCollider.transform.position;
-
-    //    Vector3 spherePosToPos = pos - spherePos;
-        
-        if (Physics.ComputePenetration(targetCollider, targetCollider.transform.position,
-                targetCollider.transform.rotation, sphereCollider, pos, Quaternion.identity,
-                out surfaceNormal, out var surfacePenetrationDepth))
+        Gizmos.color = Color.red;
+        for (int i = 0; i < rayCount; i++)
         {
-            closestPoint = pos + (surfaceNormal * (sphereCollider.radius - surfacePenetrationDepth));
-            surfaceNormal = -surfaceNormal;
+            float angle = (360f / rayCount) * i;
+            Vector3 dir = Quaternion.Euler(0, angle, 0) * Vector3.forward;
+            Vector3 rayOrigin = transform.position + dir * rayDistance;
 
-            return true;
+            Gizmos.DrawLine(rayOrigin, rayOrigin + Vector3.down * rayDistance);
         }
-
-        return false;
     }
 }

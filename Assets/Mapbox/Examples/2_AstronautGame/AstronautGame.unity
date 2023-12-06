@@ -3693,12 +3693,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d24bd973cb2c444468be0750e01c0421, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  maxDistanceToGround: 1
-  moveSmoothTime: 0.1
   ground:
     serializedVersion: 2
     m_Bits: 256
+  rayDistance: 1
+  rayCount: 30
+  moveSpeed: 5
 --- !u!54 &1495864855
 Rigidbody:
   m_ObjectHideFlags: 0
