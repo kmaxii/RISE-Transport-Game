@@ -2534,6 +2534,8 @@ MonoBehaviour:
   moveSpeed: 5
   rotationSpeed: 10
   rayYOffset: 1
+  maxIterations: 5
+  distanceIncrement: 0.5
 --- !u!114 &1176362821
 MonoBehaviour:
   m_ObjectHideFlags: 0
