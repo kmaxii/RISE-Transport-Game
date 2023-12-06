@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     [Tooltip("Distance to increment the search radius")]
     [SerializeField] private float distanceIncrement = 0.5f;  
 
+    
 
 
     private Vector3 _inputDirection;
