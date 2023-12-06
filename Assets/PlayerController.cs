@@ -7,23 +7,32 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float rayDistance = 1.0f;
     [SerializeField] private int rayCount = 30;
     [SerializeField] private float moveSpeed = 5.0f;
+    [SerializeField] private float rotationSpeed = 10.0f;
 
     [SerializeField] private float rayYOffset;
-    
-    
-    private Vector3 _inputDirection;
 
+
+    private Vector3 _inputDirection;
+    private Animator _animator;
+    private static readonly int IsWalking = Animator.StringToHash("IsWalking");
+
+    private void Start()
+    {
+        {
+            Debug.LogError(transform.name + " is missing an animator");
+        }
+    }
 
     void FixedUpdate()
     {
-        // Get input direction (modify based on your input system)
         _inputDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
-        // Only move if there is input
-        if (_inputDirection != Vector3.zero)
-        {
+        bool isMoving = _inputDirection != Vector3.zero;
+
+        if (isMoving)
             MovePlayer();
-        }
+        
+        _animator.SetBool(IsWalking, isMoving);
     }
 
     void MovePlayer()
@@ -34,7 +43,7 @@ public class PlayerController : MonoBehaviour
         Transform selfTransform = transform;
 
         Vector3 offset = new Vector3(0, rayYOffset, 0);
-        
+
         for (int i = 0; i < rayCount; i++)
         {
             float angle = (360f / rayCount) * i;
@@ -43,7 +52,8 @@ public class PlayerController : MonoBehaviour
 
             if (Physics.Raycast(ray, out var hit, rayDistance, ground))
             {
-                Vector3 hitDirection = new Vector3(hit.point.x, transform.position.y, hit.point.z) - selfTransform.position;
+                Vector3 hitDirection = new Vector3(hit.point.x, transform.position.y, hit.point.z) -
+                                       selfTransform.position;
                 float dotProduct = Vector3.Dot(_inputDirection.normalized, hitDirection.normalized);
 
                 if (dotProduct > closestDot)
@@ -59,6 +69,10 @@ public class PlayerController : MonoBehaviour
             // Lerp towards the best direction
             selfTransform.position = Vector3.Lerp(transform.position, selfTransform.position + bestDirection,
                 moveSpeed * Time.deltaTime);
+
+            // Rotate the player to face the direction of movement
+            Quaternion lookRotation = Quaternion.LookRotation(bestDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
         }
     }
 
@@ -67,7 +81,7 @@ public class PlayerController : MonoBehaviour
         Gizmos.color = Color.red;
         Vector3 offset = new Vector3(0, rayYOffset, 0);
 
-        
+
         for (int i = 0; i < rayCount; i++)
         {
             float angle = (360f / rayCount) * i;
