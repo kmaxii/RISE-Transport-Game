@@ -32,7 +32,7 @@ namespace minimap
             return tilePool.GetTile(position, sprite);
         }
 
-        public MiniMapPOI GetPoi(Sprite sprite, string text, PoiType poiType, Vector2 position)
+        public MiniMapPOI GetPoi(Vector2 position, Sprite sprite, string text, PoiType poiType)
         {
             return poiPool.GetPoi(sprite, text, poiType, position);
         }

@@ -1,8 +1,7 @@
 using System;
-using Mapbox.Unity.Map;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace minimap
@@ -15,24 +14,78 @@ namespace minimap
         [SerializeField] private float minZoom = 0.35f;
         [SerializeField] private int tileSize = 256;
         [SerializeField] private int maxTiles = 21;
-        
+
         [SerializeField] private ImageTiler imageTiler;
-        
+
         private Image[,] _tiles;
         private Vector3 _originalScale;
 
         [SerializeField] private Transform player;
-        
+
         private MiniMapPOI _playerPoi;
-        
+
         [SerializeField] MiniMapPOI poiPrefab;
         private float CurrentZoom => _mapRectTransform.localScale.x;
 
         [SerializeField] private Sprite playerSprite;
 
+        [SerializeField] private MapPools pools;
+
+
+        private void FixedUpdate()
+        {
+            RaycastUI();
+            Debug.Log("Math mid: " + CalculateTileCoordinates(new Vector2(_mapRectTransform.localPosition.x,
+                _mapRectTransform.localPosition.y)));
+        }
+
+        public Vector2 CalculateTileCoordinates(Vector2 position)
+        {
+
+            position /= CurrentZoom;
+
+            position.x += 1792;
+            position.y += 2048;
+
+            position.x /= 256;
+            position.y /= 256;
+
+            position.x++;
+            position.y--;
+
+            position.x = 16 - position.x;
+
+
+            return new Vector2Int(Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.y));
+
+        }
+
+        void RaycastUI()
+        {
+            // Create a new PointerEventData
+            PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
+
+            // Set the position to the center of the screen
+            pointerEventData.position = new Vector2(Screen.width / 2, Screen.height / 2);
+
+            // Create a list to receive the results
+            List<RaycastResult> results = new List<RaycastResult>();
+
+            // Raycast using the GraphicsRaycaster and mouse click position
+            EventSystem.current.RaycastAll(pointerEventData, results);
+
+            // Check if the raycast hit any UI elements
+            if (results.Count > 0)
+            {
+                // Print the name of the first UI element hit
+                Debug.Log("RayCast Hit: " + results[0].gameObject.name);
+            }
+        }
+
+
+
         private void Awake()
         {
-            
             imageTiler.Initialize();
 
             if (_mapRectTransform == null)
@@ -53,7 +106,6 @@ namespace minimap
             UpdateVisibleTiles();
             UpdatePlayerPoiPosition();
         }
-
 
 
         public MiniMapPOI AddPoi(Vector3 inWorldPos, PoiType poiType, String message, Sprite sprite)
@@ -89,7 +141,7 @@ namespace minimap
             return new Vector2(localX - 141.5f, localY - 101);
         }
 
-        
+
         private void UpdatePlayerPoiPosition()
         {
             _playerPoi.Position = ConvertCoordinatesToLocalPosition(player.position);
@@ -162,9 +214,9 @@ namespace minimap
 
         void CreateTile(int x, int y)
         {
-           // Texture2D tileTexture = ImageTiler.GetTileTexture(x, y);
-           Sprite tileTexture = imageTiler.GetSprite(x, y, 0);
-           Image tileImage = new GameObject("Tile_" + x + "_" + y).AddComponent<Image>();
+            // Texture2D tileTexture = ImageTiler.GetTileTexture(x, y);
+            Sprite tileTexture = imageTiler.GetSprite(x, y, 0);
+            Image tileImage = new GameObject("Tile_" + x + "_" + y).AddComponent<Image>();
 
             tileImage.sprite = tileTexture;
             tileImage.rectTransform.SetParent(_mapRectTransform, false);
