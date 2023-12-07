@@ -15,7 +15,7 @@ namespace minimap
         public float hoverScale = 1.2f; 
         private Vector3 _originalScale;
 
-        private RectTransform _rectTransform;
+        public RectTransform rectTransform;
 
         private PoiType _poiType;
 
@@ -24,14 +24,9 @@ namespace minimap
 
         public Vector2 Position
         {
-            set => _rectTransform.anchoredPosition = value;
+            set => rectTransform.anchoredPosition = value;
         }
-
-        private void Awake()
-        {
-            _rectTransform = GetComponent<RectTransform>();
-        }
-
+        
 
 
         private void Start()
@@ -65,20 +60,20 @@ namespace minimap
             return textMesh.text;
         }
 
-        public void Setup(Sprite image, String text, PoiType poiType)
+        public void Setup(Sprite sprite, String text, PoiType poiType)
         {
             _poiType = poiType;
-            textMesh.text = text;
-            SetImage(image);
+            SetText(text);
+            SetSprite(sprite);
         }
 
 
-        public void SetText(String text)
+        private void SetText(String text)
         {
             textMesh.text = text;
         }
 
-        public void SetImage(Sprite sprite)
+        private void SetSprite(Sprite sprite)
         {
             image.sprite = sprite;
         }

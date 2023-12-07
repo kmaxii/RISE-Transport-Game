@@ -274,3 +274,4 @@ MonoBehaviour:
   image: {fileID: 3247474497552755671}
   textMesh: {fileID: 5786512927425093028}
   hoverScale: 1.2
+  rectTransform: {fileID: 7928256749988838890}
