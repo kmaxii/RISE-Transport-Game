@@ -25,12 +25,10 @@ namespace minimap
         
         private MiniMapPOI _playerPoi;
         
-        [SerializeField] MiniMapPOI poiPrefab; 
-        [SerializeField] MiniMapPOI bussPoiPrefab; 
-        [SerializeField] MiniMapPOI playerPoiPrefab;
-
-
+        [SerializeField] MiniMapPOI poiPrefab;
         private float CurrentZoom => _mapRectTransform.localScale.x;
+
+        [SerializeField] private Sprite playerSprite;
 
         private void Awake()
         {
@@ -47,7 +45,7 @@ namespace minimap
             _tiles = new Image[maxTiles, maxTiles];
             UpdateVisibleTiles();
 
-            _playerPoi = AddPoi(player.position, PoiType.Player, "You");
+            _playerPoi = AddPoi(player.position, PoiType.Player, "You", playerSprite);
         }
 
         private void Update()
@@ -58,35 +56,19 @@ namespace minimap
 
 
 
-        public MiniMapPOI AddPoi(Vector3 inWorldPos, PoiType poiType, String message)
+        public MiniMapPOI AddPoi(Vector3 inWorldPos, PoiType poiType, String message, Sprite sprite)
         {
-            return AddPoi(CoordinateUtils.ToUiCoords(inWorldPos), poiType, message);
+            return AddPoi(CoordinateUtils.ToUiCoords(inWorldPos), poiType, message, sprite);
         }
 
-        public MiniMapPOI AddPoi(Vector2 poiCoordinates, PoiType poiType, String message)
+        public MiniMapPOI AddPoi(Vector2 poiCoordinates, PoiType poiType, String message, Sprite sprite)
         {
             // Convert POI coordinates to map's local coordinates
             Vector2 localPos = ConvertCoordinatesToLocalPosition(poiCoordinates);
 
-            MiniMapPOI poi;
-            switch (poiType)
-            {
-                case PoiType.BussStation:
-                    poi = Instantiate(bussPoiPrefab, _mapRectTransform);
-                    break;
-                case PoiType.Player:
-                    poi = Instantiate(playerPoiPrefab, _mapRectTransform);
-                    break;
-                case PoiType.Mission:
-                    poi = Instantiate(poiPrefab, _mapRectTransform);
-                    break;
-                default:
-                    poi = Instantiate(poiPrefab, _mapRectTransform);
-                    break;
-            }
-
+            MiniMapPOI poi = Instantiate(poiPrefab, _mapRectTransform);
             poi.Position = localPos;
-            poi.Setup(message);
+            poi.Setup(sprite, message, poiType);
 
             return poi;
         }

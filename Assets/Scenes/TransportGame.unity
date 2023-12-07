@@ -3873,10 +3873,13 @@ MonoBehaviour:
     sheet16X16: {fileID: 2800000, guid: 26e3c220fc319e346a6e22bd73ee5cf1, type: 3}
     sheet8X8: {fileID: 2800000, guid: 77cb71d7a60454240a649616ceb03839, type: 3}
     sheet4X4: {fileID: 2800000, guid: aab498d3491ad9a42a4bab7bd5563e77, type: 3}
+    zoomFor8X8: 2
+    zoomFor4X4: 1
   player: {fileID: 1176362814}
   poiPrefab: {fileID: 9204104365709305428, guid: b6a0ccf0e1c0f3640b4d24cd233bb460, type: 3}
   bussPoiPrefab: {fileID: 2917301271372369144, guid: be840b16362987f44ac8dac633e9eb75, type: 3}
   playerPoiPrefab: {fileID: 4888125342279768688, guid: fdcbe771c7d335e40a8251434f7b80b0, type: 3}
+  playerSprite: {fileID: 21300000, guid: 4249590fc26228e4a8dd41e3a293e00b, type: 3}
 --- !u!222 &1760020118
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4540,6 +4543,7 @@ MonoBehaviour:
   bussStopMarker: {fileID: 114652372319761880, guid: 22150daba6e8b47b69fd30f00b9c56cd, type: 3}
   missionMarker: {fileID: 114652372319761880, guid: 22150daba6e8b47b69fd30f00b9c56cd, type: 3}
   tileManagerUI: {fileID: 1760020117}
+  bussStopSprite: {fileID: 21300000, guid: fec5572521f52453397f564f556c168e, type: 3}
 --- !u!4 &2104720038
 Transform:
   m_ObjectHideFlags: 0

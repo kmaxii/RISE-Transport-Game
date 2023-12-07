@@ -21,6 +21,7 @@ public class PoiSpawner : MonoBehaviour
 
     private Dictionary<Mission, KeyValuePair<PoiLabelTextSetter, MiniMapPOI>[]> _spawnedMissions;
 
+    [SerializeField] private Sprite bussStopSprite;
 
     private void Awake()
     {
@@ -75,9 +76,9 @@ public class PoiSpawner : MonoBehaviour
             MiniMapPOI miniMapPoi = tileManagerUI.AddPoi(
                 CoordinateUtils.ToUiCoords(pos),
                 PoiType.Mission,
-                mission.name);
+                mission.name,
+                mission.Sprite);
             
-            miniMapPoi.SetImage(mission.Sprite);
             
             spawned.Add(new KeyValuePair<PoiLabelTextSetter, MiniMapPOI>(instance, miniMapPoi));
         }
@@ -101,7 +102,8 @@ public class PoiSpawner : MonoBehaviour
             tileManagerUI.AddPoi(
                 CoordinateUtils.ToUiCoords(pos),
                 PoiType.BussStation,
-                bussStopsStopPoint.name);
+                bussStopsStopPoint.name,
+                bussStopSprite);
         }
     }
 }
