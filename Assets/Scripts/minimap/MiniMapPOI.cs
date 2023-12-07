@@ -31,13 +31,16 @@ public class MiniMapPOI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         return textMesh.text;
     }
     
-    public void Setup(Sprite sprite, String text)
+    public void Setup(String text)
     {
         textMesh.text = text;
 
-       // imageTransform.GetComponent<Image>().sprite = sprite;
     }
 
+    public void SetImage(Sprite sprite)
+    {
+        imageTransform.GetComponent<Image>().sprite = sprite;
+    }
     private void Start()
     {
         _originalScale = imageTransform.localScale;

@@ -9,7 +9,7 @@
 	[CreateAssetMenu(menuName = "Mapbox/Modifiers/Add Monobehaviours Modifier")]
 	public class AddMonoBehavioursModifier : GameObjectModifier
 	{
-		[SerializeField]
+		[SerializeField] [NonReorderable]
 		AddMonoBehavioursModifierType[] _types;
 		private HashSet<string> _scripts;
 		private string _tempId;

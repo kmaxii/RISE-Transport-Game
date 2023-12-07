@@ -21,6 +21,6 @@ namespace Utils
         public int Second => _dateTime.Second;
         public int Millisecond => _dateTime.Millisecond;
         public TimeSpan Offset => _dateTime.Offset;
-        public string HourMinute => $"{Hour}:{Minute}";
+        public string HourMinute => $"{Hour:D2}:{Minute:D2}";
     }
 }

@@ -1,47 +1,63 @@
  using System;
+ using System.Collections.Generic;
+ using Mapbox.Unity.MeshGeneration.Interfaces;
+ using UnityEngine;
+ using UnityEngine.Serialization;
+ using UnityEngine.UI;
 
- namespace Mapbox.Examples
+ namespace Mapbox.Examples.Scripts
 {
-	using Mapbox.Unity.MeshGeneration.Interfaces;
-	using System.Collections.Generic;
-	using UnityEngine;
-	using UnityEngine.UI;
-
 	public class PoiLabelTextSetter : MonoBehaviour, IFeaturePropertySettable
 	{
-		[SerializeField]
-		Text _text;
-		[SerializeField]
-		Image _background;
+		[FormerlySerializedAs("_text")] [SerializeField]
+		Text text;
+		[FormerlySerializedAs("_background")] [SerializeField]
+		Image background;
 
+
+		[SerializeField] private Renderer inWorldImage;
+		[SerializeField] private Renderer onTopImage;
+		private static readonly int MainTex = Shader.PropertyToID("_MainTex");
 
 		public void Set(String text)
 		{
-			_text.text = text;
+			this.text.text = text;
 			RefreshBackground();
 		}
+
+		public void SetImage(Sprite sprite)
+		{
+			inWorldImage.GetComponent<SpriteRenderer>().sprite = sprite;
+			onTopImage.material.SetTexture(MainTex, sprite.texture);
+		}
+
+		public void SetBackgroundColor(Color color)
+		{
+			background.color = color;
+		}
+		
 		public void Set(Dictionary<string, object> props)
 		{
-			_text.text = "";
+			text.text = "";
 
 			if (props.ContainsKey("name"))
 			{
-				_text.text = props["name"].ToString();
+				text.text = props["name"].ToString();
 			}
 			else if (props.ContainsKey("house_num"))
 			{
-				_text.text = props["house_num"].ToString();
+				text.text = props["house_num"].ToString();
 			}
 			else if (props.ContainsKey("type"))
 			{
-				_text.text = props["type"].ToString();
+				text.text = props["type"].ToString();
 			}
 			RefreshBackground();
 		}
 
 		public void RefreshBackground()
 		{
-			RectTransform backgroundRect = _background.GetComponent<RectTransform>();
+			RectTransform backgroundRect = background.GetComponent<RectTransform>();
 			LayoutRebuilder.ForceRebuildLayoutImmediate(backgroundRect);
 		}
 	}
