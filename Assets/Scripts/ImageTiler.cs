@@ -5,20 +5,44 @@ using UnityEngine.Serialization;
 [Serializable]
 public class ImageTiler
 {
-    [FormerlySerializedAs("sheet16x16")] [SerializeField] private Texture2D sheet16X16;
-    [FormerlySerializedAs("sheet8x8")] [SerializeField] private Texture2D sheet8X8;
-    [FormerlySerializedAs("sheet4x4")] [SerializeField] private Texture2D sheet4X4;
+    [FormerlySerializedAs("sheet16x16")] [SerializeField]
+    private Texture2D sheet16X16;
+
+    [FormerlySerializedAs("sheet8x8")] [SerializeField]
+    private Texture2D sheet8X8;
+
+    [FormerlySerializedAs("sheet4x4")] [SerializeField]
+    private Texture2D sheet4X4;
+
+    [Tooltip("The maximum zoom acceptable to use the 8x8 resolution")]
+    [SerializeField] private float zoomFor8X8 = 3f;
+    [Tooltip("The maximum zoom acceptable to use the 4x4 resolution")]
+    [SerializeField] private float zoomFor4X4 = 1f;
+
 
     private Sprite[] _sprites16X16;
     private Sprite[] _sprites8X8;
     private Sprite[] _sprites4X4;
+    
+    public float GetResolution(float zoom)
+    {
+        if (zoom > zoomFor8X8)
+        {
+            return 0;
+        }
+        if (zoom > zoomFor4X4)
+        {
+            return 1;
+        }
+
+        return 2;
+    }
 
 
     public void Initialize()
     {
-        
 #if UNITY_EDITOR
-       //Check if any Texture2d is null
+        //Check if any Texture2d is null
         if (sheet16X16 == null)
         {
             Debug.LogError("sheet16x16 is null");
@@ -39,12 +63,14 @@ public class ImageTiler
         _sprites16X16 = Resources.LoadAll<Sprite>(sheet16X16.name);
         _sprites8X8 = Resources.LoadAll<Sprite>(sheet8X8.name);
         _sprites4X4 = Resources.LoadAll<Sprite>(sheet4X4.name);
-        
+
         foreach (var sprite in _sprites16X16)
         {
             Debug.Log(sprite.name);
         }
     }
+
+
 
     /// <summary>
     /// 
@@ -95,8 +121,4 @@ public class ImageTiler
         Debug.LogError("Sprite index out of range.");
         return null;
     }
-
-    
-
-  
 }
