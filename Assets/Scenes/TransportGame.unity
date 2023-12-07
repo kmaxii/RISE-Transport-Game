@@ -2738,7 +2738,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 2
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
@@ -3864,16 +3864,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc3b16f6ff02e9341932bc0a20e7901f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapRectTransform: {fileID: 0}
   zoomSpeed: 0.5
   maxZoom: 5
   minZoom: 0.5
   tileSize: 256
   maxTiles: 21
-  map: {fileID: 159634025}
   player: {fileID: 1176362814}
-  bussStationSprite: {fileID: 21300000, guid: fec5572521f52453397f564f556c168e, type: 3}
-  eScooterSprite: {fileID: 21300000, guid: 240e67c92465d4af09e98ac0ff6cb4e5, type: 3}
   poiPrefab: {fileID: 9204104365709305428, guid: b6a0ccf0e1c0f3640b4d24cd233bb460, type: 3}
   bussPoiPrefab: {fileID: 2917301271372369144, guid: be840b16362987f44ac8dac633e9eb75, type: 3}
   playerPoiPrefab: {fileID: 4888125342279768688, guid: fdcbe771c7d335e40a8251434f7b80b0, type: 3}
