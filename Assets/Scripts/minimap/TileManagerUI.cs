@@ -9,33 +9,34 @@ namespace minimap
 {
     public class TileManagerUI : MonoBehaviour, IDragHandler, IScrollHandler
     {
-        public RectTransform mapRectTransform;
-        public float zoomSpeed = 0.5f;
-        public float maxZoom = 5f;
-        public float minZoom = 1f;
-        public int tileSize = 256;
-        public int maxTiles = 21;
+        private RectTransform _mapRectTransform;
+        [SerializeField] private float zoomSpeed = 0.5f;
+        [SerializeField] private float maxZoom = 5f;
+        [SerializeField] private float minZoom = 1f;
+        [SerializeField] private int tileSize = 256;
+        [SerializeField] private int maxTiles = 21;
+        
 
         private RawImage[,] _tiles;
         private Vector3 _originalScale;
 
-        [FormerlySerializedAs("_map")] [SerializeField]
-        private AbstractMap map;
-
         [SerializeField] private Transform player;
-
-        [SerializeField] private Sprite bussStationSprite;
-        [SerializeField] private Sprite eScooterSprite;
+        
         private MiniMapPOI _playerPoi;
-
+        
+        [SerializeField] MiniMapPOI poiPrefab; 
+        [SerializeField] MiniMapPOI bussPoiPrefab; 
+        [SerializeField] MiniMapPOI playerPoiPrefab; 
+        
+        
         private void Awake()
         {
-            if (mapRectTransform == null)
+            if (_mapRectTransform == null)
             {
-                mapRectTransform = GetComponent<RectTransform>();
+                _mapRectTransform = GetComponent<RectTransform>();
             }
 
-            _originalScale = mapRectTransform.localScale;
+            _originalScale = _mapRectTransform.localScale;
 
             _tiles = new RawImage[maxTiles, maxTiles];
             UpdateVisibleTiles();
@@ -43,10 +44,12 @@ namespace minimap
             _playerPoi = AddPoi(player.position, PoiType.Player, "You");
         }
 
+        private void Update()
+        {
+            UpdateVisibleTiles();
+            UpdatePlayerPoiPosition();
+        }
 
-        [SerializeField] MiniMapPOI poiPrefab; // Assign this in the Unity Editor
-        [SerializeField] MiniMapPOI bussPoiPrefab; // Assign this in the Unity Editor
-        [SerializeField] MiniMapPOI playerPoiPrefab; // Assign this in the Unity Editor
 
 
         public MiniMapPOI AddPoi(Vector3 inWorldPos, PoiType poiType, String message)
@@ -63,16 +66,16 @@ namespace minimap
             switch (poiType)
             {
                 case PoiType.BussStation:
-                    poi = Instantiate(bussPoiPrefab, mapRectTransform);
+                    poi = Instantiate(bussPoiPrefab, _mapRectTransform);
                     break;
                 case PoiType.Player:
-                    poi = Instantiate(playerPoiPrefab, mapRectTransform);
+                    poi = Instantiate(playerPoiPrefab, _mapRectTransform);
                     break;
                 case PoiType.Mission:
-                    poi = Instantiate(poiPrefab, mapRectTransform);
+                    poi = Instantiate(poiPrefab, _mapRectTransform);
                     break;
                 default:
-                    poi = Instantiate(poiPrefab, mapRectTransform);
+                    poi = Instantiate(poiPrefab, _mapRectTransform);
                     break;
             }
 
@@ -90,7 +93,6 @@ namespace minimap
 
         private Vector2 ConvertCoordinatesToLocalPosition(Vector2 poiCoordinates)
         {
-            // Assuming the total size of your map is 10752x10752 pixels
             float mapSize = CoordinateUtils.MapSize;
 
             float localX = (poiCoordinates.x - mapSize / 2f) / mapSize * (tileSize * maxTiles);
@@ -99,14 +101,7 @@ namespace minimap
             return new Vector2(localX - 141.5f, localY - 101);
         }
 
-
-        private void Update()
-        {
-            UpdateVisibleTiles();
-            UpdatePlayerPoiPosition();
-        }
-
-
+        
         private void UpdatePlayerPoiPosition()
         {
             _playerPoi.Position = ConvertCoordinatesToLocalPosition(player.position);
@@ -114,17 +109,17 @@ namespace minimap
 
         public void OnDrag(PointerEventData eventData)
         {
-            mapRectTransform.anchoredPosition += eventData.delta;
+            _mapRectTransform.anchoredPosition += eventData.delta;
         }
 
         public void OnScroll(PointerEventData eventData)
         {
             Vector2 cursorPosition = eventData.position;
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(mapRectTransform, cursorPosition,
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(_mapRectTransform, cursorPosition,
                 eventData.pressEventCamera, out Vector2 localCursor);
 
             float scroll = eventData.scrollDelta.y;
-            Vector3 oldScale = mapRectTransform.localScale;
+            Vector3 oldScale = _mapRectTransform.localScale;
             Vector3 newScale = oldScale + Vector3.one * scroll * zoomSpeed;
             newScale = new Vector3(
                 Mathf.Clamp(newScale.x, _originalScale.x * minZoom, _originalScale.x * maxZoom),
@@ -138,11 +133,11 @@ namespace minimap
                 new Vector2(localCursor.x * scaleRatioChange.x, localCursor.y * scaleRatioChange.y);
 
             // Adjust the position to keep the cursor point stationary
-            Vector2 newPosition = mapRectTransform.anchoredPosition - adjustedCursorPos;
+            Vector2 newPosition = _mapRectTransform.anchoredPosition - adjustedCursorPos;
 
             // Apply the new scale and adjusted position
-            mapRectTransform.localScale = newScale;
-            mapRectTransform.anchoredPosition = newPosition;
+            _mapRectTransform.localScale = newScale;
+            _mapRectTransform.anchoredPosition = newPosition;
         }
 
 
@@ -182,9 +177,8 @@ namespace minimap
             Texture2D tileTexture = ImageTiler.GetTileTexture(x, y);
             RawImage tileImage = new GameObject("Tile_" + x + "_" + y).AddComponent<RawImage>();
 
-
             tileImage.texture = tileTexture;
-            tileImage.rectTransform.SetParent(mapRectTransform, false);
+            tileImage.rectTransform.SetParent(_mapRectTransform, false);
 
             // Calculate the offset to center the map
             float centerX = (maxTiles * tileSize) / 2f;
