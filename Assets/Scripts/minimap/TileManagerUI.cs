@@ -12,12 +12,14 @@ namespace minimap
         private RectTransform _mapRectTransform;
         [SerializeField] private float zoomSpeed = 0.5f;
         [SerializeField] private float maxZoom = 5f;
-        [SerializeField] private float minZoom = 1f;
+        [SerializeField] private float minZoom = 0.35f;
         [SerializeField] private int tileSize = 256;
         [SerializeField] private int maxTiles = 21;
-        
 
-        private RawImage[,] _tiles;
+
+        [SerializeField] private ImageTiler imageTiler;
+        
+        private Image[,] _tiles;
         private Vector3 _originalScale;
 
         [SerializeField] private Transform player;
@@ -26,11 +28,15 @@ namespace minimap
         
         [SerializeField] MiniMapPOI poiPrefab; 
         [SerializeField] MiniMapPOI bussPoiPrefab; 
-        [SerializeField] MiniMapPOI playerPoiPrefab; 
+        [SerializeField] MiniMapPOI playerPoiPrefab;
+
         
-        
+
         private void Awake()
         {
+            
+            imageTiler.Initialize();
+
             if (_mapRectTransform == null)
             {
                 _mapRectTransform = GetComponent<RectTransform>();
@@ -38,7 +44,7 @@ namespace minimap
 
             _originalScale = _mapRectTransform.localScale;
 
-            _tiles = new RawImage[maxTiles, maxTiles];
+            _tiles = new Image[maxTiles, maxTiles];
             UpdateVisibleTiles();
 
             _playerPoi = AddPoi(player.position, PoiType.Player, "You");
@@ -174,10 +180,11 @@ namespace minimap
 
         void CreateTile(int x, int y)
         {
-            Texture2D tileTexture = ImageTiler.GetTileTexture(x, y);
-            RawImage tileImage = new GameObject("Tile_" + x + "_" + y).AddComponent<RawImage>();
+           // Texture2D tileTexture = ImageTiler.GetTileTexture(x, y);
+           Sprite tileTexture = imageTiler.GetSprite(x, y, 0);
+           Image tileImage = new GameObject("Tile_" + x + "_" + y).AddComponent<Image>();
 
-            tileImage.texture = tileTexture;
+            tileImage.sprite = tileTexture;
             tileImage.rectTransform.SetParent(_mapRectTransform, false);
 
             // Calculate the offset to center the map

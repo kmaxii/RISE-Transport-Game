@@ -1,57 +1,102 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.Serialization;
 
+[Serializable]
 public class ImageTiler
 {
-    // Method to get the texture by name
-    // Method to get the texture by name
-    public static Texture2D GetTextureByName(string imageName)
-    {
-        imageName = "pngs/" + imageName;
-        
-        Texture2D texture = Resources.Load<Texture2D>(imageName);
+    [FormerlySerializedAs("sheet16x16")] [SerializeField] private Texture2D sheet16X16;
+    [FormerlySerializedAs("sheet8x8")] [SerializeField] private Texture2D sheet8X8;
+    [FormerlySerializedAs("sheet4x4")] [SerializeField] private Texture2D sheet4X4;
 
-#if UNITY_EDITOR
+    private Sprite[] _sprites16X16;
+    private Sprite[] _sprites8X8;
+    private Sprite[] _sprites4X4;
+
+
+    public void Initialize()
+    {
         
-        // Check if the texture was loaded successfully
-        if (texture == null)
+#if UNITY_EDITOR
+       //Check if any Texture2d is null
+        if (sheet16X16 == null)
         {
-            Debug.LogError("Texture not found: " + imageName);
-            return null;
+            Debug.LogError("sheet16x16 is null");
+        }
+
+        if (sheet8X8 == null)
+        {
+            Debug.LogError("sheet8x8 is null");
+        }
+
+        if (sheet4X4 == null)
+        {
+            Debug.LogError("sheet4x4 is null");
         }
 #endif
 
-        return texture;
-    }
 
-
-    public static Texture2D GetTileTexture(int x, int y)
-    {
-        string imageName = GetTileImage(x, y);
-        return GetTextureByName(imageName);
-    }
-
-
-    private static string GetTileImage(int x, int y)
-    {
-        // Calculate the total number of tiles per row/column
-        int gridSize = 21;
-
-        // Check if the coordinates are for the center image
-        if (x == gridSize / 2 && y == gridSize / 2)
+        _sprites16X16 = Resources.LoadAll<Sprite>(sheet16X16.name);
+        _sprites8X8 = Resources.LoadAll<Sprite>(sheet8X8.name);
+        _sprites4X4 = Resources.LoadAll<Sprite>(sheet4X4.name);
+        
+        foreach (var sprite in _sprites16X16)
         {
-            return "0"; //".png";
+            Debug.Log(sprite.name);
+        }
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="x"></param>
+    /// <param name="y"></param>
+    /// <param name="resolution">Resolution 0 for 16x16 sheet,
+    /// Resolution 1 for 8x8 sheet
+    /// Resolution 2 for 4x4 sheet</param>
+    /// <returns></returns>
+    public Sprite GetSprite(int x, int y, int resolution)
+    {
+        Sprite[] sprites;
+        int rowSize;
+
+        //Assign sprite sheet to the right one depending on variable called resolution
+        switch (resolution)
+        {
+            case 0:
+                sprites = _sprites16X16;
+                rowSize = 16;
+                break;
+            case 1:
+                sprites = _sprites8X8;
+                rowSize = 8;
+                break;
+            case 2:
+                sprites = _sprites4X4;
+                rowSize = 4;
+                break;
+            default:
+                Debug.LogError("WRONG INPUT");
+                sprites = _sprites16X16;
+                rowSize = 16;
+                break;
         }
 
-        // Calculate the index of the image
-        int index = x * gridSize + y + 1;
 
-        // Adjust the index if it's after the center image
-        if (index >= (gridSize * gridSize / 2) + 1)
+        // Calculate the index based on x, y, and the number of sprites per row
+        int index = y * rowSize + x;
+
+        // Check if the index is within the bounds of the sprite array
+        if (index >= 0 && index < sprites.Length)
         {
-            index--;
+            return sprites[index];
         }
 
-        // Return the image file name
-        return index + "";// + ".png";
+        Debug.LogError("Sprite index out of range.");
+        return null;
     }
+
+    
+
+  
 }
