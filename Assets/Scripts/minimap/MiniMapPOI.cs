@@ -8,11 +8,11 @@ namespace minimap
 {
     public class MiniMapPOI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
     {
-        public RectTransform imageTransform; // Assign the RectTransform of the POI image
-        public Image Image; // Assign the RectTransform of the POI image
-        public TextMeshProUGUI textMesh; // Assign the TextMeshPro component
+        [SerializeField] private Image image; 
+        public TextMeshProUGUI textMesh; 
 
-        public float hoverScale = 1.2f; // Scale factor for when the mouse hovers over
+        [Tooltip("Scale factor for when the mouse hovers over")]
+        public float hoverScale = 1.2f; 
         private Vector3 _originalScale;
 
         private RectTransform _rectTransform;
@@ -21,7 +21,6 @@ namespace minimap
 
         public PoiType PoiType => _poiType;
 
-        private Image _image;
 
         public Vector2 Position
         {
@@ -30,28 +29,21 @@ namespace minimap
 
         private void Awake()
         {
-            Initialize();
+            _rectTransform = GetComponent<RectTransform>();
         }
 
-        private void Initialize()
-        {
-            if (_rectTransform == null)
-            {
-                _rectTransform = GetComponent<RectTransform>();
-            }
 
-        }
 
         private void Start()
         {
-            _originalScale = imageTransform.localScale;
+            _originalScale = image.rectTransform.localScale;
             ShowText(false); // Initially hide the text
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
             // When the mouse hovers over, enlarge the image and show the text
-            imageTransform.localScale = _originalScale * hoverScale;
+            image.rectTransform.localScale = _originalScale * hoverScale;
             ShowText(true);
             transform.SetAsLastSibling();
         }
@@ -59,7 +51,7 @@ namespace minimap
         public void OnPointerExit(PointerEventData eventData)
         {
             // When the mouse exits, reset the image size and hide the text
-            imageTransform.localScale = _originalScale;
+            image.rectTransform.localScale = _originalScale;
             ShowText(false);
         }
 
@@ -75,7 +67,6 @@ namespace minimap
 
         public void Setup(Sprite image, String text, PoiType poiType)
         {
-            Initialize();
             _poiType = poiType;
             textMesh.text = text;
             SetImage(image);
@@ -89,7 +80,7 @@ namespace minimap
 
         public void SetImage(Sprite sprite)
         {
-            _image.sprite = sprite;
+            image.sprite = sprite;
         }
 
         private void ShowText(bool value)
