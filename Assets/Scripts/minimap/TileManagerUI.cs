@@ -15,8 +15,7 @@ namespace minimap
         [SerializeField] private float minZoom = 0.35f;
         [SerializeField] private int tileSize = 256;
         [SerializeField] private int maxTiles = 21;
-
-
+        
         [SerializeField] private ImageTiler imageTiler;
         
         private Image[,] _tiles;
@@ -30,7 +29,8 @@ namespace minimap
         [SerializeField] MiniMapPOI bussPoiPrefab; 
         [SerializeField] MiniMapPOI playerPoiPrefab;
 
-        
+
+        private float CurrentZoom => _mapRectTransform.localScale.x;
 
         private void Awake()
         {
