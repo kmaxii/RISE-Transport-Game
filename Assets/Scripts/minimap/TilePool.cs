@@ -50,19 +50,16 @@ namespace minimap
             parent.gameObject.Destroy(tile.gameObject);
         }
 
-        public Image GetTile(Vector2 position, Sprite sprite)
+        public Image GetTile(Sprite sprite)
         {
             Image tile = _tilePool.Get();
             tile.sprite = sprite;
-            tile.rectTransform.position = position;
             return tile;
         }
 
         public void Return(Image tile)
         {
-
             _tilePool.Release(tile);
-        
         }
     }
 }

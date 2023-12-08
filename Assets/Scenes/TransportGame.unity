@@ -3960,6 +3960,7 @@ MonoBehaviour:
       maxSize: 32
       parent: {fileID: 266058144}
       poiPrefab: {fileID: 9204104365709305428, guid: b6a0ccf0e1c0f3640b4d24cd233bb460, type: 3}
+  canvasRectTransform: {fileID: 1220223451}
 --- !u!222 &1760020118
 CanvasRenderer:
   m_ObjectHideFlags: 0

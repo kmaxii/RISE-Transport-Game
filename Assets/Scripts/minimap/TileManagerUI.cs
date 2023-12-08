@@ -29,18 +29,7 @@ namespace minimap
         [SerializeField] private Sprite playerSprite;
 
         [SerializeField] private MapPools pools;
-
-
-        /*
-        private void FixedUpdate()
-        {
-            RaycastUI();
-            var localPosition = _mapRectTransform.localPosition;
-            Debug.Log("Math mid: " + CalculateTileCoordinates(new Vector2(localPosition.x,
-                localPosition.y)));
-        }
-        */
-
+        
         private Vector2 LocalPos
         {
             get
@@ -52,7 +41,12 @@ namespace minimap
             }
         }
 
-        public Vector2Int CalculateTileCoordinates(Vector2 position)
+        /// <summary>
+        /// Gets the tile that is currently in the middle of the screen
+        /// </summary>
+        /// <param name="position">X and y pos of the tile in a 16x16 coordinate system</param>
+        /// <returns></returns>
+        private Vector2Int GetCenterTile(Vector2 position)
         {
             position /= CurrentZoom;
 
@@ -66,8 +60,7 @@ namespace minimap
             position.y--;
 
             position.x = 16 - position.x;
-
-
+            
             return new Vector2Int(Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.y));
         }
 
@@ -86,55 +79,58 @@ namespace minimap
             _originalScale = _mapRectTransform.localScale;
 
             _tiles = new Image[maxTiles, maxTiles];
-            UpdateVisibleTiles();
 
             _playerPoi = AddPoi(player.position, PoiType.Player, "You", playerSprite);
         }
 
         private void Update()
         {
-            UpdateVisibleTiles();
             UpdatePlayerPoiPosition();
+            RenderTiles();
+        }
+        public RectTransform canvasRectTransform;
+
+        void RenderTiles()
+        {
+            Vector2Int centerTile = GetCenterTile(LocalPos);
+
+            var rect = canvasRectTransform.rect;
+            float canvasWidth = rect.width;
+            float canvasHeight = rect.height;
+
+            // Calculate how many tiles are needed horizontally and vertically
+            int tilesHorizontal = Mathf.CeilToInt(canvasWidth / 256f);
+            int tilesVertical = Mathf.CeilToInt(canvasHeight / 256f);
+            
+            int minX = Mathf.Max(0, centerTile.x - tilesHorizontal / 2);
+            int maxX = Mathf.Min(15, centerTile.x + tilesHorizontal / 2);
+            int minY = Mathf.Max(0, centerTile.y - tilesVertical / 2);
+            int maxY = Mathf.Min(15, centerTile.y + tilesVertical / 2);
+
+            for (int x = minX; x <= maxX; x++)
+            {
+                for (int y = minY; y <= maxY; y++)
+                {
+                    CreateTile(x, y,  0);
+                }
+            }
         }
 
-
-        private void UpdateVisibleTiles()
+        void CreateTile(int x, int y, int resolution)
         {
-            Vector2Int middlePos = CalculateTileCoordinates(LocalPos);
-            
-            if (_tiles[middlePos.x, middlePos.y] == null)
+            if (_tiles[x, y] == null)
             {
-                var tileImage = pools.GetTile(Vector2.zero, imageTiler.GetSprite(middlePos.x, middlePos.y, 0));
-                _tiles[middlePos.x, middlePos.y] = tileImage;
+                var tileImage = pools.GetTile(imageTiler.GetSprite(x, y, resolution));
+                _tiles[x, y] = tileImage;
                 float centerX = (maxTiles * tileSize) / 2f;
                 float centerY = (maxTiles * tileSize) / 2f;
 
                 tileImage.rectTransform.anchoredPosition =
-                    new Vector2((middlePos.x * tileSize) - centerX, ((maxTiles - 1 - middlePos.y) * tileSize) - centerY);
+                    new Vector2((x * tileSize) - centerX, ((maxTiles - 1 - y) * tileSize) - centerY);
                 tileImage.rectTransform.sizeDelta = new Vector2(256,256);
                 tileImage.transform.localScale = new Vector3(1, 1, 1);
 
             }
-        }
-
-        void CreateTile(int x, int y)
-        {
-            // Texture2D tileTexture = ImageTiler.GetTileTexture(x, y);
-            Sprite tileTexture = imageTiler.GetSprite(x, y, 0);
-            Image tileImage = new GameObject("Tile_" + x + "_" + y).AddComponent<Image>();
-
-            tileImage.sprite = tileTexture;
-            tileImage.rectTransform.SetParent(_mapRectTransform, false);
-
-            // Calculate the offset to center the map
-            float centerX = (maxTiles * tileSize) / 2f;
-            float centerY = (maxTiles * tileSize) / 2f;
-
-            tileImage.rectTransform.anchoredPosition =
-                new Vector2((x * tileSize) - centerX, ((maxTiles - 1 - y) * tileSize) - centerY);
-            tileImage.rectTransform.sizeDelta = new Vector2(tileSize, tileSize);
-
-            _tiles[x, y] = tileImage;
         }
 
         public MiniMapPOI AddPoi(Vector3 inWorldPos, PoiType poiType, String message, Sprite sprite)
@@ -208,30 +204,6 @@ namespace minimap
             _mapRectTransform.localScale = newScale;
             _mapRectTransform.anchoredPosition = newPosition;
         }
-
-
-        /**
-         *         void RaycastUI()
-        {
-            // Create a new PointerEventData
-            PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
-
-            // Set the position to the center of the screen
-            pointerEventData.position = new Vector2(Screen.width / 2, Screen.height / 2);
-
-            // Create a list to receive the results
-            List<RaycastResult> results = new List<RaycastResult>();
-
-            // Raycast using the GraphicsRaycaster and mouse click position
-            EventSystem.current.RaycastAll(pointerEventData, results);
-
-            // Check if the raycast hit any UI elements
-            if (results.Count > 0)
-            {
-                // Print the name of the first UI element hit
-                Debug.Log("RayCast Hit: " + results[0].gameObject.name);
-            }
-        }
-         */
+    
     }
 }
