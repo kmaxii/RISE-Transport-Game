@@ -1,34 +1,35 @@
 using System;
+using Mapbox.Platform.Cache;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Pool;
 using UnityEngine.UI;
 
 namespace minimap
 {
     public class TileManagerUI : MonoBehaviour, IDragHandler, IScrollHandler
     {
-        private RectTransform _mapRectTransform;
-        [SerializeField] private float zoomSpeed = 0.5f;
         [SerializeField] private float maxZoom = 5f;
         [SerializeField] private float minZoom = 0.35f;
+        [SerializeField] private float zoomSpeed = 0.5f;
         [SerializeField] private int tileSize = 256;
-        [SerializeField] private int maxTiles = 21;
+        [SerializeField] private int maxTiles = 16;
 
         [SerializeField] private ImageTiler imageTiler;
-
-        private Image[,] _tiles;
-        private Vector3 _originalScale;
-
+        [SerializeField] private MapPools pools;
+        [SerializeField] private Sprite playerSprite;
         [SerializeField] private Transform player;
-
-        private MiniMapPOI _playerPoi;
-
         [SerializeField] MiniMapPOI poiPrefab;
+
+        private RectTransform _mapRectTransform;
+        private Image[,] _tiles;
+        private bool[,] _boolTiles;
+        private Vector3 _originalScale;
+        private MiniMapPOI _playerPoi;
+        
         private float CurrentZoom => _mapRectTransform.localScale.x;
 
-        [SerializeField] private Sprite playerSprite;
 
-        [SerializeField] private MapPools pools;
         
         private Vector2 LocalPos
         {
@@ -108,6 +109,33 @@ namespace minimap
             int maxX = Mathf.Min(15, centerTile.x + tilesHorizontal / 2);
             int minY = Mathf.Max(0, centerTile.y - tilesVertical / 2);
             int maxY = Mathf.Min(15, centerTile.y + tilesVertical / 2);
+
+            //  Send every tile that isnt visible to the pool
+            /*for (int x = 0; x < maxTiles; x++)
+                {
+                for (int y = 0; y < maxTiles; y++)
+                {
+                    if (_tiles[x, y] != null)
+                    {
+                        if (x < minX || x > maxX || y < minY || y > maxY)
+                        {
+                            pools.ReturnTile(_tiles[x, y]);
+                            _tiles[x, y] = null;
+                        }
+                    }
+                }
+            }*/
+
+            for (int x = 0; x < maxTiles; x++) {
+                for (int y = 0; y < maxTiles; y++) {
+                    if (x < minX || x > maxX || y < minY || y > maxY) {
+                        if (_tiles[x, y] != null) {
+                            pools.Return(_tiles[x, y]);
+                            _tiles[x, y] = null; // Vet inte om denna behövs
+                        }
+                    }
+                }
+            }
 
             for (int x = minX; x <= maxX; x++)
             {
