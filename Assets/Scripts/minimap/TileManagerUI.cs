@@ -80,6 +80,7 @@ namespace minimap
             _originalScale = _mapRectTransform.localScale;
 
             _tiles = new Image[maxTiles, maxTiles];
+            _boolTiles = new bool[maxTiles, maxTiles];
 
             _playerPoi = AddPoi(player.position, PoiType.Player, "You", playerSprite);
         }
@@ -129,9 +130,9 @@ namespace minimap
             for (int x = 0; x < maxTiles; x++) {
                 for (int y = 0; y < maxTiles; y++) {
                     if (x < minX || x > maxX || y < minY || y > maxY) {
-                        if (_tiles[x, y] != null) {
+                        if (_boolTiles[x, y]) {
                             pools.Return(_tiles[x, y]);
-                            _tiles[x, y] = null; // Vet inte om denna behövs
+                            _boolTiles[x, y] = false; // Vet inte om denna behövs
                         }
                     }
                 }
@@ -148,10 +149,11 @@ namespace minimap
 
         void CreateTile(int x, int y, int resolution)
         {
-            if (_tiles[x, y] == null)
+            if (!_boolTiles[x, y])
             {
                 var tileImage = pools.GetTile(imageTiler.GetSprite(x, y, resolution));
                 _tiles[x, y] = tileImage;
+                _boolTiles[x, y] = true;
                 float centerX = (maxTiles * tileSize) / 2f;
                 float centerY = (maxTiles * tileSize) / 2f;
 
