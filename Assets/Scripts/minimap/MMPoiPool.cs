@@ -49,7 +49,7 @@ namespace minimap
 
         private void OnDestroy(MiniMapPOI poi)
         {
-            parent.gameObject.Destroy(poi.gameObject);
+            poi.gameObject.Destroy();
         }
 
         public MiniMapPOI GetPoi(Sprite sprite, string text, PoiType poiType, Vector2 position)

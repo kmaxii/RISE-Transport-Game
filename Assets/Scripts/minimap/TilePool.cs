@@ -47,7 +47,7 @@ namespace minimap
 
         private void OnDestroyTile(Image tile)
         {
-            parent.gameObject.Destroy(tile.gameObject);
+            tile.gameObject.Destroy();
         }
 
         public Image GetTile(Sprite sprite)
