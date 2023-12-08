@@ -3936,9 +3936,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc3b16f6ff02e9341932bc0a20e7901f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoomSpeed: 0.5
   maxZoom: 5
   minZoom: 0.35
+  zoomSpeed: 0.5
   tileSize: 256
   maxTiles: 16
   imageTiler:
@@ -3947,9 +3947,6 @@ MonoBehaviour:
     sheet4X4: {fileID: 2800000, guid: aab498d3491ad9a42a4bab7bd5563e77, type: 3}
     zoomFor8X8: 2
     zoomFor4X4: 1
-  player: {fileID: 1176362814}
-  poiPrefab: {fileID: 9204104365709305428, guid: b6a0ccf0e1c0f3640b4d24cd233bb460, type: 3}
-  playerSprite: {fileID: 21300000, guid: 4249590fc26228e4a8dd41e3a293e00b, type: 3}
   pools:
     tilePool:
       defaultCapacity: 16
@@ -3960,7 +3957,11 @@ MonoBehaviour:
       maxSize: 32
       parent: {fileID: 266058144}
       poiPrefab: {fileID: 9204104365709305428, guid: b6a0ccf0e1c0f3640b4d24cd233bb460, type: 3}
+  playerSprite: {fileID: 21300000, guid: 4249590fc26228e4a8dd41e3a293e00b, type: 3}
+  player: {fileID: 1176362814}
+  poiPrefab: {fileID: 9204104365709305428, guid: b6a0ccf0e1c0f3640b4d24cd233bb460, type: 3}
   canvasRectTransform: {fileID: 1220223451}
+  testOffset: {x: 5.715, y: 5.715}
 --- !u!222 &1760020118
 CanvasRenderer:
   m_ObjectHideFlags: 0

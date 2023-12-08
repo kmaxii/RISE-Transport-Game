@@ -26,6 +26,7 @@ namespace minimap
         private bool[,] _boolTiles;
         private Vector3 _originalScale;
         private MiniMapPOI _playerPoi;
+        public RectTransform canvasRectTransform;
         
         private float CurrentZoom => _mapRectTransform.localScale.x;
 
@@ -89,8 +90,12 @@ namespace minimap
         {
             UpdatePlayerPoiPosition();
             RenderTiles();
+            LockMapInCanvasBorder();
         }
-        public RectTransform canvasRectTransform;
+
+        
+
+        
 
         void RenderTiles()
         {
@@ -203,6 +208,38 @@ namespace minimap
         {
             _playerPoi.Position = ConvertCoordinatesToLocalPosition(player.position);
         }
+        
+        private void LockMapInCanvasBorder() {
+        
+            // Get the size of the canvas
+            Vector2 canvasSize = canvasRectTransform.rect.size;
+
+            // Get the size of the map at the current zoom level
+            Vector2 mapSize = new Vector2(tileSize * maxTiles, tileSize * maxTiles) * CurrentZoom;
+
+            // Adjust the offset to correctly position the map
+            // We subtract half a tile size to bring the extra tile into the view
+            float halfTileSize = tileSize * 0.5f * CurrentZoom;
+            float offset = halfTileSize;
+            float offsetY = halfTileSize;
+
+            // Calculate the maximum allowed positions, including the adjusted offset
+            float maxX = (canvasSize.x - mapSize.x) / 2f + offset;
+            float maxY = (canvasSize.y - mapSize.y) / 2f + offsetY;
+
+            // Ensure that the map is at least as big as the canvas
+            maxX = Mathf.Min(maxX, offset);
+
+            // Get the current position of the map
+            Vector2 currentPosition = _mapRectTransform.anchoredPosition;
+
+            // Clamp the map's position
+            float clampedX = Mathf.Clamp(currentPosition.x, maxX, -maxX + tileSize * CurrentZoom);
+            float clampedY = Mathf.Clamp(currentPosition.y, maxY, -maxY + tileSize * CurrentZoom);
+
+            // Apply the clamped position with adjusted offset
+            _mapRectTransform.anchoredPosition = new Vector2(clampedX, clampedY);
+        }
 
         public void OnDrag(PointerEventData eventData)
         {
@@ -220,8 +257,7 @@ namespace minimap
             Vector3 newScale = oldScale + Vector3.one * scroll * zoomSpeed;
             newScale = new Vector3(
                 Mathf.Clamp(newScale.x, _originalScale.x * minZoom, _originalScale.x * maxZoom),
-                Mathf.Clamp(newScale.y, _originalScale.y * minZoom, _originalScale.y * maxZoom),
-                Mathf.Clamp(newScale.z, _originalScale.z * minZoom, _originalScale.z * maxZoom)
+                Mathf.Clamp(newScale.y, _originalScale.y * minZoom, _originalScale.y * maxZoom), 1
             );
 
             // Calculate the ratio of change in scale
