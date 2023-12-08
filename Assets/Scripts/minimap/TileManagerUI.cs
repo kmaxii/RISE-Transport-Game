@@ -98,9 +98,11 @@ namespace minimap
             float canvasWidth = rect.width;
             float canvasHeight = rect.height;
 
+            float adjustedTileSize = tileSize * CurrentZoom;
+            
             // Calculate how many tiles are needed horizontally and vertically
-            int tilesHorizontal = Mathf.CeilToInt(canvasWidth / 256f);
-            int tilesVertical = Mathf.CeilToInt(canvasHeight / 256f);
+            int tilesHorizontal = Mathf.CeilToInt(canvasWidth / adjustedTileSize) + 1;
+            int tilesVertical = Mathf.CeilToInt(canvasHeight / adjustedTileSize) + 1;
             
             int minX = Mathf.Max(0, centerTile.x - tilesHorizontal / 2);
             int maxX = Mathf.Min(15, centerTile.x + tilesHorizontal / 2);
