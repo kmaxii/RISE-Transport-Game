@@ -71,7 +71,7 @@ namespace minimap
             return new Vector2Int(Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.y));
         }
 
-            }
+            
 
         private void Awake()
         {
