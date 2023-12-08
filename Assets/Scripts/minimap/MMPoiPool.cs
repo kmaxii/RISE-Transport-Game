@@ -31,7 +31,7 @@ namespace minimap
         private MiniMapPOI CreatePoi()
         {
             MiniMapPOI poi = Object.Instantiate(poiPrefab, parent);
-            poi.transform.parent = parent;
+            poi.transform.SetParent(parent);
 
             poi.gameObject.SetActive(false);
             return poi;

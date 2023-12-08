@@ -29,7 +29,7 @@ namespace minimap
         private Image CreateTile()
         {
             Image tileImage = new GameObject("Tile_").AddComponent<Image>();
-            tileImage.transform.parent = parent;
+            tileImage.transform.SetParent(parent);
 
             tileImage.gameObject.SetActive(false);
             return tileImage;
