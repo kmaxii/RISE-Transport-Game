@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -42,10 +43,9 @@ namespace vasttrafik
                     JourneyResult journeyResult = JsonUtility.FromJson<JourneyResult>(result);
                 
                 
-                    /*Debug.Log(journeyResult.results.Count);
                 try
                 {
-                    await File.WriteAllTextAsync("C:\\Users\\1\\Downloads\\filePath.txt", journeyResult.ToString());
+                    await File.WriteAllTextAsync("C:\\Users\\1\\Downloads\\filePath.txt", result);
                     Debug.Log("File saved successfully.");
                 }
                 catch (System.Exception ex)
@@ -53,7 +53,7 @@ namespace vasttrafik
                     Debug.Log("Error saving file: " + ex.Message);
                 }
                 
-                Debug.Log("Journey: " + journeyResult.ToString());*/
+                Debug.Log("Journey: " + journeyResult.ToString());
                 
                     return journeyResult;
                 }

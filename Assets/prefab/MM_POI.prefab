@@ -271,6 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cddaedfae1a69d841a5a0ff9fe55edfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  imageTransform: {fileID: 8534081640901348384}
+  image: {fileID: 3247474497552755671}
   textMesh: {fileID: 5786512927425093028}
   hoverScale: 1.2
+  rectTransform: {fileID: 7928256749988838890}

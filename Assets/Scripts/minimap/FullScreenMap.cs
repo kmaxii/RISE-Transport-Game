@@ -42,11 +42,11 @@ namespace minimap
         }
 
 
-        public void ClickedPoi(MiniMapPOI poiType)
+        public void ClickedPoi(MiniMapPOI poi)
         {
-            switch (poiType)
+            switch (poi.PoiType)
             {
-                case BussStopPoi poi:
+                case PoiType.BussStation:
                     tripPlanner.HandleBussStationClick(poi);
                     break;
             }

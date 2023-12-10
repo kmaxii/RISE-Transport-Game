@@ -1,4 +1,5 @@
 ﻿using System;
+using minimap;
 using UnityEngine;
 using vasttrafik;
 

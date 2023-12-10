@@ -191,8 +191,27 @@ namespace vasttrafik
         public DestinationLink destinationLink;
         public bool isDeparted;
         public Occupancy occupancy;
-        public string LeaveTime => tripLegs[0]?.origin?.plannedTime;
-        public string DestinationTime => tripLegs[^1]?.destination?.plannedTime;
+        public string LeaveTime
+        {
+            get
+            {
+                
+                if (tripLegs.Count != 0)
+                    return tripLegs[0]?.origin?.plannedTime;
+                
+                return destinationLink.origin.plannedTime;
+            }
+        }
+
+        public string DestinationTime
+        {
+            get
+            {
+                if (tripLegs.Count != 0)
+                    return tripLegs[^1]?.destination?.plannedTime;
+                return destinationLink.destination.plannedTime;
+            }
+        }
 
         public int SwitchesAmount => tripLegs.Count - 1;
         

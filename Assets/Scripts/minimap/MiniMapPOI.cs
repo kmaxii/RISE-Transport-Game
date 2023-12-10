@@ -1,69 +1,86 @@
 using System;
-using minimap;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class MiniMapPOI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+namespace minimap
 {
-    public RectTransform imageTransform; // Assign the RectTransform of the POI image
-    public TextMeshProUGUI textMesh; // Assign the TextMeshPro component
-
-    public float hoverScale = 1.2f; // Scale factor for when the mouse hovers over
-    private Vector3 _originalScale;
-
-
-    private RectTransform _rectTransform;
-
-    public Vector2 Position
+    public class MiniMapPOI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
     {
-        set => _rectTransform.anchoredPosition = value;
-    }
+        [SerializeField] private Image image; 
+        public TextMeshProUGUI textMesh; 
 
-    private void Awake()
-    {
-        _rectTransform = GetComponent<RectTransform>();
-    }
+        [Tooltip("Scale factor for when the mouse hovers over")]
+        public float hoverScale = 1.2f; 
+        private Vector3 _originalScale;
 
-    public string GetText()
-    {
-        return textMesh.text;
-    }
-    
-    public void Setup(String text)
-    {
-        textMesh.text = text;
+        public RectTransform rectTransform;
 
-    }
+        private PoiType _poiType;
 
-    public void SetImage(Sprite sprite)
-    {
-        imageTransform.GetComponent<Image>().sprite = sprite;
-    }
-    private void Start()
-    {
-        _originalScale = imageTransform.localScale;
-        textMesh.gameObject.SetActive(false); // Initially hide the text
-    }
+        public PoiType PoiType => _poiType;
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        // When the mouse hovers over, enlarge the image and show the text
-        imageTransform.localScale = _originalScale * hoverScale;
-        textMesh.gameObject.SetActive(true);
-        transform.SetAsLastSibling();
-    }
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        // When the mouse exits, reset the image size and hide the text
-        imageTransform.localScale = _originalScale;
-        textMesh.gameObject.SetActive(false);
-    }
+        public Vector2 Position
+        {
+            set => rectTransform.anchoredPosition = value;
+        }
+        
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        FullScreenMap.Instance.ClickedPoi(this);
+
+        private void Start()
+        {
+            _originalScale = image.rectTransform.localScale;
+            ShowText(false); // Initially hide the text
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            // When the mouse hovers over, enlarge the image and show the text
+            image.rectTransform.localScale = _originalScale * hoverScale;
+            ShowText(true);
+            transform.SetAsLastSibling();
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            // When the mouse exits, reset the image size and hide the text
+            image.rectTransform.localScale = _originalScale;
+            ShowText(false);
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            FullScreenMap.Instance.ClickedPoi(this);
+        }
+
+        public string GetText()
+        {
+            return textMesh.text;
+        }
+
+        public void Setup(Sprite sprite, String text, PoiType poiType)
+        {
+            _poiType = poiType;
+            SetText(text);
+            SetSprite(sprite);
+        }
+
+
+        private void SetText(String text)
+        {
+            textMesh.text = text;
+        }
+
+        private void SetSprite(Sprite sprite)
+        {
+            image.sprite = sprite;
+        }
+
+        private void ShowText(bool value)
+        {
+            textMesh.gameObject.SetActive(value);
+        }
     }
 }

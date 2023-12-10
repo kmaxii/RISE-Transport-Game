@@ -63,11 +63,7 @@ public class ImageTiler
         _sprites16X16 = Resources.LoadAll<Sprite>(sheet16X16.name);
         _sprites8X8 = Resources.LoadAll<Sprite>(sheet8X8.name);
         _sprites4X4 = Resources.LoadAll<Sprite>(sheet4X4.name);
-
-        foreach (var sprite in _sprites16X16)
-        {
-            Debug.Log(sprite.name);
-        }
+        
     }
 
 
