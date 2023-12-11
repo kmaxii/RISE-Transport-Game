@@ -116,6 +116,8 @@ namespace minimap
             int minY = Mathf.Max(0, centerTile.y - tilesVertical / 2);
             int maxY = Mathf.Min(15, centerTile.y + tilesVertical / 2);
 
+            Debug.Log($"minX: {minX}, maxX: {maxX}, minY: {minY}, maxY: {maxY}");
+            
             //  Send every tile that isnt visible to the pool
             /*for (int x = 0; x < maxTiles; x++)
                 {
@@ -137,17 +139,12 @@ namespace minimap
                     if (x < minX || x > maxX || y < minY || y > maxY) {
                         if (_boolTiles[x, y]) {
                             pools.Return(_tiles[x, y]);
-                            _boolTiles[x, y] = false; // Vet inte om denna behövs
+                            _boolTiles[x, y] = false;
                         }
                     }
-                }
-            }
-
-            for (int x = minX; x <= maxX; x++)
-            {
-                for (int y = minY; y <= maxY; y++)
-                {
-                    CreateTile(x, y,  0);
+                    else {
+                        CreateTile(x, y,  0);
+                    }
                 }
             }
         }
