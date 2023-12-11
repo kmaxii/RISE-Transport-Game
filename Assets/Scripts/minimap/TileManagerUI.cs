@@ -43,6 +43,18 @@ namespace minimap
                     localPosition.y);
             }
         }
+        
+        
+        private Vector2 _lastScreenSize;
+        private void Update()
+        {
+            Vector2 currentScreenSize = new Vector2(Screen.width, Screen.height);
+            if (currentScreenSize != _lastScreenSize)
+            {
+                UpdateMap();
+                _lastScreenSize = currentScreenSize;
+            }
+        }
 
         /// <summary>
         /// Gets the tile that is currently in the middle of the screen
@@ -84,9 +96,11 @@ namespace minimap
             _boolTiles = new bool[_currentMaxTiles, _currentMaxTiles];
 
             _playerPoi = AddPoi(player.position, PoiType.Player, "You", playerSprite);
+            
+            UpdateMap();
         }
 
-        private void Update()
+        private void UpdateMap()
         {
             UpdatePlayerPoiPosition();
             RenderTiles();
@@ -170,7 +184,6 @@ namespace minimap
                 tileImage.rectTransform.sizeDelta = new Vector2(_currentTileSize, _currentTileSize);
                 tileImage.transform.localScale = new Vector3(1, 1, 1);
             }
-            
         }
 
         public MiniMapPOI AddPoi(Vector3 inWorldPos, PoiType poiType, String message, Sprite sprite)
@@ -238,7 +251,7 @@ namespace minimap
 
             // Get the current position of the map
             Vector2 currentPosition = _mapRectTransform.anchoredPosition;
-            
+
             // Clamp the map's position
             float clampedX = Mathf.Clamp(currentPosition.x, maxX, -maxX + _currentTileSize * CurrentZoom);
             float clampedY = Mathf.Clamp(currentPosition.y, maxY, -maxY + _currentTileSize * CurrentZoom);
@@ -251,17 +264,35 @@ namespace minimap
             };
             if (offset != 0)
             {
-                clampedX = Mathf.Clamp(currentPosition.x, maxX + offset, -maxX + offset + _currentTileSize * CurrentZoom);
-                clampedY = Mathf.Clamp(currentPosition.y, maxY + offset, -maxY + offset + _currentTileSize * CurrentZoom);
+                clampedX = Mathf.Clamp(currentPosition.x, maxX + offset,
+                    -maxX + offset + _currentTileSize * CurrentZoom);
+                clampedY = Mathf.Clamp(currentPosition.y, maxY + offset,
+                    -maxY + offset + _currentTileSize * CurrentZoom);
             }
-            
+
             // Apply the clamped position with adjusted offset
             _mapRectTransform.anchoredPosition = new Vector2(clampedX, clampedY);
+        }
+        
+        private void RemoveAllTiles()
+        {
+            for (int x = 0; x < 15; x++)
+            {
+                for (int y = 0; y < 15; y++)
+                {
+                    if (_boolTiles[x, y])
+                    {
+                        _boolTiles[x, y] = false;
+                        pools.Return(_tiles[x, y]);
+                    }
+                }
+            }
         }
 
         public void OnDrag(PointerEventData eventData)
         {
             _mapRectTransform.anchoredPosition += eventData.delta;
+            UpdateMap();
         }
 
         private int _lastRes = 9993;
@@ -298,21 +329,10 @@ namespace minimap
                 RemoveAllTiles();
                 _lastRes = res;
             }
+
+            UpdateMap();
         }
 
-        private void RemoveAllTiles()
-        {
-            for (int x = 0; x < 15; x++)
-            {
-                for (int y = 0; y < 15; y++)
-                {
-                    if (_boolTiles[x, y])
-                    {
-                        _boolTiles[x, y] = false;
-                        pools.Return(_tiles[x, y]);
-                    }
-                }
-            }
-        }
+       
     }
 }
