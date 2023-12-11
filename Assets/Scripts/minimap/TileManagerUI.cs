@@ -1,8 +1,6 @@
 using System;
-using Mapbox.Platform.Cache;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Pool;
 using UnityEngine.UI;
 
 namespace minimap
@@ -13,7 +11,9 @@ namespace minimap
         [SerializeField] private float minZoom = 0.35f;
         [SerializeField] private float zoomSpeed = 0.5f;
         [SerializeField] private int tileSize = 256;
+        private int _currentTileSize = 256;
         [SerializeField] private int maxTiles = 16;
+        private int _currentMaxTiles = 16;
 
         [SerializeField] private ImageTiler imageTiler;
         [SerializeField] private MapPools pools;
@@ -27,11 +27,10 @@ namespace minimap
         private Vector3 _originalScale;
         private MiniMapPOI _playerPoi;
         public RectTransform canvasRectTransform;
-        
+
         private float CurrentZoom => _mapRectTransform.localScale.x;
 
 
-        
         private Vector2 LocalPos
         {
             get
@@ -62,11 +61,10 @@ namespace minimap
             position.y--;
 
             position.x = 16 - position.x;
-            
+
             return new Vector2Int(Mathf.RoundToInt(position.x), Mathf.RoundToInt(position.y));
         }
 
-            
 
         private void Awake()
         {
@@ -80,8 +78,8 @@ namespace minimap
 
             _originalScale = _mapRectTransform.localScale;
 
-            _tiles = new Image[maxTiles, maxTiles];
-            _boolTiles = new bool[maxTiles, maxTiles];
+            _tiles = new Image[_currentMaxTiles, _currentMaxTiles];
+            _boolTiles = new bool[_currentMaxTiles, _currentMaxTiles];
 
             _playerPoi = AddPoi(player.position, PoiType.Player, "You", playerSprite);
         }
@@ -90,81 +88,96 @@ namespace minimap
         {
             UpdatePlayerPoiPosition();
             RenderTiles();
-            LockMapInCanvasBorder();
+           // LockMapInCanvasBorder();
         }
 
-        
-
-        
 
         void RenderTiles()
         {
+            int resolution = imageTiler.GetResolution(CurrentZoom);
+
+            _currentTileSize = (tileSize * resolution); // * (tileSize * resolution);
+            _currentMaxTiles = (maxTiles / resolution);
+
             Vector2Int centerTile = GetCenterTile(LocalPos);
+
+            centerTile.x /= resolution;
+            centerTile.y /= resolution;
 
             var rect = canvasRectTransform.rect;
             float canvasWidth = rect.width;
             float canvasHeight = rect.height;
 
-            float adjustedTileSize = tileSize * CurrentZoom;
-            
+            float adjustedTileSize = _currentTileSize * CurrentZoom;
+
             // Calculate how many tiles are needed horizontally and vertically
             int tilesHorizontal = Mathf.CeilToInt(canvasWidth / adjustedTileSize) + 1;
             int tilesVertical = Mathf.CeilToInt(canvasHeight / adjustedTileSize) + 1;
-            
+
             int minX = Mathf.Max(0, centerTile.x - tilesHorizontal / 2);
-            int maxX = Mathf.Min(15, centerTile.x + tilesHorizontal / 2);
+            int maxX = Mathf.Min(_currentMaxTiles - 1, centerTile.x + tilesHorizontal / 2);
             int minY = Mathf.Max(0, centerTile.y - tilesVertical / 2);
-            int maxY = Mathf.Min(15, centerTile.y + tilesVertical / 2);
-
-            Debug.Log($"minX: {minX}, maxX: {maxX}, minY: {minY}, maxY: {maxY}");
+            int maxY = Mathf.Min(_currentMaxTiles - 1, centerTile.y + tilesVertical / 2);
             
-            //  Send every tile that isnt visible to the pool
-            /*for (int x = 0; x < maxTiles; x++)
-                {
-                for (int y = 0; y < maxTiles; y++)
-                {
-                    if (_tiles[x, y] != null)
-                    {
-                        if (x < minX || x > maxX || y < minY || y > maxY)
-                        {
-                            pools.ReturnTile(_tiles[x, y]);
-                            _tiles[x, y] = null;
-                        }
-                    }
-                }
-            }*/
 
-            for (int x = 0; x < maxTiles; x++) {
-                for (int y = 0; y < maxTiles; y++) {
-                    if (x < minX || x > maxX || y < minY || y > maxY) {
-                        if (_boolTiles[x, y]) {
+            for (int x = 0; x < _currentMaxTiles; x++)
+            {
+                for (int y = 0; y < _currentMaxTiles; y++)
+                {
+                    if (x < minX || x > maxX || y < minY || y > maxY)
+                    {
+                        if (_boolTiles[x, y])
+                        {
                             pools.Return(_tiles[x, y]);
                             _boolTiles[x, y] = false;
                         }
                     }
-                    else {
-                        CreateTile(x, y,  0);
+                    else
+                    {
+                        CreateTile(x, y);
                     }
                 }
             }
         }
 
-        void CreateTile(int x, int y, int resolution)
+        void CreateTile(int x, int y)
         {
+            //   Debug.Log($"x: {x} y: {y}");
             if (!_boolTiles[x, y])
             {
-                var tileImage = pools.GetTile(imageTiler.GetSprite(x, y, resolution));
+                // Get the resolution (1, 2, or 4) and calculate the tile size based on it
+                int resolution = imageTiler.GetResolution(CurrentZoom);
+
+                Image tileImage = pools.GetTile(imageTiler.GetSprite(x, y, resolution));
+
+                // Keep track of the spawned image
                 _tiles[x, y] = tileImage;
                 _boolTiles[x, y] = true;
-                float centerX = (maxTiles * tileSize) / 2f;
-                float centerY = (maxTiles * tileSize) / 2f;
 
-                tileImage.rectTransform.anchoredPosition =
-                    new Vector2((x * tileSize) - centerX, ((maxTiles - 1 - y) * tileSize) - centerY);
-                tileImage.rectTransform.sizeDelta = new Vector2(256,256);
+                // Calculate the position of the tile
+                // Adjust the calculation to account for varying tile sizes
+                float offsetX = (_currentTileSize * (_currentMaxTiles / 2f)) - (_currentTileSize / 2f) + tileSize / 2f;
+                float offsetY = (_currentTileSize * (_currentMaxTiles / 2f)) - (_currentTileSize / 2f) + tileSize / 2f;
+
+                tileImage.rectTransform.anchoredPosition = new Vector2(
+                    (x * _currentTileSize) - offsetX,
+                    ((_currentMaxTiles - 1 - y) * _currentTileSize) - offsetY
+                );
+
+                // Set the size of the tile
+                tileImage.rectTransform.sizeDelta = new Vector2(_currentTileSize, _currentTileSize);
                 tileImage.transform.localScale = new Vector3(1, 1, 1);
-
             }
+            
+            /*
+   
+                            
+                //Calculate the center of the coordinate system
+                float centerX = (_currentMaxTiles * _currentTileSize) / 2f;
+                float centerY = (_currentMaxTiles * _currentTileSize) / 2f;
+                
+            }
+             */
         }
 
         public MiniMapPOI AddPoi(Vector3 inWorldPos, PoiType poiType, String message, Sprite sprite)
@@ -177,7 +190,8 @@ namespace minimap
             // Convert POI coordinates to map's local coordinates
             Vector2 localPos = ConvertCoordinatesToLocalPosition(poiCoordinates);
 
-            MiniMapPOI poi = Instantiate(poiPrefab, _mapRectTransform);
+            MiniMapPOI poi = pools.GetPoi(localPos, sprite, message, poiType);
+            // MiniMapPOI poi = Instantiate(poiPrefab, _mapRectTransform);
             poi.Position = localPos;
             poi.Setup(sprite, message, poiType);
 
@@ -194,10 +208,13 @@ namespace minimap
         {
             float mapSize = CoordinateUtils.MapSize;
 
-            float localX = (poiCoordinates.x - mapSize / 2f) / mapSize * (tileSize * maxTiles);
-            float localY = (poiCoordinates.y - mapSize / 2f) / mapSize * (tileSize * maxTiles);
+            float localX = (poiCoordinates.x - mapSize / 2f) / mapSize * (_currentTileSize * _currentMaxTiles);
+            float localY = (poiCoordinates.y - mapSize / 2f) / mapSize * (_currentTileSize * _currentMaxTiles);
 
-            return new Vector2(localX - 141.5f, localY - 101);
+            Vector2 offset = new Vector2(-141.5f, -101);
+            //   offset *= imageTiler.GetResolution(CurrentZoom);
+
+            return new Vector2(localX + offset.x, localY + offset.y);
         }
 
 
@@ -205,18 +222,19 @@ namespace minimap
         {
             _playerPoi.Position = ConvertCoordinatesToLocalPosition(player.position);
         }
-        
-        private void LockMapInCanvasBorder() {
-        
+
+        private void LockMapInCanvasBorder()
+        {
             // Get the size of the canvas
             Vector2 canvasSize = canvasRectTransform.rect.size;
 
             // Get the size of the map at the current zoom level
-            Vector2 mapSize = new Vector2(tileSize * maxTiles, tileSize * maxTiles) * CurrentZoom;
+            Vector2 mapSize = new Vector2(_currentTileSize * _currentMaxTiles, _currentTileSize * _currentMaxTiles) *
+                              CurrentZoom;
 
             // Adjust the offset to correctly position the map
             // We subtract half a tile size to bring the extra tile into the view
-            float halfTileSize = tileSize * 0.5f * CurrentZoom;
+            float halfTileSize = _currentTileSize * 0.5f * CurrentZoom;
             float offset = halfTileSize;
             float offsetY = halfTileSize;
 
@@ -231,8 +249,8 @@ namespace minimap
             Vector2 currentPosition = _mapRectTransform.anchoredPosition;
 
             // Clamp the map's position
-            float clampedX = Mathf.Clamp(currentPosition.x, maxX, -maxX + tileSize * CurrentZoom);
-            float clampedY = Mathf.Clamp(currentPosition.y, maxY, -maxY + tileSize * CurrentZoom);
+            float clampedX = Mathf.Clamp(currentPosition.x, maxX, -maxX + _currentTileSize * CurrentZoom);
+            float clampedY = Mathf.Clamp(currentPosition.y, maxY, -maxY + _currentTileSize * CurrentZoom);
 
             // Apply the clamped position with adjusted offset
             _mapRectTransform.anchoredPosition = new Vector2(clampedX, clampedY);
@@ -242,6 +260,8 @@ namespace minimap
         {
             _mapRectTransform.anchoredPosition += eventData.delta;
         }
+
+        private int _lastRes = 9993;
 
         public void OnScroll(PointerEventData eventData)
         {
@@ -268,7 +288,28 @@ namespace minimap
             // Apply the new scale and adjusted position
             _mapRectTransform.localScale = newScale;
             _mapRectTransform.anchoredPosition = newPosition;
+
+            int res = imageTiler.GetResolution(CurrentZoom);
+            if (res != _lastRes)
+            {
+                RemoveAllTiles();
+                _lastRes = res;
+            }
         }
-    
+
+        private void RemoveAllTiles()
+        {
+            for (int x = 0; x < 15; x++)
+            {
+                for (int y = 0; y < 15; y++)
+                {
+                    if (_boolTiles[x, y])
+                    {
+                        _boolTiles[x, y] = false;
+                        pools.Return(_tiles[x, y]);
+                    }
+                }
+            }
+        }
     }
 }

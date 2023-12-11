@@ -24,18 +24,18 @@ public class ImageTiler
     private Sprite[] _sprites8X8;
     private Sprite[] _sprites4X4;
     
-    public float GetResolution(float zoom)
+    public int GetResolution(float zoom)
     {
         if (zoom > zoomFor8X8)
         {
-            return 0;
-        }
-        if (zoom > zoomFor4X4)
-        {
+            //Return 16x16
             return 1;
         }
-
-        return 2;
+        return zoom > zoomFor4X4 ?
+            //Return 8x8
+            2 :
+            //Return 4x4
+            4;
     }
 
 
@@ -79,21 +79,23 @@ public class ImageTiler
     /// <returns></returns>
     public Sprite GetSprite(int x, int y, int resolution)
     {
+        
+        
         Sprite[] sprites;
         int rowSize;
 
         //Assign sprite sheet to the right one depending on variable called resolution
         switch (resolution)
         {
-            case 0:
+            case 1:
                 sprites = _sprites16X16;
                 rowSize = 16;
                 break;
-            case 1:
+            case 2:
                 sprites = _sprites8X8;
                 rowSize = 8;
                 break;
-            case 2:
+            case 4:
                 sprites = _sprites4X4;
                 rowSize = 4;
                 break;
