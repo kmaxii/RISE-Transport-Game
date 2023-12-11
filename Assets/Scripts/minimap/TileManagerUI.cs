@@ -88,7 +88,7 @@ namespace minimap
         {
             UpdatePlayerPoiPosition();
             RenderTiles();
-           // LockMapInCanvasBorder();
+            LockMapInCanvasBorder();
         }
 
 
@@ -118,7 +118,7 @@ namespace minimap
             int maxX = Mathf.Min(_currentMaxTiles - 1, centerTile.x + tilesHorizontal / 2);
             int minY = Mathf.Max(0, centerTile.y - tilesVertical / 2);
             int maxY = Mathf.Min(_currentMaxTiles - 1, centerTile.y + tilesVertical / 2);
-            
+
 
             for (int x = 0; x < _currentMaxTiles; x++)
             {
@@ -168,7 +168,7 @@ namespace minimap
                 tileImage.rectTransform.sizeDelta = new Vector2(_currentTileSize, _currentTileSize);
                 tileImage.transform.localScale = new Vector3(1, 1, 1);
             }
-            
+
             /*
    
                             
@@ -234,16 +234,14 @@ namespace minimap
 
             // Adjust the offset to correctly position the map
             // We subtract half a tile size to bring the extra tile into the view
-            float halfTileSize = _currentTileSize * 0.5f * CurrentZoom;
-            float offset = halfTileSize;
-            float offsetY = halfTileSize;
+            float halfTileSize = (_currentTileSize * 0.5f * CurrentZoom);
 
             // Calculate the maximum allowed positions, including the adjusted offset
-            float maxX = (canvasSize.x - mapSize.x) / 2f + offset;
-            float maxY = (canvasSize.y - mapSize.y) / 2f + offsetY;
+            float maxX = (canvasSize.x - mapSize.x) / 2f + halfTileSize;
+            float maxY = (canvasSize.y - mapSize.y) / 2f + halfTileSize;
 
             // Ensure that the map is at least as big as the canvas
-            maxX = Mathf.Min(maxX, offset);
+            maxX = Mathf.Min(maxX, halfTileSize);
 
             // Get the current position of the map
             Vector2 currentPosition = _mapRectTransform.anchoredPosition;
@@ -252,6 +250,25 @@ namespace minimap
             float clampedX = Mathf.Clamp(currentPosition.x, maxX, -maxX + _currentTileSize * CurrentZoom);
             float clampedY = Mathf.Clamp(currentPosition.y, maxY, -maxY + _currentTileSize * CurrentZoom);
 
+
+            switch (_currentMaxTiles)
+            {
+ 
+                /*case 8:
+                    int offsetFor8 = 384;
+                    clampedX = Mathf.Clamp(currentPosition.x, maxX - offsetFor8, -maxX + offsetFor8 - _currentTileSize * CurrentZoom);
+                    clampedY = Mathf.Clamp(currentPosition.y, maxY - offsetFor8, -maxY +  offsetFor8 - _currentTileSize * CurrentZoom);
+                    break;*/
+                case 4:
+                    int offset4BottomLeft = 384;
+                    int offset4TopRight = 640;
+                    clampedX = Mathf.Clamp(currentPosition.x, maxX - offset4TopRight, -maxX + offset4BottomLeft - _currentTileSize * CurrentZoom);
+                    clampedY = Mathf.Clamp(currentPosition.y, maxY - offset4TopRight, -maxY +  offset4BottomLeft - _currentTileSize * CurrentZoom);
+                    break;
+         
+                default:
+                    break;
+            }
             // Apply the clamped position with adjusted offset
             _mapRectTransform.anchoredPosition = new Vector2(clampedX, clampedY);
         }
