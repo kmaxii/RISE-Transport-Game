@@ -20,6 +20,8 @@ namespace minimap
         [SerializeField] private Sprite playerSprite;
         [SerializeField] private Transform player;
         [SerializeField] MiniMapPOI poiPrefab;
+        [SerializeField] private float offsetTopRight;
+        [SerializeField] private float offsetBottomLeft;
 
         private RectTransform _mapRectTransform;
         private Image[,] _tiles;
@@ -245,25 +247,26 @@ namespace minimap
 
             // Get the current position of the map
             Vector2 currentPosition = _mapRectTransform.anchoredPosition;
-
+            
             // Clamp the map's position
             float clampedX = Mathf.Clamp(currentPosition.x, maxX, -maxX + _currentTileSize * CurrentZoom);
             float clampedY = Mathf.Clamp(currentPosition.y, maxY, -maxY + _currentTileSize * CurrentZoom);
 
 
+            float offset = -384 * CurrentZoom;
+            
             switch (_currentMaxTiles)
             {
  
-                /*case 8:
-                    int offsetFor8 = 384;
-                    clampedX = Mathf.Clamp(currentPosition.x, maxX - offsetFor8, -maxX + offsetFor8 - _currentTileSize * CurrentZoom);
-                    clampedY = Mathf.Clamp(currentPosition.y, maxY - offsetFor8, -maxY +  offsetFor8 - _currentTileSize * CurrentZoom);
-                    break;*/
+                case 8:
+                    offset = -128 * CurrentZoom;
+                    clampedX = Mathf.Clamp(currentPosition.x, maxX + offset, -maxX + offset + _currentTileSize * CurrentZoom);
+                    clampedY = Mathf.Clamp(currentPosition.y, maxY + offset, -maxY + offset + _currentTileSize * CurrentZoom);
+                    break;
                 case 4:
-                    int offset4BottomLeft = 384;
-                    int offset4TopRight = 640;
-                    clampedX = Mathf.Clamp(currentPosition.x, maxX - offset4TopRight, -maxX + offset4BottomLeft - _currentTileSize * CurrentZoom);
-                    clampedY = Mathf.Clamp(currentPosition.y, maxY - offset4TopRight, -maxY +  offset4BottomLeft - _currentTileSize * CurrentZoom);
+                    offset = -384 * CurrentZoom;
+                    clampedX = Mathf.Clamp(currentPosition.x, maxX + offset, -maxX + offset + _currentTileSize * CurrentZoom);
+                    clampedY = Mathf.Clamp(currentPosition.y, maxY + offset, -maxY + offset + _currentTileSize * CurrentZoom);
                     break;
          
                 default:
