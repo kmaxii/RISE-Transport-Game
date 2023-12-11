@@ -170,16 +170,7 @@ namespace minimap
                 tileImage.rectTransform.sizeDelta = new Vector2(_currentTileSize, _currentTileSize);
                 tileImage.transform.localScale = new Vector3(1, 1, 1);
             }
-
-            /*
-   
-                            
-                //Calculate the center of the coordinate system
-                float centerX = (_currentMaxTiles * _currentTileSize) / 2f;
-                float centerY = (_currentMaxTiles * _currentTileSize) / 2f;
-                
-            }
-             */
+            
         }
 
         public MiniMapPOI AddPoi(Vector3 inWorldPos, PoiType poiType, String message, Sprite sprite)
@@ -252,26 +243,18 @@ namespace minimap
             float clampedX = Mathf.Clamp(currentPosition.x, maxX, -maxX + _currentTileSize * CurrentZoom);
             float clampedY = Mathf.Clamp(currentPosition.y, maxY, -maxY + _currentTileSize * CurrentZoom);
 
-
-            float offset = -384 * CurrentZoom;
-            
-            switch (_currentMaxTiles)
+            float offset = _currentMaxTiles switch
             {
- 
-                case 8:
-                    offset = -128 * CurrentZoom;
-                    clampedX = Mathf.Clamp(currentPosition.x, maxX + offset, -maxX + offset + _currentTileSize * CurrentZoom);
-                    clampedY = Mathf.Clamp(currentPosition.y, maxY + offset, -maxY + offset + _currentTileSize * CurrentZoom);
-                    break;
-                case 4:
-                    offset = -384 * CurrentZoom;
-                    clampedX = Mathf.Clamp(currentPosition.x, maxX + offset, -maxX + offset + _currentTileSize * CurrentZoom);
-                    clampedY = Mathf.Clamp(currentPosition.y, maxY + offset, -maxY + offset + _currentTileSize * CurrentZoom);
-                    break;
-         
-                default:
-                    break;
+                8 => -128 * CurrentZoom,
+                4 => -384 * CurrentZoom,
+                _ => 0
+            };
+            if (offset != 0)
+            {
+                clampedX = Mathf.Clamp(currentPosition.x, maxX + offset, -maxX + offset + _currentTileSize * CurrentZoom);
+                clampedY = Mathf.Clamp(currentPosition.y, maxY + offset, -maxY + offset + _currentTileSize * CurrentZoom);
             }
+            
             // Apply the clamped position with adjusted offset
             _mapRectTransform.anchoredPosition = new Vector2(clampedX, clampedY);
         }
