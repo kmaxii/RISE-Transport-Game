@@ -19,13 +19,13 @@ public class PoiSpawner : MonoBehaviour
     
     [SerializeField] private TileManagerUI tileManagerUI;
 
-    private Dictionary<Mission, KeyValuePair<PoiLabelTextSetter, MiniMapPOI>[]> _spawnedMissions;
+    private Dictionary<Mission, KeyValuePair<PoiLabelTextSetter, MmPoiData>[]> _spawnedMissions;
 
     [SerializeField] private Sprite bussStopSprite;
 
     private void Awake()
     {
-        _spawnedMissions = new Dictionary<Mission, KeyValuePair<PoiLabelTextSetter, MiniMapPOI>[]>();
+        _spawnedMissions = new Dictionary<Mission, KeyValuePair<PoiLabelTextSetter, MmPoiData>[]>();
     }
 
     void Start()
@@ -47,7 +47,7 @@ public class PoiSpawner : MonoBehaviour
             foreach (var pair in spawned)
             {
                 Destroy(pair.Key.gameObject);
-                Destroy(pair.Value.gameObject);
+                tileManagerUI.RemovePoi(pair.Value);
             }
             
             _spawnedMissions.Remove(mission);
@@ -58,8 +58,8 @@ public class PoiSpawner : MonoBehaviour
     {
         MissionLocation[] locations = mission.MissionLocations;
 
-        List<KeyValuePair<PoiLabelTextSetter, MiniMapPOI>> spawned =
-            new List<KeyValuePair<PoiLabelTextSetter, MiniMapPOI>>();
+        List<KeyValuePair<PoiLabelTextSetter, MmPoiData>> spawned =
+            new List<KeyValuePair<PoiLabelTextSetter, MmPoiData>>();
         
         foreach (var missionLocation in locations)
         {
@@ -73,14 +73,14 @@ public class PoiSpawner : MonoBehaviour
             var transform1 = instance.transform;
             transform1.localPosition = pos;
             transform1.localScale = new Vector3(spawnScale, spawnScale, spawnScale);
-            MiniMapPOI miniMapPoi = tileManagerUI.AddPoi(
+            MmPoiData miniMapPoi = tileManagerUI.AddPoi(
                 CoordinateUtils.ToUiCoords(pos),
                 PoiType.Mission,
                 mission.name,
                 mission.Sprite);
             
             
-            spawned.Add(new KeyValuePair<PoiLabelTextSetter, MiniMapPOI>(instance, miniMapPoi));
+            spawned.Add(new KeyValuePair<PoiLabelTextSetter, MmPoiData>(instance, miniMapPoi));
         }
         _spawnedMissions.Add(mission, spawned.ToArray());
     }

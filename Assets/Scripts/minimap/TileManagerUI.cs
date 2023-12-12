@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -30,6 +33,9 @@ namespace minimap
         private float CurrentZoom => _mapRectTransform.localScale.x;
 
 
+        private MmPoiHolder _poiHolder;
+
+
         private Vector2 LocalPos
         {
             get
@@ -44,8 +50,8 @@ namespace minimap
         
         private Vector2 _lastScreenSize;
 
-        private Vector2 TopRight => canvasRectTransform.rect.size / 2f - _mapRectTransform.anchoredPosition;
-        private Vector2 BottomLeft => -canvasRectTransform.rect.size / 2f - _mapRectTransform.anchoredPosition;
+        private Vector2 TopRightCoords => canvasRectTransform.rect.size / 2f - _mapRectTransform.anchoredPosition;
+        private Vector2 BottomLeftCoords => -canvasRectTransform.rect.size / 2f - _mapRectTransform.anchoredPosition;
         
         private void Update()
         {
@@ -58,9 +64,9 @@ namespace minimap
         /// <summary>
         /// Gets the tile that is currently in the middle of the screen
         /// </summary>
-        /// <param name="position">X and y pos of the tile in a 16x16 coordinate system</param>
-        /// <returns></returns>
-        private Vector2Int GetCenterTile(Vector2 position)
+        /// <param name="position"></param>
+        /// <returns>X and y pos of the tile in a 16x16 coordinate system</returns>
+        private Vector2Int GetTileAtPosition(Vector2 position)
         {
             position /= CurrentZoom;
 
@@ -83,6 +89,7 @@ namespace minimap
         {
             imageTiler.Initialize();
             pools.Initialize();
+            _poiHolder = new MmPoiHolder();
 
             if (_mapRectTransform == null)
             {
@@ -103,8 +110,64 @@ namespace minimap
             UpdatePlayerPoiPosition();
             RenderTiles();
             LockMapInCanvasBorder();
+            RenderPois();
         }
 
+
+        private void RenderPois()
+        {
+            Vector2Int topRightTile16 = GetTileAtPosition(BottomLeftCoords);
+            Vector2Int bottomLeftTile16 = GetTileAtPosition(TopRightCoords);
+            
+            HashSet<MmPoiData> shouldBeSpawned = new HashSet<MmPoiData>();
+
+            for (int x = bottomLeftTile16.x; x < topRightTile16.x; x++)
+            {
+                for (int y = topRightTile16.y; y < bottomLeftTile16.y; y++)
+                {
+                    var pois = _poiHolder.Get(new Vector2Int(x, y));
+                    if (pois == null) continue;
+                    
+                    shouldBeSpawned.AddRange(pois);
+                }
+            }
+
+            var toDespawn = LinqUtility.ToHashSet(spawnedPois.Keys.Where(p => !shouldBeSpawned.Contains(p)));
+            var toSpawn = LinqUtility.ToHashSet(shouldBeSpawned.Where(p => !spawnedPois.Keys.Contains(p)));
+
+            foreach (var poi in toDespawn)
+            {
+                DespawnPoi(poi); // Implement this method to handle despawning
+                spawnedPois.Remove(poi);
+            }
+
+            // Spawn logic
+            foreach (var poi in toSpawn)
+            {
+                MiniMapPOI miniMapPoi = SpawnPoi(poi);
+                spawnedPois.Add(poi, miniMapPoi);
+            }
+        }
+
+        private readonly Dictionary<MmPoiData, MiniMapPOI> spawnedPois = new Dictionary<MmPoiData, MiniMapPOI>();
+
+
+        private void DespawnPoi(MmPoiData poiData)
+        {
+            MiniMapPOI miniMapPoi = spawnedPois[poiData];
+            pools.Return(miniMapPoi);
+            spawnedPois.Remove(poiData);
+            
+        }
+        private MiniMapPOI SpawnPoi(MmPoiData poiData)
+        {
+            MiniMapPOI poi = pools.GetPoi(poiData.PoiCoordinates, poiData.Sprite, poiData.Message, poiData.Type);
+            // MiniMapPOI poi = Instantiate(poiPrefab, _mapRectTransform);
+            poi.Position = poiData.PoiCoordinates;
+            poi.Setup(poiData.Sprite, poiData.Message, poiData.Type);
+
+            return poi;
+        }
 
         void RenderTiles()
         {
@@ -113,7 +176,7 @@ namespace minimap
             _currentTileSize = (tileSize * resolution); // * (tileSize * resolution);
             _currentMaxTiles = (maxTiles / resolution);
 
-            Vector2Int centerTile = GetCenterTile(LocalPos);
+            Vector2Int centerTile = GetTileAtPosition(LocalPos);
 
             centerTile.x /= resolution;
             centerTile.y /= resolution;
@@ -184,22 +247,29 @@ namespace minimap
             }
         }
 
-        public MiniMapPOI AddPoi(Vector3 inWorldPos, PoiType poiType, String message, Sprite sprite)
+        public MmPoiData AddPoi(Vector3 inWorldPos, PoiType poiType, String message, Sprite sprite)
         {
             return AddPoi(CoordinateUtils.ToUiCoords(inWorldPos), poiType, message, sprite);
         }
 
-        public MiniMapPOI AddPoi(Vector2 poiCoordinates, PoiType poiType, String message, Sprite sprite)
+        public MmPoiData AddPoi(Vector2 poiCoordinates, PoiType poiType, String message, Sprite sprite)
         {
             // Convert POI coordinates to map's local coordinates
             Vector2 localPos = ConvertCoordinatesToLocalPosition(poiCoordinates);
 
-            MiniMapPOI poi = pools.GetPoi(localPos, sprite, message, poiType);
-            // MiniMapPOI poi = Instantiate(poiPrefab, _mapRectTransform);
-            poi.Position = localPos;
-            poi.Setup(sprite, message, poiType);
+            Vector2Int tilePos = GetTileAtPosition(localPos);
+            
+            MmPoiData mmPoiData = new MmPoiData(localPos, poiType, sprite, message);
+            
+            _poiHolder.Add(tilePos, mmPoiData);
+            return mmPoiData;
+        }
 
-            return poi;
+
+
+        public void RemovePoi(MmPoiData poiData)
+        {
+            _poiHolder.Remove(poiData);
         }
 
         private Vector2 ConvertCoordinatesToLocalPosition(Vector3 inWorldPos)
@@ -330,7 +400,5 @@ namespace minimap
 
             UpdateMap();
         }
-
-       
     }
 }

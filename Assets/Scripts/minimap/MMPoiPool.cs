@@ -57,8 +57,6 @@ namespace minimap
             MiniMapPOI poi = _poiPool.Get();
             
             poi.Setup(sprite, text, poiType);
-            
-            poi.rectTransform.position = position;
             return poi;
         }
 
