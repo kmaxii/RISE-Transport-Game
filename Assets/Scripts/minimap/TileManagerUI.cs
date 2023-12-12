@@ -46,13 +46,13 @@ namespace minimap
                     localPosition.y);
             }
         }
-        
-        
+
+
         private Vector2 _lastScreenSize;
 
         private Vector2 TopRightCoords => canvasRectTransform.rect.size / 2f - _mapRectTransform.anchoredPosition;
         private Vector2 BottomLeftCoords => -canvasRectTransform.rect.size / 2f - _mapRectTransform.anchoredPosition;
-        
+
         private void Update()
         {
             Vector2 currentScreenSize = new Vector2(Screen.width, Screen.height);
@@ -118,47 +118,51 @@ namespace minimap
         {
             Vector2Int topRightTile16 = GetTileAtPosition(BottomLeftCoords);
             Vector2Int bottomLeftTile16 = GetTileAtPosition(TopRightCoords);
-            
+
             HashSet<MmPoiData> shouldBeSpawned = new HashSet<MmPoiData>();
 
+            //Why? I don't know! Please help!
+            topRightTile16.x++;
+            bottomLeftTile16.y++;
+            
             for (int x = bottomLeftTile16.x; x < topRightTile16.x; x++)
             {
                 for (int y = topRightTile16.y; y < bottomLeftTile16.y; y++)
                 {
                     var pois = _poiHolder.Get(new Vector2Int(x, y));
                     if (pois == null) continue;
-                    
+
                     shouldBeSpawned.AddRange(pois);
                 }
             }
 
-            var toDespawn = LinqUtility.ToHashSet(spawnedPois.Keys.Where(p => !shouldBeSpawned.Contains(p)));
-            var toSpawn = LinqUtility.ToHashSet(shouldBeSpawned.Where(p => !spawnedPois.Keys.Contains(p)));
+            var toDespawn = LinqUtility.ToHashSet(_spawnedPois.Keys.Where(p => !shouldBeSpawned.Contains(p)));
+            var toSpawn = LinqUtility.ToHashSet(shouldBeSpawned.Where(p => !_spawnedPois.Keys.Contains(p)));
 
             foreach (var poi in toDespawn)
             {
-                DespawnPoi(poi); // Implement this method to handle despawning
-                spawnedPois.Remove(poi);
+                DespawnPoi(poi); 
+                _spawnedPois.Remove(poi);
             }
 
             // Spawn logic
             foreach (var poi in toSpawn)
             {
                 MiniMapPOI miniMapPoi = SpawnPoi(poi);
-                spawnedPois.Add(poi, miniMapPoi);
+                _spawnedPois.Add(poi, miniMapPoi);
             }
         }
 
-        private readonly Dictionary<MmPoiData, MiniMapPOI> spawnedPois = new Dictionary<MmPoiData, MiniMapPOI>();
+        private readonly Dictionary<MmPoiData, MiniMapPOI> _spawnedPois = new Dictionary<MmPoiData, MiniMapPOI>();
 
 
         private void DespawnPoi(MmPoiData poiData)
         {
-            MiniMapPOI miniMapPoi = spawnedPois[poiData];
+            MiniMapPOI miniMapPoi = _spawnedPois[poiData];
             pools.Return(miniMapPoi);
-            spawnedPois.Remove(poiData);
-            
+            _spawnedPois.Remove(poiData);
         }
+
         private MiniMapPOI SpawnPoi(MmPoiData poiData)
         {
             MiniMapPOI poi = pools.GetPoi(poiData.PoiCoordinates, poiData.Sprite, poiData.Message, poiData.Type);
@@ -258,13 +262,12 @@ namespace minimap
             Vector2 localPos = ConvertCoordinatesToLocalPosition(poiCoordinates);
 
             Vector2Int tilePos = GetTileAtPosition(localPos);
-            
+
             MmPoiData mmPoiData = new MmPoiData(localPos, poiType, sprite, message);
-            
+
             _poiHolder.Add(tilePos, mmPoiData);
             return mmPoiData;
         }
-
 
 
         public void RemovePoi(MmPoiData poiData)
@@ -341,7 +344,7 @@ namespace minimap
             // Apply the clamped position with adjusted offset
             _mapRectTransform.anchoredPosition = new Vector2(clampedX, clampedY);
         }
-        
+
         private void RemoveAllTiles()
         {
             for (int x = 0; x < 15; x++)
