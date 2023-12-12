@@ -35,6 +35,11 @@ namespace minimap
         public MiniMapPOI GetPoi(Vector2 position, Sprite sprite, string text, PoiType poiType)
         {
             return poiPool.GetPoi(sprite, text, poiType, position);
+        }      
+        
+        public MiniMapPOI GetPoi(Vector3 inWorldPos, Sprite sprite, string text, PoiType poiType)
+        {
+            return GetPoi(CoordinateUtils.ToUiCoords(inWorldPos), sprite, text, poiType);
         }
         
     }

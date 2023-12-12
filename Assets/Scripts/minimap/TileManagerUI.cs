@@ -19,9 +19,6 @@ namespace minimap
         [SerializeField] private MapPools pools;
         [SerializeField] private Sprite playerSprite;
         [SerializeField] private Transform player;
-        [SerializeField] MiniMapPOI poiPrefab;
-        [SerializeField] private float offsetTopRight;
-        [SerializeField] private float offsetBottomLeft;
 
         private RectTransform _mapRectTransform;
         private Image[,] _tiles;
@@ -46,14 +43,16 @@ namespace minimap
         
         
         private Vector2 _lastScreenSize;
+
+        private Vector2 TopRight => canvasRectTransform.rect.size / 2f - _mapRectTransform.anchoredPosition;
+        private Vector2 BottomLeft => -canvasRectTransform.rect.size / 2f - _mapRectTransform.anchoredPosition;
+        
         private void Update()
         {
             Vector2 currentScreenSize = new Vector2(Screen.width, Screen.height);
-            if (currentScreenSize != _lastScreenSize)
-            {
-                UpdateMap();
-                _lastScreenSize = currentScreenSize;
-            }
+            if (currentScreenSize == _lastScreenSize) return;
+            UpdateMap();
+            _lastScreenSize = currentScreenSize;
         }
 
         /// <summary>
@@ -92,11 +91,10 @@ namespace minimap
 
             _originalScale = _mapRectTransform.localScale;
 
-            _tiles = new Image[_currentMaxTiles, _currentMaxTiles];
-            _boolTiles = new bool[_currentMaxTiles, _currentMaxTiles];
+            _tiles = new Image[maxTiles, maxTiles];
+            _boolTiles = new bool[maxTiles, maxTiles];
 
-            _playerPoi = AddPoi(player.position, PoiType.Player, "You", playerSprite);
-            
+            _playerPoi = pools.GetPoi(player.position, playerSprite, "You", PoiType.Player);
             UpdateMap();
         }
 
