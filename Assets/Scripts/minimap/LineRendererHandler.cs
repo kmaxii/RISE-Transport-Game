@@ -61,7 +61,7 @@ public class LineRendererHandler : MonoBehaviour {
 
 
     public void ClearLines() {
-        for (int i = travelLinesList.Count; i > 0; i--) {
+        for (int i = travelLinesList.Count - 1; i >= 0; i--) {
             travelLinesList[i].Destroy();
             travelLinesList.RemoveAt(i);
         }
