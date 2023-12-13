@@ -81,11 +81,9 @@ public class BussTravelUI : MonoBehaviour
                 canvasCoords.Add(tileManagerUI.ConvertCoordinatesToLocalPosition(posInWorld));
             }
 
-            var line = tripLeg.serviceJourney.line;
-            Debug.Log("line: " + line);
+            var line = tripLeg.serviceJourneys[0].line;
             string hexColor = line.foregroundColor;
 
-   
             
             
             if (ColorUtility.TryParseHtmlString(hexColor, out var color))
