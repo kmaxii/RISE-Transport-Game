@@ -74,27 +74,34 @@ public class BussTravelUI : MonoBehaviour
         JourneyDetails journeyDetails = await result.GetJourneyDetails();
         foreach (var tripLeg in journeyDetails.tripLegs)
         {
-            List<Vector2> canvasCoords = new List<Vector2>();
+            List<Vector2> onTripCoords = new List<Vector2>();
+
+            if (tripLeg.serviceJourneys.Count > 1)
+            {
+                for (int i = 0; i < 500; i++)
+                {
+                    Debug.LogError("PLEASE REPORT WHAT TRIP YOU DID TO MAXI!");
+                }
+            }
+            
             foreach (var coord in tripLeg.tripLegCoordinates)
             {
-                Vector3 posInWorld = map.GeoToWorldPosition(new Vector2d(coord.latitude, coord.longitude));
-                canvasCoords.Add(tileManagerUI.ConvertCoordinatesToLocalPosition(posInWorld));
+                Vector2 pos =
+                    tileManagerUI.ConvertCoordinatesToLocalPosition(
+                        map.GeoToWorldPosition(new Vector2d(coord.latitude, coord.longitude)));
+                onTripCoords.Add(pos);
+
             }
 
             var line = tripLeg.serviceJourneys[0].line;
-            string hexColor = line.foregroundColor;
 
-            
-            
-            if (ColorUtility.TryParseHtmlString(hexColor, out var color))
-            {
-                lineRenderer.AddLines(canvasCoords, color);
-            }
-            else
-            {
-                Debug.LogError("WRONG COLOR: " + hexColor);
-            }
+            string transportMode = line.transportMode;
 
+
+            Debug.Log("Drawing");
+     
+            lineRenderer.AddLines(onTripCoords, transportMode);
+       
         }
     }
 

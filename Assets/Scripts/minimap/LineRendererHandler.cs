@@ -33,22 +33,22 @@ public class LineRendererHandler : MonoBehaviour {
         switch (travelType) {
             case "tram":
                 newTravelLine.color = travelColors[0];
-                return;
+                break;
             case "bus":
                 newTravelLine.color = travelColors[1];
-                return;
+                break;
             case "walk":
                 newTravelLine.color = travelColors[2];
-                return;
+                break;
             case "notontram":
                 newTravelLine.color = travelColors[3];
-                return;
+                break;
             case "notonbus":
                 newTravelLine.color = travelColors[4];
-                return;
+                break;
             default:
                 newTravelLine.color = travelColors[5];
-                return;
+                break;
         }
 
         newTravelLine.Points = new Vector2[coordsList.Count];
