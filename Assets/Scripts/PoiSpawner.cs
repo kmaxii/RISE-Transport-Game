@@ -5,6 +5,7 @@ using Mapbox.Unity.Map;
 using Mapbox.Unity.Utilities;
 using Mapbox.Utils;
 using minimap;
+using Missions;
 using UnityEngine;
 using UnityEngine.Serialization;
 
