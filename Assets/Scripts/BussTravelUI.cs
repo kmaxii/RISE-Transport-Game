@@ -1,4 +1,8 @@
+using System.Collections.Generic;
 using Editor;
+using Mapbox.Unity.Map;
+using Mapbox.Utils;
+using minimap;
 using TMPro;
 using UnityEngine;
 using Utils;
@@ -23,6 +27,10 @@ public class BussTravelUI : MonoBehaviour
 
     private GameObject[] _children;
 
+    [SerializeField] private AbstractMap map;
+    [SerializeField] private TileManagerUI tileManagerUI;
+    [SerializeField] private LineRendererHandler lineRenderer;
+
     void Start()
     {
         //Put all of this children into the children array
@@ -46,7 +54,7 @@ public class BussTravelUI : MonoBehaviour
     }
 
 
-    public void ShowTravelOption(StopPoint from, StopPoint to, Result result)
+    public async void ShowTravelOption(StopPoint from, StopPoint to, Result result)
     {
         _showingResult = result;
         Debug.Log("Trip leg count: " + result.tripLegs.Count);
@@ -60,6 +68,36 @@ public class BussTravelUI : MonoBehaviour
             .Replace("%BI", "NOT IMPLEMENTED");
         _showingInfoFrom = from;
         _showingInfoTo = to;
+
+
+        lineRenderer.ClearLines();
+        JourneyDetails journeyDetails = await result.GetJourneyDetails();
+        foreach (var tripLeg in journeyDetails.tripLegs)
+        {
+            List<Vector2> canvasCoords = new List<Vector2>();
+            foreach (var coord in tripLeg.tripLegCoordinates)
+            {
+                Vector3 posInWorld = map.GeoToWorldPosition(new Vector2d(coord.latitude, coord.longitude));
+                canvasCoords.Add(tileManagerUI.ConvertCoordinatesToLocalPosition(posInWorld));
+            }
+
+            var line = tripLeg.serviceJourney.line;
+            Debug.Log("line: " + line);
+            string hexColor = line.foregroundColor;
+
+   
+            
+            
+            if (ColorUtility.TryParseHtmlString(hexColor, out var color))
+            {
+                lineRenderer.AddLines(canvasCoords, color);
+            }
+            else
+            {
+                Debug.LogError("WRONG COLOR: " + hexColor);
+            }
+
+        }
     }
 
     private void ShowChildren(bool show)

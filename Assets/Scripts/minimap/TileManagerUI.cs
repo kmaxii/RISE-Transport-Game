@@ -275,7 +275,7 @@ namespace minimap
             _poiHolder.Remove(poiData);
         }
 
-        private Vector2 ConvertCoordinatesToLocalPosition(Vector3 inWorldPos)
+        public Vector2 ConvertCoordinatesToLocalPosition(Vector3 inWorldPos)
         {
             Vector2 vector2 = CoordinateUtils.ToUiCoords(inWorldPos);
             return ConvertCoordinatesToLocalPosition(vector2);
