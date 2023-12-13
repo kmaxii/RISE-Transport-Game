@@ -9,6 +9,9 @@ public class LineRendererHandler : MonoBehaviour {
     [SerializeField] private UILineRenderer travelLinePrefab;
     [SerializeField] private List<UILineRenderer> travelLinesList;
 
+    private int busCount = 0;
+    private int tramCount = 0;
+
     [Tooltip("Tram, Bus, Walk, notOnTram, notOnBus, Default")] [SerializeField]
     private List<Color> travelColors;
 
@@ -29,25 +32,28 @@ public class LineRendererHandler : MonoBehaviour {
     public void AddLines(List<Vector2> coordsList, string travelType) {
         // given a set of coordinates, this method should take the coordinates and put them into a array caller bussLines.Points.
         UILineRenderer newTravelLine = travelLinePrefab;
+        
 
         switch (travelType) {
             case "tram":
-                newTravelLine.color = travelColors[0];
+                newTravelLine.color = tramCount % 2 == 0 ? travelColors[0] : travelColors[1];
+                tramCount++;
                 break;
             case "bus":
-                newTravelLine.color = travelColors[1];
+                newTravelLine.color = busCount % 2 == 0 ? travelColors[2] : travelColors[3];
+                busCount++;
                 break;
             case "walk":
-                newTravelLine.color = travelColors[2];
-                break;
-            case "notontram":
-                newTravelLine.color = travelColors[3];
-                break;
-            case "notonbus":
                 newTravelLine.color = travelColors[4];
                 break;
-            default:
+            case "notontram":
                 newTravelLine.color = travelColors[5];
+                break;
+            case "notonbus":
+                newTravelLine.color = travelColors[6];
+                break;
+            default:
+                newTravelLine.color = travelColors[7];
                 break;
         }
 
@@ -65,5 +71,7 @@ public class LineRendererHandler : MonoBehaviour {
             travelLinesList[i].Destroy();
             travelLinesList.RemoveAt(i);
         }
+        busCount = 0;
+        tramCount = 0;
     }
 }
