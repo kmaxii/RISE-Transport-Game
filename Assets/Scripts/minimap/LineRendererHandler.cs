@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Mono.Cecil.Cil;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI.Extensions;
 
@@ -30,8 +31,19 @@ public class LineRendererHandler : MonoBehaviour {
     }
 
     public void AddLines(List<Vector2> coordsList, string travelType) {
+        
         // given a set of coordinates, this method should take the coordinates and put them into a array caller bussLines.Points.
         UILineRenderer newTravelLine = travelLinePrefab;
+        if (travelLinesList.Count >= 1) {
+            UILineRenderer newWalkLine = travelLinePrefab;
+            newWalkLine.color = travelColors[4];
+            newWalkLine.Points = new Vector2[2];
+            newWalkLine.transform.name = "walk";
+            newWalkLine.Points[0] = travelLinesList[travelLinesList.Count - 1].Points[travelLinesList[travelLinesList.Count - 1].Points.Length - 1];
+            newWalkLine.Points[1] = coordsList[0];
+            travelLinesList.Add(Instantiate(newWalkLine, transform));
+        }
+        
         
 
         switch (travelType) {
@@ -62,13 +74,24 @@ public class LineRendererHandler : MonoBehaviour {
             newTravelLine.Points[i] = coordsList[i];
         }
 
+        newTravelLine.transform.name = travelType;
         travelLinesList.Add(Instantiate(newTravelLine, transform));
+        
+        
+
+        if (travelLinesList.Count >= 2) {
+            int travelLinesListCount = travelLinesList[travelLinesList.Count - 2].Points.Length;
+            newTravelLine.Points[0] = travelLinesList[travelLinesList.Count - 2].Points[travelLinesListCount - 1];
+            newTravelLine.Points[1] = travelLinesList[travelLinesList.Count - 1].Points[0];
+            
+            
+        }
     }
 
 
     public void ClearLines() {
         for (int i = travelLinesList.Count - 1; i >= 0; i--) {
-            travelLinesList[i].Destroy();
+            Destroy(travelLinesList[i].gameObject);
             travelLinesList.RemoveAt(i);
         }
         busCount = 0;

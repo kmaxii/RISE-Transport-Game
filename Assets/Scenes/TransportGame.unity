@@ -832,7 +832,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 234181014}
-  m_LocalRotation: {x: 0.25767156, y: 0.000000008312682, z: -0.0000000022167979, w: 0.9662326}
+  m_LocalRotation: {x: 0.25767156, y: -0.000000008312684, z: 0.000000002216798, w: 0.9662326}
   m_LocalPosition: {x: 0, y: 269.69, z: -469.69}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2001,14 +2001,14 @@ MonoBehaviour:
   travelLinePrefab: {fileID: 4861918961244201657, guid: 9c8f572d95b2e3a47b02dee506f76ebc, type: 3}
   travelLinesList: []
   travelColors:
-  - {r: 0, g: 0.5104327, b: 1, a: 1}
-  - {r: 0.5235849, g: 0.7666537, b: 1, a: 1}
-  - {r: 1, g: 0.01978819, b: 0, a: 1}
-  - {r: 1, g: 0.5699223, b: 0.5613208, a: 1}
-  - {r: 0.13412571, g: 1, b: 0, a: 1}
-  - {r: 0, g: 0.16378962, b: 0.3207547, a: 0.5019608}
-  - {r: 0.33962262, g: 0.006659267, b: 0, a: 0.5019608}
-  - {r: 0.8396226, g: 0.7615208, b: 0.122774996, a: 1}
+  - {r: 0.21226418, g: 0.6197506, b: 1, a: 1}
+  - {r: 0.5518868, g: 0.7837465, b: 1, a: 1}
+  - {r: 1, g: 0.25943398, b: 0.2729652, a: 1}
+  - {r: 1, g: 0.5330188, b: 0.543713, a: 1}
+  - {r: 0.5089632, g: 0.9622642, b: 0.44028127, a: 1}
+  - {r: 0.19424173, g: 0.31326622, b: 0.4245283, a: 0.39215687}
+  - {r: 0.3207547, g: 0.122552514, b: 0.12674725, a: 0.39215687}
+  - {r: 1, g: 1, b: 0.27058825, a: 1}
 --- !u!222 &837042822
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4472,7 +4472,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1951402532}
-  m_LocalRotation: {x: 0.25767156, y: 0.000000008312682, z: -0.0000000022167979, w: 0.9662326}
+  m_LocalRotation: {x: 0.25767156, y: -0.000000008312684, z: 0.000000002216798, w: 0.9662326}
   m_LocalPosition: {x: 0, y: 269.69, z: -469.69}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
