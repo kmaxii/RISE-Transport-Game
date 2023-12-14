@@ -22,6 +22,12 @@ public class DayHandler : MonoBehaviour, IEventListenerInterface
     {
         _notYetActiveMissions = new List<DayMission>(day.DayMissions);
         
+
+        CheckToStartMissions();
+    }
+
+    private void CheckToStartMissions()
+    {
         //Order _dayMissions. All elements where mission.HasShowUpTime = false should will be first in an order that does not matter, 
         //After which all missions come that have a mission.ShowUpTime where the first mission is the one with the smallest < 
         //And the last one is the one with the biggest showUp time
@@ -31,21 +37,21 @@ public class DayHandler : MonoBehaviour, IEventListenerInterface
                 .Where(mission => mission.HasShowUpTime) // Select missions where HasShowUpTime is true
                 .OrderBy(mission => mission.ShowUpTime)) // Order them by ShowUpTime
             .ToList();
+
         
         for (int i = 0; i < _notYetActiveMissions.Count; i++)
         {
-            var mission = _notYetActiveMissions[i];
+            //Activate Mission will remove the element, that is why we can use 0 here
+            var mission = _notYetActiveMissions[0];
             if (!mission.HasShowUpTime || mission.ShowUpTime < timeVariable.Time24H)
             {
                 ActivateMission(mission);
-                i--;
                 continue;
             }
             
             //Because the list is ordered, once we encounter a mission that we should not yet spawn we can stop checking future missions
             break;
         }
-    
         
     }
 
@@ -87,13 +93,7 @@ public class DayHandler : MonoBehaviour, IEventListenerInterface
         Debug.Log("Next mission: " + _activeMissions[0].Mission.name);
     }
 
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
-
+    
     private void OnEnable()
     {
         timeVariable.raiseOnValueChanged.RegisterListener(this);
@@ -109,6 +109,6 @@ public class DayHandler : MonoBehaviour, IEventListenerInterface
      */
     public void OnEventRaised()
     {
-        throw new NotImplementedException();
+        CheckToStartMissions();
     }
 }

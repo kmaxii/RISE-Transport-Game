@@ -19,11 +19,11 @@ namespace minimap
             _instance = this;
         }
 
-        public BussStop InteractingBussStop
+        public Interactable3dPoi InteractingInteractable3dPoi
         {
             set
             {
-                tripPlanner.InteractingBussStop = value;
+                tripPlanner.InteractingInteractable3dPoi = value;
                 ShowMap();
             }
         }

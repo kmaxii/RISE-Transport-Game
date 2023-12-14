@@ -123,9 +123,9 @@ GameObject:
   - component: {fileID: 224719232094423712}
   - component: {fileID: 114065061957675814}
   - component: {fileID: 223504752897195498}
-  - component: {fileID: 114652372319761880}
+  - component: {fileID: 4124596149989141457}
   m_Layer: 0
-  m_Name: TransportationPoiLabelPrefab
+  m_Name: InWorldPOI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -187,7 +187,7 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!114 &114652372319761880
+--- !u!114 &4124596149989141457
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -196,13 +196,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1295758952425276}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba99666da3af044c0ae878f372ea4115, type: 3}
+  m_Script: {fileID: 11500000, guid: a47fdc556d6247d5ae2f3fce434cf57d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 114331597656622048}
   background: {fileID: 114702148998547232}
   inWorldImage: {fileID: 212423247285982060}
   onTopImage: {fileID: 5721115637094673139}
+  interactable3dPoi: {fileID: 5853602840370560830}
 --- !u!1 &1418439391676942
 GameObject:
   m_ObjectHideFlags: 0

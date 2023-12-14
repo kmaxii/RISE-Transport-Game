@@ -14,8 +14,7 @@ public class PoiSpawner : MonoBehaviour
     
     [SerializeField] private float spawnScale = 1f;
 
-    [FormerlySerializedAs("marker")] [SerializeField] private PoiLabelTextSetter bussStopMarker;
-    [SerializeField] private PoiLabelTextSetter missionMarker;
+    [SerializeField] private PoiLabel poiMarker;
     
     [SerializeField] private TileManagerUI tileManagerUI;
 
@@ -85,18 +84,16 @@ public class PoiSpawner : MonoBehaviour
         foreach (var missionLocation in locations)
         {
             Vector2d loc = Conversions.StringToLatLon(missionLocation.LocationString);
-            Debug.Log($"Spawning {mission.MissionName} at {loc}");
-            var instance = Instantiate(missionMarker);
+            var instance = Instantiate(poiMarker);
             instance.Set(mission.MissionName);
             instance.SetImage(mission.Sprite);
+            poiMarker.SetType(PoiType.Mission);
             instance.SetBackgroundColor(mission.Color);
             Vector3 pos = map.GeoToWorldPosition(loc);
             pos.y += 5;
             var transform1 = instance.transform;
             transform1.position = pos;
             transform1.localScale = new Vector3(spawnScale, spawnScale, spawnScale);
-            
-            Debug.Log($"Spawned {mission.name} at {pos}");
             
             MmPoiData miniMapPoi = tileManagerUI.AddPoi(
                 pos,
@@ -135,7 +132,7 @@ public class PoiSpawner : MonoBehaviour
             
         }
         
-        map._vectorData.SpawnPrefabAtGeoLocation(bussStopMarker.gameObject, longLats.ToArray(), list =>
+        map._vectorData.SpawnPrefabAtGeoLocation(poiMarker.gameObject, longLats.ToArray(), list =>
         {
             foreach (var marker in list)
             {
@@ -145,7 +142,10 @@ public class PoiSpawner : MonoBehaviour
 
                 if (BussStops.Instance.TryGetStop(pos, out var stop))
                 {
-                    marker.GetComponent<PoiLabelTextSetter>().Set(stop.name);
+                    PoiLabel poiLabel = marker.GetComponent<PoiLabel>();
+                    poiLabel.Set(stop.name);
+                    poiLabel.SetType(PoiType.BussStation);
+                    
                     marker.transform.localScale = new Vector3(spawnScale, spawnScale, spawnScale);
                     marker.transform.position = pos;
                 }

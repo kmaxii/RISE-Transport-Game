@@ -4866,8 +4866,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   map: {fileID: 159634025}
   spawnScale: 1
-  bussStopMarker: {fileID: 114652372319761880, guid: 22150daba6e8b47b69fd30f00b9c56cd, type: 3}
-  missionMarker: {fileID: 114652372319761880, guid: 22150daba6e8b47b69fd30f00b9c56cd, type: 3}
+  poiMarker: {fileID: 4124596149989141457, guid: 22150daba6e8b47b69fd30f00b9c56cd, type: 3}
   tileManagerUI: {fileID: 1760020117}
   bussStopSprite: {fileID: 21300000, guid: fec5572521f52453397f564f556c168e, type: 3}
 --- !u!4 &2104720038

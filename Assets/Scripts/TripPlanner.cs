@@ -18,7 +18,7 @@ public class TripPlanner
         _lastClicked = null;
     }
     
-    public BussStop InteractingBussStop
+    public Interactable3dPoi InteractingInteractable3dPoi
     {
         set => _interactingBussStop = BussStops.Instance.GetStop(value.GetName());
     }
