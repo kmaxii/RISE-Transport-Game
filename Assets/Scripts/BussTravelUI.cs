@@ -43,7 +43,11 @@ public class BussTravelUI : MonoBehaviour
 
     public void AcceptTravel()
     {
-        GameObject.FindWithTag("Player").transform.position = _showingInfoTo.pos3d;
+        //The stop is set to be at a higher y so the buss stops are seen well, but we want to ignore that
+        Vector3 pos = _showingInfoTo.pos3d;
+        pos.y = 0;
+        
+        GameObject.FindWithTag("Player").transform.position = pos;
         HideTravelOption();
         timeVariable.Time24H = new Time24H(_showingResult.DestinationTime);
     }

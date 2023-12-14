@@ -88,23 +88,49 @@ public class PoiSpawner : MonoBehaviour
 
     private void SpawnBussStations()
     {
-        foreach (var bussStopsStopPoint in BussStops.Instance.StopPoints)
+        List<Vector2d> longLats = new List<Vector2d>();
+        
+        BussStops bussStops = BussStops.Instance;
+
+        foreach (var bussStopsStopPoint in bussStops.StopPoints)
         {
             var locationString = bussStopsStopPoint.GeoCoords;
             Vector2d loc = Conversions.StringToLatLon(locationString);
-            var instance = Instantiate(bussStopMarker);
-            instance.Set(bussStopsStopPoint.name);
+            
+            longLats.Add(loc);
+
             Vector3 pos = map.GeoToWorldPosition(loc);
-            bussStopsStopPoint.pos3d = pos;
-            pos.y += 5;
-            var transform1 = instance.transform;
-            transform1.localPosition = pos;
-            transform1.localScale = new Vector3(spawnScale, spawnScale, spawnScale);
+            pos.y = 5;
+            bussStops.Set3dPos(pos, bussStopsStopPoint);
+            
             tileManagerUI.AddPoi(
-                CoordinateUtils.ToUiCoords(pos),
+                pos,
                 PoiType.BussStation,
                 bussStopsStopPoint.name,
                 bussStopSprite);
+            
         }
+        
+        map._vectorData.SpawnPrefabAtGeoLocation(bussStopMarker.gameObject, longLats.ToArray(), list =>
+        {
+            foreach (var marker in list)
+            {
+                
+                Vector3 pos = marker.transform.position;
+                pos.y = 5;
+
+                if (BussStops.Instance.TryGetStop(pos, out var stop))
+                {
+                    marker.GetComponent<PoiLabelTextSetter>().Set(stop.name);
+                    marker.transform.localScale = new Vector3(spawnScale, spawnScale, spawnScale);
+                    marker.transform.position = pos;
+
+
+
+                }
+                
+            }
+        });
+
     }
 }
