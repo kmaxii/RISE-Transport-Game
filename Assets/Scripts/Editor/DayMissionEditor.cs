@@ -34,6 +34,7 @@ namespace Editor
 
         public override void OnInspectorGUI()
         {
+            serializedObject.Update();
             EditorGUILayout.PropertyField(mission);
             EditorGUILayout.PropertyField(hasShowUpTime);
 
@@ -60,6 +61,8 @@ namespace Editor
             {
                 EditorGUILayout.PropertyField(parentMission);
             }
+
+            serializedObject.ApplyModifiedProperties();
         }
     }
 }

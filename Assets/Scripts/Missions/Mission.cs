@@ -1,4 +1,3 @@
-using Editor;
 using UnityEngine;
 
 namespace Missions
@@ -7,6 +6,7 @@ namespace Missions
     public class Mission : ScriptableObject
     {
         [SerializeField] private string missionName = "exampleName";
+        public string MissionName => missionName;
 
         [Tooltip("The picture of how this mission")]
         [SerializeField] private Sprite sprite;

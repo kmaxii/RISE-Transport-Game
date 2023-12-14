@@ -10,6 +10,7 @@ namespace Missions
     public class Day : ScriptableObject
     {
         [SerializeField] private List<DayMission> dayMissions;
-
+        
+        public List<DayMission> DayMissions => dayMissions;
     }
 }

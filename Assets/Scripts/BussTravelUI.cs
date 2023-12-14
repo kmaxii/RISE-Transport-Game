@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Editor;
 using Mapbox.Unity.Map;
 using Mapbox.Utils;
 using minimap;

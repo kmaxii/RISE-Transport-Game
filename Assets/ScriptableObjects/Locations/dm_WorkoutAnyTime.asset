@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 629601f5728d4b40887247c1cd4f27f8, type: 3}
   m_Name: dm_WorkoutAnyTime
   m_EditorClassIdentifier: 
-  mission: {fileID: 0}
+  mission: {fileID: 11400000, guid: f6b8b5f423566a9428a68d5ab7ee4bd3, type: 2}
   hasShowUpTime: 0
   showUpTime:
     hour: 0

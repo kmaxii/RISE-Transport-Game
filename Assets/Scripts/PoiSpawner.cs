@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using Mapbox.Examples.Scripts;
 using Mapbox.Unity.Map;
@@ -24,21 +23,36 @@ public class PoiSpawner : MonoBehaviour
 
     [SerializeField] private Sprite bussStopSprite;
 
+    /**
+     * Used to keep track of missions that should be called but that could not be spawned yet because the map had not yet been initialized
+     */
+    private HashSet<Mission> _toSpawn;
+
+    private bool _hasInitialized;
+
     private void Awake()
     {
         _spawnedMissions = new Dictionary<Mission, KeyValuePair<PoiLabelTextSetter, MmPoiData>[]>();
+        _toSpawn = new HashSet<Mission>();
     }
 
     void Start()
     {
-        StartCoroutine(LateStart());
+        map.OnInitialized += Initialize;
     }
 
-
-    private IEnumerator LateStart()
+    private void Initialize()
     {
-        yield return new WaitForSeconds(0.1f);
+        map.OnInitialized -= Initialize;
+        _hasInitialized = true;
         SpawnBussStations();
+        
+        //For each mission that was attempted to spawn before the map had initialized
+        foreach (var mission in _toSpawn)
+        {
+            SpawnMission(mission);
+        }
+        
     }
 
     public void DestroyMission(Mission mission)
@@ -57,6 +71,12 @@ public class PoiSpawner : MonoBehaviour
 
     public void SpawnMission(Mission mission)
     {
+        if (!_hasInitialized)
+        {
+            _toSpawn.Add(mission);
+            return;
+        }
+        
         MissionLocation[] locations = mission.MissionLocations;
 
         List<KeyValuePair<PoiLabelTextSetter, MmPoiData>> spawned =
@@ -65,19 +85,23 @@ public class PoiSpawner : MonoBehaviour
         foreach (var missionLocation in locations)
         {
             Vector2d loc = Conversions.StringToLatLon(missionLocation.LocationString);
+            Debug.Log($"Spawning {mission.MissionName} at {loc}");
             var instance = Instantiate(missionMarker);
-            instance.Set(mission.name);
+            instance.Set(mission.MissionName);
             instance.SetImage(mission.Sprite);
             instance.SetBackgroundColor(mission.Color);
             Vector3 pos = map.GeoToWorldPosition(loc);
             pos.y += 5;
             var transform1 = instance.transform;
-            transform1.localPosition = pos;
+            transform1.position = pos;
             transform1.localScale = new Vector3(spawnScale, spawnScale, spawnScale);
+            
+            Debug.Log($"Spawned {mission.name} at {pos}");
+            
             MmPoiData miniMapPoi = tileManagerUI.AddPoi(
-                CoordinateUtils.ToUiCoords(pos),
+                pos,
                 PoiType.Mission,
-                mission.name,
+                mission.MissionName,
                 mission.Sprite);
             
             
@@ -124,9 +148,6 @@ public class PoiSpawner : MonoBehaviour
                     marker.GetComponent<PoiLabelTextSetter>().Set(stop.name);
                     marker.transform.localScale = new Vector3(spawnScale, spawnScale, spawnScale);
                     marker.transform.position = pos;
-
-
-
                 }
                 
             }
