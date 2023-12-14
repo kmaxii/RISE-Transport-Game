@@ -11,9 +11,7 @@ namespace Editor
     {
         SerializedProperty dayMissions;
         
-        DayMission newMissionToAdd; // Field to hold the new mission to add
-
-
+        DayMission _newMissionToAdd; // Field to hold the new mission to be added
 
         private void OnEnable()
         {
@@ -24,44 +22,87 @@ namespace Editor
         {
             serializedObject.Update();
             
+            RemoveNullMissions();
             SortMissions();
 
-            // Display each mission with a removal button
+            DisplayMissions(false, "Missions with no set show up Time");
+            
+            DisplayMissions(true, "Missions with set show up Time");
+
+            RenderNewObjectField();
+  
+
+            serializedObject.ApplyModifiedProperties();
+        }
+
+        private void RenderNewObjectField()
+        {
+            // Field to select or drop a new DayMission
+            _newMissionToAdd = (DayMission)EditorGUILayout.ObjectField("Add New Mission", _newMissionToAdd, typeof(DayMission), false);
+
+            // Check if a DayMission was assigned to the field
+            if (_newMissionToAdd != null)
+            {
+                dayMissions.InsertArrayElementAtIndex(dayMissions.arraySize);
+                dayMissions.GetArrayElementAtIndex(dayMissions.arraySize - 1).objectReferenceValue = _newMissionToAdd;
+                _newMissionToAdd = null; // Clear the field after adding
+            }
+        }
+
+        private void RemoveNullMissions()
+        {
             for (int i = 0; i < dayMissions.arraySize; i++)
             {
-                
                 SerializedProperty element = dayMissions.GetArrayElementAtIndex(i);
     
                 // Check if the element is null and remove it
                 if (element.objectReferenceValue == null)
                 {
                     dayMissions.DeleteArrayElementAtIndex(i);
-                    continue; 
+                }
+            }
+        }
+        
+        private void DisplayMissions(bool showUpTimeValue, string header)
+        {
+            bool hasShownHeader = false;
+            
+            for (int i = 0; i < dayMissions.arraySize; i++)
+            {
+                SerializedProperty element = dayMissions.GetArrayElementAtIndex(i);
+                DayMission mission = (DayMission)element.objectReferenceValue;
+
+                // Skip if the element is null or if its isSetTime value doesn't match the current section
+                if (mission == null || mission.HasShowUpTime != showUpTimeValue)
+                {
+                    continue;
+                }
+
+                if (!hasShownHeader)
+                {
+                    EditorGUILayout.LabelField(header, EditorStyles.boldLabel);
+                    hasShownHeader = true;
                 }
                 
+
                 EditorGUILayout.BeginHorizontal();
-                EditorGUILayout.PropertyField(dayMissions.GetArrayElementAtIndex(i), GUIContent.none);
+                EditorGUILayout.PropertyField(element, GUIContent.none);
+
+                if (mission.HasShowUpTime)
+                {
+                    EditorGUILayout.LabelField($"Time: {mission.ShowUpTime.hour:00}:{mission.ShowUpTime.minute:00}", GUILayout.Width(100));
+
+                }
+                
+                
+                
                 if (GUILayout.Button("-", GUILayout.Width(20)))
                 {
                     dayMissions.DeleteArrayElementAtIndex(i);
+                    i--; // Adjust the index after removal
                 }
                 EditorGUILayout.EndHorizontal();
             }
-
-            
-            // Field to select or drop a new DayMission
-            newMissionToAdd = (DayMission)EditorGUILayout.ObjectField("Add New Mission", newMissionToAdd, typeof(DayMission), false);
-
-            // Check if a DayMission was assigned to the field
-            if (newMissionToAdd != null)
-            {
-                dayMissions.InsertArrayElementAtIndex(dayMissions.arraySize);
-                dayMissions.GetArrayElementAtIndex(dayMissions.arraySize - 1).objectReferenceValue = newMissionToAdd;
-                newMissionToAdd = null; // Clear the field after adding
-            }
-            
-            
-            serializedObject.ApplyModifiedProperties();
         }
 
         private void SortMissions()
