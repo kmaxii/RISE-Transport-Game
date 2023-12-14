@@ -3,7 +3,7 @@ using UnityEngine;
 using Utils;
 
 [Serializable]
-public class Time24H
+public class Time24H : IComparable<Time24H>
 {
     public int hour;
     public int minute;
@@ -28,6 +28,8 @@ public class Time24H
     {
         return $"{hour:00}:{minute:00}";
     }
+
+  
 
     public string Rfc3339 => TimeUtils.ConvertToRfc3339(this);
 
@@ -72,5 +74,16 @@ public class Time24H
         
         return a.minute < b.minute;
        
+    }
+
+    public int CompareTo(Time24H other)
+    {
+        if (ReferenceEquals(this, other)) return 0;
+        if (ReferenceEquals(null, other)) return 1;
+
+        int hourComparison = this.hour.CompareTo(other.hour);
+        if (hourComparison != 0) return hourComparison;
+
+        return this.minute.CompareTo(other.minute);
     }
 }
