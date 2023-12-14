@@ -32,18 +32,20 @@ public class DayHandler : MonoBehaviour, IEventListenerInterface
                 .OrderBy(mission => mission.ShowUpTime)) // Order them by ShowUpTime
             .ToList();
         
-        
-        foreach (var mission in _notYetActiveMissions)
+        for (int i = 0; i < _notYetActiveMissions.Count; i++)
         {
+            var mission = _notYetActiveMissions[i];
             if (!mission.HasShowUpTime || mission.ShowUpTime < timeVariable.Time24H)
             {
                 ActivateMission(mission);
+                i--;
                 continue;
             }
             
             //Because the list is ordered, once we encounter a mission that we should not yet spawn we can stop checking future missions
             break;
         }
+    
         
     }
 

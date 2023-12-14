@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Mission2
   m_EditorClassIdentifier: 
   mission: {fileID: 0}
-  hasShowUpTime: 1
+  hasShowUpTime: 0
   showUpTime:
     hour: 10
     minute: 0

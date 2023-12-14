@@ -90,7 +90,7 @@ namespace Editor
 
                 if (mission.HasShowUpTime)
                 {
-                    EditorGUILayout.LabelField($"Time: {mission.ShowUpTime.hour:00}:{mission.ShowUpTime.minute:00}", GUILayout.Width(100));
+                    EditorGUILayout.LabelField($"Time: {mission.ShowUpTime}", GUILayout.Width(100));
 
                 }
                 
