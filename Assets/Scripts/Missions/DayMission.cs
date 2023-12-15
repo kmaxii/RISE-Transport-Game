@@ -1,9 +1,10 @@
-﻿using UnityEngine;
+﻿using MaxisGeneralPurpose.Event;
+using UnityEngine;
 
 namespace Missions
 {
     [CreateAssetMenu(fileName = "New_DayMission", menuName = "Rise/DayMission")]
-    public class DayMission : ScriptableObject
+    public class DayMission : DataCarrier
     {
         [SerializeField] private Mission mission;
 
@@ -43,7 +44,6 @@ namespace Missions
 
         public override string ToString()
         {
-            //Return a string with mission name and time it has to be done if there is one
             if (isSetTime)
             {
                 return $"{mission} at {earliestTime} - {latestTime}";
