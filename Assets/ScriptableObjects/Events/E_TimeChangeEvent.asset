@@ -10,5 +10,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: adc0d76a29e51da47bd7f76e7d6c7251, type: 3}
-  m_Name: TimeChangeEvent
+  m_Name: E_TimeChangeEvent
   m_EditorClassIdentifier: 

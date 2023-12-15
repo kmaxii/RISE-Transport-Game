@@ -124,7 +124,6 @@ public class DayHandler : MonoBehaviour, IEventListenerInterface
         Debug.Log("Completed missions: " + _completedMissions.Count);
         Debug.Log("Total missions: " + _notYetActiveMissions.Count);
         Debug.Log("Time: " + _timeVariable.Time24H);
-        Debug.Log("Next mission: " + _activeMissions[0].Mission.name);
     }
 
 

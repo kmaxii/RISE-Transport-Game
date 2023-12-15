@@ -1,9 +1,10 @@
+using MaxisGeneralPurpose.Event;
 using UnityEngine;
 
 namespace Missions
 {
     [CreateAssetMenu(fileName = "New_Mission", menuName = "Rise/Mission")]
-    public class Mission : ScriptableObject
+    public class Mission : DataCarrier
     {
         [SerializeField] private string missionName = "exampleName";
         public string MissionName => missionName;
