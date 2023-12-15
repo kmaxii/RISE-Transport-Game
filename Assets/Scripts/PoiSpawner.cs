@@ -51,6 +51,7 @@ public class PoiSpawner : MonoBehaviour
         {
             SpawnMission(mission);
         }
+        _toSpawn.Clear();
         
     }
 

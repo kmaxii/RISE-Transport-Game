@@ -39,31 +39,52 @@ namespace Missions
 
         [Header("Time")]
         [SerializeField] private Time24H timeItTakes = new Time24H(1, 0);
-
         
-        
-      
-        
+        public Time24H TimeItTakes => timeItTakes;
         
         
         [Header("Successful")] [Tooltip("The money amount change after mission. Use - to make it go down")] [SerializeField]
         private int moneyReward;
+        public  int MoneyReward => moneyReward;
 
         [Tooltip("The stress amount change after mission. Use - to make it go down")] [SerializeField]
         private int stressChange;
+        public  int StressChange => stressChange;
 
         [Tooltip("The comfort amount change after mission. Use - to make it go down")] [SerializeField]
         private int comfortChange;
+        public  int ComfortChange => comfortChange;
 
         [Header("Failure")] [Tooltip("The money change on failure. Use - to make it go down")] [SerializeField]
         private int moneyPunishment;
+        public  int MoneyPunishment => moneyPunishment;
 
         [Tooltip("The stress change on failure. Use - to make it go down")] [SerializeField]
         private int stressPunishment;
+        public  int StressPunishment => stressPunishment;
 
         [Tooltip("The comfort change on failure. Use - to make it go down")] [SerializeField]
         private int comfortPunishment;
+        public  int ComfortPunishment => comfortPunishment;
 
+
+        public void FinishMission(CurrentStats currentStats)
+        {
+            currentStats.TimeVariable.Time24H += timeItTakes;
+            currentStats.Money.Value += moneyReward;
+            currentStats.Stress.Value += stressChange;
+            currentStats.Comfort.Value += comfortChange;
+        }
+
+
+        public void FailMission(CurrentStats currentStats)
+        {
+            currentStats.Money.Value += moneyPunishment;
+            currentStats.Stress.Value += stressPunishment;
+            currentStats.Comfort.Value += comfortPunishment;
+        }
+        
+        
         private void OnValidate()
         {
             if (moneyPunishment > 0)

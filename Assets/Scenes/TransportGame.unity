@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.45099503, g: 0.50085473, b: 0.57433176, a: 1}
+  m_IndirectSpecularColor: {r: 0.45099849, g: 0.50085634, b: 0.5743218, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3203,8 +3203,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   day: {fileID: 11400000, guid: b338493a8b4a3cc40b1bd2a0ab2a0b4a, type: 2}
-  timeVariable: {fileID: 11400000, guid: 3e013dc3110bf9b4ca29f5af6ac7195e, type: 2}
   poiSpawner: {fileID: 2104720037}
+  currentStats: {fileID: 11400000, guid: 3d36823615cfb3141ade89f65cee72fb, type: 2}
 --- !u!4 &1367835073
 Transform:
   m_ObjectHideFlags: 0

@@ -25,6 +25,7 @@ public class Interactable3dPoi : MapInteractable
                 FullScreenMap.Instance.InteractingInteractable3dPoi = this;
                 break;
             case PoiType.Mission:
+                DayHandler.Instance.FinishMission(GetName());
                 break;
         }
     }
