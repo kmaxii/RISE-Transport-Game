@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Interfaces;
@@ -17,6 +16,20 @@ public class DayHandler : MonoBehaviour, IEventListenerInterface
     private readonly List<DayMission> _activeMissions = new List<DayMission>();
     private readonly HashSet<DayMission> _completedMissions = new HashSet<DayMission>();
 
+    //Singleton
+    private static DayHandler _instance;
+    public static DayHandler Instance => _instance;
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(_instance.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
     
     void Start()
     {
@@ -62,7 +75,19 @@ public class DayHandler : MonoBehaviour, IEventListenerInterface
         _activeMissions.Add(dayMission);
     }
 
-    private void FinishMission(DayMission dayMission)
+    public void FinishMission(string missionName)
+    {
+        DayMission mission = _activeMissions.FirstOrDefault(mission => mission.Mission.name == missionName);
+
+        if (mission == null)
+        {
+            Debug.LogError( $"Mission {missionName} not found");
+            return;
+        }
+        FinishMission(mission);
+        
+    }
+    public void FinishMission(DayMission dayMission)
     {
         _activeMissions.Remove(dayMission);
         _completedMissions.Add(dayMission);
