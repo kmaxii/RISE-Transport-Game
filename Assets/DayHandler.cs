@@ -83,7 +83,7 @@ public class DayHandler : MonoBehaviour, IEventListenerInterface
 
     public void FinishMission(string missionName)
     {
-        DayMission mission = _activeMissions.FirstOrDefault(mission => mission.Mission.name == missionName);
+        DayMission mission = _activeMissions.FirstOrDefault(mission => mission.Mission.MissionName == missionName);
 
         if (mission == null)
         {

@@ -6,20 +6,26 @@ public class Interactable3dPoi : MapInteractable
 {
 
     [SerializeField] private Text stationName;
+    [SerializeField] private PoiLabel poiLabel;
 
     private PoiType _poiType;
     
     public PoiType PoiType
     {
         get => _poiType;
-        set => _poiType = value;
+        set
+        {
+            Debug.Log("Setting poi type to: " + value);
+            _poiType = value;
+        }
     }
 
     public StopPoint StopPoint { get; set; }
 
     public override void Interact()
     {
-        switch (_poiType)
+        Debug.Log("The type is: " + poiLabel.poiType);
+        switch (poiLabel.poiType)
         {
             case PoiType.BussStation:
                 FullScreenMap.Instance.InteractingInteractable3dPoi = this;

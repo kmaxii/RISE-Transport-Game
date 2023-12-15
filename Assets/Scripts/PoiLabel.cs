@@ -7,9 +7,10 @@ public class PoiLabel : PoiLabelTextSetter
 
     [SerializeField] private Interactable3dPoi interactable3dPoi;
 
+    public PoiType poiType;
 
-    public void SetType(PoiType poiType)
+    public void SetType(PoiType toSet)
     {
-        interactable3dPoi.PoiType = poiType;
+        poiType = toSet;
     }
 }
