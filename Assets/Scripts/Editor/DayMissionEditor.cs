@@ -15,6 +15,7 @@ namespace Editor
         SerializedProperty latestTime;
         SerializedProperty hasChainedTask;
         SerializedProperty childMission;
+        SerializedProperty triggerChainedOnFail;
         SerializedProperty isChainedTask;
         SerializedProperty parentMission;
 
@@ -28,6 +29,7 @@ namespace Editor
             latestTime = serializedObject.FindProperty("latestTime");
             hasChainedTask = serializedObject.FindProperty("hasChainedTask");
             childMission = serializedObject.FindProperty("childMission");
+            triggerChainedOnFail = serializedObject.FindProperty("triggerChainedOnFail");
             isChainedTask = serializedObject.FindProperty("isChainedTask");
             parentMission = serializedObject.FindProperty("parentMission");
         }
@@ -53,6 +55,7 @@ namespace Editor
             EditorGUILayout.PropertyField(hasChainedTask);
             if (hasChainedTask.boolValue)
             {
+                EditorGUILayout.PropertyField(triggerChainedOnFail);
                 EditorGUILayout.PropertyField(childMission);
             }
 

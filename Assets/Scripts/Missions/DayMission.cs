@@ -36,6 +36,11 @@ namespace Missions
         
         [Header("Chained Task")] [Tooltip("Does doing this task create other tasks")] [SerializeField]
         private bool hasChainedTask;
+        
+        [Tooltip("If you fail the task, should the chained task become available?")] 
+        [SerializeField] private bool triggerChainedOnFail = false;
+        
+        
         [SerializeField] private DayMission childMission; // Visibility managed in custom editor
 
         [Tooltip("If the task is dependent on another task")] [SerializeField]
