@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using Interfaces;
+using MaxisGeneralPurpose.Scriptable_objects;
 using Missions;
+using Scriptable_objects;
 using UnityEngine;
 
 public class DayHandler : MonoBehaviour, IEventListenerInterface
@@ -19,8 +21,14 @@ public class DayHandler : MonoBehaviour, IEventListenerInterface
 
     private readonly List<DayMission> _activeMissions = new();
     private readonly HashSet<DayMission> _completedMissions = new();
+    private readonly HashSet<DayMission> _failedMissions = new();
 
-    //Singleton
+    [SerializeField] private GameEventWithData missionGotten;
+    [SerializeField] private GameEventWithData missionFailed;
+    [SerializeField] private GameEventWithData missionCompleted;
+    
+    
+    
     private static DayHandler _instance;
     public static DayHandler Instance => _instance;
 
@@ -79,6 +87,7 @@ public class DayHandler : MonoBehaviour, IEventListenerInterface
         _notYetActiveMissions.Remove(dayMission);
         poiSpawner.SpawnMission(dayMission.Mission);
         _activeMissions.Add(dayMission);
+        missionGotten.Raise(dayMission);
     }
 
     public void FinishMission(string missionName)
@@ -93,7 +102,6 @@ public class DayHandler : MonoBehaviour, IEventListenerInterface
 
         FinishMission(mission);
     }
-
     public void FinishMission(DayMission dayMission)
     {
         dayMission.Mission.FinishMission(currentStats);
@@ -102,29 +110,54 @@ public class DayHandler : MonoBehaviour, IEventListenerInterface
         _completedMissions.Add(dayMission);
         poiSpawner.DestroyMission(dayMission.Mission);
 
+        missionCompleted.Raise(dayMission);
+        
         if (dayMission.HasChainedTask)
         {
             var nextMission = dayMission.ChildMission;
 
-            _activeMissions.Add(nextMission);
+            _notYetActiveMissions.Add(nextMission);
             if (!nextMission.HasShowUpTime || nextMission.ShowUpTime < _timeVariable.Time24H)
             {
                 ActivateMission(nextMission);
             }
         }
+    }
+    
+    public void FailedMission(string missionName)
+    {
+        DayMission mission = _activeMissions.FirstOrDefault(mission => mission.Mission.MissionName == missionName);
 
-
-        if (_activeMissions.Count == 0)
+        if (mission == null)
         {
-            Debug.Log("No more missions");
+            Debug.LogError($"Mission {missionName} not found");
+            return;
         }
 
-        Debug.Log("Mission completed");
-        Debug.Log("Active missions: " + _activeMissions.Count);
-        Debug.Log("Completed missions: " + _completedMissions.Count);
-        Debug.Log("Total missions: " + _notYetActiveMissions.Count);
-        Debug.Log("Time: " + _timeVariable.Time24H);
+        FailedMission(mission);
     }
+    public void FailedMission(DayMission dayMission)
+    {
+        dayMission.Mission.FailMission(currentStats);
+        
+        _activeMissions.Remove(dayMission);
+        _failedMissions.Add(dayMission);
+        poiSpawner.DestroyMission(dayMission.Mission);
+
+        missionFailed.Raise(dayMission);
+        
+        if (dayMission.HasChainedTask && dayMission.TriggerChainedOnFail)
+        {
+            var nextMission = dayMission.ChildMission;
+
+            _notYetActiveMissions.Add(nextMission);
+            if (!nextMission.HasShowUpTime || nextMission.ShowUpTime < _timeVariable.Time24H)
+            {
+                ActivateMission(nextMission);
+            }
+        }
+    }
+    
 
 
     private void OnEnable()

@@ -17,6 +17,7 @@ namespace Missions
         public Time24H EarliestTime => earliestTime;
         public Time24H LatestTime => latestTime;
         public bool HasChainedTask => hasChainedTask;
+        public bool TriggerChainedOnFail => triggerChainedOnFail;
         public DayMission ChildMission => childMission;
         public bool IsChainedTask => isChainedTask;
         public DayMission ParentMission => parentMission;
