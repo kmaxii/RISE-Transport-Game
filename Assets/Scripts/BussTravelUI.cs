@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using Mapbox.Unity.Map;
 using Mapbox.Utils;
+using MaxisGeneralPurpose.Scriptable_objects;
 using minimap;
+using Scriptable_objects;
 using TMPro;
 using UnityEngine;
 using Utils;
@@ -30,6 +32,11 @@ public class BussTravelUI : MonoBehaviour
     [SerializeField] private TileManagerUI tileManagerUI;
     [SerializeField] private LineRendererHandler lineRenderer;
 
+    [SerializeField] private IntVariable bussTravelCost;
+    [SerializeField] private IntVariable money;
+
+
+    [SerializeField] private GameEvent cantAffordEvent;
     void Start()
     {
         //Put all of this children into the children array
@@ -42,6 +49,12 @@ public class BussTravelUI : MonoBehaviour
 
     public void AcceptTravel()
     {
+        if (money.Value - bussTravelCost.Value < 0)
+        {
+            cantAffordEvent.Raise();
+            return;
+        }
+        
         //The stop is set to be at a higher y so the buss stops are seen well, but we want to ignore that
         Vector3 pos = _showingInfoTo.pos3d;
         pos.y = 0;
@@ -49,6 +62,8 @@ public class BussTravelUI : MonoBehaviour
         GameObject.FindWithTag("Player").transform.position = pos;
         HideTravelOption();
         timeVariable.Time24H = new Time24H(_showingResult.DestinationTime);
+
+        money.Value -= bussTravelCost.Value;
     }
 
     public void HideTravelOption()
