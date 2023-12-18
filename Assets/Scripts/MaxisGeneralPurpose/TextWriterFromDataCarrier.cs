@@ -13,6 +13,8 @@ namespace MaxisGeneralPurpose
 
         private TMP_Text _textMesh;
 
+        [SerializeField] private string postFix;
+
 
         private void Awake()
         {
@@ -36,7 +38,7 @@ namespace MaxisGeneralPurpose
 
         public void OnEventRaised()
         {
-            _textMesh.text = value.ToString();
+            _textMesh.text = value + postFix;
         }
     }
 }
