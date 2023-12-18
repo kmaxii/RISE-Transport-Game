@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using MaxisGeneralPurpose.Event;
 using MaxisGeneralPurpose.Scriptable_objects;
 using Missions;
@@ -25,6 +26,8 @@ public class MissionList : MonoBehaviour
         missionFailedEvent.UnregisterListener(RemoveMission);
     }
 
+    private readonly Dictionary<DayMission, UiMissionShowcase> spawnedElements = new();
+
 
     private void AddMission(DataCarrier dataCarrier)
     {
@@ -34,11 +37,22 @@ public class MissionList : MonoBehaviour
             Debug.LogError("Invalid type of data sent with Add mission event. Was not a day mission");
             return;
         }
-        
+
+        UiMissionShowcase spawned = Instantiate(prefabMissionShowcase, transform);
+        spawned.Show(dayMission);
+        spawnedElements.Add(dayMission, spawned);
         
     }
 
     private void RemoveMission(DataCarrier dataCarrier)
     {
+        //Cast dataCarrier to a Mission if it is fo that type
+        if (!(dataCarrier is DayMission dayMission))
+        {
+            Debug.LogError("Invalid type of data sent with Add mission event. Was not a day mission");
+            return;
+        }
+        spawnedElements[dayMission].gameObject.Destroy();
+        spawnedElements.Remove(dayMission);
     }
 }
