@@ -15,5 +15,5 @@ MonoBehaviour:
   raiseOnValueChanged: {fileID: 11400000, guid: 5c2d2e6901d2e0241869770c65d4defb, type: 2}
   time24H:
     hour: 8
-    minute: 0
-  onResetHour: {fileID: 0}
+    minute: 4
+  onResetHour: {fileID: 11400000, guid: fc1ca8f604bde734fa912de09b61f43d, type: 2}
