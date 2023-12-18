@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Missions
 {
-    [CreateAssetMenu(fileName = "New_DayMission", menuName = "Rise/DayMission")]
+    [CreateAssetMenu(fileName = "New_DayMission", menuName = "Rise/Mission/DayMission")]
     public class DayMission : DataCarrier
     {
         [SerializeField] private Mission mission;

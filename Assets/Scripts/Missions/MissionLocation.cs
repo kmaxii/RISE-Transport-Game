@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Missions
 {
-    [CreateAssetMenu(fileName = "New MissionLocation", menuName = "Rise/MissionLocation")]
+    [CreateAssetMenu(fileName = "New MissionLocation", menuName = "Rise/Mission/MissionLocation")]
     public class MissionLocation : ScriptableObject
     {
     

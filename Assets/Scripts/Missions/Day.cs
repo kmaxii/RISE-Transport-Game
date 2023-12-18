@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Missions
 {
-    [CreateAssetMenu(fileName = "New Day", menuName = "Rise/Day")]
+    [CreateAssetMenu(fileName = "New Day", menuName = "Rise/Mission/Day")]
 
     public class Day : ScriptableObject
     {
