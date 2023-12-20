@@ -105,7 +105,7 @@ namespace minimap
             UpdateMap();
         }
 
-        private void UpdateMap()
+        public void UpdateMap()
         {
             UpdatePlayerPoiPosition();
             RenderTiles();
