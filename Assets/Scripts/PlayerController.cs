@@ -1,3 +1,4 @@
+using Scriptable_objects;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -22,10 +23,10 @@ public class PlayerController : MonoBehaviour
     [Tooltip("Max number of times to expand the search radius in case none of the rays hit a road")]
     [SerializeField] private int maxIterations = 5; 
     [Tooltip("Distance to increment the search radius")]
-    [SerializeField] private float distanceIncrement = 0.5f;  
+    [SerializeField] private float distanceIncrement = 0.5f;
 
-    
 
+    [SerializeField] private GameEvent playerMoveEvent;
 
     private Vector3 _inputDirection;
     private Animator _animator;
@@ -96,6 +97,8 @@ public class PlayerController : MonoBehaviour
             Quaternion lookRotation = Quaternion.LookRotation(bestDirection);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
         }
+        
+        playerMoveEvent.Raise();
     }
 
     void OnDrawGizmos()
