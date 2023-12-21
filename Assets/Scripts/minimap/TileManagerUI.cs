@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Interfaces;
+using Scriptable_objects;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,7 +10,7 @@ using UnityEngine.UI;
 
 namespace minimap
 {
-    public class TileManagerUI : MonoBehaviour, IDragHandler, IScrollHandler
+    public class TileManagerUI : MonoBehaviour, IDragHandler, IScrollHandler, IEventListenerInterface
     {
         private float _maxZoom = 5f;
 
@@ -48,11 +50,24 @@ namespace minimap
         private MiniMapPOI _playerPoi;
         public RectTransform canvasRectTransform;
 
+        [SerializeField] private GameEvent onPlayerMove;
+
+        private void OnEnable()
+        {
+            onPlayerMove.RegisterListener(this);
+        }
+
+        private void OnDisable()
+        {
+            onPlayerMove.UnregisterListener(this);
+        }
+
         private float CurrentZoom => _mapRectTransform.localScale.x;
 
 
         private MmPoiHolder _poiHolder;
 
+    
 
         private Vector2 LocalPos
         {
@@ -420,6 +435,26 @@ namespace minimap
             }
 
             UpdateMap();
+        }
+        
+        private void SnapToPlayer()
+        {
+            var playerPoiPos = _playerPoi.rectTransform.localPosition;
+            playerPoiPos.x = -playerPoiPos.x;
+            playerPoiPos.y = -playerPoiPos.y;
+            
+            playerPoiPos.x *= CurrentZoom;
+            playerPoiPos.y *= CurrentZoom;
+            
+            
+            _mapRectTransform.localPosition = new Vector3(playerPoiPos.x, playerPoiPos.y, 0);
+        }
+
+        //Called on player move
+        public void OnEventRaised()
+        {
+            UpdatePlayerPoiPosition();
+            SnapToPlayer();
         }
     }
 }
