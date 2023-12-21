@@ -4450,10 +4450,10 @@ MonoBehaviour:
   tripPlanner:
     bussTravelUI: {fileID: 679950602}
     time: {fileID: 11400000, guid: 3e013dc3110bf9b4ca29f5af6ac7195e, type: 2}
-  mainMapSetting: {fileID: 0}
+  mainMapSetting: {fileID: 11400000, guid: bddbb0a4a8007f542886f5ff5d19ead4, type: 2}
   mainCanvas: {fileID: 1220223451}
   mainParent: {fileID: 765545330}
-  miniMapSettings: {fileID: 0}
+  miniMapSettings: {fileID: 11400000, guid: a8117fb033da0444d9e58c6b34565d06, type: 2}
   miniMapCanvas: {fileID: 1531196616}
   tileManagerUI: {fileID: 1760020117}
 --- !u!21 &1624672643
@@ -4715,9 +4715,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc3b16f6ff02e9341932bc0a20e7901f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxZoom: 5
-  minZoom: 0.35
-  zoomSpeed: 0.5
   tileSize: 256
   maxTiles: 16
   imageTiler:
