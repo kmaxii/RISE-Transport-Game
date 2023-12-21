@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -63,11 +64,21 @@ public class MapInteractor : MonoBehaviour
 
         _interactables.Remove(mapInteractable);
 
-        if (_interactables.Count == 0)
+        UpdateInteractableState();
+    }
+
+    public void UpdateInteractableState()
+    {
+        //Go through the entire list and check if any of the objects have gotten destroyed
+        foreach (var interactable in _interactables.Where(interactable => interactable == null))
         {
-            _canInteract = false;
-            canNoLongerInteract.Invoke();
+            _interactables.Remove(interactable);
         }
+
+
+        if (_interactables.Count != 0) return;
+        _canInteract = false;
+        canNoLongerInteract.Invoke();
     }
     
     

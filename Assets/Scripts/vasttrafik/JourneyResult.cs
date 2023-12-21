@@ -1,8 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace vasttrafik
 {
+    
+    [Serializable]
+    public class JourneyDetails
+    {
+        public List<TripLeg> tripLegs;
+        public List<ConnectionLink> connectionLinks;
+        public ArrivalAccessLink arrivalAccessLink;
+        public List<TariffZone> tariffZones;
+    }
+    
     [Serializable]
     public class JourneyResult
     {
@@ -30,6 +41,27 @@ namespace vasttrafik
         public int estimatedNumberOfSteps;
         public List<LinkCoordinate> linkCoordinates;
         public List<Segment> segments;
+    }
+    
+    [Serializable]
+    public class CallsOnTripLeg
+    {
+        public StopPoint stopPoint ;
+        public DateTime plannedArrivalTime ;
+        public DateTime plannedDepartureTime ;
+        public DateTime estimatedDepartureTime ;
+        public DateTime estimatedOtherwisePlannedArrivalTime ;
+        public DateTime estimatedOtherwisePlannedDepartureTime ;
+        public string plannedPlatform ;
+        public double latitude ;
+        public double longitude ;
+        public string index ;
+        public bool isOnTripLeg ;
+        public bool isTripLegStart ;
+        public List<TariffZone> tariffZones ;
+        public bool isCancelled ;
+        public DateTime? estimatedArrivalTime ;
+        public bool? isTripLegStop ;
     }
 
     [Serializable]
@@ -108,19 +140,7 @@ namespace vasttrafik
         public List<Segment> segments;
     }
 
-    [Serializable]
-    public class Line
-    {
-        public string name;
-        public string backgroundColor;
-        public string foregroundColor;
-        public string borderColor;
-        public string transportMode;
-        public string transportSubMode;
-        public string shortName;
-        public string designation;
-        public bool isWheelchairAccessible;
-    }
+
 
     [Serializable]
     public class LinkCoordinate
@@ -182,6 +202,12 @@ namespace vasttrafik
     [Serializable]
     public class Result
     {
+
+        public async Task<JourneyDetails> GetJourneyDetails()
+        {
+            return await VasttrafikAPI.GetJourneyDetailsJson(detailsReference);
+        }
+        
         public string reconstructionReference;
         public string detailsReference;
         public DepartureAccessLink departureAccessLink;
@@ -233,10 +259,34 @@ namespace vasttrafik
     {
         public string gid;
         public string direction;
-        public string number;
         public Line line;
+        public string number;
+        public List<ServiceJourneyCoordinate> serviceJourneyCoordinates;
+    }
+    
+    [Serializable]
+    public class Line
+    {
+        public string name;
+        public string backgroundColor;
+        public string foregroundColor;
+        public string borderColor;
+        public string transportMode;
+        public string transportSubMode;
+        public string shortName;
+        public string designation;
+        public bool isWheelchairAccessible;
     }
 
+    [Serializable]
+    public class ServiceJourneyCoordinate
+    {
+        public double latitude;
+        public double longitude;
+        public bool isOnTripLeg;
+        public bool isTripLegStart;
+    }
+    
     [Serializable]
     public class StopArea
     {
@@ -244,8 +294,8 @@ namespace vasttrafik
         public string name;
         public int latitude;
         public int longitude;
-        public TariffZone1 tariffZone1;
-        public TariffZone2 tariffZone2;
+        public TariffZone tariffZone1;
+        public TariffZone tariffZone2;
     }
 
     [Serializable]
@@ -254,32 +304,28 @@ namespace vasttrafik
         public string gid;
         public string name;
         public string platform;
-        public int latitude;
-        public int longitude;
+        public double latitude;
+        public double longitude;
         public StopArea stopArea;
     }
 
     [Serializable]
-    public class TariffZone1
+    public class TariffZone
     {
         public string gid;
         public string name;
         public int number;
         public string shortName;
     }
-
-    [Serializable]
-    public class TariffZone2
-    {
-        public string gid;
-        public string name;
-        public int number;
-        public string shortName;
-    }
+    
 
     [Serializable]
     public class TripLeg
     {
+        public List<ServiceJourney> serviceJourneys;
+        public List<CallsOnTripLeg> callsOnTripLeg;
+        public List<TripLegCoordinate> tripLegCoordinates;
+        public List<TariffZone> tariffZones;
         public Origin origin;
         public Destination destination;
         public bool isCancelled;
@@ -300,5 +346,15 @@ namespace vasttrafik
         public string estimatedOtherwisePlannedDepartureTime;
         public Occupancy occupancy;
         public int journeyLegIndex;
+    }
+    
+    [Serializable]
+    public class TripLegCoordinate
+    {
+        public double latitude;
+        public double longitude;
+        public bool isOnTripLeg;
+        public bool isTripLegStart;
+        public bool isTripLegStop;
     }
 }

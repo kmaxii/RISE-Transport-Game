@@ -24,7 +24,7 @@ namespace minimap
 
         public Vector2 Position
         {
-            set => rectTransform.anchoredPosition = value;
+            set => rectTransform.localPosition = value;
         }
         
 

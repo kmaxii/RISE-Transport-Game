@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ab9f98a0db547a9b5195eec10e81e29, type: 3}
+  m_Name: CurrentStats
+  m_EditorClassIdentifier: 
+  timeVariable: {fileID: 11400000, guid: 3e013dc3110bf9b4ca29f5af6ac7195e, type: 2}
+  money: {fileID: 11400000, guid: 5b165bbb0d2f70e4fbab476614247608, type: 2}
+  stress: {fileID: 11400000, guid: ba5458ff20c861840b8c7284beb72d1a, type: 2}
+  comfort: {fileID: 11400000, guid: 2fb69f5de5c7df7499c53ea39e5f23c9, type: 2}

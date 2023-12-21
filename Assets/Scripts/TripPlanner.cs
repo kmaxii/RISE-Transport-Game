@@ -18,7 +18,7 @@ public class TripPlanner
         _lastClicked = null;
     }
     
-    public BussStop InteractingBussStop
+    public Interactable3dPoi InteractingInteractable3dPoi
     {
         set => _interactingBussStop = BussStops.Instance.GetStop(value.GetName());
     }
@@ -54,9 +54,7 @@ public class TripPlanner
             Debug.LogWarning("RESULT FROM VASTTRAFIK IS NULL!");
             return;
         }
-
-        Debug.Log($"Result amount: " + result.results.Count);
-
+        
         bussTravelUI.ShowTravelOption(_interactingBussStop, stopPoint, result.results[0]);
     }
 

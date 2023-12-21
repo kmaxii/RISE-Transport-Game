@@ -1,4 +1,9 @@
-using Editor;
+using System.Collections.Generic;
+using Mapbox.Unity.Map;
+using Mapbox.Utils;
+using MaxisGeneralPurpose.Scriptable_objects;
+using minimap;
+using Scriptable_objects;
 using TMPro;
 using UnityEngine;
 using Utils;
@@ -23,6 +28,15 @@ public class BussTravelUI : MonoBehaviour
 
     private GameObject[] _children;
 
+    [SerializeField] private AbstractMap map;
+    [SerializeField] private TileManagerUI tileManagerUI;
+    [SerializeField] private LineRendererHandler lineRenderer;
+
+    [SerializeField] private IntVariable bussTravelCost;
+    [SerializeField] private IntVariable money;
+
+
+    [SerializeField] private GameEvent cantAffordEvent;
     void Start()
     {
         //Put all of this children into the children array
@@ -35,9 +49,21 @@ public class BussTravelUI : MonoBehaviour
 
     public void AcceptTravel()
     {
-        GameObject.FindWithTag("Player").transform.position = _showingInfoTo.pos3d;
+        if (money.Value - bussTravelCost.Value < 0)
+        {
+            cantAffordEvent.Raise();
+            return;
+        }
+        
+        //The stop is set to be at a higher y so the buss stops are seen well, but we want to ignore that
+        Vector3 pos = _showingInfoTo.pos3d;
+        pos.y = 0;
+        
+        GameObject.FindWithTag("Player").transform.position = pos;
         HideTravelOption();
         timeVariable.Time24H = new Time24H(_showingResult.DestinationTime);
+
+        money.Value -= bussTravelCost.Value;
     }
 
     public void HideTravelOption()
@@ -46,7 +72,7 @@ public class BussTravelUI : MonoBehaviour
     }
 
 
-    public void ShowTravelOption(StopPoint from, StopPoint to, Result result)
+    public async void ShowTravelOption(StopPoint from, StopPoint to, Result result)
     {
         _showingResult = result;
         Debug.Log("Trip leg count: " + result.tripLegs.Count);
@@ -60,6 +86,41 @@ public class BussTravelUI : MonoBehaviour
             .Replace("%BI", "NOT IMPLEMENTED");
         _showingInfoFrom = from;
         _showingInfoTo = to;
+
+
+        lineRenderer.ClearLines();
+        JourneyDetails journeyDetails = await result.GetJourneyDetails();
+        foreach (var tripLeg in journeyDetails.tripLegs)
+        {
+            List<Vector2> onTripCoords = new List<Vector2>();
+
+            if (tripLeg.serviceJourneys.Count > 1)
+            {
+                for (int i = 0; i < 500; i++)
+                {
+                    Debug.LogError("PLEASE REPORT WHAT TRIP YOU DID TO MAXI!");
+                }
+            }
+            
+            foreach (var coord in tripLeg.tripLegCoordinates)
+            {
+                Vector2 pos =
+                    tileManagerUI.ConvertCoordinatesToLocalPosition(
+                        map.GeoToWorldPosition(new Vector2d(coord.latitude, coord.longitude)));
+                onTripCoords.Add(pos);
+
+            }
+
+            var line = tripLeg.serviceJourneys[0].line;
+
+            string transportMode = line.transportMode;
+
+
+            Debug.Log("Drawing");
+     
+            lineRenderer.AddLines(onTripCoords, transportMode);
+       
+        }
     }
 
     private void ShowChildren(bool show)

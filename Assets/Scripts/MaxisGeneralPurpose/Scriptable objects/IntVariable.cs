@@ -19,6 +19,10 @@ namespace MaxisGeneralPurpose.Scriptable_objects
             }
         }
         
-       
+        
+        public override string ToString()
+        {
+            return value.ToString();
+        }
     }
 }

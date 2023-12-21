@@ -1,7 +1,5 @@
-using System;
 using Interfaces;
 using MaxisGeneralPurpose.Event;
-using MaxisGeneralPurpose.Scriptable_objects;
 using TMPro;
 using UnityEngine;
 
@@ -13,6 +11,8 @@ namespace MaxisGeneralPurpose
 
         private TMP_Text _textMesh;
 
+        [SerializeField] private string postFix;
+
 
         private void Awake()
         {
@@ -20,13 +20,13 @@ namespace MaxisGeneralPurpose
             {
                 _textMesh = GetComponent<TMP_Text>();
             }
+
             OnEventRaised();
         }
 
         private void OnEnable()
         {
             value.raiseOnValueChanged.RegisterListener(this);
-
         }
 
         private void OnDisable()
@@ -36,7 +36,7 @@ namespace MaxisGeneralPurpose
 
         public void OnEventRaised()
         {
-            _textMesh.text = value.ToString();
+            _textMesh.text = value + postFix;
         }
     }
 }

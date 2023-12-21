@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using Missions;
+using UnityEditor;
 
 namespace Editor
 {
@@ -10,15 +11,10 @@ namespace Editor
         SerializedProperty color;
         SerializedProperty canBeDoneAtAllLocation;
         SerializedProperty missionLocations;
-        SerializedProperty isFixed;
         SerializedProperty timeItTakes;
-        SerializedProperty isSetTime;
-        SerializedProperty earliestTime;
-        SerializedProperty latestTime;
-        SerializedProperty hasChainedTask;
-        SerializedProperty childMission;
-        SerializedProperty isChainedTask;
-        SerializedProperty parentMission;
+
+
+        
         SerializedProperty moneyReward;
         SerializedProperty stressChange;
         SerializedProperty comfortChange;
@@ -33,15 +29,7 @@ namespace Editor
             color = serializedObject.FindProperty("color");
             canBeDoneAtAllLocation = serializedObject.FindProperty("canBeDoneAtAllLocation");
             missionLocations = serializedObject.FindProperty("missionLocations");
-            isFixed = serializedObject.FindProperty("isFixed");
             timeItTakes = serializedObject.FindProperty("timeItTakes");
-            isSetTime = serializedObject.FindProperty("isSetTime");
-            earliestTime = serializedObject.FindProperty("earliestTime");
-            latestTime = serializedObject.FindProperty("latestTime");
-            hasChainedTask = serializedObject.FindProperty("hasChainedTask");
-            childMission = serializedObject.FindProperty("childMission");
-            isChainedTask = serializedObject.FindProperty("isChainedTask");
-            parentMission = serializedObject.FindProperty("parentMission");
             moneyReward = serializedObject.FindProperty("moneyReward");
             stressChange = serializedObject.FindProperty("stressChange");
             comfortChange = serializedObject.FindProperty("comfortChange");
@@ -67,28 +55,8 @@ namespace Editor
             }
 
             
-            EditorGUILayout.PropertyField(isFixed);
             EditorGUILayout.PropertyField(timeItTakes);
-
-            EditorGUILayout.PropertyField(isSetTime);
-            if (isSetTime.boolValue)
-            {
-                EditorGUILayout.PropertyField(earliestTime);
-                EditorGUILayout.PropertyField(latestTime);
-            }
-
-            EditorGUILayout.PropertyField(hasChainedTask);
-            if (hasChainedTask.boolValue)
-            {
-                EditorGUILayout.PropertyField(childMission);
-            }
-
-            EditorGUILayout.PropertyField(isChainedTask);
-            if (isChainedTask.boolValue)
-            {
-                EditorGUILayout.PropertyField(parentMission);
-            }
-
+            
             EditorGUILayout.PropertyField(moneyReward);
             EditorGUILayout.PropertyField(stressChange);
             EditorGUILayout.PropertyField(comfortChange);

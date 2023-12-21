@@ -1,9 +1,8 @@
 using MaxisGeneralPurpose.Event;
-using Scriptable_objects;
+using MaxisGeneralPurpose.Scriptable_objects;
 using UnityEngine;
-using UnityEngine.Events;
 
-namespace MonoBehaviors
+namespace MaxisGeneralPurpose.MonoBehaviours
 {
     public class GameEventListenerWithData : MonoBehaviour
     {
@@ -12,12 +11,12 @@ namespace MonoBehaviors
 
         private void OnEnable()
         {
-            @event.RegisterListener(this);
+            @event.RegisterListener(OnEventRaised);
         }
 
         private void OnDisable()
         {
-            @event.UnregisterListener(this);
+            @event.UnregisterListener(OnEventRaised);
         }
 
         public void OnEventRaised(DataCarrier data)
