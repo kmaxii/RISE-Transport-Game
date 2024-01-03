@@ -16,7 +16,7 @@
 
 
 		[SerializeField] private Renderer inWorldImage;
-		[SerializeField] private Renderer onTopImage;
+		//[SerializeField] private Renderer onTopImage;
 		private static readonly int MainTex = Shader.PropertyToID("_MainTex");
 
 		public void Set(String text)
@@ -28,7 +28,7 @@
 		public void SetImage(Sprite sprite)
 		{
 			inWorldImage.GetComponent<SpriteRenderer>().sprite = sprite;
-			onTopImage.material.SetTexture(MainTex, sprite.texture);
+			//onTopImage.material.SetTexture(MainTex, sprite.texture);
 		}
 
 		public void SetBackgroundColor(Color color)
