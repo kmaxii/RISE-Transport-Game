@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
     private Animator _animator;
     private static readonly int IsWalking = Animator.StringToHash("IsWalking");
 
+    [SerializeField] private VirtualJoystick virtualJoystick;
+    
     private void Start()
     {
         if (!TryGetComponent(out _animator))
@@ -42,7 +44,9 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        _inputDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        Vector3 inputFromInputManager = new Vector3(virtualJoystick.Horizontal(), 0, virtualJoystick.Vertical());
+        
+        _inputDirection = inputFromInputManager != Vector3.zero ? inputFromInputManager : new Vector3(virtualJoystick.Horizontal(), 0, virtualJoystick.Vertical());
 
         bool isMoving = _inputDirection != Vector3.zero;
 
