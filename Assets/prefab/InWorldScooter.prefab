@@ -71,6 +71,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InWorldScooter
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f5396818774e5914b8fafa01aeb6d2df, type: 3}
+      propertyPath: m_TagString
+      value: MapInteractable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5396818774e5914b8fafa01aeb6d2df, type: 3}
 --- !u!1 &3363376374664523458 stripped
@@ -103,3 +107,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a07dffaa8d04d02b7433325da3e5bf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mountScooterEvent: {fileID: 11400000, guid: c22d8cecb60cc8c4abbc51538f6e4fab, type: 2}
