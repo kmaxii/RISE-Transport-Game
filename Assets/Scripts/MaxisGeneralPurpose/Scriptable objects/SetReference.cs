@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using MaxisGeneralPurpose.Event;
+using MaxisGeneralPurpose.Scriptable_objects;
 using UnityEngine;
 
 namespace Scriptable_objects

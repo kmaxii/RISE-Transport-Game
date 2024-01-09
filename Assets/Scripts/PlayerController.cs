@@ -1,4 +1,5 @@
 using System;
+using MaxisGeneralPurpose.Scriptable_objects;
 using Scriptable_objects;
 using UnityEngine;
 using UnityEngine.Serialization;

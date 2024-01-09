@@ -1,4 +1,5 @@
 using Interfaces;
+using MaxisGeneralPurpose.Scriptable_objects;
 using Scriptable_objects;
 using UnityEngine;
 using UnityEngine.Events;
