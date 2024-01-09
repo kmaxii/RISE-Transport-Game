@@ -1,11 +1,11 @@
-﻿using MaxisGeneralPurpose.Scriptable_objects;
+﻿using Scriptable_objects;
 using UnityEditor;
 using UnityEngine;
 
 namespace MaxisGeneralPurpose.Editor
 {
-    [CustomPropertyDrawer(typeof(IntVariable))]
-    public class IntVariableDrawer : PropertyDrawer
+    [CustomPropertyDrawer(typeof(FloatVariable))]
+    public class FloatVariableDrawer : PropertyDrawer
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
@@ -22,14 +22,14 @@ namespace MaxisGeneralPurpose.Editor
             // Draw the field for the default value, but only if the ScriptableObject is not null
             if (property.objectReferenceValue != null)
             {
-                var intVar = (IntVariable)property.objectReferenceValue;
+                var floatVar = (FloatVariable)property.objectReferenceValue;
                 EditorGUI.BeginChangeCheck();
-                var newValue = EditorGUI.IntField(valueFieldRect, "", intVar.Value);
+                var newValue = EditorGUI.FloatField(valueFieldRect, "", floatVar.value);
                 if (EditorGUI.EndChangeCheck())
                 {
                     // Set the new value if it has changed
-                    intVar.Value = newValue;
-                    EditorUtility.SetDirty(intVar); // Mark the object as dirty to ensure the change is saved
+                    floatVar.value = newValue;
+                    EditorUtility.SetDirty(floatVar); // Mark the object as dirty to ensure the change is saved
                 }
             }
 
