@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -14,6 +15,8 @@ public class MapInteractor : MonoBehaviour
 
     [SerializeField] private UnityEvent canNowInteract;
     [SerializeField] private UnityEvent canNoLongerInteract;
+    
+
 
     private void OnTriggerEnter(Collider other)
     {

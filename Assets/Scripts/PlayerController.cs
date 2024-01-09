@@ -1,10 +1,14 @@
+using System;
 using Scriptable_objects;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
 
     [SerializeField] private float moveSpeed = 5.0f;
+    [SerializeField] private float scooterMoveSpeed = 8.0f;
+    [SerializeField] private bool isRidingScooter;
     [SerializeField] private float rotationSpeed = 10.0f;
 
     
@@ -33,7 +37,21 @@ public class PlayerController : MonoBehaviour
     private static readonly int IsWalking = Animator.StringToHash("IsWalking");
 
     [SerializeField] private VirtualJoystick virtualJoystick;
-    
+
+    [SerializeField] private GameObject scooter;
+    private static readonly int OnScooterAnimID = Animator.StringToHash("IsOnScooter");
+
+    public bool IsRidingScooter
+    {
+        get => isRidingScooter;
+        set
+        {
+            isRidingScooter = value;
+            scooter.SetActive(value);
+            _animator.SetBool(OnScooterAnimID, value);
+        }
+    }
+
     private void Start()
     {
         if (!TryGetComponent(out _animator))
@@ -94,8 +112,10 @@ public class PlayerController : MonoBehaviour
 
         if (bestDirection != Vector3.zero)
         {
+            float currentMoveSpeed = isRidingScooter ? scooterMoveSpeed : moveSpeed;
             // Lerp towards the best direction
-            selfTransform.position = Vector3.Lerp(transform.position, selfTransform.position + bestDirection, moveSpeed * Time.deltaTime);
+            selfTransform.position = Vector3.Lerp(transform.position, selfTransform.position + bestDirection,
+                currentMoveSpeed * Time.deltaTime);
 
             // Rotate the player to face the direction of movement
             Quaternion lookRotation = Quaternion.LookRotation(bestDirection);
