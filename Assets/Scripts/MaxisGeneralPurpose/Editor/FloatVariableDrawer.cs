@@ -24,11 +24,11 @@ namespace MaxisGeneralPurpose.Editor
             {
                 var floatVar = (FloatVariable)property.objectReferenceValue;
                 EditorGUI.BeginChangeCheck();
-                var newValue = EditorGUI.FloatField(valueFieldRect, "", floatVar.value);
+                var newValue = EditorGUI.FloatField(valueFieldRect, "", floatVar.Value);
                 if (EditorGUI.EndChangeCheck())
                 {
                     // Set the new value if it has changed
-                    floatVar.value = newValue;
+                    floatVar.Value = newValue;
                     EditorUtility.SetDirty(floatVar); // Mark the object as dirty to ensure the change is saved
                 }
             }

@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
             _animator.SetBool(OnScooterAnimID, value);
         }
     }
-
+    
     private void Start()
     {
         if (!TryGetComponent(out _animator))

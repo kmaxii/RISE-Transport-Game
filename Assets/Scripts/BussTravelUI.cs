@@ -33,7 +33,7 @@ public class BussTravelUI : MonoBehaviour
     [SerializeField] private LineRendererHandler lineRenderer;
 
     [SerializeField] private IntVariable bussTravelCost;
-    [SerializeField] private IntVariable money;
+    [SerializeField] private FloatVariable money;
 
 
     [SerializeField] private GameEvent cantAffordEvent;

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 96a37097b3f04e64db2a8099a4853ec6, type: 3}
-  m_Name: Money
+  m_Name: EScooterPerMinuteCost
   m_EditorClassIdentifier: 
-  raiseOnValueChanged: {fileID: 11400000, guid: 94a46ebc640f6d74ea1756b039d7d834, type: 2}
-  value: 300
+  raiseOnValueChanged: {fileID: 0}
+  value: 2.5

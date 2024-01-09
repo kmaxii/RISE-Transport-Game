@@ -2687,19 +2687,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f5396818774e5914b8fafa01aeb6d2df, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.13052888
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f5396818774e5914b8fafa01aeb6d2df, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f5396818774e5914b8fafa01aeb6d2df, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.9914446
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f5396818774e5914b8fafa01aeb6d2df, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f5396818774e5914b8fafa01aeb6d2df, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2737,3 +2737,22 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: f5396818774e5914b8fafa01aeb6d2df, type: 3}
   m_PrefabInstance: {fileID: 7414518176325906977}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8027519834754324671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7648450472719159152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e015ce511c3e0b44b4cef3ba4399f51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timePassedEvent: {fileID: 11400000, guid: 5c2d2e6901d2e0241869770c65d4defb, type: 2}
+  currentTime: {fileID: 11400000, guid: 3e013dc3110bf9b4ca29f5af6ac7195e, type: 2}
+  pickUpCost: {fileID: 11400000, guid: ace4284d68dcb4c44ad100ccdd181020, type: 2}
+  costPerMinute: {fileID: 11400000, guid: 2cf55f5bcae083b44aa0b6b96764d20d, type: 2}
+  money: {fileID: 11400000, guid: 9112a4e09811b9744b9f86d82f990ded, type: 2}
+  cantAffordEvent: {fileID: 11400000, guid: 5a59924baf989a344b863ed5c263bd61, type: 2}
+  dismountScooterEvent: {fileID: 11400000, guid: 845bc13bd4c6c3045aa9989f8bd368a4, type: 2}

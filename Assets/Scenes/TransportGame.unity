@@ -1177,7 +1177,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 234181014}
-  m_LocalRotation: {x: 0.25767156, y: 0.000000008312682, z: -0.0000000022167979, w: 0.9662326}
+  m_LocalRotation: {x: 0.25767156, y: -0.000000008312684, z: 0.000000002216798, w: 0.9662326}
   m_LocalPosition: {x: 0, y: 269.69, z: -469.69}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2029,7 +2029,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bf2b29d7039c4040b6c9de70600d188, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: {fileID: 11400000, guid: 5b165bbb0d2f70e4fbab476614247608, type: 2}
+  value: {fileID: 11400000, guid: 9112a4e09811b9744b9f86d82f990ded, type: 2}
   postFix: :-
 --- !u!114 &523080869
 MonoBehaviour:
@@ -2414,7 +2414,7 @@ MonoBehaviour:
   tileManagerUI: {fileID: 1760020117}
   lineRenderer: {fileID: 837042820}
   bussTravelCost: {fileID: 11400000, guid: 786bdff5b79a89645ae44abc4fd8cb17, type: 2}
-  money: {fileID: 11400000, guid: 5b165bbb0d2f70e4fbab476614247608, type: 2}
+  money: {fileID: 11400000, guid: 9112a4e09811b9744b9f86d82f990ded, type: 2}
   cantAffordEvent: {fileID: 11400000, guid: 5a59924baf989a344b863ed5c263bd61, type: 2}
 --- !u!222 &679950603
 CanvasRenderer:
@@ -2567,6 +2567,7 @@ GameObject:
   - component: {fileID: 786917357}
   - component: {fileID: 786917356}
   - component: {fileID: 786917355}
+  - component: {fileID: 786917358}
   m_Layer: 5
   m_Name: DismountButtonChild
   m_TagString: Untagged
@@ -2639,18 +2640,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: 845bc13bd4c6c3045aa9989f8bd368a4, type: 2}
-        m_TargetAssemblyTypeName: Scriptable_objects.GameEvent, Assembly-CSharp
-        m_MethodName: Raise
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 786917353}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -2701,6 +2690,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 786917353}
   m_CullTransparentMesh: 1
+--- !u!114 &786917358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 786917353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a44f222db338b5e42a3f141be68fc611, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  event: {fileID: 11400000, guid: 845bc13bd4c6c3045aa9989f8bd368a4, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 786917353}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &794610511
 GameObject:
   m_ObjectHideFlags: 0
@@ -5330,9 +5347,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18ba697cc24f8bf48b9e118fe160ca6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toSetArray:
+  toSetIntVariable: []
+  toSetFloats:
   - value: 300
-    intVariable: {fileID: 11400000, guid: 5b165bbb0d2f70e4fbab476614247608, type: 2}
+    floatVariable: {fileID: 11400000, guid: 9112a4e09811b9744b9f86d82f990ded, type: 2}
   time: {fileID: 11400000, guid: 3e013dc3110bf9b4ca29f5af6ac7195e, type: 2}
   startTime:
     hour: 8
@@ -5622,7 +5640,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1951402532}
-  m_LocalRotation: {x: 0.25767156, y: 0.000000008312682, z: -0.0000000022167979, w: 0.9662326}
+  m_LocalRotation: {x: 0.25767156, y: -0.000000008312684, z: 0.000000002216798, w: 0.9662326}
   m_LocalPosition: {x: 0, y: 269.69, z: -469.69}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6427,22 +6445,6 @@ PrefabInstance:
     - target: {fileID: 5077646315777030608, guid: 1ebe1d6687e77b04bb160edcb42382c8, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 7020849594643273162, guid: 1ebe1d6687e77b04bb160edcb42382c8, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7020849594643273162, guid: 1ebe1d6687e77b04bb160edcb42382c8, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7020849594643273162, guid: 1ebe1d6687e77b04bb160edcb42382c8, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7020849594643273162, guid: 1ebe1d6687e77b04bb160edcb42382c8, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7020849594643273162, guid: 1ebe1d6687e77b04bb160edcb42382c8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
