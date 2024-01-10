@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using Interfaces;
-using MonoBehaviors;
 using UnityEngine;
 
-namespace Scriptable_objects
+namespace MaxisGeneralPurpose.Scriptable_objects
 {
     [CreateAssetMenu(menuName = "Custom/Event/GameEvent")]
     public class GameEvent : ScriptableObject

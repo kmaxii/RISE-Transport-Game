@@ -1,5 +1,6 @@
 using System;
 using ScriptableObjects;
+using ScriptableObjects.Map;
 using UnityEngine;
 
 namespace minimap
@@ -17,12 +18,12 @@ namespace minimap
         [SerializeField] private TripPlanner tripPlanner;
         
         
-        [SerializeField] private MapSettingsSO mainMapSetting;
+        [SerializeField] private MapSettingsSo mainMapSetting;
         [SerializeField] private RectTransform mainCanvas;
         [SerializeField] private RectTransform mainParent;
 
 
-        [SerializeField] private MapSettingsSO miniMapSettings;
+        [SerializeField] private MapSettingsSo miniMapSettings;
         [SerializeField] private RectTransform miniMapCanvas;
 
         [SerializeField] private TileManagerUI tileManagerUI;
@@ -56,8 +57,10 @@ namespace minimap
             closeButton.SetActive(true);
             MoveToMainMap();
             tileManagerUI.UpdateMap();
-
+            UpdateSettings(mainMapSetting);
         }
+        
+    
 
         /**
          * Hide the full screen map and the close button
@@ -69,6 +72,14 @@ namespace minimap
             tripPlanner.ClearCurrentData();
             MoveToMinimap();
             tileManagerUI.UpdateMap();
+            UpdateSettings(miniMapSettings);
+        }
+        
+        private void UpdateSettings(MapSettingsSo settings)
+        {
+            tileManagerUI.MaxZoom = settings.MapZoomMax;
+            tileManagerUI.MinZoom = settings.MapZoomMin;
+            tileManagerUI.ZoomSpeed = settings.MapZoomSpeed;
         }
         
         private void MoveToMinimap()

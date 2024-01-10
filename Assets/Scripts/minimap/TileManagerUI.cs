@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Interfaces;
+using MaxisGeneralPurpose.Scriptable_objects;
+using Scriptable_objects;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -8,11 +11,29 @@ using UnityEngine.UI;
 
 namespace minimap
 {
-    public class TileManagerUI : MonoBehaviour, IDragHandler, IScrollHandler
+    public class TileManagerUI : MonoBehaviour, IDragHandler, IScrollHandler, IEventListenerInterface
     {
-        [SerializeField] private float maxZoom = 5f;
-        [SerializeField] private float minZoom = 0.35f;
-        [SerializeField] private float zoomSpeed = 0.5f;
+        private float _maxZoom = 5f;
+
+        public float MaxZoom
+        {
+            set => _maxZoom = value;
+        }
+
+        private float _minZoom = 0.35f;
+
+        public float MinZoom
+        {
+            set => _minZoom = value;
+        }
+
+        private float _zoomSpeed = 0.5f;
+
+        public float ZoomSpeed
+        {
+            set => _zoomSpeed = value;
+        }
+
         [SerializeField] private int tileSize = 256;
         private int _currentTileSize = 256;
         [SerializeField] private int maxTiles = 16;
@@ -30,11 +51,24 @@ namespace minimap
         private MiniMapPOI _playerPoi;
         public RectTransform canvasRectTransform;
 
+        [SerializeField] private GameEvent onPlayerMove;
+
+        private void OnEnable()
+        {
+            onPlayerMove.RegisterListener(this);
+        }
+
+        private void OnDisable()
+        {
+            onPlayerMove.UnregisterListener(this);
+        }
+
         private float CurrentZoom => _mapRectTransform.localScale.x;
 
 
         private MmPoiHolder _poiHolder;
 
+    
 
         private Vector2 LocalPos
         {
@@ -124,7 +158,7 @@ namespace minimap
             //Why? I don't know! Please help!
             topRightTile16.x++;
             bottomLeftTile16.y++;
-            
+
             for (int x = bottomLeftTile16.x; x < topRightTile16.x; x++)
             {
                 for (int y = topRightTile16.y; y < bottomLeftTile16.y; y++)
@@ -141,7 +175,7 @@ namespace minimap
 
             foreach (var poi in toDespawn)
             {
-                DespawnPoi(poi); 
+                DespawnPoi(poi);
                 _spawnedPois.Remove(poi);
             }
 
@@ -376,10 +410,10 @@ namespace minimap
 
             float scroll = eventData.scrollDelta.y;
             Vector3 oldScale = _mapRectTransform.localScale;
-            Vector3 newScale = oldScale + Vector3.one * scroll * zoomSpeed;
+            Vector3 newScale = oldScale + Vector3.one * scroll * _zoomSpeed;
             newScale = new Vector3(
-                Mathf.Clamp(newScale.x, _originalScale.x * minZoom, _originalScale.x * maxZoom),
-                Mathf.Clamp(newScale.y, _originalScale.y * minZoom, _originalScale.y * maxZoom), 1
+                Mathf.Clamp(newScale.x, _originalScale.x * _minZoom, _originalScale.x * _maxZoom),
+                Mathf.Clamp(newScale.y, _originalScale.y * _minZoom, _originalScale.y * _maxZoom), 1
             );
 
             // Calculate the ratio of change in scale
@@ -402,6 +436,26 @@ namespace minimap
             }
 
             UpdateMap();
+        }
+        
+        private void SnapToPlayer()
+        {
+            var playerPoiPos = _playerPoi.rectTransform.localPosition;
+            playerPoiPos.x = -playerPoiPos.x;
+            playerPoiPos.y = -playerPoiPos.y;
+            
+            playerPoiPos.x *= CurrentZoom;
+            playerPoiPos.y *= CurrentZoom;
+            
+            
+            _mapRectTransform.localPosition = new Vector3(playerPoiPos.x, playerPoiPos.y, 0);
+        }
+
+        //Called on player move
+        public void OnEventRaised()
+        {
+            UpdatePlayerPoiPosition();
+            SnapToPlayer();
         }
     }
 }

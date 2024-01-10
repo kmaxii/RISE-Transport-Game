@@ -13,8 +13,8 @@ namespace MaxisGeneralPurpose.Editor
             EditorGUI.BeginProperty(position, label, property);
 
             // Split the position Rect into two parts
-            Rect objectFieldRect = new Rect(position.x, position.y, position.width * 0.5f, position.height);
-            Rect valueFieldRect = new Rect(position.x + position.width * 0.5f, position.y, position.width * 0.5f, position.height);
+            Rect objectFieldRect = new Rect(position.x, position.y, position.width * 0.8f, position.height);
+            Rect valueFieldRect = new Rect(position.x + position.width * 0.8f, position.y, position.width * 0.2f, position.height);
 
             // Draw the field to assign the ScriptableObject instance
             EditorGUI.PropertyField(objectFieldRect, property, label, true);
@@ -24,7 +24,7 @@ namespace MaxisGeneralPurpose.Editor
             {
                 var intVar = (IntVariable)property.objectReferenceValue;
                 EditorGUI.BeginChangeCheck();
-                var newValue = EditorGUI.IntField(valueFieldRect, "Value: ", intVar.Value);
+                var newValue = EditorGUI.IntField(valueFieldRect, "", intVar.Value);
                 if (EditorGUI.EndChangeCheck())
                 {
                     // Set the new value if it has changed
