@@ -12,22 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0c7e2810d564534aa1c6e1a2aeb79aa, type: 3}
   m_Name: GoToGym
   m_EditorClassIdentifier: 
+  raiseOnValueChanged: {fileID: 0}
   missionName: "Tr\xE4na p\xE5 gym"
-  isFixed: 1
+  sprite: {fileID: 0}
+  color: {r: 0, g: 0, b: 0, a: 0}
+  missionLocations:
+  - {fileID: 0}
+  canBeDoneAtAllLocation: 0
   timeItTakes:
     hour: 1
     minute: 0
-  isSetTime: 0
-  earliestTime:
-    hour: 7
-    minute: 30
-  latestTime:
-    hour: 8
-    minute: 1
-  hasChainedTask: 0
-  childMission: {fileID: 0}
-  isChainedTask: 0
-  parentMission: {fileID: 11400000, guid: aa9cbe89fd6ab67448f0c1600f98a108, type: 2}
   moneyReward: 0
   stressChange: -10
   comfortChange: 5

@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62eec35392d9363478d7ad4bf7fad843, type: 3}
   m_Name: New-Persona
   m_EditorClassIdentifier: 
-  raiseOnValueChanged: {fileID: 0}
   sweatThreshold: 50
   wetnessThreshold: 50
   tirednessThreshold: 50
