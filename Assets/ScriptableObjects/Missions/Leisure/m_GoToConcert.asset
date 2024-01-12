@@ -10,28 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c0c7e2810d564534aa1c6e1a2aeb79aa, type: 3}
-  m_Name: GoToConcert
+  m_Name: m_GoToConcert
   m_EditorClassIdentifier: 
+  raiseOnValueChanged: {fileID: 0}
   missionName: "G\xE5 p\xE5 konsert"
-  isFixed: 0
+  sprite: {fileID: 21300000, guid: 88cacb42af7fe47338fa175ad6114e09, type: 3}
+  color: {r: 0, g: 0, b: 0, a: 0}
+  missionLocations: []
+  canBeDoneAtAllLocation: 0
   timeItTakes:
     hour: 2
     minute: 0
-  isSetTime: 1
-  earliestTime:
-    hour: 19
-    minute: 0
-  latestTime:
-    hour: 19
-    minute: 59
-  hasChainedTask: 0
-  childMission: {fileID: 0}
-  isChainedTask: 0
-  parentMission: {fileID: 11400000, guid: aa9cbe89fd6ab67448f0c1600f98a108, type: 2}
   moneyReward: 0
   stressChange: -10
   comfortChange: 10
-  energyChange: 0
   moneyPunishment: 0
-  stressPunishment: -5
+  stressPunishment: 5
   comfortPunishment: -10

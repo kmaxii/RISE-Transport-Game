@@ -9,28 +9,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0c7e2810d564534aa1c6e1a2aeb79aa, type: 3}
-  m_Name: PickUpKidsSchool 1
+  m_Script: {fileID: 11500000, guid: 629601f5728d4b40887247c1cd4f27f8, type: 3}
+  m_Name: dm_PickUpKids
   m_EditorClassIdentifier: 
-  missionName: "H\xE4mta barnen i skolan"
-  isFixed: 1
-  timeItTakes:
+  raiseOnValueChanged: {fileID: 0}
+  mission: {fileID: 11400000, guid: 18ed29a22f6af6e4c8315eba02fd04de, type: 2}
+  hasShowUpTime: 0
+  showUpTime:
     hour: 0
-    minute: 3
+    minute: 0
   isSetTime: 1
   earliestTime:
-    hour: 15
+    hour: 14
     minute: 0
   latestTime:
     hour: 15
-    minute: 30
+    minute: 0
   hasChainedTask: 0
+  triggerChainedOnFail: 0
   childMission: {fileID: 0}
   isChainedTask: 1
-  parentMission: {fileID: 11400000, guid: aa9cbe89fd6ab67448f0c1600f98a108, type: 2}
-  moneyReward: 0
-  stressChange: 3
-  comfortChange: 0
-  moneyPunishment: 0
-  stressPunishment: 10
-  comfortPunishment: 0
+  parentMission: {fileID: 11400000, guid: dfa1479cee617964589b9d983de1751b, type: 2}

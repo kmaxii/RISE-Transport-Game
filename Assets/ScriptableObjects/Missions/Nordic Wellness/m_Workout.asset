@@ -10,15 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c0c7e2810d564534aa1c6e1a2aeb79aa, type: 3}
-  m_Name: GoToGym
+  m_Name: m_Workout
   m_EditorClassIdentifier: 
   raiseOnValueChanged: {fileID: 0}
-  missionName: "Tr\xE4na p\xE5 gym"
-  sprite: {fileID: 0}
-  color: {r: 0, g: 0, b: 0, a: 0}
+  missionName: Workout
+  sprite: {fileID: 21300000, guid: 240e67c92465d4af09e98ac0ff6cb4e5, type: 3}
+  color: {r: 0.3490566, g: 0.3490566, b: 0.3490566, a: 1}
   missionLocations:
-  - {fileID: 0}
-  canBeDoneAtAllLocation: 0
+  - {fileID: 11400000, guid: 2c524100467a7f2468650c2cf1efb109, type: 2}
+  - {fileID: 11400000, guid: af6fc45ba84b93b4890d5d330ce6667f, type: 2}
+  - {fileID: 11400000, guid: 7e38749a821a3ff4b80fcdcb58938bad, type: 2}
+  - {fileID: 11400000, guid: 1510923bc55b30f4ca64bb27419d91ab, type: 2}
+  canBeDoneAtAllLocation: 1
   timeItTakes:
     hour: 1
     minute: 0
