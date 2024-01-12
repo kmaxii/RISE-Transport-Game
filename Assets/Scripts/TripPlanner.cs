@@ -47,17 +47,10 @@ public class TripPlanner
 
         Debug.Log("Clicked on " + stopPoint.name);
 
-        JourneyResult result = await VasttrafikAPI.GetJourneyJson(_interactingBussStop.gid, stopPoint.gid, 1, time.Time24H.Rfc3339);
+       
+        bussTravelUI.HandleGoing(_interactingBussStop, stopPoint);
 
-        if (result == null)
-        {
-            Debug.LogWarning("RESULT FROM VASTTRAFIK IS NULL!");
-            return;
-        }
-
-        int resultNum = result.results[0].SwitchesAmount == -1 && result.results.Count > 1 ? 1 : 0;
         
-        bussTravelUI.ShowTravelOption(_interactingBussStop, stopPoint, result.results[resultNum]);
     }
 
 
