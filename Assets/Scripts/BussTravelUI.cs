@@ -75,7 +75,6 @@ public class BussTravelUI : MonoBehaviour
     public async void ShowTravelOption(StopPoint from, StopPoint to, Result result)
     {
         _showingResult = result;
-        Debug.Log("Trip leg count: " + result.tripLegs.Count);
         ShowChildren(true);
         travelInfoText.text = travelInfoTemplate
             .Replace("%FN", from.name)
@@ -90,10 +89,22 @@ public class BussTravelUI : MonoBehaviour
 
         lineRenderer.ClearLines();
         JourneyDetails journeyDetails = await result.GetJourneyDetails();
+
+        
+        List<Vector2> onTripCoords = new List<Vector2>();
+        
+        onTripCoords.Add(tileManagerUI.ConvertCoordinatesToLocalPosition(from.pos3d));
+        var firstCoord = journeyDetails.tripLegs[0].tripLegCoordinates[0];
+        onTripCoords.Add(tileManagerUI.ConvertCoordinatesToLocalPosition(
+            map.GeoToWorldPosition(new Vector2d(firstCoord.latitude, firstCoord.longitude))));
+        lineRenderer.AddLines(onTripCoords, "walk");
+
+        Vector2 lastPos = Vector2.zero;
+        
         foreach (var tripLeg in journeyDetails.tripLegs)
         {
-            List<Vector2> onTripCoords = new List<Vector2>();
 
+            onTripCoords.Clear();
             if (tripLeg.serviceJourneys.Count > 1)
             {
                 for (int i = 0; i < 500; i++)
@@ -104,23 +115,26 @@ public class BussTravelUI : MonoBehaviour
             
             foreach (var coord in tripLeg.tripLegCoordinates)
             {
-                Vector2 pos =
+                lastPos =
                     tileManagerUI.ConvertCoordinatesToLocalPosition(
                         map.GeoToWorldPosition(new Vector2d(coord.latitude, coord.longitude)));
-                onTripCoords.Add(pos);
+                onTripCoords.Add(lastPos);
 
             }
 
-            var line = tripLeg.serviceJourneys[0].line;
+            var bussLine = tripLeg.serviceJourneys[0].line;
 
-            string transportMode = line.transportMode;
+            string transportMode = bussLine.transportMode;
 
-
-            Debug.Log("Drawing");
-     
+            
             lineRenderer.AddLines(onTripCoords, transportMode);
-       
         }
+        
+        onTripCoords.Clear();
+        onTripCoords.Add(lastPos);
+        onTripCoords.Add(tileManagerUI.ConvertCoordinatesToLocalPosition(to.pos3d));
+        lineRenderer.AddLines(onTripCoords, "walk");
+
     }
 
     private void ShowChildren(bool show)
