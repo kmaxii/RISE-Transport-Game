@@ -54,8 +54,10 @@ public class TripPlanner
             Debug.LogWarning("RESULT FROM VASTTRAFIK IS NULL!");
             return;
         }
+
+        int resultNum = result.results[0].SwitchesAmount == -1 && result.results.Count > 1 ? 1 : 0;
         
-        bussTravelUI.ShowTravelOption(_interactingBussStop, stopPoint, result.results[0]);
+        bussTravelUI.ShowTravelOption(_interactingBussStop, stopPoint, result.results[resultNum]);
     }
 
 
