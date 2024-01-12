@@ -70,6 +70,8 @@ namespace vasttrafik
                     $"{BaseUrl}?originGid={originGid}" +
                     $"&destinationGid={destinationGid}" +
                     $"&limit={resultLimit}" +
+                    $"&originWalk=1,0,500" +
+                    $"&destWalk=1,0,500" +
                     $"&onlyDirectConnections=false" +
                     $"&includeNearbyStopAreas=true";
 
