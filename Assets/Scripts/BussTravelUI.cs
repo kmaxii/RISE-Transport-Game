@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Interfaces;
 using Mapbox.Unity.Map;
 using Mapbox.Utils;
 using MaxisGeneralPurpose.Scriptable_objects;
@@ -9,7 +10,7 @@ using UnityEngine;
 using Utils;
 using vasttrafik;
 
-public class BussTravelUI : MonoBehaviour
+public class BussTravelUI : MonoBehaviour, IEventListenerInterface
 {
     /*[TextArea] [ReadOnly] private string textReplacements = "%FN: From Name " +
                                                                              "\n%FT: From Time" +
@@ -25,6 +26,7 @@ public class BussTravelUI : MonoBehaviour
     private StopPoint _showingInfoFrom;
     private StopPoint _showingInfoTo;
     private Result _showingResult;
+    private Time24H _leaveTime;
 
     private GameObject[] _children;
 
@@ -34,9 +36,13 @@ public class BussTravelUI : MonoBehaviour
 
     [SerializeField] private IntVariable bussTravelCost;
     [SerializeField] private FloatVariable money;
-
-
+    
     [SerializeField] private GameEvent cantAffordEvent;
+    
+    [SerializeField] private GameEvent timePassedEvent;
+    private bool _isEventSubscriber;
+    [SerializeField] private TimeVariable currentTime;
+    
     void Start()
     {
         //Put all of this children into the children array
@@ -47,6 +53,27 @@ public class BussTravelUI : MonoBehaviour
         }
     }
 
+    private void SubscribeToTimePassed()
+    {
+        if (_isEventSubscriber)
+        {
+            return;
+        }
+        timePassedEvent.RegisterListener(this);
+        _isEventSubscriber = true;
+    }
+    
+    private void UnsubscribeToTimePassed()
+    {
+        if (!_isEventSubscriber)
+        {
+            return;
+        }
+        timePassedEvent.UnregisterListener(this);
+        _isEventSubscriber = false;
+    }
+    
+    
     public void AcceptTravel()
     {
         if (money.Value - bussTravelCost.Value < 0)
@@ -68,17 +95,39 @@ public class BussTravelUI : MonoBehaviour
 
     public void HideTravelOption()
     {
+        UnsubscribeToTimePassed();
         ShowChildren(false);
     }
 
 
-    public async void ShowTravelOption(StopPoint from, StopPoint to, Result result)
+    public async void HandleGoing(StopPoint from, StopPoint to)
     {
+        JourneyResult result = await VasttrafikAPI.GetJourneyJson(from.gid, to.gid, 1, currentTime.Time24H.Rfc3339);
+
+        if (result == null)
+        {
+            Debug.LogWarning("RESULT FROM VASTTRAFIK IS NULL!");
+            return;
+        }
+
+        int resultNum = result.results[0].SwitchesAmount == -1 && result.results.Count > 1 ? 1 : 0;
+        
+        SubscribeToTimePassed();
+        
+        ShowTravelOption(from, to, result.results[resultNum]);
+    }
+
+    private async void ShowTravelOption(StopPoint from, StopPoint to, Result result)
+    {
+        
+        var leaveTimeTimeFormatter = new DateTimeFormatter(result.LeaveTime);
+        _leaveTime = new Time24H(leaveTimeTimeFormatter.Hour, leaveTimeTimeFormatter.Minute);
+
         _showingResult = result;
         ShowChildren(true);
         travelInfoText.text = travelInfoTemplate
             .Replace("%FN", from.name)
-            .Replace("%FT", new DateTimeFormatter(result.LeaveTime).HourMinute)
+            .Replace("%FT", leaveTimeTimeFormatter.HourMinute)
             .Replace("%TN", to.name)
             .Replace("%TT", new DateTimeFormatter(result.DestinationTime).HourMinute)
             .Replace("%BA", result.SwitchesAmount + "")
@@ -91,9 +140,8 @@ public class BussTravelUI : MonoBehaviour
         JourneyDetails journeyDetails = await result.GetJourneyDetails();
 
         
-        List<Vector2> onTripCoords = new List<Vector2>();
-        
-        onTripCoords.Add(tileManagerUI.ConvertCoordinatesToLocalPosition(from.pos3d));
+        List<Vector2> onTripCoords = new List<Vector2> {tileManagerUI.ConvertCoordinatesToLocalPosition(from.pos3d)};
+
         var firstCoord = journeyDetails.tripLegs[0].tripLegCoordinates[0];
         onTripCoords.Add(tileManagerUI.ConvertCoordinatesToLocalPosition(
             map.GeoToWorldPosition(new Vector2d(firstCoord.latitude, firstCoord.longitude))));
@@ -143,5 +191,16 @@ public class BussTravelUI : MonoBehaviour
         {
             child.SetActive(show);
         }
+    }
+
+    //On Time Passed
+    public void OnEventRaised()
+    {
+        if (currentTime.Time24H < _leaveTime)
+        {
+            return;
+        }
+        
+        HandleGoing(_showingInfoFrom, _showingInfoTo);
     }
 }
