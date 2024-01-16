@@ -29,4 +29,4 @@ MonoBehaviour:
   triggerChainedOnFail: 0
   childMission: {fileID: 11400000, guid: 28db3d6a2d665744781cd0d74473b27d, type: 2}
   isChainedTask: 0
-  parentMission: {fileID: 0}
+  parentMission: {fileID: 11400000, guid: 28db3d6a2d665744781cd0d74473b27d, type: 2}

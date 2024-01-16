@@ -20,8 +20,8 @@ MonoBehaviour:
   canBeDoneAtAllLocation: 0
   timeItTakes:
     hour: 0
-    minute: 6
-  moneyReward: -20
+    minute: 10
+  moneyReward: 0
   stressChange: 0
   comfortChange: 0
   moneyPunishment: 0

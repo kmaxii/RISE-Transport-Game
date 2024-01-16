@@ -12,10 +12,11 @@ namespace Mapbox.Unity.Utilities
 	using UnityEngine;
 	using System.Globalization;
 	using Mapbox.Unity.MeshGeneration.Data;
+    using System.Text.RegularExpressions;
 
-	/// <summary>
-	/// A set of Geo and Terrain Conversion utils.
-	/// </summary>
+    /// <summary>
+    /// A set of Geo and Terrain Conversion utils.
+    /// </summary>
 	public static class Conversions
 	{
 		private const int TileSize = 256;
@@ -34,16 +35,19 @@ namespace Mapbox.Unity.Utilities
 		{
 			return LatLonToMeters(v.x, v.y);
 		}
+        
+        /// <summary>
+        /// Convert a simple string to a latitude longitude.
+        /// Expects format: latitude, longitude
+        /// </summary>
+        /// <returns>The lat/lon as Vector2d.</returns>
+        /// <param name="s">string.</param>
 
-		/// <summary>
-		/// Convert a simple string to a latitude longitude.
-		/// Expects format: latitude, longitude
-		/// </summary>
-		/// <returns>The lat/lon as Vector2d.</returns>
-		/// <param name="s">string.</param>
-		public static Vector2d StringToLatLon(string s)
+        public static Vector2d StringToLatLon(string s)
 		{
-			var latLonSplit = s.Split(',');
+            s = Regex.Replace(s, ",(?=\\d)", ".");
+            Debug.Log("String is" + s);
+            var latLonSplit = s.Split(',');
 			if (latLonSplit.Length != 2)
 			{
 				throw new ArgumentException("Wrong number of arguments");

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Comfort
   m_EditorClassIdentifier: 
   raiseOnValueChanged: {fileID: 0}
-  value: 0
+  value: 100

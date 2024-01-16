@@ -16,8 +16,15 @@ MonoBehaviour:
   missionName: Handla
   sprite: {fileID: 21300000, guid: e6aebe3a73e184e0d8196a1362a5c72e, type: 3}
   color: {r: 0, g: 0, b: 0, a: 0}
-  missionLocations: []
-  canBeDoneAtAllLocation: 0
+  missionLocations:
+  - {fileID: 11400000, guid: ef4b39393aa6df34a85b7517e953728a, type: 2}
+  - {fileID: 11400000, guid: 203b60611a2c8ec4584bc7fad562cf28, type: 2}
+  - {fileID: 11400000, guid: dc2f65b8d3a50874ca23881ddd8d7c96, type: 2}
+  - {fileID: 11400000, guid: 69d60fa88fea80e47b9accc4c6d47f42, type: 2}
+  - {fileID: 11400000, guid: 615484212ef0b504689cfa991b0d21f0, type: 2}
+  - {fileID: 11400000, guid: 61c8c5f3cbcb31d41a43ab6023b70672, type: 2}
+  - {fileID: 11400000, guid: 46fac8b38c7fa194e926285f6b128384, type: 2}
+  canBeDoneAtAllLocation: 1
   timeItTakes:
     hour: 0
     minute: 35
