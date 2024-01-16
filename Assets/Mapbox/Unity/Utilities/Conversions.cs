@@ -45,7 +45,8 @@ namespace Mapbox.Unity.Utilities
 
         public static Vector2d StringToLatLon(string s)
 		{
-            s = Regex.Replace(s, ",(?=\\d)", ".");
+            s = ReplaceFirstAndLastComma(s);
+
             Debug.Log("String is" + s);
             var latLonSplit = s.Split(',');
 			if (latLonSplit.Length != 2)
@@ -67,6 +68,23 @@ namespace Mapbox.Unity.Utilities
 			}
 
 			return new Vector2d(latitude, longitude);
+		}
+        
+		static string ReplaceFirstAndLastComma(string input)
+		{
+			if (input.Split(',').Length - 1 == 3)
+			{
+				int firstCommaIndex = input.IndexOf(',');
+				int lastCommaIndex = input.LastIndexOf(',');
+
+				if (firstCommaIndex >= 0 && lastCommaIndex >= 0 && firstCommaIndex != lastCommaIndex)
+				{
+					input = input.Remove(lastCommaIndex, 1).Insert(lastCommaIndex, ".");
+					input = input.Remove(firstCommaIndex, 1).Insert(firstCommaIndex, ".");
+				}
+			}
+
+			return input;
 		}
 
 		/// <summary>
