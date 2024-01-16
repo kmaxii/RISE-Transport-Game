@@ -47,7 +47,6 @@ namespace Mapbox.Unity.Utilities
 		{
             s = ReplaceFirstAndLastComma(s);
 
-            Debug.Log("String is" + s);
             var latLonSplit = s.Split(',');
 			if (latLonSplit.Length != 2)
 			{
