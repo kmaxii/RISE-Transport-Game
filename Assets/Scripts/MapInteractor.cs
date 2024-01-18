@@ -72,10 +72,13 @@ public class MapInteractor : MonoBehaviour
 
     public void UpdateInteractableState()
     {
-        //Go through the entire list and check if any of the objects have gotten destroyed
-        foreach (var interactable in _interactables.Where(interactable => interactable == null))
+        //Go through the entire list reverse and check if any of the objects have gotten destroyed, if they have remove them.
+        for (int i = _interactables.Count - 1; i >= 0; i--)
         {
-            _interactables.Remove(interactable);
+            if (_interactables.ElementAt(i) == null)
+            {
+                _interactables.Remove(_interactables.ElementAt(i));
+            }
         }
 
 
