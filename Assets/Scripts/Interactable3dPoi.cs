@@ -24,7 +24,7 @@ public class Interactable3dPoi : MapInteractable
 
     public override void Interact()
     {
-        Debug.Log("The type is: " + poiLabel.poiType);
+        Debug.Log("The type is: " + poiLabel.poiType + " and the name is: " + stationName.text);
         switch (poiLabel.poiType)
         {
             case PoiType.BussStation:

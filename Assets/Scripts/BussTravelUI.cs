@@ -40,6 +40,7 @@ public class BussTravelUI : MonoBehaviour, IEventListenerInterface
     [SerializeField] private GameEvent cantAffordEvent;
     
     [SerializeField] private GameEvent timePassedEvent;
+    [SerializeField] private GameEvent traveledByBussEvent;
     private bool _isEventSubscriber;
     [SerializeField] private TimeVariable currentTime;
     
@@ -91,6 +92,9 @@ public class BussTravelUI : MonoBehaviour, IEventListenerInterface
         timeVariable.Time24H = new Time24H(_showingResult.DestinationTime);
 
         money.Value -= bussTravelCost.Value;
+        
+        traveledByBussEvent.Raise();
+        
     }
 
     public void HideTravelOption()

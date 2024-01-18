@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Interfaces;
+using MaxisGeneralPurpose.Scriptable_objects;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class MapInteractor : MonoBehaviour
+public class MapInteractor : MonoBehaviour, IEventListenerInterface
 {
 
     private readonly HashSet<MapInteractable> _interactables = new HashSet<MapInteractable>();
@@ -15,7 +17,10 @@ public class MapInteractor : MonoBehaviour
 
     [SerializeField] private UnityEvent canNowInteract;
     [SerializeField] private UnityEvent canNoLongerInteract;
-    
+
+    [SerializeField] private GameEvent bussTaken;
+
+
 
 
     private void OnTriggerEnter(Collider other)
@@ -37,6 +42,9 @@ public class MapInteractor : MonoBehaviour
 
     public void InteractWithClosest()
     {
+        
+        UpdateInteractableState();
+        
         if (!_canInteract)
             return;
         
@@ -56,12 +64,17 @@ public class MapInteractor : MonoBehaviour
 
         if (closest != null)
             closest.Interact();
+        
+        
+        
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (!other.CompareTag("MapInteractable"))
             return;
+        
+        Debug.Log($"{other.name} has left the collider");
         
         MapInteractable mapInteractable = other.GetComponent<MapInteractable>();
 
@@ -75,17 +88,34 @@ public class MapInteractor : MonoBehaviour
         //Go through the entire list reverse and check if any of the objects have gotten destroyed, if they have remove them.
         for (int i = _interactables.Count - 1; i >= 0; i--)
         {
-            if (_interactables.ElementAt(i) == null)
+            var interactable = _interactables.ElementAt(i);
+            if (interactable == null)
             {
-                _interactables.Remove(_interactables.ElementAt(i));
+                _interactables.Remove(interactable);
             }
         }
-
 
         if (_interactables.Count != 0) return;
         _canInteract = false;
         canNoLongerInteract.Invoke();
     }
+
+    private void OnEnable()
+    {
+        bussTaken.RegisterListener(this);
+    }
     
+    private void OnDisable()
+    {
+        bussTaken.UnregisterListener(this);
+    }
     
+    //On buss taken
+    public void OnEventRaised()
+    {
+        _interactables.Clear();
+        _canInteract = false;
+        canNoLongerInteract.Invoke();
+        Debug.Log("cleared");
+    }
 }
