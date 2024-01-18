@@ -140,7 +140,7 @@ namespace minimap
         private float _minimumMoved = 5;
         public void UpdateIfMovedEnough()
         {
-            //Check if the quared distance of player.transform.position and _playerLastPos is bigger then _minimumMoved squared
+            //Check if the squared distance of player.transform.position and _playerLastPos is bigger then _minimumMoved squared
             if (Vector3.SqrMagnitude(player.transform.position - _playerLastPos) > _minimumMoved * _minimumMoved)
             {
                 _playerLastPos = player.transform.position;
