@@ -67,9 +67,6 @@ namespace minimap
 
 
         private MmPoiHolder _poiHolder;
-
-    
-
         private Vector2 LocalPos
         {
             get
@@ -139,6 +136,20 @@ namespace minimap
             UpdateMap();
         }
 
+        private Vector3 _playerLastPos = new Vector3(9999, 9999, 9999);
+        private float _minimumMoved = 5;
+        public void UpdateIfMovedEnough()
+        {
+            //Check if the quared distance of player.transform.position and _playerLastPos is bigger then _minimumMoved squared
+            if (Vector3.SqrMagnitude(player.transform.position - _playerLastPos) > _minimumMoved * _minimumMoved)
+            {
+                _playerLastPos = player.transform.position;
+                UpdateMap();
+                
+            }
+        }
+        
+        
         public void UpdateMap()
         {
             UpdatePlayerPoiPosition();
