@@ -6,7 +6,7 @@ using Scriptable_objects;
 using TMPro;
 using UnityEngine;
 
-public class ShowEscooterPriceUi : MonoBehaviour, IEventListenerInterface
+public class ShowEscooterPriceUi : MonoBehaviour
 {
     [SerializeField] private FloatVariable initScooterPrice;
     [SerializeField] private FloatVariable pricePerMin;
@@ -23,12 +23,12 @@ public class ShowEscooterPriceUi : MonoBehaviour, IEventListenerInterface
 
     private void OnEnable()
     {
-        showScooterUiEvent.RegisterListener(this);
+        showScooterUiEvent.RegisterListener(OnEventRaised);
     }
 
     private void OnDisable()
     {
-        showScooterUiEvent.UnregisterListener(this);
+        showScooterUiEvent.UnregisterListener(OnEventRaised);
     }
 
     private void ShowChildren(bool value)

@@ -10,7 +10,7 @@ using UnityEngine;
 using Utils;
 using vasttrafik;
 
-public class BussTravelUI : MonoBehaviour, IEventListenerInterface
+public class BussTravelUI : MonoBehaviour
 {
     /*[TextArea] [ReadOnly] private string textReplacements = "%FN: From Name " +
                                                                              "\n%FT: From Time" +
@@ -60,7 +60,7 @@ public class BussTravelUI : MonoBehaviour, IEventListenerInterface
         {
             return;
         }
-        timePassedEvent.RegisterListener(this);
+        timePassedEvent.RegisterListener(OnEventRaised);
         _isEventSubscriber = true;
     }
     
@@ -70,7 +70,7 @@ public class BussTravelUI : MonoBehaviour, IEventListenerInterface
         {
             return;
         }
-        timePassedEvent.UnregisterListener(this);
+        timePassedEvent.UnregisterListener(OnEventRaised);
         _isEventSubscriber = false;
     }
     

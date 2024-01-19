@@ -6,7 +6,7 @@ using MaxisGeneralPurpose.Scriptable_objects;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class MapInteractor : MonoBehaviour, IEventListenerInterface
+public class MapInteractor : MonoBehaviour
 {
 
     private readonly HashSet<MapInteractable> _interactables = new HashSet<MapInteractable>();
@@ -102,12 +102,12 @@ public class MapInteractor : MonoBehaviour, IEventListenerInterface
 
     private void OnEnable()
     {
-        bussTaken.RegisterListener(this);
+        bussTaken.RegisterListener(OnEventRaised);
     }
     
     private void OnDisable()
     {
-        bussTaken.UnregisterListener(this);
+        bussTaken.UnregisterListener(OnEventRaised);
     }
     
     //On buss taken

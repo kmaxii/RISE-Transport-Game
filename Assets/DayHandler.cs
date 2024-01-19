@@ -6,7 +6,7 @@ using Missions;
 using Scriptable_objects;
 using UnityEngine;
 
-public class DayHandler : MonoBehaviour, IEventListenerInterface
+public class DayHandler : MonoBehaviour
 {
     [SerializeField] private Day day;
 
@@ -162,12 +162,12 @@ public class DayHandler : MonoBehaviour, IEventListenerInterface
 
     private void OnEnable()
     {
-        _timeVariable.raiseOnValueChanged.RegisterListener(this);
+        _timeVariable.raiseOnValueChanged.RegisterListener(OnEventRaised);
     }
 
     private void OnDisable()
     {
-        _timeVariable.raiseOnValueChanged.UnregisterListener(this);
+        _timeVariable.raiseOnValueChanged.UnregisterListener(OnEventRaised);
     }
 
     /**

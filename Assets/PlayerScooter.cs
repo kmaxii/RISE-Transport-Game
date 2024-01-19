@@ -6,7 +6,7 @@ using MaxisGeneralPurpose.Scriptable_objects;
 using Scriptable_objects;
 using UnityEngine;
 
-public class PlayerScooter : MonoBehaviour, IEventListenerInterface 
+public class PlayerScooter : MonoBehaviour 
 {
     
     [SerializeField] private GameEvent timePassedEvent;
@@ -36,12 +36,12 @@ public class PlayerScooter : MonoBehaviour, IEventListenerInterface
         _startTime = currentTime.Time24H;
 
         money.Value -= pickUpCost.Value;
-        timePassedEvent.RegisterListener(this);
+        timePassedEvent.RegisterListener(OnEventRaised);
     }
 
     private void OnDisable()
     {
-        timePassedEvent.UnregisterListener(this);
+        timePassedEvent.UnregisterListener(OnEventRaised);
     }
 
     public void OnEventRaised()

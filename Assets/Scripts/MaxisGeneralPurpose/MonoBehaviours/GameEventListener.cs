@@ -1,24 +1,22 @@
-using Interfaces;
 using MaxisGeneralPurpose.Scriptable_objects;
-using Scriptable_objects;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace MonoBehaviours
+namespace MaxisGeneralPurpose.MonoBehaviours
 {
-    public class GameEventListener : MonoBehaviour, IEventListenerInterface
+    public class GameEventListener : MonoBehaviour
     {
         public GameEvent @event;
         public UnityEvent response;
 
         private void OnEnable()
         {
-            @event.RegisterListener(this);
+            @event.RegisterListener(OnEventRaised);
         }
 
         private void OnDisable()
         {
-            @event.UnregisterListener(this);
+            @event.UnregisterListener(OnEventRaised);
         }
 
         public void OnEventRaised()

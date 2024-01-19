@@ -11,7 +11,7 @@ using UnityEngine.UI;
 
 namespace minimap
 {
-    public class TileManagerUI : MonoBehaviour, IDragHandler, IScrollHandler, IEventListenerInterface
+    public class TileManagerUI : MonoBehaviour, IDragHandler, IScrollHandler
     {
         private float _maxZoom = 5f;
 
@@ -55,12 +55,12 @@ namespace minimap
 
         private void OnEnable()
         {
-            onPlayerMove.RegisterListener(this);
+            onPlayerMove.RegisterListener(OnEventRaised);
         }
 
         private void OnDisable()
         {
-            onPlayerMove.UnregisterListener(this);
+            onPlayerMove.UnregisterListener(OnEventRaised);
         }
 
         private float CurrentZoom => _mapRectTransform.localScale.x;

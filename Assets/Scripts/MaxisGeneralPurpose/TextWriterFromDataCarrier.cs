@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace MaxisGeneralPurpose
 {
-    public class TextWriterFromDataCarrier : MonoBehaviour, IEventListenerInterface
+    public class TextWriterFromDataCarrier : MonoBehaviour
     {
         [SerializeField] private DataCarrier value;
 
@@ -26,12 +26,12 @@ namespace MaxisGeneralPurpose
 
         private void OnEnable()
         {
-            value.raiseOnValueChanged.RegisterListener(this);
+            value.raiseOnValueChanged.RegisterListener(OnEventRaised);
         }
 
         private void OnDisable()
         {
-            value.raiseOnValueChanged.UnregisterListener(this);
+            value.raiseOnValueChanged.UnregisterListener(OnEventRaised);
         }
 
         public void OnEventRaised()
