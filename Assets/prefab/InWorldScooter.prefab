@@ -107,4 +107,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a07dffaa8d04d02b7433325da3e5bf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mountScooterEvent: {fileID: 11400000, guid: c22d8cecb60cc8c4abbc51538f6e4fab, type: 2}
+  mountScooterEvent: {fileID: 11400000, guid: 02b749baaec22424a9d220cdaf4f9f0a, type: 2}

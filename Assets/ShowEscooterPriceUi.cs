@@ -23,12 +23,14 @@ public class ShowEscooterPriceUi : MonoBehaviour
 
     private void OnEnable()
     {
-        showScooterUiEvent.RegisterListener(OnEventRaised);
+        showScooterUiEvent.RegisterListener(OnShowScooterPriceEvent);
+        mountScooterEvent.RegisterListener(OnMountScooterEvent);
     }
 
     private void OnDisable()
     {
-        showScooterUiEvent.UnregisterListener(OnEventRaised);
+        showScooterUiEvent.UnregisterListener(OnShowScooterPriceEvent);
+        mountScooterEvent.UnregisterListener(OnMountScooterEvent);
     }
 
     private void ShowChildren(bool value)
@@ -38,11 +40,17 @@ public class ShowEscooterPriceUi : MonoBehaviour
             transform.GetChild(i).gameObject.SetActive(value);
         }
     }
-    
-    public void OnEventRaised()
+
+    private void OnShowScooterPriceEvent()
     {
         text.text = _initialText.Replace("<InitPrice>", initScooterPrice.Value + "")
             .Replace("<perMinPrice>", pricePerMin.Value + "");
         ShowChildren(true);
+    }
+    
+    public void OnMountScooterEvent()
+    {
+        Debug.Log("Mounted scooter");
+        ShowChildren(false);
     }
 }

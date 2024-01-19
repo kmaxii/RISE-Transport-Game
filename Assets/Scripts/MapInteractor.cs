@@ -19,9 +19,8 @@ public class MapInteractor : MonoBehaviour
     [SerializeField] private UnityEvent canNoLongerInteract;
 
     [SerializeField] private GameEvent bussTaken;
-
-
-
+    
+    [SerializeField] private GameEvent mountScooterEvent;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -42,11 +41,19 @@ public class MapInteractor : MonoBehaviour
 
     public void InteractWithClosest()
     {
+        MapInteractable closest = GetClosest();
+  
+
+        if (closest != null)
+            closest.Interact();
         
+    }
+    private MapInteractable GetClosest()
+    {
         UpdateInteractableState();
         
         if (!_canInteract)
-            return;
+            return null;
         
         MapInteractable closest = null;
         float closestDistance = float.MaxValue;
@@ -62,12 +69,9 @@ public class MapInteractor : MonoBehaviour
             }
         }
 
-        if (closest != null)
-            closest.Interact();
-        
-        
-        
+        return closest;
     }
+    
 
     private void OnTriggerExit(Collider other)
     {
@@ -103,11 +107,22 @@ public class MapInteractor : MonoBehaviour
     private void OnEnable()
     {
         bussTaken.RegisterListener(OnEventRaised);
+        mountScooterEvent.RegisterListener(DestroyClosest);
     }
     
     private void OnDisable()
     {
         bussTaken.UnregisterListener(OnEventRaised);
+        mountScooterEvent.UnregisterListener(DestroyClosest);
+    }
+
+    private void DestroyClosest()
+    {
+        var closest = GetClosest();
+        if (closest != null)
+        {
+            Destroy(closest.gameObject);
+        }
     }
     
     //On buss taken
