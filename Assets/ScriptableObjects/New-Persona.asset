@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62eec35392d9363478d7ad4bf7fad843, type: 3}
   m_Name: New-Persona
   m_EditorClassIdentifier: 
-  sweatThreshold: 50
-  wetnessThreshold: 50
-  tirednessThreshold: 50
-  timeImportance: 50
-  stressImportance: 50
-  comfortImportance: 50
-  busComfortability: 50
-  tramComfortability: 50
-  eScooterComfortability: 50
-  fitness: 50
+  sweatThreshold: 20
+  wetnessThreshold: 70
+  tirednessThreshold: 47
+  timeImportance: 2
+  stressImportance: 3
+  comfortImportance: 4
+  busComfortability: 3
+  tramComfortability: 3
+  eScooterComfortability: 2
+  fitness: 26
