@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using MonoBehaviors;
 using UnityEngine;
 
-namespace Scriptable_objects
+namespace MaxisGeneralPurpose.Scriptable_objects
 {
     [CreateAssetMenu(menuName = "Custom/Audio/AudioGameEvent")]
     public class GameEventWithAudioEvent : ScriptableObject
