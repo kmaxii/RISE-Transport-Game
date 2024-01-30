@@ -10,13 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0d2b39f998fdf8d40b457d2ff25d75bb, type: 3}
-  m_Name: ClickSound
+  m_Name: Bus horn
   m_EditorClassIdentifier: 
   gameEventWithAudio: {fileID: 11400000, guid: f40d9881b108e4949bb33efe3b0ca9d0, type: 2}
   audioClips:
-  - {fileID: 8300000, guid: 1992a7caf5bf5564eb81f964a374afe2, type: 3}
-  - {fileID: 8300000, guid: 68c2dc6d97c395949b85f82eefb5acb3, type: 3}
-  minimumVolume: 0.238
-  maximumVolume: 0.536
-  minimumPitch: 0.476
-  maximumPitch: 0.853
+  - {fileID: 8300000, guid: 899f502ad0364334f85b010a4d6c51a5, type: 3}
+  minimumVolume: 0.636
+  maximumVolume: 1.378
+  minimumPitch: 0.691
+  maximumPitch: 1.256
