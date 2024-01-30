@@ -130,7 +130,11 @@ public class EScooterSpawner : MonoBehaviour
             var gridInfo = gridData[i];
 
             GameObject eScooter = _eScooterPool.Get();
-            eScooter.transform.position = new Vector3((float) gridInfo.xPos, 0, (float) gridInfo.yPos);
+            eScooter.transform.position = new Vector3((float) gridInfo.xPos, 0.35f, (float) gridInfo.yPos);
+            
+            //Randomize their y rotation
+            eScooter.transform.rotation = Quaternion.Euler(0, UnityEngine.Random.Range(0, 360), 0);
+            
             scootersInGrid.Add(eScooter);
         }
     }

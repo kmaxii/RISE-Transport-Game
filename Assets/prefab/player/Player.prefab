@@ -1377,6 +1377,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  bussTaken: {fileID: 0}
+  mountScooterEvent: {fileID: 0}
 --- !u!114 &5076243098416210876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2679,7 +2681,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f5396818774e5914b8fafa01aeb6d2df, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.13
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f5396818774e5914b8fafa01aeb6d2df, type: 3}
       propertyPath: m_LocalPosition.z
