@@ -2802,7 +2802,8 @@ MonoBehaviour:
   eScooterPrefab: {fileID: 3363376374664523458, guid: 0dbd2de988de07f44ab6cb4f5d2d31de, type: 3}
   player: {fileID: 4601729311675006}
   spawnDistance: 2
-  maxSpawnPer32x32: 30
+  maxSpawnPerGrid: 2
+  spawnChance: 1
 --- !u!4 &823690239
 Transform:
   m_ObjectHideFlags: 0
