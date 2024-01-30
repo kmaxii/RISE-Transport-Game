@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.45099503, g: 0.50085473, b: 0.57433176, a: 1}
+  m_IndirectSpecularColor: {r: 0.45099849, g: 0.50085634, b: 0.5743218, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -623,7 +623,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 234181014}
-  m_LocalRotation: {x: 0.25767156, y: 0.000000008312682, z: -0.0000000022167979, w: 0.9662326}
+  m_LocalRotation: {x: 0.25767156, y: -0.000000008312684, z: 0.000000002216798, w: 0.9662326}
   m_LocalPosition: {x: 0, y: 269.69, z: -469.69}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2768,6 +2768,56 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 816736605}
   m_CullTransparentMesh: 1
+--- !u!1 &823690237
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 823690239}
+  - component: {fileID: 823690238}
+  m_Layer: 0
+  m_Name: EscooterSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &823690238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 823690237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e77af1d1978518a4b82aeff79fbb0199, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eScooterData: {fileID: 11400000, guid: 755a0354067a30f41855ca8ca85ecb4d, type: 2}
+  playerMovedEvent: {fileID: 11400000, guid: 074d2a4246b109847b62b6b2657b42f5, type: 2}
+  eScooterPrefab: {fileID: 3363376374664523458, guid: 0dbd2de988de07f44ab6cb4f5d2d31de, type: 3}
+  player: {fileID: 4601729311675006}
+  spawnDistance: 2
+  maxSpawnPer32x32: 30
+--- !u!4 &823690239
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 823690237}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.3825469, y: -4.0441294, z: -7.9698915}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &837042818
 GameObject:
   m_ObjectHideFlags: 0
@@ -6015,7 +6065,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1951402532}
-  m_LocalRotation: {x: 0.25767156, y: 0.000000008312682, z: -0.0000000022167979, w: 0.9662326}
+  m_LocalRotation: {x: 0.25767156, y: -0.000000008312684, z: 0.000000002216798, w: 0.9662326}
   m_LocalPosition: {x: 0, y: 269.69, z: -469.69}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
