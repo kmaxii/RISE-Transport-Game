@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.45099849, g: 0.50085634, b: 0.5743218, a: 1}
+  m_IndirectSpecularColor: {r: 0.4509946, g: 0.50085366, b: 0.57433045, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1934,7 +1934,7 @@ MonoBehaviour:
       - m_Target: {fileID: 11400000, guid: 0d7e05b7f27c2f8459369495aa0e367f, type: 2}
         m_TargetAssemblyTypeName: MaxisGeneralPurpose.Scriptable_objects.AudioEvent,
           Assembly-CSharp
-        m_MethodName: RaiseEvent
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5602,7 +5602,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 6.5400085, y: 6.540009}
+  m_AnchoredPosition: {x: 6.540039, y: 6.540039}
   m_SizeDelta: {x: 111.6358, y: 45.858}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1747779651
