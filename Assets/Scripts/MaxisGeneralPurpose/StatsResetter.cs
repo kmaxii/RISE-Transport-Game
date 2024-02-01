@@ -2,6 +2,11 @@ using System;
 using MaxisGeneralPurpose.Scriptable_objects;
 using Scriptable_objects;
 using UnityEngine;
+using UnityEngine.Events;
+using System.Collections.Generic;
+using System.Linq;
+using Interfaces;
+
 
 namespace MaxisGeneralPurpose
 {
@@ -12,6 +17,8 @@ namespace MaxisGeneralPurpose
 
         [NonReorderable] [SerializeField] private TimeVariable time;
         [SerializeField] private Time24H startTime;
+
+        [SerializeField] private GameEvent startMusicEvent;
 
         // Start is called before the first frame update
         void Start()
@@ -26,6 +33,10 @@ namespace MaxisGeneralPurpose
             }
 
             time.Time24H = startTime;
+        }
+        private void OnEnable()
+        {
+            startMusicEvent.Raise();
         }
     }
 
@@ -42,4 +53,6 @@ namespace MaxisGeneralPurpose
         public float value;
         public FloatVariable floatVariable;
     }
+
+
 }

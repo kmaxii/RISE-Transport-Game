@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0d2b39f998fdf8d40b457d2ff25d75bb, type: 3}
-  m_Name: TaskComplete
+  m_Name: EScooterMove
   m_EditorClassIdentifier: 
   gameEventWithAudio: {fileID: 11400000, guid: f40d9881b108e4949bb33efe3b0ca9d0, type: 2}
   audioClips:
-  - {fileID: 8300000, guid: ac4f4edaaa78522458c430ec775536a1, type: 3}
-  minimumVolume: 0.69
-  maximumVolume: 0.7
-  minimumPitch: 1
-  maximumPitch: 1
+  - {fileID: 8300000, guid: 1695f39c8766c7e489248f1973aeca5b, type: 3}
+  minimumVolume: 0.21
+  maximumVolume: 0.21
+  minimumPitch: 0.61
+  maximumPitch: 0.56

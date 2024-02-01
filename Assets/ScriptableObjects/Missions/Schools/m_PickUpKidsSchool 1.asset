@@ -18,12 +18,6 @@ MonoBehaviour:
   color: {r: 0, g: 0, b: 0, a: 0}
   missionLocations:
   - {fileID: 11400000, guid: 9ff1190b51e530849a267dd3ae671fcb, type: 2}
-  - {fileID: 11400000, guid: 5a1359811d95eef49b57531893c6c447, type: 2}
-  - {fileID: 11400000, guid: e4d105ae711d61e439d9b1562f05d1b9, type: 2}
-  - {fileID: 11400000, guid: 008665f911a5175498ca8a39345305b6, type: 2}
-  - {fileID: 11400000, guid: c9402c611abf6bc40b22da4fa4dcf5f7, type: 2}
-  - {fileID: 11400000, guid: 4d395281f8fb4384f854ce7626b280b1, type: 2}
-  - {fileID: 11400000, guid: 7f4d5fe43ad021940b03cba0b4c2ef8e, type: 2}
   canBeDoneAtAllLocation: 0
   timeItTakes:
     hour: 0

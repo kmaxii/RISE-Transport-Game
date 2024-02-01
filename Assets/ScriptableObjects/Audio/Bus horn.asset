@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameEventWithAudio: {fileID: 11400000, guid: f40d9881b108e4949bb33efe3b0ca9d0, type: 2}
   audioClips:
-  - {fileID: 8300000, guid: 899f502ad0364334f85b010a4d6c51a5, type: 3}
+  - {fileID: 8300000, guid: 04498208ccca5674ea5a76f7c61367b1, type: 3}
   minimumVolume: 0.636
   maximumVolume: 1.378
   minimumPitch: 0.691

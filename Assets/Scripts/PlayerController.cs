@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
 
 
     [SerializeField] private GameEvent playerMoveEvent;
+    [SerializeField] private GameEvent playerMoveScooterEvent;
 
     private Vector3 _inputDirection;
     private Animator _animator;
@@ -122,8 +123,14 @@ public class PlayerController : MonoBehaviour
             Quaternion lookRotation = Quaternion.LookRotation(bestDirection);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
         }
-        
-        playerMoveEvent.Raise();
+        if (!isRidingScooter)
+        { 
+            playerMoveEvent.Raise();
+        }
+        else if (isRidingScooter)
+        {
+            playerMoveScooterEvent.Raise();
+        }
     }
 
     void OnDrawGizmos()

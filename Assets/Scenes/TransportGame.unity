@@ -1908,6 +1908,11 @@ GameObject:
   - component: {fileID: 722094145}
   - component: {fileID: 722094144}
   - component: {fileID: 722094146}
+  - component: {fileID: 722094149}
+  - component: {fileID: 722094148}
+  - component: {fileID: 722094147}
+  - component: {fileID: 722094150}
+  - component: {fileID: 722094151}
   m_Layer: 0
   m_Name: SoundTriggerer
   m_TagString: Untagged
@@ -1934,7 +1939,7 @@ MonoBehaviour:
       - m_Target: {fileID: 11400000, guid: 0d7e05b7f27c2f8459369495aa0e367f, type: 2}
         m_TargetAssemblyTypeName: MaxisGeneralPurpose.Scriptable_objects.AudioEvent,
           Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: RaiseEvent
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1976,6 +1981,151 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: c025501657371c94183e9b85bc991a26, type: 2}
+        m_TargetAssemblyTypeName: MaxisGeneralPurpose.Scriptable_objects.AudioEvent,
+          Assembly-CSharp
+        m_MethodName: RaiseEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &722094147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 722094143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 019d2a91e6cd64d4381c1ee08616fdba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  event: {fileID: 11400000, guid: 344339e1688f0934db26e7a62b51210a, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 4875e11ac88d4f84fb8a0a11d300bff6, type: 2}
+        m_TargetAssemblyTypeName: MaxisGeneralPurpose.Scriptable_objects.AudioEvent,
+          Assembly-CSharp
+        m_MethodName: RaiseEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &722094148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 722094143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 019d2a91e6cd64d4381c1ee08616fdba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  event: {fileID: 11400000, guid: f6da546253b3c154fb5acbc91b12e3e5, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: b7312c1f9db91ca48bc6d5aef12a9c8a, type: 2}
+        m_TargetAssemblyTypeName: MaxisGeneralPurpose.Scriptable_objects.AudioEvent,
+          Assembly-CSharp
+        m_MethodName: RaiseEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &722094149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 722094143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 019d2a91e6cd64d4381c1ee08616fdba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  event: {fileID: 11400000, guid: 86d532d6f3b5e0c4c922ef3068e82eab, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 909160db7e8a678468350bb802395d83, type: 2}
+        m_TargetAssemblyTypeName: MaxisGeneralPurpose.Scriptable_objects.AudioEvent,
+          Assembly-CSharp
+        m_MethodName: RaiseEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &722094150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 722094143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a44f222db338b5e42a3f141be68fc611, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  event: {fileID: 11400000, guid: c0763aa7d14fb9247b8222d06d3b9ae2, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: b39aeb53c7ffc15418f6fd2e1e7eb1fe, type: 2}
+        m_TargetAssemblyTypeName: MaxisGeneralPurpose.Scriptable_objects.AudioEvent,
+          Assembly-CSharp
+        m_MethodName: RaiseEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &722094151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 722094143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a44f222db338b5e42a3f141be68fc611, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  event: {fileID: 11400000, guid: f18c89730c8819c45957e7806cfb7350, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: ee146b50c111ffc439ed6459d46765b3, type: 2}
         m_TargetAssemblyTypeName: MaxisGeneralPurpose.Scriptable_objects.AudioEvent,
           Assembly-CSharp
         m_MethodName: RaiseEvent
@@ -4234,6 +4384,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1392788054}
   - component: {fileID: 1392788053}
+  - component: {fileID: 1392788055}
   m_Layer: 0
   m_Name: PlayerMovedEnoughTriggerer
   m_TagString: Untagged
@@ -4273,6 +4424,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1392788055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1392788052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54d52582e7dc93b4b9e7cc461d16c764, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameEventWhichTrigger:
+  - {fileID: 11400000, guid: 74f082fc9ea82ff43b931541735fe9b3, type: 2}
+  gameEventToTrigger: {fileID: 11400000, guid: f18c89730c8819c45957e7806cfb7350, type: 2}
+  cooldownTime: 18.1
 --- !u!21 &1426827102
 Material:
   serializedVersion: 8
@@ -5788,8 +5955,9 @@ MonoBehaviour:
     floatVariable: {fileID: 11400000, guid: 9112a4e09811b9744b9f86d82f990ded, type: 2}
   time: {fileID: 11400000, guid: 3e013dc3110bf9b4ca29f5af6ac7195e, type: 2}
   startTime:
-    hour: 8
+    hour: 7
     minute: 0
+  startMusicEvent: {fileID: 11400000, guid: c0763aa7d14fb9247b8222d06d3b9ae2, type: 2}
 --- !u!4 &1794904671
 Transform:
   m_ObjectHideFlags: 0
@@ -7523,6 +7691,10 @@ PrefabInstance:
       propertyPath: scooterMoveSpeed
       value: 10.73
       objectReference: {fileID: 0}
+    - target: {fileID: 5076243098416210876, guid: 1ebe1d6687e77b04bb160edcb42382c8, type: 3}
+      propertyPath: playerMoveScooterEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 74f082fc9ea82ff43b931541735fe9b3, type: 2}
     - target: {fileID: 5076243098416210877, guid: 1ebe1d6687e77b04bb160edcb42382c8, type: 3}
       propertyPath: cam
       value: 
