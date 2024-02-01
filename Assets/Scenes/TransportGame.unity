@@ -612,7 +612,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 234181014}
-  m_LocalRotation: {x: 0.25767156, y: -0.000000008312684, z: 0.000000002216798, w: 0.9662326}
+  m_LocalRotation: {x: 0.25767156, y: 0.000000008312682, z: -0.0000000022167979, w: 0.9662326}
   m_LocalPosition: {x: 0, y: 269.69, z: -469.69}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2773,7 +2773,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1124918609}
         m_TargetAssemblyTypeName: ShowEscooterPriceUi, Assembly-CSharp
-        m_MethodName: OnMountScooterEvent
+        m_MethodName: CloseUI
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3008,7 +3008,7 @@ GameObject:
   - component: {fileID: 930863326}
   - component: {fileID: 930863325}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3850,11 +3850,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59a174c7ba168df4aa4356dcb14a52e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initScooterPrice: {fileID: 11400000, guid: ace4284d68dcb4c44ad100ccdd181020, type: 2}
-  pricePerMin: {fileID: 11400000, guid: 2cf55f5bcae083b44aa0b6b96764d20d, type: 2}
-  showScooterUiEvent: {fileID: 11400000, guid: 02b749baaec22424a9d220cdaf4f9f0a, type: 2}
-  mountScooterEvent: {fileID: 11400000, guid: c22d8cecb60cc8c4abbc51538f6e4fab, type: 2}
-  text: {fileID: 1952228238}
+  money: {fileID: 11400000, guid: 9112a4e09811b9744b9f86d82f990ded, type: 2}
+  cantAffordEvent: {fileID: 11400000, guid: 5a59924baf989a344b863ed5c263bd61, type: 2}
+  titleText: {fileID: 930863325}
+  mainText: {fileID: 1952228238}
+  priceUiElements:
+  - priceUiTexts:
+      titleText: E-Scooter
+      mainText: Att ta en E-Scooter kostar <InitPrice>:- och sedan <perMinPrice>:-/minut
+    textReplacements:
+      list:
+      - key: <InitPrice>
+        value: {fileID: 11400000, guid: ace4284d68dcb4c44ad100ccdd181020, type: 2}
+        duplicatedKey: 0
+      - key: <perMinPrice>
+        value: {fileID: 11400000, guid: 2cf55f5bcae083b44aa0b6b96764d20d, type: 2}
+        duplicatedKey: 0
+    showOnEvent: {fileID: 11400000, guid: 02b749baaec22424a9d220cdaf4f9f0a, type: 2}
+    hideOnEvent: {fileID: 0}
+    triggerOnAccept: {fileID: 11400000, guid: c22d8cecb60cc8c4abbc51538f6e4fab, type: 2}
+    price: {fileID: 11400000, guid: ace4284d68dcb4c44ad100ccdd181020, type: 2}
+  - priceUiTexts:
+      titleText: "Buss/Sp\xE5rvagn"
+      mainText: "Att ta bussen/sp\xE5rvagn kostar <bussPrice>:- "
+    textReplacements:
+      list:
+      - key: <bussPrice>
+        value: {fileID: 11400000, guid: 921bc49c92442e44fb86da5ba6a0a0e4, type: 2}
+        duplicatedKey: 0
+    showOnEvent: {fileID: 11400000, guid: 6059ca2e16b96454dbcb508a0ef95c5d, type: 2}
+    hideOnEvent: {fileID: 0}
+    triggerOnAccept: {fileID: 11400000, guid: 5ab3ff43a404ab649a0519fe113c62e1, type: 2}
+    price: {fileID: 11400000, guid: 921bc49c92442e44fb86da5ba6a0a0e4, type: 2}
 --- !u!222 &1124918610
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6244,7 +6271,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1951402532}
-  m_LocalRotation: {x: 0.25767156, y: -0.000000008312684, z: 0.000000002216798, w: 0.9662326}
+  m_LocalRotation: {x: 0.25767156, y: 0.000000008312682, z: -0.0000000022167979, w: 0.9662326}
   m_LocalPosition: {x: 0, y: 269.69, z: -469.69}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6265,7 +6292,7 @@ GameObject:
   - component: {fileID: 1952228239}
   - component: {fileID: 1952228238}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: MainText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7023,10 +7050,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11400000, guid: c22d8cecb60cc8c4abbc51538f6e4fab, type: 2}
-        m_TargetAssemblyTypeName: MaxisGeneralPurpose.Scriptable_objects.GameEvent,
-          Assembly-CSharp
-        m_MethodName: Raise
+      - m_Target: {fileID: 1124918609}
+        m_TargetAssemblyTypeName: PriceUi, Assembly-CSharp
+        m_MethodName: Trigger
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
