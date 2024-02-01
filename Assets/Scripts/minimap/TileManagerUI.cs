@@ -52,15 +52,19 @@ namespace minimap
         public RectTransform canvasRectTransform;
 
         [SerializeField] private GameEvent onPlayerMove;
+        [SerializeField] private GameEvent onPlayerMove2;
 
         private void OnEnable()
         {
             onPlayerMove.RegisterListener(OnEventRaised);
+            onPlayerMove2.RegisterListener(OnEventRaised);
+            
         }
 
         private void OnDisable()
         {
             onPlayerMove.UnregisterListener(OnEventRaised);
+            onPlayerMove2.UnregisterListener(OnEventRaised);
         }
 
         private float CurrentZoom => _mapRectTransform.localScale.x;
