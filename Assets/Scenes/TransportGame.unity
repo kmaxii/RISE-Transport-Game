@@ -1883,11 +1883,9 @@ MonoBehaviour:
   map: {fileID: 159634025}
   tileManagerUI: {fileID: 1760020117}
   lineRenderer: {fileID: 837042820}
-  bussTravelCost: {fileID: 11400000, guid: 786bdff5b79a89645ae44abc4fd8cb17, type: 2}
-  money: {fileID: 11400000, guid: 9112a4e09811b9744b9f86d82f990ded, type: 2}
-  cantAffordEvent: {fileID: 11400000, guid: 5a59924baf989a344b863ed5c263bd61, type: 2}
   timePassedEvent: {fileID: 11400000, guid: 5c2d2e6901d2e0241869770c65d4defb, type: 2}
   traveledByBussEvent: {fileID: 11400000, guid: 5ab3ff43a404ab649a0519fe113c62e1, type: 2}
+  showBussTravelCostUI: {fileID: 11400000, guid: 6059ca2e16b96454dbcb508a0ef95c5d, type: 2}
   currentTime: {fileID: 11400000, guid: 3e013dc3110bf9b4ca29f5af6ac7195e, type: 2}
 --- !u!222 &679950603
 CanvasRenderer:

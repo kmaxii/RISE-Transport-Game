@@ -33,14 +33,10 @@ public class BussTravelUI : MonoBehaviour
     [SerializeField] private AbstractMap map;
     [SerializeField] private TileManagerUI tileManagerUI;
     [SerializeField] private LineRendererHandler lineRenderer;
-
-    [SerializeField] private IntVariable bussTravelCost;
-    [SerializeField] private FloatVariable money;
-    
-    [SerializeField] private GameEvent cantAffordEvent;
     
     [SerializeField] private GameEvent timePassedEvent;
     [SerializeField] private GameEvent traveledByBussEvent;
+    [SerializeField] private GameEvent showBussTravelCostUI;
     private bool _isEventSubscriber;
     [SerializeField] private TimeVariable currentTime;
     
@@ -54,35 +50,37 @@ public class BussTravelUI : MonoBehaviour
         }
     }
 
-    private void SubscribeToTimePassed()
+    private void SubscribeToEventsWhileShowing()
     {
         if (_isEventSubscriber)
         {
             return;
         }
         timePassedEvent.RegisterListener(OnEventRaised);
+        traveledByBussEvent.RegisterListener(Travel);
         _isEventSubscriber = true;
     }
     
-    private void UnsubscribeToTimePassed()
+    private void UnsubscribeToEventsWhileShowing()
     {
         if (!_isEventSubscriber)
         {
             return;
         }
         timePassedEvent.UnregisterListener(OnEventRaised);
+        traveledByBussEvent.UnregisterListener(Travel);
         _isEventSubscriber = false;
     }
     
-    
+    //Called when clicked on accept in buss ui
     public void AcceptTravel()
     {
-        if (money.Value - bussTravelCost.Value < 0)
-        {
-            cantAffordEvent.Raise();
-            return;
-        }
-        
+        showBussTravelCostUI.Raise();
+    }
+
+    //Called from the accept button in the price ui
+    private void Travel()
+    {
         //The stop is set to be at a higher y so the buss stops are seen well, but we want to ignore that
         Vector3 pos = _showingInfoTo.pos3d;
         pos.y = 0;
@@ -91,15 +89,13 @@ public class BussTravelUI : MonoBehaviour
         HideTravelOption();
         timeVariable.Time24H = new Time24H(_showingResult.DestinationTime);
 
-        money.Value -= bussTravelCost.Value;
         
         traveledByBussEvent.Raise();
-        
     }
 
     public void HideTravelOption()
     {
-        UnsubscribeToTimePassed();
+        UnsubscribeToEventsWhileShowing();
         ShowChildren(false);
     }
 
@@ -116,7 +112,7 @@ public class BussTravelUI : MonoBehaviour
 
         int resultNum = result.results[0].SwitchesAmount == -1 && result.results.Count > 1 ? 1 : 0;
         
-        SubscribeToTimePassed();
+        SubscribeToEventsWhileShowing();
         
         ShowTravelOption(from, to, result.results[resultNum]);
     }
