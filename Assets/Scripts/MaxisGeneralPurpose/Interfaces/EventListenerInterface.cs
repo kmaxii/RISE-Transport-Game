@@ -2,6 +2,6 @@
 {
     public interface IEventListenerInterface
     {
-        public void OnEventRaised();
+        public void OnValueChange();
     }
 }
