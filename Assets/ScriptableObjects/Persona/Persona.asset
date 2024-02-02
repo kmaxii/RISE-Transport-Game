@@ -26,7 +26,7 @@ MonoBehaviour:
   comfortImportanceVariable: {fileID: 11400000, guid: 24de9e644f6707d4a9674c978cfe33c6, type: 2}
   busComfortability: 3
   busComfortabilityVariable: {fileID: 11400000, guid: b844be5f883ddd34f98421f4389fe35c, type: 2}
-  eScooterComfortability: 2
+  eScooterComfortability: -0.49
   eScooterComfortabilityVariable: {fileID: 11400000, guid: 23769817f24f468479d37026250ec1e0, type: 2}
   fitness: 26
   fitnessVariable: {fileID: 11400000, guid: 0174a1787bfbf7743b32cc7b41750efa, type: 2}

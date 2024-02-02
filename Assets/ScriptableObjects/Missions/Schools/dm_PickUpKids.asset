@@ -16,8 +16,8 @@ MonoBehaviour:
   mission: {fileID: 11400000, guid: 18ed29a22f6af6e4c8315eba02fd04de, type: 2}
   hasShowUpTime: 1
   showUpTime:
-    hour: 8
-    minute: 6
+    hour: 13
+    minute: 0
   isSetTime: 1
   earliestTime:
     hour: 14
