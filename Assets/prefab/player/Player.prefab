@@ -1377,8 +1377,28 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  bussTaken: {fileID: 0}
-  mountScooterEvent: {fileID: 0}
+  bussTaken: {fileID: 11400000, guid: 5ab3ff43a404ab649a0519fe113c62e1, type: 2}
+  bussInteractor:
+    canNowInteract: {fileID: 11400000, guid: d6a89407fda37734490a445f7357662b, type: 2}
+    canNoLongerInteract: {fileID: 11400000, guid: 0a9a3d989cfbc6b449114718f1ad0251, type: 2}
+    interactWith: {fileID: 11400000, guid: a5db568fcbe4c7548a2a2e4475e6f0c7, type: 2}
+    clearList: {fileID: 11400000, guid: 5ab3ff43a404ab649a0519fe113c62e1, type: 2}
+    canInteract: {fileID: 11400000, guid: 8a21cc6ceac19944da78de75ff41f995, type: 2}
+    player: {fileID: 5071661262631612038}
+  scooterInteractor:
+    canNowInteract: {fileID: 11400000, guid: 27553ae414fd0fe4093dc8351548e4f4, type: 2}
+    canNoLongerInteract: {fileID: 11400000, guid: cf7e85e2b3ea1f644b79ba4b92482d97, type: 2}
+    interactWith: {fileID: 11400000, guid: de7590722b257f546b51125c02872478, type: 2}
+    clearList: {fileID: 11400000, guid: 5ab3ff43a404ab649a0519fe113c62e1, type: 2}
+    canInteract: {fileID: 11400000, guid: 21bc0a240e9df294a88ec38730fcafcd, type: 2}
+    player: {fileID: 5071661262631612038}
+  missionInteractor:
+    canNowInteract: {fileID: 11400000, guid: 3bd875fcf4a3d5043b59eeaac5446ce0, type: 2}
+    canNoLongerInteract: {fileID: 11400000, guid: ed82b35bc63d5444cafcd845afbfdd17, type: 2}
+    interactWith: {fileID: 11400000, guid: 5bc255fb60550dd43be0f63bab001d97, type: 2}
+    clearList: {fileID: 11400000, guid: 5ab3ff43a404ab649a0519fe113c62e1, type: 2}
+    canInteract: {fileID: 11400000, guid: d883b8b72a1465e43ad7b07ab5f12aa4, type: 2}
+    player: {fileID: 5071661262631612038}
 --- !u!114 &5076243098416210876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1393,7 +1413,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   scooterMoveSpeed: 8
-  isRidingScooter: 0
+  isRidingScooter: {fileID: 0}
   rotationSpeed: 10
   ground:
     serializedVersion: 2
@@ -1404,6 +1424,7 @@ MonoBehaviour:
   maxIterations: 5
   distanceIncrement: 0.5
   playerMoveEvent: {fileID: 11400000, guid: 074d2a4246b109847b62b6b2657b42f5, type: 2}
+  playerMoveScooterEvent: {fileID: 0}
   virtualJoystick: {fileID: 0}
   scooter: {fileID: 7648450472719159152}
 --- !u!114 &5076243098416210877

@@ -9,128 +9,95 @@ using UnityEngine.Events;
 public class MapInteractor : MonoBehaviour
 {
 
-    private readonly HashSet<MapInteractable> _interactables = new HashSet<MapInteractable>();
 
-    private bool _canInteract = false;
     
-    public bool CanInteract => _canInteract;
-
     [SerializeField] private UnityEvent canNowInteract;
     [SerializeField] private UnityEvent canNoLongerInteract;
 
     [SerializeField] private GameEvent bussTaken;
     
-    [SerializeField] private GameEvent mountScooterEvent;
-
+    [SerializeField] private MapInteractorLogic bussInteractor;
+    [SerializeField] private MapInteractorLogic scooterInteractor;
+    [SerializeField] private MapInteractorLogic missionInteractor;
+    
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.CompareTag("MapInteractable"))
+        if (!other.CompareTag("MapInteractable")
+            && !other.CompareTag("BussStation")
+            && !other.CompareTag("Mission"))
             return;
 
-        MapInteractable mapInteractable = other.GetComponent<MapInteractable>();
-        
-        _interactables.Add(mapInteractable);
-        
 
-        if (!_canInteract)
+        if (!other.TryGetComponent<MapInteractable>(out var mapInteractable))
         {
-            _canInteract = true;
-            canNowInteract.Invoke();
+            return;
+        }
+        
+        switch (other.tag)
+        {
+            case "BussStation":
+                bussInteractor.AddInteractable(mapInteractable);
+                break;
+            case "Mission":
+                missionInteractor.AddInteractable(mapInteractable);
+                break;
+            case "MapInteractable":
+                scooterInteractor.AddInteractable(mapInteractable);
+                break;
         }
     }
 
     public void InteractWithClosest()
     {
-        MapInteractable closest = GetClosest();
+      //  MapInteractable closest = GetClosest();
   
 
-        if (closest != null)
-            closest.Interact();
+   //     if (closest != null)
+   //         closest.Interact();
         
     }
-    private MapInteractable GetClosest()
-    {
-        UpdateInteractableState();
-        
-        if (!_canInteract)
-            return null;
-        
-        MapInteractable closest = null;
-        float closestDistance = float.MaxValue;
-        
-        foreach (MapInteractable interactable in _interactables)
-        {
-            float distance = Vector3.Distance(transform.position, interactable.transform.position);
-            
-            if (distance < closestDistance)
-            {
-                closestDistance = distance;
-                closest = interactable;
-            }
-        }
-
-        return closest;
-    }
-    
 
     private void OnTriggerExit(Collider other)
     {
-        if (!other.CompareTag("MapInteractable"))
+        if (!other.CompareTag("MapInteractable")
+            && !other.CompareTag("BussStation")
+            && !other.CompareTag("Mission"))
             return;
         
-        Debug.Log($"{other.name} has left the collider");
-        
-        MapInteractable mapInteractable = other.GetComponent<MapInteractable>();
-
-        _interactables.Remove(mapInteractable);
-
-        UpdateInteractableState();
-    }
-
-    public void UpdateInteractableState()
-    {
-        //Go through the entire list reverse and check if any of the objects have gotten destroyed, if they have remove them.
-        for (int i = _interactables.Count - 1; i >= 0; i--)
+        if (!other.TryGetComponent<MapInteractable>(out var mapInteractable))
         {
-            var interactable = _interactables.ElementAt(i);
-            if (interactable == null)
-            {
-                _interactables.Remove(interactable);
-            }
+            return;
         }
 
-        if (_interactables.Count != 0) return;
-        _canInteract = false;
-        canNoLongerInteract.Invoke();
+        switch (other.tag)
+        {
+            case "BussStation":
+                bussInteractor.RemoveInteractable(mapInteractable);
+                break;
+            case "Mission":
+                missionInteractor.RemoveInteractable(mapInteractable);
+                break;
+            case "MapInteractable":
+                scooterInteractor.RemoveInteractable(mapInteractable);
+                break;
+        }
+        
+      //  UpdateInteractableState();
     }
-
+    
     private void OnEnable()
     {
-        bussTaken.RegisterListener(OnEventRaised);
-        mountScooterEvent.RegisterListener(DestroyClosest);
+        bussInteractor.RegisterListeners();
+        scooterInteractor.RegisterListeners();
+        missionInteractor.RegisterListeners();
     }
     
     private void OnDisable()
     {
-        bussTaken.UnregisterListener(OnEventRaised);
-        mountScooterEvent.UnregisterListener(DestroyClosest);
+        bussInteractor.UnregisterListeners();
+        scooterInteractor.UnregisterListeners();
+        missionInteractor.UnregisterListeners();
     }
 
-    private void DestroyClosest()
-    {
-        var closest = GetClosest();
-        if (closest != null)
-        {
-            Destroy(closest.gameObject);
-        }
-    }
     
-    //On buss taken
-    public void OnEventRaised()
-    {
-        _interactables.Clear();
-        _canInteract = false;
-        canNoLongerInteract.Invoke();
-        Debug.Log("cleared");
-    }
 }

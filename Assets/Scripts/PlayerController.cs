@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float moveSpeed = 5.0f;
     [SerializeField] private float scooterMoveSpeed = 8.0f;
-    [SerializeField] private bool isRidingScooter;
+    [SerializeField] private BoolVariable isRidingScooter;
     [SerializeField] private float rotationSpeed = 10.0f;
 
     
@@ -45,10 +45,10 @@ public class PlayerController : MonoBehaviour
 
     public bool IsRidingScooter
     {
-        get => isRidingScooter;
+        get => isRidingScooter.Value;
         set
         {
-            isRidingScooter = value;
+            isRidingScooter.Value = value;
             scooter.SetActive(value);
             _animator.SetBool(OnScooterAnimID, value);
         }
@@ -56,6 +56,7 @@ public class PlayerController : MonoBehaviour
     
     private void Start()
     {
+        isRidingScooter.Value = false;
         if (!TryGetComponent(out _animator))
         {
             Debug.LogError(transform.name + " is missing an animator");
@@ -114,7 +115,7 @@ public class PlayerController : MonoBehaviour
 
         if (bestDirection != Vector3.zero)
         {
-            float currentMoveSpeed = isRidingScooter ? scooterMoveSpeed : moveSpeed;
+            float currentMoveSpeed = isRidingScooter.Value ? scooterMoveSpeed : moveSpeed;
             // Lerp towards the best direction
             selfTransform.position = Vector3.Lerp(transform.position, selfTransform.position + bestDirection,
                 currentMoveSpeed * Time.deltaTime);
@@ -123,11 +124,11 @@ public class PlayerController : MonoBehaviour
             Quaternion lookRotation = Quaternion.LookRotation(bestDirection);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
         }
-        if (!isRidingScooter)
+        if (!isRidingScooter.Value)
         { 
             playerMoveEvent.Raise();
         }
-        else if (isRidingScooter)
+        else 
         {
             playerMoveScooterEvent.Raise();
         }

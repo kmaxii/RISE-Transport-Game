@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5853602840370560830}
   m_Layer: 0
   m_Name: LabelIcon
-  m_TagString: MapInteractable
+  m_TagString: BussStation
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -204,7 +204,7 @@ MonoBehaviour:
   background: {fileID: 114702148998547232}
   inWorldImage: {fileID: 212423247285982060}
   interactable3dPoi: {fileID: 5853602840370560830}
-  poiType: 0
+  poiType: 2
 --- !u!1 &1418439391676942
 GameObject:
   m_ObjectHideFlags: 0
@@ -360,7 +360,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 534, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222710272256179442

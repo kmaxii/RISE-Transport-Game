@@ -6,6 +6,7 @@ TagManager:
   tags:
   - MapInteractable
   - BussStation
+  - Mission
   layers:
   - Default
   - TransparentFX

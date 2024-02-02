@@ -89,6 +89,9 @@ public class PoiSpawner : MonoBehaviour
             instance.Set(mission.MissionName);
             instance.SetImage(mission.Sprite);
             poiMarker.SetType(PoiType.Mission);
+
+
+            instance.interactable3dPoi.transform.tag = "Mission";
             instance.SetBackgroundColor(mission.Color);
             Vector3 pos = map.GeoToWorldPosition(loc);
             pos.y += 5;

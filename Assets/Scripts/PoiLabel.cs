@@ -5,7 +5,7 @@ using UnityEngine;
 public class PoiLabel : PoiLabelTextSetter
 {
 
-    [SerializeField] private Interactable3dPoi interactable3dPoi;
+    [SerializeField] public Interactable3dPoi interactable3dPoi;
 
     public PoiType poiType;
 
