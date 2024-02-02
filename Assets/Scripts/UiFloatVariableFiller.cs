@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using Interfaces;
 using MaxisGeneralPurpose.Scriptable_objects;
-using Scriptable_objects;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -19,15 +18,28 @@ public class UiFloatVariableFiller : MonoBehaviour, IEventListenerInterface
     [SerializeField] private Image blackBackground;
 
     [SerializeField] private TMP_Text variableName;
+    
+    [SerializeField] private RectTransform marker;
+    [SerializeField] private FloatVariable markerPos;
+    [SerializeField] private float markerWidthOffset = -50;
 
 
-    [FormerlySerializedAs("timeBeforeWhiteHealthLoss")] [Tooltip("The amount of time before the white health disappear")] [Range(0, 5)] [SerializeField]
+    [FormerlySerializedAs("timeBeforeWhiteHealthLoss")]
+    [Tooltip("The amount of time before the white health disappear")]
+    [Range(0, 5)]
+    [SerializeField]
     private float timeBeforeWhiteLoss = 1;
 
-    [FormerlySerializedAs("timeBeforeWhiteHealthGain")] [Tooltip("The amount of time before the white health disappear when gaining health")] [Range(0, 5)] [SerializeField]
+    [FormerlySerializedAs("timeBeforeWhiteHealthGain")]
+    [Tooltip("The amount of time before the white health disappear when gaining health")]
+    [Range(0, 5)]
+    [SerializeField]
     private float timeBeforeWhiteGain = 0.1f;
 
-    [FormerlySerializedAs("whiteHealthLossTime")] [Tooltip("The amount of time it takes the white health to disappear")] [Range(0, 5)] [SerializeField]
+    [FormerlySerializedAs("whiteHealthLossTime")]
+    [Tooltip("The amount of time it takes the white health to disappear")]
+    [Range(0, 5)]
+    [SerializeField]
     private float whiteLossTime = 0.5f;
 
     [FormerlySerializedAs("whiteHealthGainTime")]
@@ -40,13 +52,23 @@ public class UiFloatVariableFiller : MonoBehaviour, IEventListenerInterface
 
     private float _healthPercentBefore = 1f;
 
-    public static UiFloatVariableFiller Instance;
+    private void SetMarkerPosition()
+    {
 
-    // Start is called before the first frame update
+        float percent = markerPos.Value / 100f;
+        
+
+        float width = healthBar.rectTransform.rect.width + markerWidthOffset; 
+        float positionX = percent * width; 
+        Vector2 newPosition = new Vector2(positionX - (width / 2), marker.anchoredPosition.y); 
+
+        marker.anchoredPosition = newPosition; 
+    }
+    
     private void Start()
     {
-        Instance = this;
-        //We call this once to update our health to the correct amount when entering a scene
+        SetMarkerPosition();
+        //We call this once to update our bars to the correct amount when entering a scene
         OnValueChange();
     }
 
