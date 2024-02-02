@@ -2153,6 +2153,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 679950600}
   m_CullTransparentMesh: 1
+--- !u!114 &685062668 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6570746843145852120, guid: c035b02c15cd8ab4d901f5426362c073, type: 3}
+  m_PrefabInstance: {fileID: 1565917300}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37eb0058c51c1e448bae53949203dbf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &722094143
 GameObject:
   m_ObjectHideFlags: 0
@@ -2169,6 +2180,7 @@ GameObject:
   - component: {fileID: 722094147}
   - component: {fileID: 722094150}
   - component: {fileID: 722094151}
+  - component: {fileID: 722094152}
   m_Layer: 0
   m_Name: SoundTriggerer
   m_TagString: Untagged
@@ -2389,6 +2401,35 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &722094152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 722094143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a44f222db338b5e42a3f141be68fc611, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  event: {fileID: 11400000, guid: 845bc13bd4c6c3045aa9989f8bd368a4, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 685062668}
+        m_TargetAssemblyTypeName: MaxisGeneralPurpose.AudioReceiver, Assembly-CSharp
+        m_MethodName: StopAudio
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: ee146b50c111ffc439ed6459d46765b3, type: 2}
+          m_ObjectArgumentAssemblyTypeName: Scriptable_objects.SimpleAudioPlayer,
+            Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -5648,6 +5689,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioReciever
       objectReference: {fileID: 0}
+    - target: {fileID: 6570746843145852122, guid: c035b02c15cd8ab4d901f5426362c073, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c035b02c15cd8ab4d901f5426362c073, type: 3}
 --- !u!1 &1592593441
@@ -5888,7 +5933,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1879410866877934554, guid: e70b4c6f3054c9d439ed422d3f8a3c90, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -112.4
+      value: -123.5
       objectReference: {fileID: 0}
     - target: {fileID: 1879410866877934554, guid: e70b4c6f3054c9d439ed422d3f8a3c90, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -5906,6 +5951,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 2197003307145594023, guid: e70b4c6f3054c9d439ed422d3f8a3c90, type: 3}
+      propertyPath: markerPos
+      value: 
+      objectReference: {fileID: 11400000, guid: 8cf7d7eba97201e46889860dc00356f9, type: 2}
     - target: {fileID: 2197003307145594023, guid: e70b4c6f3054c9d439ed422d3f8a3c90, type: 3}
       propertyPath: floatVariable
       value: 
@@ -7291,7 +7340,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1879410866877934554, guid: e70b4c6f3054c9d439ed422d3f8a3c90, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -50.9
+      value: -57.50003
       objectReference: {fileID: 0}
     - target: {fileID: 1879410866877934554, guid: e70b4c6f3054c9d439ed422d3f8a3c90, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -7309,6 +7358,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 2197003307145594023, guid: e70b4c6f3054c9d439ed422d3f8a3c90, type: 3}
+      propertyPath: markerPos
+      value: 
+      objectReference: {fileID: 11400000, guid: 4dd9c051b69239b408f888b6c169be18, type: 2}
     - target: {fileID: 2197003307145594023, guid: e70b4c6f3054c9d439ed422d3f8a3c90, type: 3}
       propertyPath: floatVariable
       value: 
