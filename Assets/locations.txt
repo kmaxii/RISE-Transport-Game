@@ -11,3 +11,9 @@ Bottom Right:
 8x8 = 
 
 4x4 = 4096
+
+
+
+Stats to log:
+
+Player id, Time (log every second), longitude; latitude, Transport mode, Activity, money status, other stats
