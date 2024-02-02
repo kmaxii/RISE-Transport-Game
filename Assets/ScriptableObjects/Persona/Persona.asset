@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62eec35392d9363478d7ad4bf7fad843, type: 3}
-  m_Name: New-Persona
+  m_Name: Persona
   m_EditorClassIdentifier: 
   sweatThreshold: 20
   sweatThresholdVariable: {fileID: 11400000, guid: c0246ab9733f90645a3c0776f30932f0, type: 2}

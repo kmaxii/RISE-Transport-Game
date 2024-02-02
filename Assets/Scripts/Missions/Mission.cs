@@ -1,4 +1,6 @@
+using Functions;
 using MaxisGeneralPurpose.Event;
+using MaxisGeneralPurpose.Scriptable_objects;
 using UnityEngine;
 
 namespace Missions
@@ -22,6 +24,7 @@ namespace Missions
     
         [Tooltip("If false, a random location is chosen. If true, can be done at all")]
         [SerializeField] private bool canBeDoneAtAllLocation; // Visibility managed in custom editor
+
 
         public  MissionLocation[] MissionLocations
         {
@@ -69,20 +72,25 @@ namespace Missions
         public  int ComfortPunishment => comfortPunishment;
 
 
-        public void FinishMission(CurrentStats currentStats)
+        public void FinishMission(CurrentStats currentStats, Persona persona)
         {
             currentStats.TimeVariable.Time24H += timeItTakes;
             currentStats.Money.Value += moneyReward;
-            currentStats.Stress.Value += stressChange;
-            currentStats.Comfort.Value += comfortChange;
+            currentStats.Stress.Value +=
+                SoDefaultSCFunc.ExecuteFunction(true, stressChange, persona.StressImportanceVariable.Value, 2);
+            currentStats.Comfort.Value += 
+                SoDefaultSCFunc.ExecuteFunction(true, comfortChange, persona.ComfortImportanceVariable.Value, 2);;
         }
 
 
-        public void FailMission(CurrentStats currentStats)
+        public void FailMission(CurrentStats currentStats, Persona persona)
         {
             currentStats.Money.Value += moneyPunishment;
-            currentStats.Stress.Value += stressPunishment;
-            currentStats.Comfort.Value += comfortPunishment;
+            currentStats.Stress.Value += 
+                SoDefaultSCFunc.ExecuteFunction(true, stressPunishment, persona.StressImportanceVariable.Value, 2);
+            currentStats.Comfort.Value += 
+                SoDefaultSCFunc.ExecuteFunction(true, comfortPunishment, persona.ComfortImportanceVariable.Value, 2);
+            
         }
         
         

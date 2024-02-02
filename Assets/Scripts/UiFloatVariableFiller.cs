@@ -6,6 +6,7 @@ using Scriptable_objects;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class UiFloatVariableFiller : MonoBehaviour, IEventListenerInterface
@@ -20,19 +21,20 @@ public class UiFloatVariableFiller : MonoBehaviour, IEventListenerInterface
     [SerializeField] private TMP_Text variableName;
 
 
-    [Tooltip("The amount of time before the white health disappear")] [Range(0, 5)] [SerializeField]
-    private float timeBeforeWhiteHealthLoss = 1;
+    [FormerlySerializedAs("timeBeforeWhiteHealthLoss")] [Tooltip("The amount of time before the white health disappear")] [Range(0, 5)] [SerializeField]
+    private float timeBeforeWhiteLoss = 1;
 
-    [Tooltip("The amount of time before the white health disappear when gaining health")] [Range(0, 5)] [SerializeField]
-    private float timeBeforeWhiteHealthGain = 0.1f;
+    [FormerlySerializedAs("timeBeforeWhiteHealthGain")] [Tooltip("The amount of time before the white health disappear when gaining health")] [Range(0, 5)] [SerializeField]
+    private float timeBeforeWhiteGain = 0.1f;
 
-    [Tooltip("The amount of time it takes the white health to disappear")] [Range(0, 5)] [SerializeField]
-    private float whiteHealthLossTime = 0.5f;
+    [FormerlySerializedAs("whiteHealthLossTime")] [Tooltip("The amount of time it takes the white health to disappear")] [Range(0, 5)] [SerializeField]
+    private float whiteLossTime = 0.5f;
 
+    [FormerlySerializedAs("whiteHealthGainTime")]
     [Tooltip("The amount of time it takes the white health to disappear when gaining hp")]
     [Range(0, 5)]
     [SerializeField]
-    private float whiteHealthGainTime = 0.4f;
+    private float whiteGainTime = 0.4f;
 
     private float _time;
 
@@ -87,8 +89,8 @@ public class UiFloatVariableFiller : MonoBehaviour, IEventListenerInterface
     private void IncreasedStat(float newLivePercent)
     {
         whiteHealthLost.fillAmount = newLivePercent;
-        StartCoroutine(LerpFill(healthBar, _healthPercentBefore, newLivePercent, timeBeforeWhiteHealthGain,
-            whiteHealthLossTime));
+        StartCoroutine(LerpFill(healthBar, _healthPercentBefore, newLivePercent, timeBeforeWhiteGain,
+            whiteLossTime));
     }
 
     private void DecreasedStat(float newLivePercent)
@@ -99,8 +101,8 @@ public class UiFloatVariableFiller : MonoBehaviour, IEventListenerInterface
 
 
         StartCoroutine(LerpFill(whiteHealthLost, _healthPercentBefore, newLivePercent - 0.1f,
-            timeBeforeWhiteHealthLoss,
-            whiteHealthGainTime));
+            timeBeforeWhiteLoss,
+            whiteGainTime));
 
 
         blackBackground.fillAmount = 1f;
