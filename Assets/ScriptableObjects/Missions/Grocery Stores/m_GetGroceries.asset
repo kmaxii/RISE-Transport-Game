@@ -28,7 +28,7 @@ MonoBehaviour:
   timeItTakes:
     hour: 0
     minute: 35
-  moneyReward: 0
+  moneyReward: -20
   stressChange: 0
   comfortChange: 0
   moneyPunishment: 0
