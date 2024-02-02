@@ -1,5 +1,4 @@
-﻿using MaxisGeneralPurpose.Scriptable_objects;
-using Scriptable_objects;
+﻿using Scriptable_objects;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "CurrentStats", menuName = "Rise/CurrentStats")]
@@ -10,9 +9,9 @@ public class CurrentStats : ScriptableObject
 
     [SerializeField] private FloatVariable money;
     public  FloatVariable Money => money;
-    [SerializeField] private IntVariable stress;
-    public  IntVariable Stress => stress;
-    [SerializeField] private IntVariable comfort;
-    public  IntVariable Comfort => comfort;
+    [SerializeField] private FloatVariable stress;
+    public  FloatVariable Stress => stress;
+    [SerializeField] private FloatVariable comfort;
+    public  FloatVariable Comfort => comfort;
 
 }

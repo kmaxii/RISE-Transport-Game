@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8955cedc251de874eb309d19e4457569, type: 3}
+  m_Script: {fileID: 11500000, guid: 96a37097b3f04e64db2a8099a4853ec6, type: 3}
   m_Name: Stress
   m_EditorClassIdentifier: 
   raiseOnValueChanged: {fileID: 0}
