@@ -19,9 +19,11 @@ public class Persona : ScriptableObject
     [Header("Stress Importance")]
     [Range(1, 5)] [SerializeField] private float stressImportance = 0;
     [SerializeField] private FloatVariable stressImportanceVariable;
+    public FloatVariable StressImportanceVariable => stressImportanceVariable;
     [Header("Comfort Importance")]
     [Range(1, 5)] [SerializeField] private float comfortImportance = 0;
     [SerializeField] private FloatVariable comfortImportanceVariable;
+    public FloatVariable ComfortImportanceVariable => comfortImportanceVariable;
     [Header("Bus Comfortability")]
     [Range(-1, 5)] [SerializeField] private float busComfortability = 0;
     [SerializeField] private FloatVariable busComfortabilityVariable;

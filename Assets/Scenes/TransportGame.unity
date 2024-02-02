@@ -667,7 +667,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 234181014}
-  m_LocalRotation: {x: 0.25767156, y: -0.000000008312684, z: 0.000000002216798, w: 0.9662326}
+  m_LocalRotation: {x: 0.25767156, y: 0.000000008312682, z: -0.0000000022167979, w: 0.9662326}
   m_LocalPosition: {x: 0, y: 269.69, z: -469.69}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4708,6 +4708,7 @@ MonoBehaviour:
   missionGotten: {fileID: 11400000, guid: 344339e1688f0934db26e7a62b51210a, type: 2}
   missionFailed: {fileID: 11400000, guid: 86d532d6f3b5e0c4c922ef3068e82eab, type: 2}
   missionCompleted: {fileID: 11400000, guid: f6da546253b3c154fb5acbc91b12e3e5, type: 2}
+  persona: {fileID: 11400000, guid: d82f3fcfc8fa5824d912a8fc5857bea0, type: 2}
 --- !u!4 &1367835073
 Transform:
   m_ObjectHideFlags: 0
@@ -6720,7 +6721,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1951402532}
-  m_LocalRotation: {x: 0.25767156, y: -0.000000008312684, z: 0.000000002216798, w: 0.9662326}
+  m_LocalRotation: {x: 0.25767156, y: 0.000000008312682, z: -0.0000000022167979, w: 0.9662326}
   m_LocalPosition: {x: 0, y: 269.69, z: -469.69}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

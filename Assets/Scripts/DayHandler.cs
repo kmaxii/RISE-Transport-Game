@@ -27,7 +27,8 @@ public class DayHandler : MonoBehaviour
     [SerializeField] private GameEventWithData missionFailed;
     [SerializeField] private GameEventWithData missionCompleted;
     
-    
+    [SerializeField] private Persona persona;
+
     
     private static DayHandler _instance;
     public static DayHandler Instance => _instance;
@@ -104,7 +105,7 @@ public class DayHandler : MonoBehaviour
     }
     public void FinishMission(DayMission dayMission)
     {
-        dayMission.Mission.FinishMission(currentStats);
+        dayMission.Mission.FinishMission(currentStats, persona);
         
         _activeMissions.Remove(dayMission);
         _completedMissions.Add(dayMission);
@@ -124,6 +125,8 @@ public class DayHandler : MonoBehaviour
         }
     }
     
+    
+    
     public void FailedMission(string missionName)
     {
         DayMission mission = _activeMissions.FirstOrDefault(mission => mission.Mission.MissionName == missionName);
@@ -138,7 +141,7 @@ public class DayHandler : MonoBehaviour
     }
     public void FailedMission(DayMission dayMission)
     {
-        dayMission.Mission.FailMission(currentStats);
+        dayMission.Mission.FailMission(currentStats, persona);
         
         _activeMissions.Remove(dayMission);
         _failedMissions.Add(dayMission);
