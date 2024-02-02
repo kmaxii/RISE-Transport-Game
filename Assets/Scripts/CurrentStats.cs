@@ -1,4 +1,5 @@
-﻿using Scriptable_objects;
+﻿using MaxisGeneralPurpose.Scriptable_objects;
+using Scriptable_objects;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "CurrentStats", menuName = "Rise/CurrentStats")]
