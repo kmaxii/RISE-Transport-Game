@@ -39,6 +39,8 @@ public class BussTravelUI : MonoBehaviour
     [SerializeField] private GameEvent showBussTravelCostUI;
     private bool _isEventSubscriber;
     [SerializeField] private TimeVariable currentTime;
+
+    [SerializeField] private IntVariable lastBusSwitches;
     
     void Start()
     {
@@ -135,6 +137,7 @@ public class BussTravelUI : MonoBehaviour
         _showingInfoFrom = from;
         _showingInfoTo = to;
 
+        lastBusSwitches.Value = result.SwitchesAmount;
 
         lineRenderer.ClearLines();
         JourneyDetails journeyDetails = await result.GetJourneyDetails();

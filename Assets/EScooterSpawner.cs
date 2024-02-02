@@ -93,7 +93,6 @@ public class EScooterSpawner : MonoBehaviour
             foreach (var scooter in _spawnedEScootersInGrids[grid])
             {
                 _eScooterPool.Release(scooter);
-                Debug.Log($"Destroyed eScooter in grid {grid.x}, {grid.y}");
             }
 
             _spawnedEScootersInGrids.Remove(grid);
