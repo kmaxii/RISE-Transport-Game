@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class BussStops
 {
-    private static String jsonFileName = "bussstations.json";
+    private static String jsonFileName = "bussstations";
 
     private bool singleStopPerName = true;
 
@@ -76,7 +76,10 @@ public class BussStops
     {
         try
         {
-            string jsonString = File.ReadAllText("Assets/" + jsonFileName);
+            
+            var textAsset = Resources.Load<TextAsset>(jsonFileName);
+            string jsonString = textAsset.text;
+            
             StopPointsData data = JsonConvert.DeserializeObject<StopPointsData>(jsonString);
 
             _uniqueStopPoints = singleStopPerName
