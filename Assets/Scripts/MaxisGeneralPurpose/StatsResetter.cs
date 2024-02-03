@@ -18,7 +18,7 @@ namespace MaxisGeneralPurpose
 
         [NonReorderable] [SerializeField] private TimeVariable time;
         [SerializeField] private Time24H startTime;
-
+        [SerializeField] private GameEvent bgMusicEvent;
 
 
         // Start is called before the first frame update
@@ -39,6 +39,7 @@ namespace MaxisGeneralPurpose
             }
 
             time.Time24H = startTime;
+            bgMusicEvent.Raise();
         }
 
     }
