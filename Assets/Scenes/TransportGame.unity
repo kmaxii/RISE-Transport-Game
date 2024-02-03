@@ -155,7 +155,7 @@ MonoBehaviour:
   statsChanges:
   - onEvent: {fileID: 11400000, guid: 5c2d2e6901d2e0241869770c65d4defb, type: 2}
     change: {fileID: 11400000, guid: 0801921ac358ea846b59f1e8a66fb4e1, type: 2}
-    with: {fileID: 11400000, guid: 8a36a9631bb0c9242a3945fd669335dc, type: 2}
+    with: {fileID: 11400000, guid: 6f3fc48f7f7d4f2408cd8924d6b7881a, type: 2}
     ifThis: {fileID: 11400000, guid: a58676de35c5b1647b4e75614b81f0cc, type: 2}
     isThis: 1
   - onEvent: {fileID: 11400000, guid: 5ab3ff43a404ab649a0519fe113c62e1, type: 2}
@@ -609,7 +609,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 234181014}
-  m_LocalRotation: {x: 0.25767156, y: 0.000000008312682, z: -0.0000000022167979, w: 0.9662326}
+  m_LocalRotation: {x: 0.25767156, y: -0.000000008312684, z: 0.000000002216798, w: 0.9662326}
   m_LocalPosition: {x: -17.49, y: 270.9908, z: -468.94308}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7022,7 +7022,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1951402532}
-  m_LocalRotation: {x: 0.25767156, y: 0.000000008312682, z: -0.0000000022167979, w: 0.9662326}
+  m_LocalRotation: {x: 0.25767156, y: -0.000000008312684, z: 0.000000002216798, w: 0.9662326}
   m_LocalPosition: {x: 0, y: 269.69, z: -469.69}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
