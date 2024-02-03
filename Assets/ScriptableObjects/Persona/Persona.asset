@@ -20,9 +20,9 @@ MonoBehaviour:
   tirednessThresholdVariable: {fileID: 11400000, guid: 54cb2ba0a130eb440921eff40b0e79a0, type: 2}
   timeImportance: 2
   timeImportanceVariable: {fileID: 11400000, guid: 8a39aae2be774d44cba84b6db34e7577, type: 2}
-  stressImportance: 3
+  stressImportance: 1
   stressImportanceVariable: {fileID: 11400000, guid: 037695af6eb2d5a4cb80205726ba5b0a, type: 2}
-  comfortImportance: 4
+  comfortImportance: 5
   comfortImportanceVariable: {fileID: 11400000, guid: 24de9e644f6707d4a9674c978cfe33c6, type: 2}
   busComfortability: 3
   busComfortabilityVariable: {fileID: 11400000, guid: b844be5f883ddd34f98421f4389fe35c, type: 2}

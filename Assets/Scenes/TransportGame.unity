@@ -163,6 +163,16 @@ MonoBehaviour:
     with: {fileID: 11400000, guid: 028cba30ef96cc9488229d9e64c6a835, type: 2}
     ifThis: {fileID: 0}
     isThis: 0
+  - onEvent: {fileID: 11400000, guid: 5ab3ff43a404ab649a0519fe113c62e1, type: 2}
+    change: {fileID: 11400000, guid: 405db621c5811d7469d90d9b30997164, type: 2}
+    with: {fileID: 11400000, guid: 028cba30ef96cc9488229d9e64c6a835, type: 2}
+    ifThis: {fileID: 0}
+    isThis: 0
+  - onEvent: {fileID: 11400000, guid: 5c2d2e6901d2e0241869770c65d4defb, type: 2}
+    change: {fileID: 11400000, guid: 405db621c5811d7469d90d9b30997164, type: 2}
+    with: {fileID: 11400000, guid: 6f3fc48f7f7d4f2408cd8924d6b7881a, type: 2}
+    ifThis: {fileID: 11400000, guid: a58676de35c5b1647b4e75614b81f0cc, type: 2}
+    isThis: 1
 --- !u!4 &6502576
 Transform:
   m_ObjectHideFlags: 0
@@ -1000,7 +1010,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4991467873002340382, guid: ec4dc34f889754e4f99037191a6aacef, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4991467873519429232, guid: ec4dc34f889754e4f99037191a6aacef, type: 3}
       propertyPath: m_Name
@@ -1679,7 +1689,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &525015560
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6204,6 +6214,10 @@ PrefabInstance:
       value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 2197003307145594023, guid: e70b4c6f3054c9d439ed422d3f8a3c90, type: 3}
+      propertyPath: maxValue
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 2197003307145594023, guid: e70b4c6f3054c9d439ed422d3f8a3c90, type: 3}
       propertyPath: markerPos
       value: 
       objectReference: {fileID: 11400000, guid: 8cf7d7eba97201e46889860dc00356f9, type: 2}
@@ -6719,9 +6733,9 @@ MonoBehaviour:
   toSetFloats:
   - value: 300
     floatVariable: {fileID: 11400000, guid: 9112a4e09811b9744b9f86d82f990ded, type: 2}
-  - value: 20
+  - value: 100
     floatVariable: {fileID: 11400000, guid: 405db621c5811d7469d90d9b30997164, type: 2}
-  - value: 20
+  - value: 100
     floatVariable: {fileID: 11400000, guid: 0801921ac358ea846b59f1e8a66fb4e1, type: 2}
   toSetBools:
   - value: 0
@@ -6736,7 +6750,7 @@ MonoBehaviour:
   startTime:
     hour: 7
     minute: 0
-  bgMusicEvent: {fileID: 0}
+  bgMusicEvent: {fileID: 11400000, guid: c0763aa7d14fb9247b8222d06d3b9ae2, type: 2}
 --- !u!4 &1794904671
 Transform:
   m_ObjectHideFlags: 0
@@ -7760,6 +7774,10 @@ PrefabInstance:
     - target: {fileID: 1879410866877934554, guid: e70b4c6f3054c9d439ed422d3f8a3c90, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2197003307145594023, guid: e70b4c6f3054c9d439ed422d3f8a3c90, type: 3}
+      propertyPath: maxValue
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 2197003307145594023, guid: e70b4c6f3054c9d439ed422d3f8a3c90, type: 3}
       propertyPath: markerPos

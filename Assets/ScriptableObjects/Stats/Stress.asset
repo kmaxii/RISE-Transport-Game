@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Stress
   m_EditorClassIdentifier: 
   raiseOnValueChanged: {fileID: 11400000, guid: 24e28b1b179bc274fb5d39851f459187, type: 2}
-  value: 52.3
+  value: 137.66876
