@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.45099849, g: 0.50085634, b: 0.5743218, a: 1}
+  m_IndirectSpecularColor: {r: 0.4509946, g: 0.50085366, b: 0.57433045, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -155,7 +155,7 @@ MonoBehaviour:
   statsChanges:
   - onEvent: {fileID: 11400000, guid: 5c2d2e6901d2e0241869770c65d4defb, type: 2}
     change: {fileID: 11400000, guid: 0801921ac358ea846b59f1e8a66fb4e1, type: 2}
-    with: {fileID: 11400000, guid: 8a36a9631bb0c9242a3945fd669335dc, type: 2}
+    with: {fileID: 0}
     ifThis: {fileID: 11400000, guid: a58676de35c5b1647b4e75614b81f0cc, type: 2}
     isThis: 1
   - onEvent: {fileID: 11400000, guid: 5ab3ff43a404ab649a0519fe113c62e1, type: 2}
@@ -6736,6 +6736,7 @@ MonoBehaviour:
   startTime:
     hour: 7
     minute: 0
+  bgMusicEvent: {fileID: 11400000, guid: c0763aa7d14fb9247b8222d06d3b9ae2, type: 2}
 --- !u!4 &1794904671
 Transform:
   m_ObjectHideFlags: 0
