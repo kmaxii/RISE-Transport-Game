@@ -54,7 +54,6 @@ namespace MaxisGeneralPurpose
                     if (audioSource.clip == audioEventAudioClip)
                     {
                         audioSource.Stop();
-                        return;
                     }
                 }
             }
