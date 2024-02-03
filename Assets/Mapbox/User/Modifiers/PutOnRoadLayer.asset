@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Active: 1
   _layerId: 8
+  material: {fileID: 2100000, guid: 69abb3b1ee8ea81478a900dfbbe4dd32, type: 2}
