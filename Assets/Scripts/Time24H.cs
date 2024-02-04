@@ -59,11 +59,13 @@ public class Time24H : IComparable<Time24H>
         {
             return true;
         }
-
-   
-        return a.minute > b.minute;
-
+        else if (a.hour == b.hour)
+        {
+            return a.minute > b.minute;
+        }
+        return false;
     }
+
 
     public static bool operator <(Time24H a, Time24H b)
     {
@@ -71,10 +73,13 @@ public class Time24H : IComparable<Time24H>
         {
             return true;
         }
-        
-        return a.minute < b.minute;
-       
+        else if (a.hour == b.hour)
+        {
+            return a.minute < b.minute;
+        }
+        return false;
     }
+
 
     public int CompareTo(Time24H other)
     {

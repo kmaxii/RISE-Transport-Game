@@ -66,12 +66,12 @@ public class DayHandler : MonoBehaviour
                 .Where(mission => mission.HasShowUpTime) // Select missions where HasShowUpTime is true
                 .OrderBy(mission => mission.ShowUpTime)) // Order them by ShowUpTime
             .ToList();
-
-
+        
         for (int i = 0; i < _notYetActiveMissions.Count; i++)
         {
             //Activate Mission will remove the element, that is why we can use 0 here
             var mission = _notYetActiveMissions[0];
+
             if (!mission.HasShowUpTime || mission.ShowUpTime < _timeVariable.Time24H)
             {
                 ActivateMission(mission);
