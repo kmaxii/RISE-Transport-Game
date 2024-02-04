@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4509946, g: 0.50085366, b: 0.57433045, a: 1}
+  m_IndirectSpecularColor: {r: 0.45099849, g: 0.50085634, b: 0.5743218, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4877,6 +4877,7 @@ MonoBehaviour:
   missionFailed: {fileID: 11400000, guid: 86d532d6f3b5e0c4c922ef3068e82eab, type: 2}
   missionCompleted: {fileID: 11400000, guid: f6da546253b3c154fb5acbc91b12e3e5, type: 2}
   persona: {fileID: 11400000, guid: d82f3fcfc8fa5824d912a8fc5857bea0, type: 2}
+  onTriedToDoMissionToEarly: {fileID: 11400000, guid: cfc28d93e459f6d4e88f94a319261bb7, type: 2}
 --- !u!4 &1367835073
 Transform:
   m_ObjectHideFlags: 0

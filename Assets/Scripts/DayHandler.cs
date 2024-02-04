@@ -29,6 +29,7 @@ public class DayHandler : MonoBehaviour
     
     [SerializeField] private Persona persona;
 
+    [SerializeField] private GameEvent onTriedToDoMissionToEarly;
     
     private static DayHandler _instance;
     public static DayHandler Instance => _instance;
@@ -101,6 +102,16 @@ public class DayHandler : MonoBehaviour
             return;
         }
 
+        //Check if you can do the mission 
+        if (mission.IsSetTime && mission.EarliestTime > _timeVariable.Time24H)
+        {
+            Debug.Log($"Mission {missionName} is not yet available");
+            onTriedToDoMissionToEarly.Raise();
+            return;
+        }
+        
+        
+  
         FinishMission(mission);
     }
     public void FinishMission(DayMission dayMission)
