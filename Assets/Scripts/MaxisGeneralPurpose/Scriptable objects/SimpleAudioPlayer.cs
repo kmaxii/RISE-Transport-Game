@@ -15,12 +15,14 @@ namespace Scriptable_objects
         [Range(0, 2)] public float minimumPitch = 1;
         [Range(0, 2)] public float maximumPitch = 1;
         
+        [SerializeField] public bool loop;
 
         public override void Play(AudioSource audioSource)
         {
             audioSource.clip = audioClips[Random.Range(0, audioClips.Count - 1)];
             audioSource.volume = Random.Range(minimumVolume, maximumVolume);
             audioSource.pitch = Random.Range(minimumPitch, maximumPitch);
+            audioSource.loop = loop;
             audioSource.Play();
         }
     }

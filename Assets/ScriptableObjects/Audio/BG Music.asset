@@ -19,3 +19,4 @@ MonoBehaviour:
   maximumVolume: 0.15
   minimumPitch: 1
   maximumPitch: 1
+  loop: 1
