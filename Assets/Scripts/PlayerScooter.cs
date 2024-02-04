@@ -15,7 +15,6 @@ public class PlayerScooter : MonoBehaviour
     
     [SerializeField] private TimeVariable currentTime;
 
-    [SerializeField] private FloatVariable pickUpCost;
     [SerializeField] private FloatVariable costPerMinute;
     
     [SerializeField] private FloatVariable money;
@@ -26,16 +25,9 @@ public class PlayerScooter : MonoBehaviour
     private void OnEnable()
     {
         
-        if (money.Value - pickUpCost.Value < 0)
-        {
-            cantAffordEvent.Raise();
-            return;
-        }
-        
         
         _startTime = currentTime.Time24H;
 
-        money.Value -= pickUpCost.Value;
         timePassedEvent.RegisterListener(OnEventRaised);
     }
 
@@ -46,7 +38,7 @@ public class PlayerScooter : MonoBehaviour
 
     public void OnEventRaised()
     {
-        if (money.Value - pickUpCost.Value < 0)
+        if (money.Value - costPerMinute.Value < 0)
         {
             cantAffordEvent.Raise();
             dismountScooterEvent.Raise();

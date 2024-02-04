@@ -1,25 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Interfaces;
 using MaxisGeneralPurpose.Scriptable_objects;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class MapInteractor : MonoBehaviour
 {
-
-
-    
-    [SerializeField] private UnityEvent canNowInteract;
-    [SerializeField] private UnityEvent canNoLongerInteract;
-
     [SerializeField] private GameEvent bussTaken;
-    
+
     [SerializeField] private MapInteractorLogic bussInteractor;
     [SerializeField] private MapInteractorLogic scooterInteractor;
     [SerializeField] private MapInteractorLogic missionInteractor;
-    
+
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("MapInteractable")
@@ -32,7 +21,7 @@ public class MapInteractor : MonoBehaviour
         {
             return;
         }
-        
+
         switch (other.tag)
         {
             case "BussStation":
@@ -49,12 +38,11 @@ public class MapInteractor : MonoBehaviour
 
     public void InteractWithClosest()
     {
-      //  MapInteractable closest = GetClosest();
-  
+        //  MapInteractable closest = GetClosest();
 
-   //     if (closest != null)
-   //         closest.Interact();
-        
+
+        //     if (closest != null)
+        //         closest.Interact();
     }
 
     private void OnTriggerExit(Collider other)
@@ -63,7 +51,7 @@ public class MapInteractor : MonoBehaviour
             && !other.CompareTag("BussStation")
             && !other.CompareTag("Mission"))
             return;
-        
+
         if (!other.TryGetComponent<MapInteractable>(out var mapInteractable))
         {
             return;
@@ -81,23 +69,21 @@ public class MapInteractor : MonoBehaviour
                 scooterInteractor.RemoveInteractable(mapInteractable);
                 break;
         }
-        
-      //  UpdateInteractableState();
+
+        //  UpdateInteractableState();
     }
-    
+
     private void OnEnable()
     {
         bussInteractor.RegisterListeners();
         scooterInteractor.RegisterListeners();
         missionInteractor.RegisterListeners();
     }
-    
+
     private void OnDisable()
     {
         bussInteractor.UnregisterListeners();
         scooterInteractor.UnregisterListeners();
         missionInteractor.UnregisterListeners();
     }
-
-    
 }
