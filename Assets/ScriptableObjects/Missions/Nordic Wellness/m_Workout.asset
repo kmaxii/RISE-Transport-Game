@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: m_Workout
   m_EditorClassIdentifier: 
   raiseOnValueChanged: {fileID: 0}
-  missionName: Workout
+  missionName: "Tr\xE4na p\xE5 gym"
   sprite: {fileID: 21300000, guid: 240e67c92465d4af09e98ac0ff6cb4e5, type: 3}
   color: {r: 0.3490566, g: 0.3490566, b: 0.3490566, a: 1}
   missionLocations:

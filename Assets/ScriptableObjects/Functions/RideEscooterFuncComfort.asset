@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fd1ca70fb2a42599ceb37b18ef33f76, type: 3}
+  m_Name: RideEscooterFuncComfort
+  m_EditorClassIdentifier: 
+  increase: 0
+  grossChange: 20
+  comfortabilityLevel: {fileID: 11400000, guid: 23769817f24f468479d37026250ec1e0, type: 2}
+  importanceLevel: {fileID: 11400000, guid: 24de9e644f6707d4a9674c978cfe33c6, type: 2}

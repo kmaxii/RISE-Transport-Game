@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: StressGoal
   m_EditorClassIdentifier: 
   raiseOnValueChanged: {fileID: 0}
-  value: 200
+  value: 60

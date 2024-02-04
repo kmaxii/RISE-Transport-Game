@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1fd1ca70fb2a42599ceb37b18ef33f76, type: 3}
-  m_Name: RideEscooterFunc 1
+  m_Name: RideEscooterFuncStress
   m_EditorClassIdentifier: 
   increase: 0
-  grossChange: 50
+  grossChange: 25
   comfortabilityLevel: {fileID: 11400000, guid: 23769817f24f468479d37026250ec1e0, type: 2}
-  importanceLevel: {fileID: 0}
+  importanceLevel: {fileID: 11400000, guid: 037695af6eb2d5a4cb80205726ba5b0a, type: 2}
