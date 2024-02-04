@@ -14,6 +14,9 @@ public class EScooterSpawner : MonoBehaviour
     private Dictionary<Vector2Int, List<GameObject>> _spawnedEScootersInGrids;
 
     private ObjectPool<GameObject> _eScooterPool;
+    
+    [SerializeField] private GameEvent mountScoterEvent;
+    [SerializeField] private GameEvent dismountScooterEvent;
 
 
     [Header("Spawn Settings")]
@@ -27,16 +30,57 @@ public class EScooterSpawner : MonoBehaviour
     //SpawnChance
     [Tooltip("The chance for each scooter that it wants to spawn to actually spawn.")] [SerializeField] [Range(0, 1)]
     private float spawnChance = 1f;
+    
+    [SerializeField] private float scooterYLevel = 0.35f;
 
     private void OnEnable()
     {
         playerMovedEvent.RegisterListener(SpawnEScooters);
+        mountScoterEvent.RegisterListener(RemoveClosestScooter);
+        dismountScooterEvent.RegisterListener(SpawnScooterAtPlayer);
     }
 
     private void OnDisable()
     {
         playerMovedEvent.UnregisterListener(SpawnEScooters);
+        mountScoterEvent.UnregisterListener(RemoveClosestScooter);
+        dismountScooterEvent.UnregisterListener(SpawnScooterAtPlayer);
     }
+
+
+    private void RemoveClosestScooter()
+    {
+        //Sphere cast around player and return the closest GameObject with the tag "MapInteractable" to the pool
+        Collider[] hitColliders = Physics.OverlapSphere(player.position, 10);
+        float minDistance = float.MaxValue;
+        GameObject closestScooter = null;
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider.CompareTag("MapInteractable"))
+            {
+                float distance = Vector3.Distance(hitCollider.transform.position, player.position);
+                if (distance < minDistance)
+                {
+                    minDistance = distance;
+                    closestScooter = hitCollider.gameObject;
+                }
+            }
+        }
+        
+        if (closestScooter != null)
+        {
+            _eScooterPool.Release(closestScooter);
+        }
+    }
+
+    private void SpawnScooterAtPlayer()
+    {
+        GameObject eScooter = _eScooterPool.Get();
+        //Set the scooter pos to player poss but to the right y
+        var position = player.position;
+        eScooter.transform.position = new Vector3(position.x, scooterYLevel, position.z);
+    }
+    
 
     private void Awake()
     {
@@ -129,7 +173,7 @@ public class EScooterSpawner : MonoBehaviour
             var gridInfo = gridData[i];
 
             GameObject eScooter = _eScooterPool.Get();
-            eScooter.transform.position = new Vector3((float) gridInfo.xPos, 0.35f, (float) gridInfo.yPos);
+            eScooter.transform.position = new Vector3((float) gridInfo.xPos, scooterYLevel, (float) gridInfo.yPos);
             
             //Randomize their y rotation
             eScooter.transform.rotation = Quaternion.Euler(0, UnityEngine.Random.Range(0, 360), 0);

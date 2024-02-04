@@ -35,16 +35,7 @@ public class MapInteractor : MonoBehaviour
                 break;
         }
     }
-
-    public void InteractWithClosest()
-    {
-        //  MapInteractable closest = GetClosest();
-
-
-        //     if (closest != null)
-        //         closest.Interact();
-    }
-
+    
     private void OnTriggerExit(Collider other)
     {
         if (!other.CompareTag("MapInteractable")
@@ -69,8 +60,6 @@ public class MapInteractor : MonoBehaviour
                 scooterInteractor.RemoveInteractable(mapInteractable);
                 break;
         }
-
-        //  UpdateInteractableState();
     }
 
     private void OnEnable()
