@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0c7e2810d564534aa1c6e1a2aeb79aa, type: 3}
+  m_Name: m_GoToPlayground
+  m_EditorClassIdentifier: 
+  raiseOnValueChanged: {fileID: 0}
+  missionName: "G\xE5 till lekpark"
+  sprite: {fileID: 21300000, guid: 08d14ec5687ea47fcb3de9ac267391b5, type: 3}
+  color: {r: 0, g: 0, b: 0, a: 0}
+  missionLocations:
+  - {fileID: 11400000, guid: 506bbc07ad3921e4ab7889d4242f049e, type: 2}
+  - {fileID: 11400000, guid: 127cba43d072aef4994b750a0b4e1516, type: 2}
+  - {fileID: 11400000, guid: fe69920a6d23d4742bfea62d32ddb1c3, type: 2}
+  - {fileID: 11400000, guid: ca89870df46545d49b847fb6cef1aace, type: 2}
+  - {fileID: 11400000, guid: 299cf4b253ef0354cbbc276ed97d8ccd, type: 2}
+  - {fileID: 11400000, guid: ea094d3a839a7b142875f633bc38de0c, type: 2}
+  - {fileID: 11400000, guid: 16dcde687ced7c34ea04148155de7728, type: 2}
+  canBeDoneAtAllLocation: 1
+  timeItTakes:
+    hour: 1
+    minute: 0
+  moneyReward: 0
+  stressChange: -5
+  comfortChange: 0
+  moneyPunishment: 0
+  stressPunishment: 0
+  comfortPunishment: 10

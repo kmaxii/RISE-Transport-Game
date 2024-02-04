@@ -16,7 +16,8 @@ MonoBehaviour:
   missionName: "G\xE5 till jobbet"
   sprite: {fileID: 21300000, guid: b8b01d4fa12054e23ac744c58f0ce422, type: 3}
   color: {r: 0, g: 0, b: 0, a: 0}
-  missionLocations: []
+  missionLocations:
+  - {fileID: 11400000, guid: d52349a94e54aaf4e91330763da7c552, type: 2}
   canBeDoneAtAllLocation: 0
   timeItTakes:
     hour: 8

@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c0c7e2810d564534aa1c6e1a2aeb79aa, type: 3}
-  m_Name: m_DropKidsAtSchool
+  m_Name: m_GoWatchFootball
   m_EditorClassIdentifier: 
   raiseOnValueChanged: {fileID: 0}
-  missionName: "L\xE4mna barnen i skolan"
-  sprite: {fileID: 21300000, guid: 5c6aae8151717b044b69959eb97e1502, type: 3}
+  missionName: Kolla barnens fotbollsmatch
+  sprite: {fileID: 21300000, guid: 08d14ec5687ea47fcb3de9ac267391b5, type: 3}
   color: {r: 0, g: 0, b: 0, a: 0}
   missionLocations:
-  - {fileID: 11400000, guid: 9ff1190b51e530849a267dd3ae671fcb, type: 2}
+  - {fileID: 11400000, guid: 16dcde687ced7c34ea04148155de7728, type: 2}
   canBeDoneAtAllLocation: 0
   timeItTakes:
-    hour: 0
-    minute: 3
+    hour: 2
+    minute: 0
   moneyReward: 0
-  stressChange: -3
-  comfortChange: 0
+  stressChange: -5
+  comfortChange: 5
   moneyPunishment: 0
   stressPunishment: 5
-  comfortPunishment: 0
+  comfortPunishment: 10

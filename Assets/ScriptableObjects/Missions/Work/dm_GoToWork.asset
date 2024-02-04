@@ -10,23 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 629601f5728d4b40887247c1cd4f27f8, type: 3}
-  m_Name: dm_PickUpKids
+  m_Name: dm_GoToWork
   m_EditorClassIdentifier: 
   raiseOnValueChanged: {fileID: 0}
-  mission: {fileID: 11400000, guid: 18ed29a22f6af6e4c8315eba02fd04de, type: 2}
+  mission: {fileID: 11400000, guid: 571ced9591dd8a2469f9af73ff85ee9e, type: 2}
   hasShowUpTime: 0
   showUpTime:
-    hour: 13
+    hour: 0
     minute: 0
   isSetTime: 1
   earliestTime:
-    hour: 16
-    minute: 0
+    hour: 7
+    minute: 30
   latestTime:
-    hour: 17
-    minute: 0
+    hour: 8
+    minute: 30
   hasChainedTask: 0
   triggerChainedOnFail: 0
-  childMission: {fileID: 11400000, guid: dfa1479cee617964589b9d983de1751b, type: 2}
-  isChainedTask: 1
-  parentMission: {fileID: 11400000, guid: dfa1479cee617964589b9d983de1751b, type: 2}
+  childMission: {fileID: 0}
+  isChainedTask: 0
+  parentMission: {fileID: 0}
