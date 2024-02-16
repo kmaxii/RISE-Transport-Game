@@ -63,7 +63,7 @@ namespace minimap
         {
             onPlayerMove.RegisterListener(OnEventRaised);
             onPlayerMove2.RegisterListener(OnEventRaised);
-            
+            Invoke(nameof(UpdateMap), 0.5f);
         }
 
         private void OnDisable()
