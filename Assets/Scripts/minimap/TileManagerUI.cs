@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Interfaces;
 using MaxisGeneralPurpose.Scriptable_objects;
-using Scriptable_objects;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -14,6 +12,7 @@ namespace minimap
     public class TileManagerUI : MonoBehaviour, IDragHandler, IScrollHandler
     {
         private float _maxZoom = 5f;
+        public bool isInMainMapView = false;
 
         public float MaxZoom
         {
@@ -31,7 +30,12 @@ namespace minimap
 
         public float ZoomSpeed
         {
-            set => _zoomSpeed = value;
+            set
+            {
+                _zoomSpeed = value;
+          //   Invoke(nameof(UpdateMap), 1f);
+                
+            }
         }
 
         [SerializeField] private int tileSize = 256;
@@ -147,7 +151,6 @@ namespace minimap
             //Check if the squared distance of player.transform.position and _playerLastPos is bigger then _minimumMoved squared
             if (Vector3.SqrMagnitude(player.transform.position - _playerLastPos) > _minimumMoved * _minimumMoved)
             {
-                _playerLastPos = player.transform.position;
                 UpdateMap();
                 
             }
@@ -156,6 +159,8 @@ namespace minimap
         
         public void UpdateMap()
         {
+            _playerLastPos = player.transform.position;
+
             UpdatePlayerPoiPosition();
             RenderTiles();
             LockMapInCanvasBorder();
@@ -420,12 +425,50 @@ namespace minimap
         public void OnScroll(PointerEventData eventData)
         {
             Vector2 cursorPosition = eventData.position;
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(_mapRectTransform, cursorPosition,
-                eventData.pressEventCamera, out Vector2 localCursor);
-
             float scroll = eventData.scrollDelta.y;
+            
+            Zoom(cursorPosition, scroll, eventData.pressEventCamera);
+            UpdateMap();
+
+        }
+
+        public void ZoomInOnCenter(bool zoomIn)
+        {
+            //Get the center pixel as a vector 2 of the screen
+            Vector2 center = new Vector2(Screen.width / 2, Screen.height / 2);
+            //Zoom in on the center
+            Zoom(center, zoomIn ? 1 : -1, Camera.current);
+
+            if (!isInMainMapView)
+            {
+                SnapToPlayer();
+            }
+            UpdateMap();
+
+        }
+
+        /// <summary>
+        /// Adjusts the zoom level of the map based on user input.
+        /// </summary>
+        /// <param name="pos">The position to zoom in to based on pixels on the screen.</param>
+        /// <param name="amount">Should be 1 to zoom in, -1 to zoom out</param>
+        /// <param name="camera">The camera that is rendering the UI.</param>
+        /// <remarks>
+        /// This method adjusts the scale of the map RectTransform based on the amount of scroll input from the user.
+        /// It also adjusts the position of the map to keep the cursor point stationary during zooming.
+        /// The zoom level is clamped between a minimum and maximum zoom level, defined by _minZoom and _maxZoom.
+        /// If the resolution changes as a result of the zoom, all tiles are removed and will be re-rendered on the next UpdateMap call.
+        /// </remarks>
+        private void Zoom(Vector2 pos, float amount, Camera camera)
+        {
+            Debug.Log("Amount: " + amount);
+            Debug.Log(pos);
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(_mapRectTransform, pos,
+                camera, out Vector2 localCursor);
+
+            
             Vector3 oldScale = _mapRectTransform.localScale;
-            Vector3 newScale = oldScale + Vector3.one * scroll * _zoomSpeed;
+            Vector3 newScale = oldScale + Vector3.one * amount * _zoomSpeed;
             newScale = new Vector3(
                 Mathf.Clamp(newScale.x, _originalScale.x * _minZoom, _originalScale.x * _maxZoom),
                 Mathf.Clamp(newScale.y, _originalScale.y * _minZoom, _originalScale.y * _maxZoom), 1
@@ -450,7 +493,6 @@ namespace minimap
                 _lastRes = res;
             }
 
-            UpdateMap();
         }
         
         private void SnapToPlayer()
