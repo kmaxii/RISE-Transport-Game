@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using MaxisGeneralPurpose.Event;
 using UnityEngine;
 
@@ -22,7 +23,7 @@ namespace MaxisGeneralPurpose.Scriptable_objects
         }
         public override string ToString()
         {
-            return value.ToString();
+            return value.ToString(CultureInfo.InvariantCulture);
         }
     }
 }

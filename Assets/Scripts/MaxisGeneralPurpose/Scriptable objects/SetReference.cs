@@ -44,5 +44,11 @@ namespace Scriptable_objects
       {
          return _set.Count == 0;
       }
+
+      public override string ToString()
+      {
+         //Return all names of object in set
+         return "set";
+      }
    }
 }

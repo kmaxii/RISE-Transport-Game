@@ -8,5 +8,6 @@ namespace MaxisGeneralPurpose.Event
     {
         public GameEvent raiseOnValueChanged;
 
+        public abstract override string ToString();
     }
 }

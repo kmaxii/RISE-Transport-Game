@@ -8,5 +8,9 @@ namespace Scriptable_objects
     public class StringList : DataCarrier
     {
         [SerializeField] public string[] list;
+        public override string ToString()
+        {
+            return string.Join(", ", list);
+        }
     }
 }
