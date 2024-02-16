@@ -33,7 +33,8 @@ namespace minimap
             set
             {
                 _zoomSpeed = value;
-          //   Invoke(nameof(UpdateMap), 1f);
+                OnEventRaised();
+                UpdateMap();
                 
             }
         }
