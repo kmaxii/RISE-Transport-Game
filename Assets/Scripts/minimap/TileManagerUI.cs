@@ -63,13 +63,23 @@ namespace minimap
         {
             onPlayerMove.RegisterListener(OnEventRaised);
             onPlayerMove2.RegisterListener(OnEventRaised);
-            Invoke(nameof(UpdateMap), 0.5f);
         }
 
         private void OnDisable()
         {
             onPlayerMove.UnregisterListener(OnEventRaised);
             onPlayerMove2.UnregisterListener(OnEventRaised);
+        }
+
+        private void Start()
+        {
+            Invoke(nameof(UpdateMap), 0.5f);
+            Invoke(nameof(ZoomOut), 0.6f);
+        }
+
+        private void ZoomOut()
+        {
+            ZoomInOnCenter(false);
         }
 
         private float CurrentZoom => _mapRectTransform.localScale.x;
