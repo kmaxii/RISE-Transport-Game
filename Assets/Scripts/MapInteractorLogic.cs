@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using MaxisGeneralPurpose.Event;
 using MaxisGeneralPurpose.Scriptable_objects;
 using UnityEngine;
 
@@ -73,6 +74,10 @@ public class MapInteractorLogic
         return closest;
     }
     
+    public void UpdateInteractableState(DataCarrier dataCarrier)
+    {
+        UpdateInteractableState();
+    }
     public void UpdateInteractableState()
     {
         //Go through the entire list reverse and check if any of the objects have gotten destroyed, if they have remove them.
@@ -85,7 +90,7 @@ public class MapInteractorLogic
             }
         }
 
-        if (_interactables.Count != 0) return;
+        if (_interactables.Count != 0 || !canInteract.Value) return;
         canInteract.Value = false;
         canNoLongerInteract.Raise();
     }
