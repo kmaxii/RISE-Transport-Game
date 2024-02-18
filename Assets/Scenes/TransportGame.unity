@@ -620,7 +620,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 234181014}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.25767156, y: 0.000000008312682, z: -0.0000000022167979, w: 0.9662326}
+  m_LocalRotation: {x: 0.25767156, y: -0.000000008312684, z: 0.000000002216798, w: 0.9662326}
   m_LocalPosition: {x: -17.49, y: 270.9908, z: -468.94308}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2433,6 +2433,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 765545330}
+  - component: {fileID: 765545331}
   m_Layer: 5
   m_Name: FullScreenMapParent
   m_TagString: Untagged
@@ -2460,6 +2461,58 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &765545331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 765545329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a44f222db338b5e42a3f141be68fc611, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  event: {fileID: 11400000, guid: f2d82bf213608fb4e888903e9cdadb1d, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 837042820}
+        m_TargetAssemblyTypeName: LineRendererHandler, Assembly-CSharp
+        m_MethodName: ClearLines
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 679950602}
+        m_TargetAssemblyTypeName: BussTravelUI, Assembly-CSharp
+        m_MethodName: HideTravelOption
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1592593445}
+        m_TargetAssemblyTypeName: minimap.FullScreenMap, Assembly-CSharp
+        m_MethodName: HideMap
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &786917353
 GameObject:
   m_ObjectHideFlags: 0
@@ -5819,33 +5872,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 837042820}
-        m_TargetAssemblyTypeName: LineRendererHandler, Assembly-CSharp
-        m_MethodName: ClearLines
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 679950602}
-        m_TargetAssemblyTypeName: BussTravelUI, Assembly-CSharp
-        m_MethodName: HideTravelOption
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1592593445}
-        m_TargetAssemblyTypeName: FullScreenMap, Assembly-CSharp
-        m_MethodName: HideMap
+      - m_Target: {fileID: 11400000, guid: f2d82bf213608fb4e888903e9cdadb1d, type: 2}
+        m_TargetAssemblyTypeName: MaxisGeneralPurpose.Scriptable_objects.GameEvent,
+          Assembly-CSharp
+        m_MethodName: Raise
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7220,7 +7250,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1951402532}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.25767156, y: 0.000000008312682, z: -0.0000000022167979, w: 0.9662326}
+  m_LocalRotation: {x: 0.25767156, y: -0.000000008312684, z: 0.000000002216798, w: 0.9662326}
   m_LocalPosition: {x: 0, y: 269.69, z: -469.69}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
