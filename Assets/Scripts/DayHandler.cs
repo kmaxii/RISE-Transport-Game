@@ -1,9 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using Interfaces;
 using MaxisGeneralPurpose.Scriptable_objects;
 using Missions;
-using Scriptable_objects;
 using UnityEngine;
 
 public class DayHandler : MonoBehaviour
@@ -26,11 +24,11 @@ public class DayHandler : MonoBehaviour
     [SerializeField] private GameEventWithData missionGotten;
     [SerializeField] private GameEventWithData missionFailed;
     [SerializeField] private GameEventWithData missionCompleted;
-    
+
     [SerializeField] private Persona persona;
 
-    [SerializeField] private GameEvent onTriedToDoMissionToEarly;
-    
+    [SerializeField] private DayMissionReference lastAttemptedMission;
+
     private static DayHandler _instance;
     public static DayHandler Instance => _instance;
 
@@ -67,7 +65,7 @@ public class DayHandler : MonoBehaviour
                 .Where(mission => mission.HasShowUpTime) // Select missions where HasShowUpTime is true
                 .OrderBy(mission => mission.ShowUpTime)) // Order them by ShowUpTime
             .ToList();
-        
+
         for (int i = 0; i < _notYetActiveMissions.Count; i++)
         {
             //Activate Mission will remove the element, that is why we can use 0 here
@@ -106,24 +104,30 @@ public class DayHandler : MonoBehaviour
         if (mission.IsSetTime && mission.EarliestTime > _timeVariable.Time24H)
         {
             Debug.Log($"Mission {missionName} is not yet available");
-            onTriedToDoMissionToEarly.Raise();
+            lastAttemptedMission.Value = mission;
             return;
         }
-        
-        
-  
+
+
         FinishMission(mission);
     }
+
+    public void TimeWarpToMission()
+    {
+        _timeVariable.Time24H = lastAttemptedMission.Value.EarliestTime;
+        FinishMission(lastAttemptedMission.Value);
+    }
+
     public void FinishMission(DayMission dayMission)
     {
         dayMission.Mission.FinishMission(currentStats, persona);
-        
+
         _activeMissions.Remove(dayMission);
         _completedMissions.Add(dayMission);
         poiSpawner.DestroyMission(dayMission.Mission);
 
         missionCompleted.Raise(dayMission);
-        
+
         if (dayMission.HasChainedTask)
         {
             var nextMission = dayMission.ChildMission;
@@ -135,9 +139,8 @@ public class DayHandler : MonoBehaviour
             }
         }
     }
-    
-    
-    
+
+
     public void FailedMission(string missionName)
     {
         DayMission mission = _activeMissions.FirstOrDefault(mission => mission.Mission.MissionName == missionName);
@@ -150,16 +153,17 @@ public class DayHandler : MonoBehaviour
 
         FailedMission(mission);
     }
+
     public void FailedMission(DayMission dayMission)
     {
         dayMission.Mission.FailMission(currentStats, persona);
-        
+
         _activeMissions.Remove(dayMission);
         _failedMissions.Add(dayMission);
         poiSpawner.DestroyMission(dayMission.Mission);
 
         missionFailed.Raise(dayMission);
-        
+
         if (dayMission.HasChainedTask && dayMission.TriggerChainedOnFail)
         {
             var nextMission = dayMission.ChildMission;
@@ -171,7 +175,6 @@ public class DayHandler : MonoBehaviour
             }
         }
     }
-    
 
 
     private void OnEnable()

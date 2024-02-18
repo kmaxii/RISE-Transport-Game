@@ -45,10 +45,14 @@ public class PriceUi : MonoBehaviour
             return;
         }
 
-        if (!CanAfford(_showingElement.price))
-            return;
+        if (_showingElement.price)
+        {
+            if (!CanAfford(_showingElement.price))
+                return;
 
-        money.Value -= _showingElement.price.Value;
+            money.Value -= _showingElement.price.Value;
+        }
+
         _showingElement.triggerOnAccept.Raise();
         CloseUI();
     }
