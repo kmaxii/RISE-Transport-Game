@@ -8,13 +8,15 @@ namespace minimap
         public PoiType Type;
         public Sprite Sprite;
         public string Message;
+        public bool alwaysShow;
         
-        public MmPoiData(Vector2 poiCoordinates, PoiType type, Sprite sprite, string message)
+        public MmPoiData(Vector2 poiCoordinates, PoiType type, Sprite sprite, string message, bool alwaysShow = false)
         {
             PoiCoordinates = poiCoordinates;
             Type = type;
             Sprite = sprite;
             Message = message;
+            this.alwaysShow = alwaysShow;
         }
     }
 }

@@ -316,19 +316,19 @@ namespace minimap
             }
         }
 
-        public MmPoiData AddPoi(Vector3 inWorldPos, PoiType poiType, String message, Sprite sprite)
+        public MmPoiData AddPoi(Vector3 inWorldPos, PoiType poiType, String message, Sprite sprite, bool alwaysShow = false)
         {
-            return AddPoi(CoordinateUtils.ToUiCoords(inWorldPos), poiType, message, sprite);
+            return AddPoi(CoordinateUtils.ToUiCoords(inWorldPos), poiType, message, sprite, alwaysShow);
         }
 
-        public MmPoiData AddPoi(Vector2 poiCoordinates, PoiType poiType, String message, Sprite sprite)
+
+        public MmPoiData AddPoi(Vector2 poiCoordinates, PoiType poiType, String message, Sprite sprite, bool alwaysShow = false)
         {
-            // Convert POI coordinates to map's local coordinates
             Vector2 localPos = ConvertCoordinatesToLocalPosition(poiCoordinates);
 
             Vector2Int tilePos = GetTileAtPosition(localPos);
 
-            MmPoiData mmPoiData = new MmPoiData(localPos, poiType, sprite, message);
+            MmPoiData mmPoiData = new MmPoiData(localPos, poiType, sprite, message, alwaysShow);
 
             _poiHolder.Add(tilePos, mmPoiData);
             return mmPoiData;

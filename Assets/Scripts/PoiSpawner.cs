@@ -103,7 +103,8 @@ public class PoiSpawner : MonoBehaviour
                 pos,
                 PoiType.Mission,
                 mission.MissionName,
-                mission.Sprite);
+                mission.Sprite,
+                true);
             
             
             spawned.Add(new KeyValuePair<PoiLabelTextSetter, MmPoiData>(instance, miniMapPoi));
