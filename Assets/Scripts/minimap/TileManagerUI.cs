@@ -201,7 +201,7 @@ namespace minimap
                 }
             }
 
-            var toDespawn = LinqUtility.ToHashSet(_spawnedPois.Keys.Where(p => !shouldBeSpawned.Contains(p)));
+            var toDespawn = LinqUtility.ToHashSet(_spawnedPois.Keys.Where(p => !p.alwaysShow && !shouldBeSpawned.Contains(p)));
             var toSpawn = LinqUtility.ToHashSet(shouldBeSpawned.Where(p => !_spawnedPois.Keys.Contains(p)));
 
             foreach (var poi in toDespawn)
@@ -231,7 +231,6 @@ namespace minimap
         private MiniMapPOI SpawnPoi(MmPoiData poiData)
         {
             MiniMapPOI poi = pools.GetPoi(poiData.PoiCoordinates, poiData.Sprite, poiData.Message, poiData.Type);
-            // MiniMapPOI poi = Instantiate(poiPrefab, _mapRectTransform);
             poi.Position = poiData.PoiCoordinates;
             poi.Setup(poiData.Sprite, poiData.Message, poiData.Type);
 
