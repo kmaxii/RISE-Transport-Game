@@ -224,7 +224,7 @@ namespace minimap
             
             foreach (var poi in _alwaysShowPois)
             {
-                poi.AdjustWithinBounds(_mapRectTransform);
+                poi.AdjustWithinBounds(_mapRectTransform, canvasRectTransform);
                 
             }
         }

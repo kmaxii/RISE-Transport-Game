@@ -31,12 +31,26 @@ namespace minimap
 
         private Vector2 _initialLocalPos;
 
-        public void AdjustWithinBounds(RectTransform grandParent)
+        public void AdjustWithinBounds(RectTransform grandParent, RectTransform canvas)
         {
             Vector2 adjustedPosition = grandParent.TransformPoint(_initialLocalPos);
 
-            adjustedPosition.x = Mathf.Clamp(adjustedPosition.x, 0, Screen.width);
-            adjustedPosition.y = Mathf.Clamp(adjustedPosition.y, 0, Screen.height);
+           // Debug.Log(Position);
+            // Get the corners of the canvas
+            Vector3[] corners = new Vector3[4];
+            canvas.GetWorldCorners(corners);
+            
+            // Calculate canvas width and height
+            float canvasWidth = Vector3.Distance(corners[0], corners[3]);
+            float canvasHeight = Vector3.Distance(corners[0], corners[1]);
+
+            Vector2 bottomLeft = corners[0];
+
+            // Adjusting the position by considering the canvas pinned to the top left
+            // We use the bottom left corner as the reference for the X and Y min values
+            adjustedPosition.x = Mathf.Clamp(adjustedPosition.x, bottomLeft.x + 25, bottomLeft.x + canvasWidth - 25);
+            adjustedPosition.y = Mathf.Clamp(adjustedPosition.y, bottomLeft.y + 25, bottomLeft.y + canvasHeight - 25);
+
             rectTransform.position = adjustedPosition;
         }
 
