@@ -8,11 +8,12 @@ namespace minimap
 {
     public class MiniMapPOI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
     {
-        [SerializeField] private Image image; 
-        public TextMeshProUGUI textMesh; 
+        [SerializeField] private Image image;
+        public TextMeshProUGUI textMesh;
 
         [Tooltip("Scale factor for when the mouse hovers over")]
-        public float hoverScale = 1.2f; 
+        public float hoverScale = 1.2f;
+
         private Vector3 _originalScale;
 
         public RectTransform rectTransform;
@@ -25,8 +26,19 @@ namespace minimap
         public Vector2 Position
         {
             set => rectTransform.localPosition = value;
+            get => rectTransform.localPosition;
         }
-        
+
+        private Vector2 _initialLocalPos;
+
+        public void AdjustWithinBounds(RectTransform grandParent)
+        {
+            Vector2 adjustedPosition = grandParent.TransformPoint(_initialLocalPos);
+
+            adjustedPosition.x = Mathf.Clamp(adjustedPosition.x, 0, Screen.width);
+            adjustedPosition.y = Mathf.Clamp(adjustedPosition.y, 0, Screen.height);
+            rectTransform.position = adjustedPosition;
+        }
 
 
         private void Start()
@@ -65,6 +77,7 @@ namespace minimap
             _poiType = poiType;
             SetText(text);
             SetSprite(sprite);
+            _initialLocalPos = Position;
         }
 
 

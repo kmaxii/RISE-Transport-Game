@@ -46,6 +46,7 @@ namespace minimap
 
         [SerializeField] private ImageTiler imageTiler;
         [SerializeField] private MapPools pools;
+        private HashSet<MiniMapPOI> _alwaysShowPois = new HashSet<MiniMapPOI>();
         [SerializeField] private Sprite playerSprite;
         [SerializeField] private Transform player;
 
@@ -215,10 +216,20 @@ namespace minimap
             {
                 MiniMapPOI miniMapPoi = SpawnPoi(poi);
                 _spawnedPois.Add(poi, miniMapPoi);
+                if (poi.alwaysShow)
+                {
+                    _alwaysShowPois.Add(miniMapPoi);
+                }
+            }
+            
+            foreach (var poi in _alwaysShowPois)
+            {
+                poi.AdjustWithinBounds(_mapRectTransform);
+                
             }
         }
 
-        private readonly Dictionary<MmPoiData, MiniMapPOI> _spawnedPois = new Dictionary<MmPoiData, MiniMapPOI>();
+        private readonly Dictionary<MmPoiData, MiniMapPOI> _spawnedPois = new();
 
 
         private void DespawnPoi(MmPoiData poiData)
