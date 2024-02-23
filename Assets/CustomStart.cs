@@ -15,7 +15,7 @@ public class CustomStart : MonoBehaviour
 
     [Tooltip("We need the player to first spawn at the center pos for the world map to be correctly set up, then we can move them to the correct location")]
     [SerializeField] private float delayToMovePlayer = 0.1f;
-    // Start is called before the first frame update
+
     void Start()
     {
         Invoke(nameof(SetPlayerLocToStart), delayToMovePlayer);
