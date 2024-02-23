@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using MaxisGeneralPurpose.Scriptable_objects;
 using UnityEngine;
 
@@ -9,6 +10,10 @@ public class MapInteractor : MonoBehaviour
     [SerializeField] private MapInteractorLogic scooterInteractor;
     [SerializeField] private MapInteractorLogic missionInteractor;
 
+    [SerializeField] private List<GameEvent> updateInteractableStates;
+    [SerializeField] private List<GameEventWithData> updateInteractableStates2;
+    
+    
     private void OnTriggerEnter(Collider other)
     {
         if (!other.CompareTag("MapInteractable")
@@ -35,6 +40,8 @@ public class MapInteractor : MonoBehaviour
                 break;
         }
     }
+    
+    
     
     private void OnTriggerExit(Collider other)
     {
@@ -67,6 +74,20 @@ public class MapInteractor : MonoBehaviour
         bussInteractor.RegisterListeners();
         scooterInteractor.RegisterListeners();
         missionInteractor.RegisterListeners();
+        
+        foreach (var updateInteractableState in updateInteractableStates)
+        {
+            updateInteractableState.RegisterListener(bussInteractor.UpdateInteractableState);
+            updateInteractableState.RegisterListener(scooterInteractor.UpdateInteractableState);
+            updateInteractableState.RegisterListener(missionInteractor.UpdateInteractableState);
+        }
+        
+        foreach (var updateInteractableState in updateInteractableStates2)
+        {
+            updateInteractableState.RegisterListener(bussInteractor.UpdateInteractableState);
+            updateInteractableState.RegisterListener(scooterInteractor.UpdateInteractableState);
+            updateInteractableState.RegisterListener(missionInteractor.UpdateInteractableState);
+        }
     }
 
     private void OnDisable()
@@ -74,5 +95,19 @@ public class MapInteractor : MonoBehaviour
         bussInteractor.UnregisterListeners();
         scooterInteractor.UnregisterListeners();
         missionInteractor.UnregisterListeners();
+        
+        foreach (var updateInteractableState in updateInteractableStates)
+        {
+            updateInteractableState.UnregisterListener(bussInteractor.UpdateInteractableState);
+            updateInteractableState.UnregisterListener(scooterInteractor.UpdateInteractableState);
+            updateInteractableState.UnregisterListener(missionInteractor.UpdateInteractableState);
+        }
+        
+        foreach (var updateInteractableState in updateInteractableStates2)
+        {
+            updateInteractableState.UnregisterListener(bussInteractor.UpdateInteractableState);
+            updateInteractableState.UnregisterListener(scooterInteractor.UpdateInteractableState);
+            updateInteractableState.UnregisterListener(missionInteractor.UpdateInteractableState);
+        }
     }
 }

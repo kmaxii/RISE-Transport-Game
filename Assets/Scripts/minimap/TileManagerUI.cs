@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Interfaces;
 using MaxisGeneralPurpose.Scriptable_objects;
-using Scriptable_objects;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -14,6 +12,7 @@ namespace minimap
     public class TileManagerUI : MonoBehaviour, IDragHandler, IScrollHandler
     {
         private float _maxZoom = 5f;
+        public bool isInMainMapView = false;
 
         public float MaxZoom
         {
@@ -31,7 +30,13 @@ namespace minimap
 
         public float ZoomSpeed
         {
-            set => _zoomSpeed = value;
+            set
+            {
+                _zoomSpeed = value;
+                OnEventRaised();
+                UpdateMap();
+                
+            }
         }
 
         [SerializeField] private int tileSize = 256;
@@ -41,6 +46,7 @@ namespace minimap
 
         [SerializeField] private ImageTiler imageTiler;
         [SerializeField] private MapPools pools;
+        private HashSet<MiniMapPOI> _alwaysShowPois = new HashSet<MiniMapPOI>();
         [SerializeField] private Sprite playerSprite;
         [SerializeField] private Transform player;
 
@@ -58,13 +64,23 @@ namespace minimap
         {
             onPlayerMove.RegisterListener(OnEventRaised);
             onPlayerMove2.RegisterListener(OnEventRaised);
-            
         }
 
         private void OnDisable()
         {
             onPlayerMove.UnregisterListener(OnEventRaised);
             onPlayerMove2.UnregisterListener(OnEventRaised);
+        }
+
+        private void Start()
+        {
+            Invoke(nameof(UpdateMap), 0.5f);
+            Invoke(nameof(ZoomOut), 0.6f);
+        }
+
+        private void ZoomOut()
+        {
+            ZoomInOnCenter(false);
         }
 
         private float CurrentZoom => _mapRectTransform.localScale.x;
@@ -147,7 +163,6 @@ namespace minimap
             //Check if the squared distance of player.transform.position and _playerLastPos is bigger then _minimumMoved squared
             if (Vector3.SqrMagnitude(player.transform.position - _playerLastPos) > _minimumMoved * _minimumMoved)
             {
-                _playerLastPos = player.transform.position;
                 UpdateMap();
                 
             }
@@ -156,6 +171,8 @@ namespace minimap
         
         public void UpdateMap()
         {
+            _playerLastPos = player.transform.position;
+
             UpdatePlayerPoiPosition();
             RenderTiles();
             LockMapInCanvasBorder();
@@ -185,7 +202,7 @@ namespace minimap
                 }
             }
 
-            var toDespawn = LinqUtility.ToHashSet(_spawnedPois.Keys.Where(p => !shouldBeSpawned.Contains(p)));
+            var toDespawn = LinqUtility.ToHashSet(_spawnedPois.Keys.Where(p => !p.alwaysShow && !shouldBeSpawned.Contains(p)));
             var toSpawn = LinqUtility.ToHashSet(shouldBeSpawned.Where(p => !_spawnedPois.Keys.Contains(p)));
 
             foreach (var poi in toDespawn)
@@ -199,10 +216,20 @@ namespace minimap
             {
                 MiniMapPOI miniMapPoi = SpawnPoi(poi);
                 _spawnedPois.Add(poi, miniMapPoi);
+                if (poi.alwaysShow)
+                {
+                    _alwaysShowPois.Add(miniMapPoi);
+                }
+            }
+            
+            foreach (var poi in _alwaysShowPois)
+            {
+                poi.AdjustWithinBounds(_mapRectTransform, canvasRectTransform);
+                
             }
         }
 
-        private readonly Dictionary<MmPoiData, MiniMapPOI> _spawnedPois = new Dictionary<MmPoiData, MiniMapPOI>();
+        private readonly Dictionary<MmPoiData, MiniMapPOI> _spawnedPois = new();
 
 
         private void DespawnPoi(MmPoiData poiData)
@@ -215,7 +242,6 @@ namespace minimap
         private MiniMapPOI SpawnPoi(MmPoiData poiData)
         {
             MiniMapPOI poi = pools.GetPoi(poiData.PoiCoordinates, poiData.Sprite, poiData.Message, poiData.Type);
-            // MiniMapPOI poi = Instantiate(poiPrefab, _mapRectTransform);
             poi.Position = poiData.PoiCoordinates;
             poi.Setup(poiData.Sprite, poiData.Message, poiData.Type);
 
@@ -300,19 +326,19 @@ namespace minimap
             }
         }
 
-        public MmPoiData AddPoi(Vector3 inWorldPos, PoiType poiType, String message, Sprite sprite)
+        public MmPoiData AddPoi(Vector3 inWorldPos, PoiType poiType, String message, Sprite sprite, bool alwaysShow = false)
         {
-            return AddPoi(CoordinateUtils.ToUiCoords(inWorldPos), poiType, message, sprite);
+            return AddPoi(CoordinateUtils.ToUiCoords(inWorldPos), poiType, message, sprite, alwaysShow);
         }
 
-        public MmPoiData AddPoi(Vector2 poiCoordinates, PoiType poiType, String message, Sprite sprite)
+
+        public MmPoiData AddPoi(Vector2 poiCoordinates, PoiType poiType, String message, Sprite sprite, bool alwaysShow = false)
         {
-            // Convert POI coordinates to map's local coordinates
             Vector2 localPos = ConvertCoordinatesToLocalPosition(poiCoordinates);
 
             Vector2Int tilePos = GetTileAtPosition(localPos);
 
-            MmPoiData mmPoiData = new MmPoiData(localPos, poiType, sprite, message);
+            MmPoiData mmPoiData = new MmPoiData(localPos, poiType, sprite, message, alwaysShow);
 
             _poiHolder.Add(tilePos, mmPoiData);
             return mmPoiData;
@@ -420,12 +446,50 @@ namespace minimap
         public void OnScroll(PointerEventData eventData)
         {
             Vector2 cursorPosition = eventData.position;
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(_mapRectTransform, cursorPosition,
-                eventData.pressEventCamera, out Vector2 localCursor);
-
             float scroll = eventData.scrollDelta.y;
+            
+            Zoom(cursorPosition, scroll, eventData.pressEventCamera);
+            UpdateMap();
+
+        }
+
+        public void ZoomInOnCenter(bool zoomIn)
+        {
+            //Get the center pixel as a vector 2 of the screen
+            Vector2 center = new Vector2(Screen.width / 2, Screen.height / 2);
+            //Zoom in on the center
+            Zoom(center, zoomIn ? 1 : -1, Camera.current);
+
+            if (!isInMainMapView)
+            {
+                SnapToPlayer();
+            }
+            UpdateMap();
+
+        }
+
+        /// <summary>
+        /// Adjusts the zoom level of the map based on user input.
+        /// </summary>
+        /// <param name="pos">The position to zoom in to based on pixels on the screen.</param>
+        /// <param name="amount">Should be 1 to zoom in, -1 to zoom out</param>
+        /// <param name="camera">The camera that is rendering the UI.</param>
+        /// <remarks>
+        /// This method adjusts the scale of the map RectTransform based on the amount of scroll input from the user.
+        /// It also adjusts the position of the map to keep the cursor point stationary during zooming.
+        /// The zoom level is clamped between a minimum and maximum zoom level, defined by _minZoom and _maxZoom.
+        /// If the resolution changes as a result of the zoom, all tiles are removed and will be re-rendered on the next UpdateMap call.
+        /// </remarks>
+        private void Zoom(Vector2 pos, float amount, Camera camera)
+        {
+            Debug.Log("Amount: " + amount);
+            Debug.Log(pos);
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(_mapRectTransform, pos,
+                camera, out Vector2 localCursor);
+
+            
             Vector3 oldScale = _mapRectTransform.localScale;
-            Vector3 newScale = oldScale + Vector3.one * scroll * _zoomSpeed;
+            Vector3 newScale = oldScale + Vector3.one * amount * _zoomSpeed;
             newScale = new Vector3(
                 Mathf.Clamp(newScale.x, _originalScale.x * _minZoom, _originalScale.x * _maxZoom),
                 Mathf.Clamp(newScale.y, _originalScale.y * _minZoom, _originalScale.y * _maxZoom), 1
@@ -450,7 +514,6 @@ namespace minimap
                 _lastRes = res;
             }
 
-            UpdateMap();
         }
         
         private void SnapToPlayer()

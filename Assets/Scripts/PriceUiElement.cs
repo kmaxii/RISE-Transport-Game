@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using MaxisGeneralPurpose.Event;
 using MaxisGeneralPurpose.Scriptable_objects;
 using QuickEye.Utility;
 using Scriptable_objects;
@@ -11,7 +12,7 @@ public delegate void PriceUiElementDelegate(PriceUiElement priceUiElement);
 public class PriceUiElement
 {
     [SerializeField] private PriceUiTexts priceUiTexts;
-    [SerializeField] private UnityDictionary<string, FloatVariable> textReplacements;
+    [SerializeField] private UnityDictionary<string, DataCarrier> textReplacements;
 
     [SerializeField]  private GameEvent showOnEvent;
     [SerializeField] private GameEvent hideOnEvent;
@@ -54,9 +55,9 @@ public class PriceUiElement
         get
         {
             string titleText = priceUiTexts.titleText;
-            foreach (KeyValuePair<string, FloatVariable> replacement in textReplacements)
+            foreach (KeyValuePair<string, DataCarrier> replacement in textReplacements)
             {
-                titleText = titleText.Replace(replacement.Key, replacement.Value.Value + "");
+                titleText = titleText.Replace(replacement.Key, replacement.Value.ToString());
             }
 
             return titleText;
@@ -68,11 +69,12 @@ public class PriceUiElement
         get
         {
             string mainText = priceUiTexts.mainText;
-            foreach (KeyValuePair<string, FloatVariable> replacement in textReplacements)
+            foreach (KeyValuePair<string, DataCarrier> replacement in textReplacements)
             {
-                mainText = mainText.Replace(replacement.Key, replacement.Value.Value + "");
+      
+                mainText = mainText.Replace(replacement.Key, replacement.Value.ToString());
             }
-
+            
             return mainText;
         }
     }

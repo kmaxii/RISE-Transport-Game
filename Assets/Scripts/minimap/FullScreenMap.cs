@@ -1,5 +1,3 @@
-using System;
-using ScriptableObjects;
 using ScriptableObjects.Map;
 using UnityEngine;
 
@@ -57,7 +55,7 @@ namespace minimap
             closeButton.SetActive(true);
             MoveToMainMap();
             tileManagerUI.UpdateMap();
-            UpdateSettings(mainMapSetting);
+            UpdateSettings(mainMapSetting,true);
         }
         
     
@@ -72,11 +70,12 @@ namespace minimap
             tripPlanner.ClearCurrentData();
             MoveToMinimap();
             tileManagerUI.UpdateMap();
-            UpdateSettings(miniMapSettings);
+            UpdateSettings(miniMapSettings, false);
         }
-        
-        private void UpdateSettings(MapSettingsSo settings)
+
+        private void UpdateSettings(MapSettingsSo settings, bool isInMainMapView)
         {
+            tileManagerUI.isInMainMapView = isInMainMapView;
             tileManagerUI.MaxZoom = settings.MapZoomMax;
             tileManagerUI.MinZoom = settings.MapZoomMin;
             tileManagerUI.ZoomSpeed = settings.MapZoomSpeed;
