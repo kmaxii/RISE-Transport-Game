@@ -7059,7 +7059,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18ba697cc24f8bf48b9e118fe160ca6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toSetIntVariable: []
+  toSetIntVariable:
+  - value: 0
+    intVariable: {fileID: 11400000, guid: 20fb2c81bfd07f34c8ba4d91ebc46c8c, type: 2}
   toSetFloats:
   - value: 300
     floatVariable: {fileID: 11400000, guid: 9112a4e09811b9744b9f86d82f990ded, type: 2}

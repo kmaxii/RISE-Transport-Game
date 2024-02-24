@@ -2782,3 +2782,4 @@ MonoBehaviour:
   money: {fileID: 11400000, guid: 9112a4e09811b9744b9f86d82f990ded, type: 2}
   cantAffordEvent: {fileID: 11400000, guid: 5a59924baf989a344b863ed5c263bd61, type: 2}
   dismountScooterEvent: {fileID: 11400000, guid: 845bc13bd4c6c3045aa9989f8bd368a4, type: 2}
+  timeSpentOnScooter: {fileID: 11400000, guid: 20fb2c81bfd07f34c8ba4d91ebc46c8c, type: 2}
