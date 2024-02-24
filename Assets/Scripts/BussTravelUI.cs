@@ -12,12 +12,12 @@ using vasttrafik;
 
 public class BussTravelUI : MonoBehaviour
 {
-    /*[TextArea] [ReadOnly] private string textReplacements = "%FN: From Name " +
-                                                                             "\n%FT: From Time" +
-                                                                             "\n%TN: To Name" +
-                                                                             "\n%TT: To time " +
-                                                                             "\n%BA: Byten amount" +
-                                                                             "\n%BI: Byten info";*/
+    [Tooltip("%FN: From Name " +
+             "\n%FT: From Time" +
+             "\n%TN: To Name" +
+             "\n%TT: To time " +
+             "\n%BA: Byten amount" +
+             "\n%BI: Byten info")]
     [SerializeField] [TextArea] private string travelInfoTemplate;
     [SerializeField] private TMP_Text travelInfoText;
 
@@ -41,6 +41,7 @@ public class BussTravelUI : MonoBehaviour
     [SerializeField] private TimeVariable currentTime;
 
     [SerializeField] private IntVariable lastBusSwitches;
+    [SerializeField] private IntVariable timeSpentOnPublicTransport;
     
     void Start()
     {
@@ -89,6 +90,10 @@ public class BussTravelUI : MonoBehaviour
         
         GameObject.FindWithTag("Player").transform.position = pos;
         HideTravelOption();
+        
+        Time24H timeTripTakes = new Time24H(_showingResult.DestinationTime) - _leaveTime;
+        timeSpentOnPublicTransport.Value += timeTripTakes.TotalMinutes;
+        
         timeVariable.Time24H = new Time24H(_showingResult.DestinationTime);
 
         

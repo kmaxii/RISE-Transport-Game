@@ -2088,6 +2088,7 @@ MonoBehaviour:
   showBussTravelCostUI: {fileID: 11400000, guid: 6059ca2e16b96454dbcb508a0ef95c5d, type: 2}
   currentTime: {fileID: 11400000, guid: 3e013dc3110bf9b4ca29f5af6ac7195e, type: 2}
   lastBusSwitches: {fileID: 11400000, guid: cf21be444e468ec419e11fad33445b9f, type: 2}
+  timeSpentOnPublicTransport: {fileID: 11400000, guid: 854e91aa5f683c5488112cfdc15d603b, type: 2}
 --- !u!222 &679950603
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7062,6 +7063,8 @@ MonoBehaviour:
   toSetIntVariable:
   - value: 0
     intVariable: {fileID: 11400000, guid: 20fb2c81bfd07f34c8ba4d91ebc46c8c, type: 2}
+  - value: 0
+    intVariable: {fileID: 11400000, guid: 854e91aa5f683c5488112cfdc15d603b, type: 2}
   toSetFloats:
   - value: 300
     floatVariable: {fileID: 11400000, guid: 9112a4e09811b9744b9f86d82f990ded, type: 2}
