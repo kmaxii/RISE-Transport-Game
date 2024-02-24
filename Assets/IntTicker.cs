@@ -22,7 +22,6 @@ public class IntTicker : MonoBehaviour
 
     private void OnEventRaised()
     {
-        Debug.Log(Vector3.Distance(player.position, transform.position));
         if (ifThis.Value != isThis || !(Vector3.Distance(player.position, transform.position) > 2)) return;
         transform.position = player.position;
         toIncrease.Value += increaseAmount;
