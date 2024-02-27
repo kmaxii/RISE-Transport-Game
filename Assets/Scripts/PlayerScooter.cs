@@ -22,10 +22,10 @@ public class PlayerScooter : MonoBehaviour
     [SerializeField] private GameEvent cantAffordEvent;
     [SerializeField] private GameEvent dismountScooterEvent;
     
+    [SerializeField] private IntVariable timeSpentOnScooter;
+    
     private void OnEnable()
     {
-        
-        
         _startTime = currentTime.Time24H;
 
         timePassedEvent.RegisterListener(OnEventRaised);
@@ -46,5 +46,6 @@ public class PlayerScooter : MonoBehaviour
         }
         
         money.Value -= costPerMinute.Value;
+        timeSpentOnScooter.Value++;
     }
 }

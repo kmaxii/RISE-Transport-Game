@@ -179,13 +179,13 @@ namespace minimap
             RenderPois();
         }
 
+        private HashSet<MmPoiData> shouldBeSpawned = new HashSet<MmPoiData>();
 
         private void RenderPois()
         {
             Vector2Int topRightTile16 = GetTileAtPosition(BottomLeftCoords);
             Vector2Int bottomLeftTile16 = GetTileAtPosition(TopRightCoords);
 
-            HashSet<MmPoiData> shouldBeSpawned = new HashSet<MmPoiData>();
 
             //Why? I don't know! Please help!
             topRightTile16.x++;
@@ -225,8 +225,8 @@ namespace minimap
             foreach (var poi in _alwaysShowPois)
             {
                 poi.AdjustWithinBounds(_mapRectTransform, canvasRectTransform);
-                
             }
+            shouldBeSpawned.Clear();
         }
 
         private readonly Dictionary<MmPoiData, MiniMapPOI> _spawnedPois = new();
@@ -341,6 +341,12 @@ namespace minimap
             MmPoiData mmPoiData = new MmPoiData(localPos, poiType, sprite, message, alwaysShow);
 
             _poiHolder.Add(tilePos, mmPoiData);
+
+            if (alwaysShow)
+            {
+                shouldBeSpawned.Add(mmPoiData);
+            }
+            
             return mmPoiData;
         }
 

@@ -29,7 +29,8 @@ public class Time24H : IComparable<Time24H>
         return $"{hour:00}:{minute:00}";
     }
 
-  
+    public int TotalMinutes => hour * 60 + minute;
+
 
     public string Rfc3339 => TimeUtils.ConvertToRfc3339(this);
 
@@ -45,6 +46,28 @@ public class Time24H : IComparable<Time24H>
 
         return new Time24H(totalHours, totalMinutes);
     }
+    
+    public static Time24H operator -(Time24H a, Time24H b)
+    {
+        int totalMinutes = a.minute - b.minute;
+        int totalHours = a.hour - b.hour;
+
+        // If subtracting minutes goes below zero, adjust hours and minutes accordingly
+        if (totalMinutes < 0)
+        {
+            totalMinutes += 60; // Add 60 minutes to totalMinutes
+            totalHours -= 1; // Subtract one hour
+        }
+
+        // Normalize hours to be within 0-23 range
+        if (totalHours < 0)
+        {
+            totalHours += 24; // Add 24 hours if result is negative
+        }
+
+        return new Time24H(totalHours, totalMinutes);
+    }
+
 
     public static bool WillHourResetToZero(Time24H a, Time24H b)
     {
@@ -65,7 +88,7 @@ public class Time24H : IComparable<Time24H>
         }
         return false;
     }
-
+    
 
     public static bool operator <(Time24H a, Time24H b)
     {
