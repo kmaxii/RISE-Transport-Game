@@ -29,7 +29,7 @@ public class LineRendererHandler : MonoBehaviour {
     public void AddLines(List<Vector2> coordsList, string travelType) {
         
         // given a set of coordinates, this method should take the coordinates and put them into a array caller bussLines.Points.
-        UILineRenderer newTravelLine = travelLinePrefab;
+        UILineRenderer newTravelLine = Instantiate(travelLinePrefab, transform);
         if (travelLinesList.Count >= 1) {
             UILineRenderer newWalkLine = travelLinePrefab;
             newWalkLine.color = travelColors[4];
@@ -71,7 +71,7 @@ public class LineRendererHandler : MonoBehaviour {
         }
 
         newTravelLine.transform.name = travelType;
-        travelLinesList.Add(Instantiate(newTravelLine, transform));
+        travelLinesList.Add(newTravelLine);
         
         
 
