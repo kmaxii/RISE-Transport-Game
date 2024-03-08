@@ -27,6 +27,7 @@ namespace MaxisGeneralPurpose
         private void OnEnable()
         {
             value.raiseOnValueChanged.RegisterListener(OnEventRaised);
+            OnEventRaised();
         }
 
         private void OnDisable()
