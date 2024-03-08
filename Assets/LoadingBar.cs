@@ -9,11 +9,14 @@ public class LoadingBar : MonoBehaviour
 
     [SerializeField] private TimeVariable time;
 
-
     [SerializeField] private TimeVariable lastBusArriveTime;
     [SerializeField] private GameEvent traveldByBusEvent;
 
+    [Tooltip("The speed to normally pass the time by. Min per sec")]
     [SerializeField] private float speed = 5;
+
+    [Tooltip("Includes the one sec fade in and one sec fade out time")]
+    [SerializeField] private float minimumTimeShown = 4;
 
     [SerializeField] private CanvasGroup canvasGroup;
 
@@ -70,9 +73,22 @@ public class LoadingBar : MonoBehaviour
         float startTime = time.Time24H.TotalMinutes;
         float to = toTime.TotalMinutes;
         var currentTime = startTime;
+        
+        
+        //Set a float "speedToUse" to be speed if the time to reach is greater than the minimum time shown
+        //Otherwise set it to be the time to reach divided by the minimum time shown
+        
+        Debug.Log("Time it will take to reach: " + (to - startTime));
+        
+        float speedToUse = ((to - startTime) / speed) > minimumTimeShown ? speed : (to - startTime) / minimumTimeShown;
+        
+        //print speedtouse
+        Debug.Log("Speed to use: " + speedToUse);
+        
         while (currentTime < to)
         {
-            currentTime += speed * Time.deltaTime;
+                
+            currentTime += speedToUse * Time.deltaTime;
             //Set the slider value to how far it has loaded from startTime to final time
             slider.value = (currentTime - startTime) / (to - startTime);
 

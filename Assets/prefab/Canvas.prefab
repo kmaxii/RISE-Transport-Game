@@ -2108,7 +2108,7 @@ GameObject:
   - component: {fileID: 8130215115587744550}
   - component: {fileID: 3428328663561472794}
   m_Layer: 5
-  m_Name: Image
+  m_Name: BussTravelLoading
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2154,6 +2154,7 @@ MonoBehaviour:
   lastBusArriveTime: {fileID: 11400000, guid: 0151b85eb41c7904c88f428606bf94fe, type: 2}
   traveldByBusEvent: {fileID: 11400000, guid: 5ab3ff43a404ab649a0519fe113c62e1, type: 2}
   speed: 5
+  minimumTimeShown: 4
   canvasGroup: {fileID: 3428328663561472794}
 --- !u!225 &3428328663561472794
 CanvasGroup:
