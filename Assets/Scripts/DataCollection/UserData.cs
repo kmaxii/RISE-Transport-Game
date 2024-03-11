@@ -10,11 +10,11 @@ namespace DataCollection
         public double latitude;
         public string busTransport;
         public string activityChange;
-        public int money;
+        public float money;
         public bool isOnScooter;
         public string activities;
 
-        public UserData(string time, double longitude, double latitude, string busTransport, string activityChange, int money, bool isOnScooter, string activities)
+        public UserData(string time, double longitude, double latitude, string busTransport, string activityChange, float money, bool isOnScooter, string activities)
         {
             this.time = time;
             this.longitude = longitude;

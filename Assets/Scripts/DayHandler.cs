@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using MaxisGeneralPurpose.Scriptable_objects;
@@ -193,5 +194,17 @@ public class DayHandler : MonoBehaviour
     public void OnEventRaised()
     {
         CheckToStartMissions();
+    }
+
+    public override string ToString()
+    {
+        //Return a string with all the missions that are active 
+        
+        string activeMissions = _activeMissions
+            .Select(mission => mission.Mission.MissionName)
+            .Aggregate((current, next) => current + ", " + next);
+        
+        
+        return activeMissions;
     }
 }
