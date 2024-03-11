@@ -41,6 +41,7 @@ public class BussTravelUI : MonoBehaviour
     [SerializeField] private TimeVariable currentTime;
 
     [SerializeField] private IntVariable lastBusSwitches;
+    [SerializeField] private TimeVariable lastBusArrive;
     [SerializeField] private IntVariable timeSpentOnPublicTransport;
     
     void Start()
@@ -93,8 +94,10 @@ public class BussTravelUI : MonoBehaviour
         
         Time24H timeTripTakes = new Time24H(_showingResult.DestinationTime) - _leaveTime;
         timeSpentOnPublicTransport.Value += timeTripTakes.TotalMinutes;
+
+        lastBusArrive.Time24H = new Time24H(_showingResult.DestinationTime);
         
-        timeVariable.Time24H = new Time24H(_showingResult.DestinationTime);
+    //    timeVariable.Time24H = new Time24H(_showingResult.DestinationTime);
 
         
         traveledByBussEvent.Raise();

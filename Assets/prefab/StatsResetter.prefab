@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5741252856095185016
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7350437652671388724}
+  - component: {fileID: 7498704153838807312}
+  m_Layer: 0
+  m_Name: StatsResetter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7350437652671388724
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5741252856095185016}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1060.8728, y: 580.3749, z: -270.67477}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7498704153838807312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5741252856095185016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18ba697cc24f8bf48b9e118fe160ca6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  toSetIntVariable:
+  - value: 0
+    intVariable: {fileID: 11400000, guid: 20fb2c81bfd07f34c8ba4d91ebc46c8c, type: 2}
+  - value: 0
+    intVariable: {fileID: 11400000, guid: 854e91aa5f683c5488112cfdc15d603b, type: 2}
+  - value: -1
+    intVariable: {fileID: 11400000, guid: b59e1f330ed0f3a4ca043e311c0b1aff, type: 2}
+  toSetFloats:
+  - value: 300
+    floatVariable: {fileID: 11400000, guid: 9112a4e09811b9744b9f86d82f990ded, type: 2}
+  - value: 100
+    floatVariable: {fileID: 11400000, guid: 405db621c5811d7469d90d9b30997164, type: 2}
+  - value: 300
+    floatVariable: {fileID: 11400000, guid: 0801921ac358ea846b59f1e8a66fb4e1, type: 2}
+  toSetBools:
+  - value: 0
+    boolVariable: {fileID: 11400000, guid: 8a21cc6ceac19944da78de75ff41f995, type: 2}
+  - value: 0
+    boolVariable: {fileID: 11400000, guid: d883b8b72a1465e43ad7b07ab5f12aa4, type: 2}
+  - value: 0
+    boolVariable: {fileID: 11400000, guid: 21bc0a240e9df294a88ec38730fcafcd, type: 2}
+  - value: 0
+    boolVariable: {fileID: 11400000, guid: a58676de35c5b1647b4e75614b81f0cc, type: 2}
+  time: {fileID: 11400000, guid: 3e013dc3110bf9b4ca29f5af6ac7195e, type: 2}
+  startTime:
+    hour: 6
+    minute: 30
+  bgMusicEvent: {fileID: 11400000, guid: c0763aa7d14fb9247b8222d06d3b9ae2, type: 2}

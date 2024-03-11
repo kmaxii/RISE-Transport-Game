@@ -32,7 +32,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -72,8 +71,8 @@ MonoBehaviour:
   m_Resolution: 0
   m_useNativeSize: 0
   m_points:
-  - {x: -135.06882, y: -229.5424}
-  - {x: -135.06882, y: -229.5424}
+  - {x: 38.77418, y: 229.1557}
+  - {x: 38.77418, y: 229.1557}
   lineThickness: 3
   relativeSize: 0
   lineList: 0

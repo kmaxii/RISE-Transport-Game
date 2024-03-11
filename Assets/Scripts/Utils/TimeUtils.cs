@@ -8,7 +8,7 @@ namespace Utils
     {
         public static string ConvertToRfc3339(Time24H time24H)
         {
-            return ConvertToRfc3339(time24H.hour, time24H.minute);
+            return ConvertToRfc3339(time24H.hour - 1, time24H.minute);
         }
 
         public static string ConvertToRfc3339(int hour, int minute)
