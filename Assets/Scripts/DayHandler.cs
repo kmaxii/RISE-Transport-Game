@@ -16,7 +16,7 @@ public class DayHandler : MonoBehaviour
 
     [SerializeField] private CurrentStats currentStats;
 
-    private List<DayMission> _notYetActiveMissions;
+    private List<DayMission> _notYetActiveMissions = new List<DayMission>();
 
     private readonly List<DayMission> _activeMissions = new();
     private readonly HashSet<DayMission> _completedMissions = new();
