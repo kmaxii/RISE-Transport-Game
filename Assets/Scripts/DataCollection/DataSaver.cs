@@ -101,6 +101,8 @@ namespace DataCollection
 
         private void OnApplicationQuit()
         {
+            StartCoroutine(_dataManager.SendDataToAPI("http://129.151.214.102:9090/processUserData"));
+            
             _dataManager.SaveDataToFile();
         }
     }

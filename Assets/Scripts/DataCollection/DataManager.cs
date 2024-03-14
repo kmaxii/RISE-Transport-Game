@@ -2,6 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Net;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -46,16 +49,29 @@ namespace DataCollection
             }
         }
 
+// Add this method to validate all certificates
+        private bool RemoteCertificateValidationCallback(System.Object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
+        {
+            return true; // Accept all certificates
+        }
+
         public IEnumerator SendDataToAPI(string apiUrl)
         {
+            // Ignore SSL certificate errors (only for development)
+            ServicePointManager.ServerCertificateValidationCallback = RemoteCertificateValidationCallback;
+
             string jsonData = JsonUtility.ToJson(userDataList);
 
-            using (UnityWebRequest webRequest = UnityWebRequest.Put(apiUrl, jsonData))
+            using (UnityWebRequest webRequest = new UnityWebRequest(apiUrl, "POST"))
             {
+                byte[] bodyRaw = new System.Text.UTF8Encoding().GetBytes(jsonData);
+                webRequest.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
+                webRequest.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
                 webRequest.SetRequestHeader("Content-Type", "application/json");
+
                 yield return webRequest.SendWebRequest();
 
-                if (webRequest.isNetworkError || webRequest.isHttpError)
+                if (webRequest.result == UnityWebRequest.Result.ConnectionError || webRequest.result == UnityWebRequest.Result.ProtocolError)
                 {
                     Debug.LogError($"Error sending data: {webRequest.error}");
                 }
