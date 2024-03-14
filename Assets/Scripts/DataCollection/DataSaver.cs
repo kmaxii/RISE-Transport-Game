@@ -86,7 +86,8 @@ namespace DataCollection
 
             var latLong = map.WorldToGeoPosition(player.position);
             UserData data = new UserData(time.Time24H.ToString(),
-                latLong.x, latLong.y,
+                latLong.y, 
+                latLong.x,
                 lastBusInfo.Value,
                 _missionChangeText,
                 money.Value,
