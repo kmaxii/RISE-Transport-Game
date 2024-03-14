@@ -22,7 +22,7 @@ namespace MaxisGeneralPurpose
 
 
         // Start is called before the first frame update
-        void Start()
+        void Awake()
         {
             foreach (var toSet in toSetIntVariable)
             {
