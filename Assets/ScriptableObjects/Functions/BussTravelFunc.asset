@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberOfSwitches: {fileID: 11400000, guid: cf21be444e468ec419e11fad33445b9f, type: 2}
   comfortChange: -1
-  stressChange: 40
+  stressChange: -1

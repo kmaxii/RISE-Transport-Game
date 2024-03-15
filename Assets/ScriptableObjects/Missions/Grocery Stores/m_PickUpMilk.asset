@@ -25,5 +25,5 @@ MonoBehaviour:
   stressChange: 0
   comfortChange: 0
   moneyPunishment: 0
-  stressPunishment: -5
+  stressPunishment: 25
   comfortPunishment: 0

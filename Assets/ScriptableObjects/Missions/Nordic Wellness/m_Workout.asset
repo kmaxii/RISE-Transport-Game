@@ -26,8 +26,8 @@ MonoBehaviour:
     hour: 1
     minute: 0
   moneyReward: 0
-  stressChange: -10
-  comfortChange: 5
+  stressChange: -50
+  comfortChange: 25
   moneyPunishment: 0
   stressPunishment: 0
-  comfortPunishment: -5
+  comfortPunishment: -25

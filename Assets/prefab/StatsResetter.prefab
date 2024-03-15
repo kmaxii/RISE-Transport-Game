@@ -56,7 +56,7 @@ MonoBehaviour:
     floatVariable: {fileID: 11400000, guid: 9112a4e09811b9744b9f86d82f990ded, type: 2}
   - value: 100
     floatVariable: {fileID: 11400000, guid: 405db621c5811d7469d90d9b30997164, type: 2}
-  - value: 300
+  - value: 200
     floatVariable: {fileID: 11400000, guid: 0801921ac358ea846b59f1e8a66fb4e1, type: 2}
   toSetBools:
   - value: 0
