@@ -26,8 +26,11 @@ public class TimeVariable : DataCarrier
     public void IncreaseTime(Time24H toIncrease)
     {
         bool resetHour = Time24H.WillHourResetToZero(time24H, toIncrease);
+        
+        var minBefore = time24H.TotalMinutes;
+        
         time24H += toIncrease;
-        if (raiseOnValueChanged)
+        if (raiseOnValueChanged && minBefore != time24H.TotalMinutes)
             raiseOnValueChanged.Raise();
         if (resetHour && onResetHour)
         {

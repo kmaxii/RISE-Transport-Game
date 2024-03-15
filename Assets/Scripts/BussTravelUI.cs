@@ -1,10 +1,8 @@
 using System.Collections.Generic;
-using Interfaces;
 using Mapbox.Unity.Map;
 using Mapbox.Utils;
 using MaxisGeneralPurpose.Scriptable_objects;
 using minimap;
-using Scriptable_objects;
 using TMPro;
 using UnityEngine;
 using Utils;
@@ -43,7 +41,10 @@ public class BussTravelUI : MonoBehaviour
     [SerializeField] private IntVariable lastBusSwitches;
     [SerializeField] private TimeVariable lastBusArrive;
     [SerializeField] private IntVariable timeSpentOnPublicTransport;
+    [SerializeField] private StringVariable lastBusInfo;
     
+    private StopPoint _lastFrom;
+    private StopPoint _lastTo;
     void Start()
     {
         //Put all of this children into the children array
@@ -97,8 +98,7 @@ public class BussTravelUI : MonoBehaviour
 
         lastBusArrive.Time24H = new Time24H(_showingResult.DestinationTime);
         
-    //    timeVariable.Time24H = new Time24H(_showingResult.DestinationTime);
-
+        lastBusInfo.Value = _lastFrom.name + " to " + _lastTo.name;
         
         traveledByBussEvent.Raise();
     }
@@ -110,8 +110,11 @@ public class BussTravelUI : MonoBehaviour
     }
 
 
+
     public async void HandleGoing(StopPoint from, StopPoint to)
     {
+
+     
         JourneyResult result = await VasttrafikAPI.GetJourneyJson(from.gid, to.gid, 1, currentTime.Time24H.Rfc3339);
 
         if (result == null)
@@ -119,6 +122,9 @@ public class BussTravelUI : MonoBehaviour
             Debug.LogWarning("RESULT FROM VASTTRAFIK IS NULL!");
             return;
         }
+        
+        _lastFrom = from;
+        _lastTo = to;
 
         int resultNum = result.results[0].SwitchesAmount == -1 && result.results.Count > 1 ? 1 : 0;
         

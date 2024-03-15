@@ -67,6 +67,8 @@ MonoBehaviour:
     boolVariable: {fileID: 11400000, guid: 21bc0a240e9df294a88ec38730fcafcd, type: 2}
   - value: 0
     boolVariable: {fileID: 11400000, guid: a58676de35c5b1647b4e75614b81f0cc, type: 2}
+  - value: 0
+    boolVariable: {fileID: 11400000, guid: 59ea77410b2f8f4498004af4e258703a, type: 2}
   time: {fileID: 11400000, guid: 3e013dc3110bf9b4ca29f5af6ac7195e, type: 2}
   startTime:
     hour: 6

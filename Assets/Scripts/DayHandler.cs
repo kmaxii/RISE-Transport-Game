@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using MaxisGeneralPurpose.Scriptable_objects;
@@ -15,7 +16,7 @@ public class DayHandler : MonoBehaviour
 
     [SerializeField] private CurrentStats currentStats;
 
-    private List<DayMission> _notYetActiveMissions;
+    private List<DayMission> _notYetActiveMissions = new List<DayMission>();
 
     private readonly List<DayMission> _activeMissions = new();
     private readonly HashSet<DayMission> _completedMissions = new();
@@ -193,5 +194,17 @@ public class DayHandler : MonoBehaviour
     public void OnEventRaised()
     {
         CheckToStartMissions();
+    }
+
+    public override string ToString()
+    {
+        //Return a string with all the missions that are active 
+        
+        string activeMissions = _activeMissions
+            .Select(mission => mission.Mission.MissionName)
+            .Aggregate((current, next) => current + ", " + next);
+        
+        
+        return activeMissions;
     }
 }

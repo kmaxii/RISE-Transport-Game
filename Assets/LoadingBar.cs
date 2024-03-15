@@ -20,6 +20,8 @@ public class LoadingBar : MonoBehaviour
 
     [SerializeField] private CanvasGroup canvasGroup;
 
+    [SerializeField] private BoolVariable isTimeWarping;
+
     private void OnEnable()
     {
         traveldByBusEvent.RegisterListener(ShowScreen);
@@ -33,6 +35,8 @@ public class LoadingBar : MonoBehaviour
     private void ShowScreen()
     {
         ShowAllChildren(true);
+        isTimeWarping.Value = true;
+
         
         StartCoroutine(FadeCanvasGroup(true, 1));
 
@@ -43,6 +47,7 @@ public class LoadingBar : MonoBehaviour
 
     private void ShowAllChildren(bool show)
     {
+        
         //Go through every child of the transform
         for (int i = 0; i < transform.childCount; i++)
         {
@@ -98,6 +103,7 @@ public class LoadingBar : MonoBehaviour
 
         canvasGroup.blocksRaycasts = false;
         StartCoroutine(FadeCanvasGroup(false, 1));
+        isTimeWarping.Value = false;
 
      //   ShowAllChildren(false);
     }
