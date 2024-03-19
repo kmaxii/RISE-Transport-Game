@@ -25,7 +25,11 @@ namespace DataCollection
         {
             userDataList.userDataList.Add(data);
             Debug.Log("Saving data. Total data points saved: " + userDataList.userDataList.Count);
-
+        }
+        
+        public void ClearUserData()
+        {
+            userDataList.userDataList.Clear();
         }
 
         public void SaveDataToFile()

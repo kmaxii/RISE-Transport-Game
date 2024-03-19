@@ -29,6 +29,9 @@ namespace DataCollection
 
         [SerializeField] private BoolVariable isTimeWarping;
 
+        [SerializeField] private int randomId;
+
+
         private DataManager _dataManager;
         
         private string lastActivities = "";
@@ -37,6 +40,11 @@ namespace DataCollection
         {
             _dataManager = new DataManager();
             _dataManager.DeleteDataFile();
+            
+            //Assign randomId to a completly random integer that is within the integer bounds
+            randomId = Random.Range(int.MinValue, int.MaxValue);
+            
+            Debug.Log(randomId);
         }
 
         private void OnEnable()
@@ -92,18 +100,28 @@ namespace DataCollection
                 _missionChangeText,
                 money.Value,
                 isOnScooter.Value,
-                activities);
+                activities,
+                randomId);
 
             lastBusInfo.Value = "";
             _missionChangeText = "";
             _dataManager.AddUserData(data);
+            
+            SendToServer();
         }
 
         private void OnApplicationQuit()
         {
-            StartCoroutine(_dataManager.SendDataToAPI("http://129.151.214.102:9090/processUserData"));
-            
-            _dataManager.SaveDataToFile();
+           // _dataManager.SaveDataToFile();
+
+            SendToServer();
+        }
+
+        private void SendToServer()
+        {
+           // StartCoroutine(_dataManager.SendDataToAPI("http://129.151.214.102:9090/processUserData"));
+            StartCoroutine(_dataManager.SendDataToAPI("http://localhost:9090/processUserData"));
+            _dataManager.ClearUserData();
         }
     }
 }

@@ -13,8 +13,9 @@ namespace DataCollection
         public float money;
         public bool isOnScooter;
         public string activities;
+        public int id;
 
-        public UserData(string time, double longitude, double latitude, string busTransport, string activityChange, float money, bool isOnScooter, string activities)
+        public UserData(string time, double longitude, double latitude, string busTransport, string activityChange, float money, bool isOnScooter, string activities, int id)
         {
             this.time = time;
             this.longitude = longitude;
@@ -24,6 +25,7 @@ namespace DataCollection
             this.money = money;
             this.isOnScooter = isOnScooter;
             this.activities = activities;
+            this.id = id;
         }
     }
 
