@@ -119,8 +119,7 @@ namespace DataCollection
 
         private void SendToServer()
         {
-           // StartCoroutine(_dataManager.SendDataToAPI("http://129.151.214.102:9090/processUserData"));
-            StartCoroutine(_dataManager.SendDataToAPI("http://localhost:9090/processUserData"));
+            StartCoroutine(_dataManager.SendDataToAPI("http://129.151.214.102:9090/processUserData"));
             _dataManager.ClearUserData();
         }
     }
