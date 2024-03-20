@@ -62,10 +62,13 @@ public class TripPlanner
             return;
         }
 
-        JourneyResult journey = await VasttrafikAPI.GetJourneyJson(_lastClicked.gid, stopPoint.gid, 7);
-        foreach (var trip in journey.results)
+        /*JourneyResult journey = await VasttrafikAPI.GetJourneyJson(_lastClicked.gid, stopPoint.gid, 7, null, result =>
         {
-            Debug.Log($"Leave time: {trip.LeaveTime}, arrive time: {trip.DestinationTime}");
-        }
+            foreach (var trip in result.results)
+            {
+                Debug.Log($"Leave time: {trip.LeaveTime}, arrive time: {trip.DestinationTime}");
+            }
+        });*/
+  
     }
 }

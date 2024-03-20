@@ -1,115 +1,74 @@
 ﻿using System;
-using System.IO;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
-using JetBrains.Annotations;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace vasttrafik
 {
     public static class VasttrafikAPI
     {
-        private static readonly HttpClient Client = new HttpClient();
         private const string BaseUrl = "https://ext-api.vasttrafik.se/pr/v4/journeys";
-        
-        [ItemCanBeNull]
-        public static async Task<JourneyDetails> GetJourneyDetailsJson(string detailsReference)
+
+        public static IEnumerator GetJourneyDetailsJson(string detailsReference, Action<JourneyDetails> callback)
         {
-            try
+            string accessToken =  VasttrafikAccessToken.GetAccessToken();
+            string url = $"{BaseUrl}/{detailsReference}/details?includes=triplegcoordinates&includes=servicejourneycoordinates";
+
+            Debug.Log("Url: " + url);
+
+            using (UnityWebRequest request = UnityWebRequest.Get(url))
             {
-                Client.DefaultRequestHeaders.Authorization =
-                    new AuthenticationHeaderValue("Bearer", VasttrafikAccessToken.GetAccessToken());
-                string url =
-                    $"{BaseUrl}/{detailsReference}/details?includes=triplegcoordinates&includes=servicejourneycoordinates";
+                request.SetRequestHeader("Authorization", $"Bearer {accessToken}");
 
-                Debug.Log("Url: " + url);
+                yield return request.SendWebRequest();
 
-                HttpResponseMessage response = await Client.GetAsync(url);
-                if (response.IsSuccessStatusCode)
+                if (request.result == UnityWebRequest.Result.Success)
                 {
-                    string result = await response.Content.ReadAsStringAsync();
+                    string result = request.downloadHandler.text;
                     JourneyDetails journeyResult = JsonUtility.FromJson<JourneyDetails>(result);
-                    
-
-                    
-                 try
-                 {
-                     await File.WriteAllTextAsync("C:\\Users\\1\\Downloads\\filePath.txt", result);
-                     Debug.Log("File saved successfully.");
-                 }
-                 catch (Exception ex)
-                 {
-                     Debug.Log("Error saving file: " + ex.Message);
-                 }
-                 
-                    
-                    return journeyResult;
+                    callback(journeyResult);
                 }
-
-                Debug.Log($"Error: {response.StatusCode}");
-                return null;
-            }
-            catch (Exception ex)
-            {
-                Debug.Log($"Exception occurred: {ex.Message}");
-                return null;
+                else
+                {
+                    Debug.Log($"Error: {request.responseCode}");
+                    callback(null);
+                }
             }
         }
 
-        [ItemCanBeNull]
-        public static async Task<JourneyResult> GetJourneyJson(string originGid,
-            string destinationGid, int resultLimit = 1, string time = null)
+        public static IEnumerator GetJourneyJson(string originGid, string destinationGid, int resultLimit, string time, Action<JourneyResult> callback)
         {
-            Debug.Log($"Sending request with {originGid} to {destinationGid}");
-            try
+            Debug.LogError($"Sending request with {originGid} to {destinationGid}");
+
+            string accessToken = VasttrafikAccessToken.GetAccessToken();
+            string url = $"{BaseUrl}?originGid={originGid}" +
+                         $"&destinationGid={destinationGid}" +
+                         $"&limit={resultLimit}" +
+                         $"&originWalk=1,0,500" +
+                         $"&destWalk=1,0,500" +
+                         $"&onlyDirectConnections=false" +
+                         $"&includeNearbyStopAreas=true";
+
+            if (time != null)
+                url += $"&dateTime={Uri.EscapeDataString(time)}";
+
+            using (UnityWebRequest request = UnityWebRequest.Get(url))
             {
-                Client.DefaultRequestHeaders.Authorization =
-                    new AuthenticationHeaderValue("Bearer", VasttrafikAccessToken.GetAccessToken());
-                string url =
-                    $"{BaseUrl}?originGid={originGid}" +
-                    $"&destinationGid={destinationGid}" +
-                    $"&limit={resultLimit}" +
-                    $"&originWalk=1,0,500" +
-                    $"&destWalk=1,0,500" +
-                    $"&onlyDirectConnections=false" +
-                    $"&includeNearbyStopAreas=true";
+                request.SetRequestHeader("Authorization", $"Bearer {accessToken}");
 
+                yield return request.SendWebRequest();
 
-                if (time != null)
-                    url += $"&dateTime={Uri.EscapeDataString(time)}";
-
-
-                HttpResponseMessage response = await Client.GetAsync(url);
-                if (response.IsSuccessStatusCode)
+                if (request.result == UnityWebRequest.Result.Success)
                 {
-                    string result = await response.Content.ReadAsStringAsync();
+                    string result = request.downloadHandler.text;
                     JourneyResult journeyResult = JsonUtility.FromJson<JourneyResult>(result);
-
-
-                    /*
-                    try
-                    {
-                        await File.WriteAllTextAsync("C:\\Users\\1\\Downloads\\filePath.txt", result);
-                        Debug.Log("File saved successfully.");
-                    }
-                    catch (Exception ex)
-                    {
-                        Debug.Log("Error saving file: " + ex.Message);
-                    }
-                    */
-
-
-                    return journeyResult;
+                    callback(journeyResult);
                 }
-
-                Debug.Log($"Error: {response.StatusCode}");
-                return null;
-            }
-            catch (Exception ex)
-            {
-                Debug.Log($"Exception occurred: {ex.Message}");
-                return null;
+                else
+                {
+                    Debug.LogError($"Error: {request.responseCode}");
+                    callback(null);
+                }
             }
         }
     }

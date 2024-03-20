@@ -114,23 +114,24 @@ public class BussTravelUI : MonoBehaviour
     public async void HandleGoing(StopPoint from, StopPoint to)
     {
 
-     
-        JourneyResult result = await VasttrafikAPI.GetJourneyJson(from.gid, to.gid, 1, currentTime.Time24H.Rfc3339);
 
-        if (result == null)
+        StartCoroutine(VasttrafikAPI.GetJourneyJson(from.gid, to.gid, 1, currentTime.Time24H.Rfc3339, result =>
         {
-            Debug.LogWarning("RESULT FROM VASTTRAFIK IS NULL!");
-            return;
-        }
+            if (result == null)
+            {
+                Debug.LogWarning("RESULT FROM VASTTRAFIK IS NULL!");
+                return;
+            }
         
-        _lastFrom = from;
-        _lastTo = to;
+            _lastFrom = from;
+            _lastTo = to;
 
-        int resultNum = result.results[0].SwitchesAmount == -1 && result.results.Count > 1 ? 1 : 0;
+            int resultNum = result.results[0].SwitchesAmount == -1 && result.results.Count > 1 ? 1 : 0;
         
-        SubscribeToEventsWhileShowing();
+            SubscribeToEventsWhileShowing();
         
-        ShowTravelOption(from, to, result.results[resultNum]);
+            ShowTravelOption(from, to, result.results[resultNum]);
+        }));
     }
 
     private async void ShowTravelOption(StopPoint from, StopPoint to, Result result)
@@ -154,51 +155,55 @@ public class BussTravelUI : MonoBehaviour
         lastBusSwitches.Value = result.SwitchesAmount;
 
         lineRenderer.ClearLines();
-        JourneyDetails journeyDetails = await result.GetJourneyDetails();
-
         
-        List<Vector2> onTripCoords = new List<Vector2> {tileManagerUI.ConvertCoordinatesToLocalPosition(from.pos3d)};
-
-        var firstCoord = journeyDetails.tripLegs[0].tripLegCoordinates[0];
-        onTripCoords.Add(tileManagerUI.ConvertCoordinatesToLocalPosition(
-            map.GeoToWorldPosition(new Vector2d(firstCoord.latitude, firstCoord.longitude))));
-        lineRenderer.AddLines(onTripCoords, "walk");
-
-        Vector2 lastPos = Vector2.zero;
-        
-        foreach (var tripLeg in journeyDetails.tripLegs)
-        {
-
-            onTripCoords.Clear();
-            if (tripLeg.serviceJourneys.Count > 1)
+        StartCoroutine(VasttrafikAPI.GetJourneyDetailsJson(result.detailsReference, journeyDetails =>
             {
-                for (int i = 0; i < 500; i++)
+                List<Vector2> onTripCoords = new List<Vector2> {tileManagerUI.ConvertCoordinatesToLocalPosition(from.pos3d)};
+
+                var firstCoord = journeyDetails.tripLegs[0].tripLegCoordinates[0];
+                onTripCoords.Add(tileManagerUI.ConvertCoordinatesToLocalPosition(
+                    map.GeoToWorldPosition(new Vector2d(firstCoord.latitude, firstCoord.longitude))));
+                lineRenderer.AddLines(onTripCoords, "walk");
+
+                Vector2 lastPos = Vector2.zero;
+        
+                foreach (var tripLeg in journeyDetails.tripLegs)
                 {
-                    Debug.LogError("PLEASE REPORT WHAT TRIP YOU DID TO MAXI!");
+
+                    onTripCoords.Clear();
+                    if (tripLeg.serviceJourneys.Count > 1)
+                    {
+                        for (int i = 0; i < 500; i++)
+                        {
+                            Debug.LogError("PLEASE REPORT WHAT TRIP YOU DID TO MAXI!");
+                        }
+                    }
+            
+                    foreach (var coord in tripLeg.tripLegCoordinates)
+                    {
+                        lastPos =
+                            tileManagerUI.ConvertCoordinatesToLocalPosition(
+                                map.GeoToWorldPosition(new Vector2d(coord.latitude, coord.longitude)));
+                        onTripCoords.Add(lastPos);
+
+                    }
+
+                    var bussLine = tripLeg.serviceJourneys[0].line;
+
+                    string transportMode = bussLine.transportMode;
+
+            
+                    lineRenderer.AddLines(onTripCoords, transportMode);
                 }
-            }
-            
-            foreach (var coord in tripLeg.tripLegCoordinates)
-            {
-                lastPos =
-                    tileManagerUI.ConvertCoordinatesToLocalPosition(
-                        map.GeoToWorldPosition(new Vector2d(coord.latitude, coord.longitude)));
-                onTripCoords.Add(lastPos);
-
-            }
-
-            var bussLine = tripLeg.serviceJourneys[0].line;
-
-            string transportMode = bussLine.transportMode;
-
-            
-            lineRenderer.AddLines(onTripCoords, transportMode);
-        }
         
-        onTripCoords.Clear();
-        onTripCoords.Add(lastPos);
-        onTripCoords.Add(tileManagerUI.ConvertCoordinatesToLocalPosition(to.pos3d));
-        lineRenderer.AddLines(onTripCoords, "walk");
+                onTripCoords.Clear();
+                onTripCoords.Add(lastPos);
+                onTripCoords.Add(tileManagerUI.ConvertCoordinatesToLocalPosition(to.pos3d));
+                lineRenderer.AddLines(onTripCoords, "walk");
+            }))
+        ;
+        
+      
 
     }
 

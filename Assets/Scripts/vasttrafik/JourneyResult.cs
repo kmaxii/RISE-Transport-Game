@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace vasttrafik
 {
@@ -203,10 +205,6 @@ namespace vasttrafik
     public class Result
     {
 
-        public async Task<JourneyDetails> GetJourneyDetails()
-        {
-            return await VasttrafikAPI.GetJourneyDetailsJson(detailsReference);
-        }
         
         public string reconstructionReference;
         public string detailsReference;
