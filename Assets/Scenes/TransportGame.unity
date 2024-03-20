@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4509946, g: 0.50085366, b: 0.57433045, a: 1}
+  m_IndirectSpecularColor: {r: 0.45099503, g: 0.50085473, b: 0.57433176, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1932,6 +1932,50 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0dbd2de988de07f44ab6cb4f5d2d31de, type: 3}
+--- !u!1 &1727899643
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1727899645}
+  - component: {fileID: 1727899644}
+  m_Layer: 0
+  m_Name: VastrafikAccesTokenGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1727899644
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1727899643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49deb6661c1f4ea1980a1f25596df5cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1727899645
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1727899643}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.12894227, y: 2.9972785, z: 0.14606872}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1749581738
 GameObject:
   m_ObjectHideFlags: 0
@@ -1972,6 +2016,7 @@ MonoBehaviour:
   dayHandler: {fileID: 1367835072}
   lastBusInfo: {fileID: 11400000, guid: e03ec322f2b7a084ab89af78eab2f97a, type: 2}
   isTimeWarping: {fileID: 11400000, guid: 59ea77410b2f8f4498004af4e258703a, type: 2}
+  randomId: 0
 --- !u!4 &1749581740
 Transform:
   m_ObjectHideFlags: 0
@@ -2444,7 +2489,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1452463561613163628, guid: 0eaf30dda927d394e93dd98fcb128c44, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 17.267
+      value: 17.267029
       objectReference: {fileID: 0}
     - target: {fileID: 1587796560997401700, guid: 0eaf30dda927d394e93dd98fcb128c44, type: 3}
       propertyPath: m_Texture
@@ -2606,6 +2651,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 5931964260167408172, guid: 0eaf30dda927d394e93dd98fcb128c44, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.767334
+      objectReference: {fileID: 0}
     - target: {fileID: 6774133535190918017, guid: 0eaf30dda927d394e93dd98fcb128c44, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -2624,19 +2673,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6774133535190918017, guid: 0eaf30dda927d394e93dd98fcb128c44, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 328.79
+      value: 328.79004
       objectReference: {fileID: 0}
     - target: {fileID: 6774133535190918017, guid: 0eaf30dda927d394e93dd98fcb128c44, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000015258789
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6991663008432505931, guid: 0eaf30dda927d394e93dd98fcb128c44, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7508181738713518133, guid: 0eaf30dda927d394e93dd98fcb128c44, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -18.520996
+      objectReference: {fileID: 0}
+    - target: {fileID: 7508181738713518133, guid: 0eaf30dda927d394e93dd98fcb128c44, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -18.541077
+      objectReference: {fileID: 0}
     - target: {fileID: 7759333659163236589, guid: 0eaf30dda927d394e93dd98fcb128c44, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8295264845089187281, guid: 0eaf30dda927d394e93dd98fcb128c44, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 6.944336
       objectReference: {fileID: 0}
     - target: {fileID: 8384533055019575848, guid: 0eaf30dda927d394e93dd98fcb128c44, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -2914,3 +2975,4 @@ SceneRoots:
   - {fileID: 6502576}
   - {fileID: 532033710}
   - {fileID: 1749581740}
+  - {fileID: 1727899645}

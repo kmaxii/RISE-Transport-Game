@@ -7,7 +7,7 @@ namespace vasttrafik
     {
         private async void Awake()
         {
-            var token = await VasttrafikAccessToken.GetAccessTokenAsync();
+            var token = VasttrafikAccessToken.GetAccessToken();
             Debug.Log("Token: " + token);
         }
     }

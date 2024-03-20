@@ -1,45 +1,57 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace vasttrafik
 {
-    public class VasttrafikAccessToken
+    public class VasttrafikAccessToken : MonoBehaviour
     {
         
         private const string AuthUrl = "https://ext-api.vasttrafik.se/token";
         private const string AuthenticationKey = "SjdHMmk4bTdKUTNNWndaUEFkVXd3UWZfd01VYTpSNzYwR3BWM2NmVWFTSk5BT0hLQjhaSnpxc2dh";
 
         private static string _accessToken = "";
-        
-        public static async Task<string> GetAccessTokenAsync()
+        private const string GrantType = "grant_type=client_credentials";
+
+        private void Awake()
         {
-            if (_accessToken != "")
-                return _accessToken;
-            
-            using var client = new HttpClient();
-            var request = new HttpRequestMessage(HttpMethod.Post, AuthUrl);
-            request.Headers.Authorization = new AuthenticationHeaderValue("Basic", AuthenticationKey);
-            request.Content = new FormUrlEncodedContent(new Dictionary<string, string>
+            StartCoroutine(RequestToken());
+        }
+        private IEnumerator RequestToken()
+        {
+            using (UnityWebRequest request = new UnityWebRequest(AuthUrl, "POST"))
             {
-                { "grant_type", "client_credentials" }
-            });
+                byte[] bodyRaw = Encoding.UTF8.GetBytes(GrantType);
+                request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+                request.downloadHandler = new DownloadHandlerBuffer();
+                request.SetRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                request.SetRequestHeader("Authorization", "Basic " + AuthenticationKey);
 
-            HttpResponseMessage response = await client.SendAsync(request);
+                yield return request.SendWebRequest();
 
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new InvalidOperationException("Failed to retrieve access token");
+                if (request.result == UnityWebRequest.Result.Success)
+                {
+                    string tokenResponse = request.downloadHandler.text;
+                    TokenResponse response = JsonUtility.FromJson<TokenResponse>(tokenResponse);
+
+                    _accessToken = response.access_token;
+                }
+                else
+                {
+                    Debug.LogError("Token request failed: " + request.error);
+                }
             }
-
-            string responseContent = await response.Content.ReadAsStringAsync();
-            TokenResponse tokenResponse = JsonUtility.FromJson<TokenResponse>(responseContent);
-
-            _accessToken = tokenResponse.access_token;
-            
+        }
+        
+        
+        public static string GetAccessToken()
+        {
             return _accessToken;
         }
 

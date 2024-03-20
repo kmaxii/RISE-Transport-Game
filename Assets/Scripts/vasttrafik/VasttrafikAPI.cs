@@ -19,7 +19,7 @@ namespace vasttrafik
             try
             {
                 Client.DefaultRequestHeaders.Authorization =
-                    new AuthenticationHeaderValue("Bearer", await VasttrafikAccessToken.GetAccessTokenAsync());
+                    new AuthenticationHeaderValue("Bearer", VasttrafikAccessToken.GetAccessToken());
                 string url =
                     $"{BaseUrl}/{detailsReference}/details?includes=triplegcoordinates&includes=servicejourneycoordinates";
 
@@ -65,7 +65,7 @@ namespace vasttrafik
             try
             {
                 Client.DefaultRequestHeaders.Authorization =
-                    new AuthenticationHeaderValue("Bearer", await VasttrafikAccessToken.GetAccessTokenAsync());
+                    new AuthenticationHeaderValue("Bearer", VasttrafikAccessToken.GetAccessToken());
                 string url =
                     $"{BaseUrl}?originGid={originGid}" +
                     $"&destinationGid={destinationGid}" +
