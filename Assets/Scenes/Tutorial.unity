@@ -355,7 +355,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 234181014}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.25767156, y: 0.000000008312682, z: -0.0000000022167979, w: 0.9662326}
+  m_LocalRotation: {x: 0.25767156, y: -0.000000008312684, z: 0.000000002216798, w: 0.9662326}
   m_LocalPosition: {x: -6.4, y: 270.9908, z: -468.94308}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -543,7 +543,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: {fileID: 159634025}
-  startLocation: 57.70577289565173, 11.897452350185599
+  startLocation: 57.708552917033145, 11.97333573072694
   player: {fileID: 4601729311675006}
   delayToMovePlayer: 0.3
 --- !u!4 &532033710
@@ -1481,7 +1481,7 @@ MonoBehaviour:
   missionGotten: {fileID: 11400000, guid: 344339e1688f0934db26e7a62b51210a, type: 2}
   missionFailed: {fileID: 11400000, guid: 86d532d6f3b5e0c4c922ef3068e82eab, type: 2}
   missionCompleted: {fileID: 11400000, guid: f6da546253b3c154fb5acbc91b12e3e5, type: 2}
-  persona: {fileID: 11400000, guid: d82f3fcfc8fa5824d912a8fc5857bea0, type: 2}
+  persona: {fileID: 11400000, guid: de5eaeee145684a40b2e8009319149b5, type: 2}
   lastAttemptedMission: {fileID: 11400000, guid: 2f27f8f33b48387459cac6f8b7c2eca7, type: 2}
 --- !u!4 &1367835073
 Transform:
@@ -2177,7 +2177,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1951402532}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.25767156, y: 0.000000008312682, z: -0.0000000022167979, w: 0.9662326}
+  m_LocalRotation: {x: 0.25767156, y: -0.000000008312684, z: 0.000000002216798, w: 0.9662326}
   m_LocalPosition: {x: 0, y: 269.69, z: -469.69}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2471,6 +2471,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 4601729311675006}
+    - target: {fileID: 1140347070547208699, guid: 0eaf30dda927d394e93dd98fcb128c44, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1452463561613163628, guid: 0eaf30dda927d394e93dd98fcb128c44, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -2654,6 +2658,10 @@ PrefabInstance:
     - target: {fileID: 5931964260167408172, guid: 0eaf30dda927d394e93dd98fcb128c44, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.767334
+      objectReference: {fileID: 0}
+    - target: {fileID: 6327003734077013322, guid: 0eaf30dda927d394e93dd98fcb128c44, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6774133535190918017, guid: 0eaf30dda927d394e93dd98fcb128c44, type: 3}
       propertyPath: m_AnchorMax.x
