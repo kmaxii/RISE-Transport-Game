@@ -66,23 +66,21 @@ namespace DataCollection
 
             string jsonData = JsonUtility.ToJson(userDataList);
 
-            using (UnityWebRequest webRequest = new UnityWebRequest(apiUrl, "POST"))
+            using UnityWebRequest webRequest = new UnityWebRequest(apiUrl, "POST");
+            byte[] bodyRaw = new System.Text.UTF8Encoding().GetBytes(jsonData);
+            webRequest.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
+            webRequest.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+            webRequest.SetRequestHeader("Content-Type", "application/json");
+
+            yield return webRequest.SendWebRequest();
+
+            if (webRequest.result == UnityWebRequest.Result.ConnectionError || webRequest.result == UnityWebRequest.Result.ProtocolError)
             {
-                byte[] bodyRaw = new System.Text.UTF8Encoding().GetBytes(jsonData);
-                webRequest.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
-                webRequest.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
-                webRequest.SetRequestHeader("Content-Type", "application/json");
-
-                yield return webRequest.SendWebRequest();
-
-                if (webRequest.result == UnityWebRequest.Result.ConnectionError || webRequest.result == UnityWebRequest.Result.ProtocolError)
-                {
-                    Debug.LogError($"Error sending data: {webRequest.error}");
-                }
-                else
-                {
-                    Debug.Log("Data successfully sent to the server.");
-                }
+                Debug.LogError($"Error sending data: {webRequest.error}");
+            }
+            else
+            {
+                Debug.Log("Data successfully sent to the server.");
             }
         }
 
