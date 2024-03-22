@@ -13,43 +13,47 @@ namespace Utils
 
         public static string ConvertToRfc3339(int hour, int minute)
         {
-            // Get today's date in UTC
             DateTime today = DateTime.UtcNow;
 
-            // Create a new DateTime object in UTC with today's date and specified hour and minute
             DateTime utcDateTime = new DateTime(today.Year, today.Month, today.Day, hour, minute, 0, DateTimeKind.Utc);
 
-            // Use different time zone IDs based on the operating system
-            string timeZoneId = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "Central Europe Standard Time" : "Europe/Berlin";
+            TimeSpan standardOffset = TimeSpan.FromHours(1); // Sweden Standard Time (UTC+1)
+            TimeSpan dstOffset = TimeSpan.FromHours(2); // Sweden Daylight Saving Time (UTC+2)
 
-            // Define the Central European Time Zone (CET, UTC+1 or UTC+2 depending on DST)
-            TimeZoneInfo cetZone;
-            try
+            TimeSpan offset;
+            DateTime transitionDate =
+                new DateTime(today.Year, 3, GetLastSundayOfMonth(3), 1, 0, 0); // Last Sunday of March
+            if (today >= transitionDate && today < transitionDate.AddMonths(7))
             {
-                cetZone = TimeZoneInfo.FindSystemTimeZoneById(timeZoneId);
+                // Daylight Saving Time is in effect (from the last Sunday of March to the last Sunday of October)
+                offset = dstOffset;
             }
-            catch (TimeZoneNotFoundException)
+            else
             {
-                Console.WriteLine($"The time zone '{timeZoneId}' could not be found on the system.");
-                return null; // or handle the error as appropriate for your application
+                // Standard time is in effect
+                offset = standardOffset;
             }
 
-            // Convert the DateTime from UTC to CET
-            DateTime cetDateTime = TimeZoneInfo.ConvertTimeFromUtc(utcDateTime, cetZone);
-
-            // Automatically determine the offset for CET (considering Daylight Saving Time if applicable)
-            TimeSpan offset = cetZone.GetUtcOffset(cetDateTime);
             string formattedOffset = offset.ToString(@"hh\:mm");
             if (offset.Hours >= 0)
             {
                 formattedOffset = "+" + formattedOffset; // Ensure the plus sign for positive offsets
             }
 
-            // Format the DateTime object to RFC-3339 format with the actual offset for CET
-            string rfc3339String = cetDateTime.ToString("yyyy-MM-dd'T'HH:mm:ss.fff", CultureInfo.InvariantCulture) + formattedOffset;
+            // Format the DateTime object to RFC-3339 format with the actual offset for Sweden time zone
+            DateTime swedenDateTime = utcDateTime.Add(offset);
+            string rfc3339String = swedenDateTime.ToString("yyyy-MM-dd'T'HH:mm:ss.fff", CultureInfo.InvariantCulture) +
+                                   formattedOffset;
 
             return rfc3339String;
         }
-    }
 
+        private static int GetLastSundayOfMonth(int month)
+        {
+            DateTime lastDayOfMonth =
+                new DateTime(DateTime.Now.Year, month, DateTime.DaysInMonth(DateTime.Now.Year, month));
+            int lastSunday = lastDayOfMonth.Day - (int) lastDayOfMonth.DayOfWeek;
+            return lastSunday > 0 ? lastSunday : lastSunday + 7;
+        }
+    }
 }
