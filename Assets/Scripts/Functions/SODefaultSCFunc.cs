@@ -54,7 +54,7 @@ namespace Functions
         /// </remarks>
         public static float ExecuteFunction(bool b, float x, float c, float i)
         {
-            return 0.3f * (b ? 1 : -1) * c * (x + 0.5f * i * 0.05f * x);
+            return 0.3f * (b ? 1 : -1) * c * (x + 0.1f * i * 0.05f * x);
         }
     }
 }

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: RideEscooterFuncComfort
   m_EditorClassIdentifier: 
   increase: 0
-  grossChange: -20
+  grossChange: -10
   comfortabilityLevel: {fileID: 11400000, guid: 23769817f24f468479d37026250ec1e0, type: 2}
   importanceLevel: {fileID: 11400000, guid: 24de9e644f6707d4a9674c978cfe33c6, type: 2}

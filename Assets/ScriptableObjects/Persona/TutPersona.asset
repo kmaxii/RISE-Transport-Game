@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62eec35392d9363478d7ad4bf7fad843, type: 3}
+  m_Name: TutPersona
+  m_EditorClassIdentifier: 
+  sweatThreshold: 20
+  sweatThresholdVariable: {fileID: 11400000, guid: c0246ab9733f90645a3c0776f30932f0, type: 2}
+  wetnessThreshold: 70
+  wetnessThresholdVariable: {fileID: 11400000, guid: 9ed96a3f6e23ad5449c4af7b7756503c, type: 2}
+  tirednessThreshold: 47
+  tirednessThresholdVariable: {fileID: 11400000, guid: 54cb2ba0a130eb440921eff40b0e79a0, type: 2}
+  timeImportance: 5
+  timeImportanceVariable: {fileID: 11400000, guid: 8a39aae2be774d44cba84b6db34e7577, type: 2}
+  stressImportance: 5
+  stressImportanceVariable: {fileID: 11400000, guid: 037695af6eb2d5a4cb80205726ba5b0a, type: 2}
+  comfortImportance: 5
+  comfortImportanceVariable: {fileID: 11400000, guid: 24de9e644f6707d4a9674c978cfe33c6, type: 2}
+  busComfortability: -1
+  busComfortabilityVariable: {fileID: 11400000, guid: b844be5f883ddd34f98421f4389fe35c, type: 2}
+  eScooterComfortability: 1.18
+  eScooterComfortabilityVariable: {fileID: 11400000, guid: 23769817f24f468479d37026250ec1e0, type: 2}
+  fitness: 26
+  fitnessVariable: {fileID: 11400000, guid: 0174a1787bfbf7743b32cc7b41750efa, type: 2}
