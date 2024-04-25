@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fd1ca70fb2a42599ceb37b18ef33f76, type: 3}
   m_Name: RideEscooterFuncComfort
   m_EditorClassIdentifier: 
-  increase: 0
-  grossChange: -10
+  increase: 1
+  grossChange: 20
   comfortabilityLevel: {fileID: 11400000, guid: 23769817f24f468479d37026250ec1e0, type: 2}
   importanceLevel: {fileID: 11400000, guid: 24de9e644f6707d4a9674c978cfe33c6, type: 2}

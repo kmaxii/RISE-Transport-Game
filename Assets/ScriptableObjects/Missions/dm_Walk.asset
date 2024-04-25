@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 629601f5728d4b40887247c1cd4f27f8, type: 3}
-  m_Name: dm_WorkoutAnyTime
+  m_Name: dm_Walk
   m_EditorClassIdentifier: 
   raiseOnValueChanged: {fileID: 0}
-  mission: {fileID: 11400000, guid: f21f0810119efe946a6297ce0e278f89, type: 2}
+  mission: {fileID: 11400000, guid: c312783bdc59d5c4897821eb2229a0fe, type: 2}
   hasShowUpTime: 0
   showUpTime:
     hour: 19

@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: e7bb4857cdee2974189391d5386361bf
+  - enabled: 1
     path: Assets/Scenes/TransportGame.unity
     guid: 23b3522d4f6fa450eb781397db4b26ed
   m_configObjects: {}

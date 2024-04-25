@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c0c7e2810d564534aa1c6e1a2aeb79aa, type: 3}
-  m_Name: m_DropKidsAtSchool
+  m_Name: m_TaScooter
   m_EditorClassIdentifier: 
   raiseOnValueChanged: {fileID: 0}
-  missionName: "L\xE4mna barnen i skolan"
-  sprite: {fileID: 21300000, guid: 5c6aae8151717b044b69959eb97e1502, type: 3}
-  color: {r: 0, g: 0, b: 0, a: 0}
+  missionName: Ta e-scooter hit
+  sprite: {fileID: 21300000, guid: 389611d20bdfc284ca97fdcf05c8f8d1, type: 3}
+  color: {r: 0, g: 0, b: 0, a: 1}
   missionLocations:
-  - {fileID: 11400000, guid: 9ff1190b51e530849a267dd3ae671fcb, type: 2}
-  canBeDoneAtAllLocation: 0
+  - {fileID: 11400000, guid: 394f583a1747f7b45be5a0aa359748c0, type: 2}
+  canBeDoneAtAllLocation: 1
   timeItTakes:
     hour: 0
-    minute: 3
+    minute: 5
   moneyReward: 0
   stressChange: -10
-  comfortChange: 0
+  comfortChange: 5
   moneyPunishment: 0
-  stressPunishment: 10
-  comfortPunishment: 0
+  stressPunishment: 0
+  comfortPunishment: -25
