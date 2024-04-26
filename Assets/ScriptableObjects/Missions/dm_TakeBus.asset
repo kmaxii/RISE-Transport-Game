@@ -28,5 +28,5 @@ MonoBehaviour:
   hasChainedTask: 0
   triggerChainedOnFail: 0
   childMission: {fileID: 0}
-  isChainedTask: 0
-  parentMission: {fileID: 0}
+  isChainedTask: 1
+  parentMission: {fileID: 11400000, guid: eeac43a376dfca64985f8e85146be722, type: 2}

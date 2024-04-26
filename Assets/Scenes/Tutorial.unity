@@ -682,7 +682,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: {fileID: 159634025}
-  startLocation: 57.708552917033145, 11.97333573072694
+  startLocation: 57.70957664997253, 11.973105173535778
   player: {fileID: 4601729311675006}
   delayToMovePlayer: 0.3
 --- !u!4 &532033710

@@ -25,8 +25,8 @@ MonoBehaviour:
   latestTime:
     hour: 23
     minute: 59
-  hasChainedTask: 0
-  triggerChainedOnFail: 0
-  childMission: {fileID: 0}
+  hasChainedTask: 1
+  triggerChainedOnFail: 1
+  childMission: {fileID: 11400000, guid: eeac43a376dfca64985f8e85146be722, type: 2}
   isChainedTask: 0
   parentMission: {fileID: 0}
