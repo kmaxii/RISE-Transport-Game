@@ -67,6 +67,7 @@ public class PoiSpawner : MonoBehaviour
 
                 Destroy(pair.Key.gameObject);
                 tileManagerUI.RemovePoi(pair.Value);
+                tileManagerUI.DespawnPoi(pair.Value);
             }
             
             _spawnedMissions.Remove(mission);

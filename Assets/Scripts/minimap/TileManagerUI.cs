@@ -179,7 +179,7 @@ namespace minimap
             RenderPois();
         }
 
-        private HashSet<MmPoiData> shouldBeSpawned = new HashSet<MmPoiData>();
+        private readonly HashSet<MmPoiData> _shouldBeSpawned = new();
 
         private void RenderPois()
         {
@@ -198,12 +198,12 @@ namespace minimap
                     var pois = _poiHolder.Get(new Vector2Int(x, y));
                     if (pois == null) continue;
 
-                    shouldBeSpawned.AddRange(pois);
+                    _shouldBeSpawned.AddRange(pois);
                 }
             }
 
-            var toDespawn = LinqUtility.ToHashSet(_spawnedPois.Keys.Where(p => !p.alwaysShow && !shouldBeSpawned.Contains(p)));
-            var toSpawn = LinqUtility.ToHashSet(shouldBeSpawned.Where(p => !_spawnedPois.Keys.Contains(p)));
+            var toDespawn = LinqUtility.ToHashSet(_spawnedPois.Keys.Where(p => !p.alwaysShow && !_shouldBeSpawned.Contains(p)));
+            var toSpawn = LinqUtility.ToHashSet(_shouldBeSpawned.Where(p => !_spawnedPois.Keys.Contains(p)));
 
             foreach (var poi in toDespawn)
             {
@@ -226,13 +226,13 @@ namespace minimap
             {
                 poi.AdjustWithinBounds(_mapRectTransform, canvasRectTransform);
             }
-            shouldBeSpawned.Clear();
+            _shouldBeSpawned.Clear();
         }
 
         private readonly Dictionary<MmPoiData, MiniMapPOI> _spawnedPois = new();
 
 
-        private void DespawnPoi(MmPoiData poiData)
+        public void DespawnPoi(MmPoiData poiData)
         {
             MiniMapPOI miniMapPoi = _spawnedPois[poiData];
             pools.Return(miniMapPoi);
@@ -344,7 +344,7 @@ namespace minimap
 
             if (alwaysShow)
             {
-                shouldBeSpawned.Add(mmPoiData);
+                _shouldBeSpawned.Add(mmPoiData);
             }
             
             return mmPoiData;
@@ -353,7 +353,9 @@ namespace minimap
 
         public void RemovePoi(MmPoiData poiData)
         {
+           
             _poiHolder.Remove(poiData);
+            
         }
 
         public Vector2 ConvertCoordinatesToLocalPosition(Vector3 inWorldPos)
