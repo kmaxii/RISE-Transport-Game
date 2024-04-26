@@ -18,9 +18,7 @@ public class BussTravelUI : MonoBehaviour
              "\n%BI: Byten info")]
     [SerializeField] [TextArea] private string travelInfoTemplate;
     [SerializeField] private TMP_Text travelInfoText;
-
-    [SerializeField] private TimeVariable timeVariable;
-
+    
     private StopPoint _showingInfoFrom;
     private StopPoint _showingInfoTo;
     private Result _showingResult;

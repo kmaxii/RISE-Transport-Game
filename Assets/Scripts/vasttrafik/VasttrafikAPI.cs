@@ -50,7 +50,15 @@ namespace vasttrafik
                          $"&includeNearbyStopAreas=true";
 
             if (time != null)
+            {
+                //The time variable is of format: 2024-04-26T07:32:00.000+02:00
+                //We need to change this if it right is summer time to +03:00. 
+                time = time.Replace("+02:00", "+03:00");
+                
+                
                 url += $"&dateTime={Uri.EscapeDataString(time)}";
+
+            }
 
             using (UnityWebRequest request = UnityWebRequest.Get(url))
             {
