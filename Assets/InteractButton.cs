@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using MaxisGeneralPurpose.Event;
 using MaxisGeneralPurpose.Scriptable_objects;
 using QuickEye.Utility;
 using UnityEngine;
@@ -8,6 +10,7 @@ public class InteractButton : MonoBehaviour
     [SerializeField] private UnityDictionary<BoolVariable, bool> valuesNeededToInteract;
 
     [SerializeField] private List<GameEvent> updateState;
+    [SerializeField] private List<GameEventWithData> updateState2;
 
     private bool _canInteract;
 
@@ -17,6 +20,11 @@ public class InteractButton : MonoBehaviour
         {
             gameEvent.RegisterListener(UpdateState);
         }
+        
+        foreach (var gameEvent in updateState2)
+        {
+            gameEvent.RegisterListener(UpdateState2);
+        }
     }
 
     private void OnDisable()
@@ -25,6 +33,16 @@ public class InteractButton : MonoBehaviour
         {
             gameEvent.UnregisterListener(UpdateState);
         }
+        
+        foreach (var gameEvent in updateState2)
+        {
+            gameEvent.UnregisterListener(UpdateState2);
+        }
+    }
+    
+    private void UpdateState2(DataCarrier data)
+    {
+       UpdateState();
     }
 
     private void UpdateState()
@@ -45,6 +63,11 @@ public class InteractButton : MonoBehaviour
         _canInteract = canInteract;
 
         ShowButton(canInteract);
+    }
+
+    private void Update()
+    {
+        UpdateState();
     }
 
     private void ShowButton(bool value)

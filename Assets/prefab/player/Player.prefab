@@ -1285,6 +1285,7 @@ MonoBehaviour:
     clearList: {fileID: 11400000, guid: 5ab3ff43a404ab649a0519fe113c62e1, type: 2}
     canInteract: {fileID: 11400000, guid: 8a21cc6ceac19944da78de75ff41f995, type: 2}
     player: {fileID: 5071661262631612038}
+    canOnlyReactOnce: 0
   scooterInteractor:
     canNowInteract: {fileID: 11400000, guid: 27553ae414fd0fe4093dc8351548e4f4, type: 2}
     canNoLongerInteract: {fileID: 11400000, guid: cf7e85e2b3ea1f644b79ba4b92482d97, type: 2}
@@ -1292,6 +1293,7 @@ MonoBehaviour:
     clearList: {fileID: 11400000, guid: 5ab3ff43a404ab649a0519fe113c62e1, type: 2}
     canInteract: {fileID: 11400000, guid: 21bc0a240e9df294a88ec38730fcafcd, type: 2}
     player: {fileID: 5071661262631612038}
+    canOnlyReactOnce: 0
   missionInteractor:
     canNowInteract: {fileID: 11400000, guid: 3bd875fcf4a3d5043b59eeaac5446ce0, type: 2}
     canNoLongerInteract: {fileID: 11400000, guid: ed82b35bc63d5444cafcd845afbfdd17, type: 2}
@@ -1299,6 +1301,7 @@ MonoBehaviour:
     clearList: {fileID: 11400000, guid: 5ab3ff43a404ab649a0519fe113c62e1, type: 2}
     canInteract: {fileID: 11400000, guid: d883b8b72a1465e43ad7b07ab5f12aa4, type: 2}
     player: {fileID: 5071661262631612038}
+    canOnlyReactOnce: 1
   updateInteractableStates:
   - {fileID: 11400000, guid: 92c46249420a6df4b99fe06c1db6029c, type: 2}
   - {fileID: 11400000, guid: 3bd875fcf4a3d5043b59eeaac5446ce0, type: 2}

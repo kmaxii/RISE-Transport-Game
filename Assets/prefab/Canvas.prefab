@@ -703,7 +703,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -142.59003, y: -0.76730347}
+  m_AnchoredPosition: {x: -142.59003, y: -0.767334}
   m_SizeDelta: {x: 143.95001, y: 163.2918}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &4910987797543926861
@@ -2134,7 +2134,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -18.521, y: -18.5411}
+  m_AnchoredPosition: {x: -18.520996, y: -18.541077}
   m_SizeDelta: {x: 37.0421, y: 37.0421}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2815517763153039907
@@ -3255,7 +3255,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 59.799995, y: 6.9443665}
+  m_AnchoredPosition: {x: 59.799995, y: 6.944336}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!1 &4339876893400808249
@@ -7015,6 +7015,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 319442961416408116, guid: ec4dc34f889754e4f99037191a6aacef, type: 3}
+      propertyPath: updateState2.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 319442961416408116, guid: ec4dc34f889754e4f99037191a6aacef, type: 3}
       propertyPath: updateState.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: 5d7b100d37679574bac70c14149fac23, type: 2}
@@ -7022,6 +7026,14 @@ PrefabInstance:
       propertyPath: updateState.Array.data[1]
       value: 
       objectReference: {fileID: 11400000, guid: e630b0315f168614e81b1818847cf0f4, type: 2}
+    - target: {fileID: 319442961416408116, guid: ec4dc34f889754e4f99037191a6aacef, type: 3}
+      propertyPath: updateState.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 319442961416408116, guid: ec4dc34f889754e4f99037191a6aacef, type: 3}
+      propertyPath: updateState2.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: f6da546253b3c154fb5acbc91b12e3e5, type: 2}
     - target: {fileID: 319442961416408116, guid: ec4dc34f889754e4f99037191a6aacef, type: 3}
       propertyPath: valuesNeededToInteract.list.Array.size
       value: 2
