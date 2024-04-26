@@ -50,7 +50,20 @@ namespace vasttrafik
                          $"&includeNearbyStopAreas=true";
 
             if (time != null)
+            {
+                //The time variable is of format: 2024-04-26T07:32:00.000+02:00
+                //If it is between March 31 and Oct 27th we need to change the last +02:00 to +03:00. 
+               // time = time.Replace("+02:00", "+03:00");
+                
+                DateTime dateTime = DateTime.Parse(time);
+                if (dateTime.IsDaylightSavingTime())
+                {
+                    time = time.Replace("+02:00", "+03:00");
+                }
+                
                 url += $"&dateTime={Uri.EscapeDataString(time)}";
+
+            }
 
             using (UnityWebRequest request = UnityWebRequest.Get(url))
             {

@@ -54,6 +54,7 @@ public class PoiSpawner : MonoBehaviour
         _toSpawn.Clear();
         
     }
+    [SerializeField] private GameObject particleBlast;
 
     public void DestroyMission(Mission mission)
     {
@@ -61,8 +62,12 @@ public class PoiSpawner : MonoBehaviour
         {
             foreach (var pair in spawned)
             {
+                
+                Instantiate(particleBlast, pair.Key.transform.position, Quaternion.identity);
+
                 Destroy(pair.Key.gameObject);
                 tileManagerUI.RemovePoi(pair.Value);
+                tileManagerUI.DespawnPoi(pair.Value);
             }
             
             _spawnedMissions.Remove(mission);

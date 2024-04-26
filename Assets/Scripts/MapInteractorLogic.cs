@@ -20,6 +20,8 @@ public class MapInteractorLogic
     [SerializeField] private BoolVariable canInteract;
 
     [SerializeField] private Transform player;
+    
+    [SerializeField] private bool canOnlyReactOnce = false;
 
     
     public void AddInteractable(MapInteractable interactable)
@@ -49,6 +51,11 @@ public class MapInteractorLogic
         if (closest != null)
             closest.Interact();
         
+        if (canOnlyReactOnce && _interactables.Count <= 1)
+        {
+            canInteract.Value = false;
+            canNoLongerInteract.Raise();
+        }
     }
     private MapInteractable GetClosest()
     {
