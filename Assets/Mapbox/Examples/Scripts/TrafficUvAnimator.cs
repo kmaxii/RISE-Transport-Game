@@ -10,10 +10,7 @@ namespace Mapbox.Examples
 		public float Speed;
 		private Vector2 _offset;
 
-		void Start()
-		{
 
-		}
 
 		void Update()
 		{
@@ -21,7 +18,9 @@ namespace Mapbox.Examples
 
 			foreach (var item in Materials)
 			{
-				item.SetTextureOffset("_MainTex", _offset);
+			//	item.SetTextureOffset("_MainTex", _offset);
+				
+				item.SetTextureOffset("_BaseMap", _offset);
 			}
 		}
 	}
