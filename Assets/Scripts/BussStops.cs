@@ -45,7 +45,7 @@ public class BussStops
 
         Vector3Int posInt = new Vector3Int((int)pos.x, (int)pos.y, (int)pos.z);
         
-        _stopPointsInWorldPos.Add(posInt, stopPoint);
+        _stopPointsInWorldPos.TryAdd(posInt, stopPoint);
         stopPoint.pos3d = pos;
     }
 
@@ -57,19 +57,7 @@ public class BussStops
     //Singleton
     private static BussStops _instance;
 
-    public static BussStops Instance
-    {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = new BussStops();
-            }
-
-            return _instance;
-        }
-    }
-
+    public static BussStops Instance => _instance ??= new BussStops();
 
 
     private void ProcessStopPointsFromFile()
