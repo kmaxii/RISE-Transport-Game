@@ -2715,6 +2715,7 @@ MonoBehaviour:
   tileManagerUI: {fileID: 1760020117}
   bussStopSprite: {fileID: 21300000, guid: fec5572521f52453397f564f556c168e, type: 3}
   particleBlast: {fileID: 3495100134638395964, guid: 29236e688b09b3f4bbc60249f30460c1, type: 3}
+  spawnBussStopsOnStart: 1
 --- !u!4 &2104720038
 Transform:
   m_ObjectHideFlags: 0
@@ -3153,7 +3154,7 @@ PrefabInstance:
     - target: {fileID: 114105500206378512, guid: 35ce2bb4caba9434db5e656796b632b1, type: 3}
       propertyPath: _vectorData._layerProperty.vectorSubLayers.Array.data[0].GoModifiers.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: e425dc440a40d9a4080794105e9f66ef, type: 2}
+      objectReference: {fileID: 11400000, guid: 5ad7c36a7a62f8b4cbcbcea8139a12a5, type: 2}
     - target: {fileID: 114105500206378512, guid: 35ce2bb4caba9434db5e656796b632b1, type: 3}
       propertyPath: _vectorData._layerProperty.vectorSubLayers.Array.data[2].materialOptions.materials.Array.data[0].Materials.Array.data[0]
       value: 
