@@ -84,6 +84,7 @@ MonoBehaviour:
   canvasRectTransform: {fileID: 1637843530929888291}
   onPlayerMove: {fileID: 11400000, guid: 074d2a4246b109847b62b6b2657b42f5, type: 2}
   onPlayerMove2: {fileID: 11400000, guid: 74f082fc9ea82ff43b931541735fe9b3, type: 2}
+  showBussStations: 1
 --- !u!114 &1606209718690813028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -883,7 +884,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   travelInfoTemplate: "Fr\xE5n: %FN %FT\nTill: %TN %TT\nByten: %BA\n\n"
   travelInfoText: {fileID: 5067307806203162848}
-  timeVariable: {fileID: 11400000, guid: 3e013dc3110bf9b4ca29f5af6ac7195e, type: 2}
   map: {fileID: 0}
   tileManagerUI: {fileID: 1087287940630255260}
   lineRenderer: {fileID: 4650206323706496546}
@@ -1152,11 +1152,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 465213889400551538}
-  m_Father: {fileID: 912146079800756788}
+  m_Father: {fileID: 1637843530929888291}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 10, y: 6.649994}
+  m_AnchoredPosition: {x: 10, y: 6.650055}
   m_SizeDelta: {x: 211.28, y: 208.3612}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &6552871937432658522
@@ -3651,6 +3651,7 @@ RectTransform:
   - {fileID: 7508181738713518133}
   - {fileID: 5109382339829775762}
   - {fileID: 912146079800756788}
+  - {fileID: 6727754120639429438}
   - {fileID: 7438617996254807096}
   - {fileID: 749849062982338842}
   - {fileID: 2992132343471066124}
@@ -3913,8 +3914,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6727754120639429438}
+  m_Children: []
   m_Father: {fileID: 1637843530929888291}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
