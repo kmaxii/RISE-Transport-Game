@@ -28,7 +28,6 @@ public class PoiSpawner : MonoBehaviour
     private HashSet<Mission> _toSpawn;
 
     private bool _hasInitialized;
-
     private void Awake()
     {
         _spawnedMissions = new Dictionary<Mission, KeyValuePair<PoiLabelTextSetter, MmPoiData>[]>();
@@ -117,9 +116,12 @@ public class PoiSpawner : MonoBehaviour
         _spawnedMissions.Add(mission, spawned.ToArray());
     }
 
+    private List<Vector2d> longLats;
+    [SerializeField] private bool spawnBussStopsOnStart = true;
+
     private void SpawnBussStations()
     {
-        List<Vector2d> longLats = new List<Vector2d>();
+        longLats = new List<Vector2d>();
         
         BussStops bussStops = BussStops.Instance;
 
@@ -141,7 +143,12 @@ public class PoiSpawner : MonoBehaviour
                 bussStopSprite);
             
         }
-        
+        if (spawnBussStopsOnStart)
+            SpawnBussStopsOnMap();
+    }
+
+    public void SpawnBussStopsOnMap()
+    {
         map._vectorData.SpawnPrefabAtGeoLocation(poiMarker.gameObject, longLats.ToArray(), list =>
         {
             foreach (var marker in list)
@@ -162,6 +169,5 @@ public class PoiSpawner : MonoBehaviour
                 
             }
         });
-
     }
 }

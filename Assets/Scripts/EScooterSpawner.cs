@@ -33,6 +33,15 @@ public class EScooterSpawner : MonoBehaviour
     
     [SerializeField] private float scooterYLevel = 0.35f;
 
+    private void Start()
+    {
+        if (player == null)
+        {
+            //find the player by its tag
+            player = GameObject.FindGameObjectWithTag("Player").transform;
+        }
+    }
+
     private void OnEnable()
     {
         playerMovedEvent.RegisterListener(SpawnEScooters);

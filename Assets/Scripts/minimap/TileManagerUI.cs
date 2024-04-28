@@ -59,6 +59,8 @@ namespace minimap
 
         [SerializeField] private GameEvent onPlayerMove;
         [SerializeField] private GameEvent onPlayerMove2;
+        
+        public bool showBussStations = true;
 
         private void OnEnable()
         {
@@ -203,7 +205,7 @@ namespace minimap
             }
 
             var toDespawn = LinqUtility.ToHashSet(_spawnedPois.Keys.Where(p => !p.alwaysShow && !_shouldBeSpawned.Contains(p)));
-            var toSpawn = LinqUtility.ToHashSet(_shouldBeSpawned.Where(p => !_spawnedPois.Keys.Contains(p)));
+            var toSpawn = LinqUtility.ToHashSet(_shouldBeSpawned.Where(p => p.Type == PoiType.BussStation ? showBussStations && !_spawnedPois.Keys.Contains(p) : !_spawnedPois.Keys.Contains(p)));
 
             foreach (var poi in toDespawn)
             {
@@ -332,7 +334,7 @@ namespace minimap
         }
 
 
-        public MmPoiData AddPoi(Vector2 poiCoordinates, PoiType poiType, String message, Sprite sprite, bool alwaysShow = false)
+        private MmPoiData AddPoi(Vector2 poiCoordinates, PoiType poiType, String message, Sprite sprite, bool alwaysShow = false)
         {
             Vector2 localPos = ConvertCoordinatesToLocalPosition(poiCoordinates);
 
