@@ -46,11 +46,18 @@ namespace minimap
 
             Vector2 bottomLeft = corners[0];
 
+            Vector2 savedAdjustedPosition = adjustedPosition;
             // Adjusting the position by considering the canvas pinned to the top left
             // We use the bottom left corner as the reference for the X and Y min values
             adjustedPosition.x = Mathf.Clamp(adjustedPosition.x, bottomLeft.x + 25, bottomLeft.x + canvasWidth - 25);
             adjustedPosition.y = Mathf.Clamp(adjustedPosition.y, bottomLeft.y + 25, bottomLeft.y + canvasHeight - 25);
 
+            
+            // If the position was adjusted, we need to update the local position
+            image.color = adjustedPosition != savedAdjustedPosition ? Color.gray : Color.white;
+            
+            
+            
             rectTransform.position = adjustedPosition;
         }
 

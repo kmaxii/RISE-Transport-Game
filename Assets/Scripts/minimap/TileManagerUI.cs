@@ -412,6 +412,8 @@ namespace minimap
             float clampedX = Mathf.Clamp(currentPosition.x, maxX, -maxX + _currentTileSize * CurrentZoom);
             float clampedY = Mathf.Clamp(currentPosition.y, maxY, -maxY + _currentTileSize * CurrentZoom);
 
+        
+            
             float offset = _currentMaxTiles switch
             {
                 8 => -128 * CurrentZoom,
