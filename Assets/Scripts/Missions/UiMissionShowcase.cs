@@ -1,5 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Missions
 {
@@ -9,10 +10,13 @@ namespace Missions
 
         private DayMission _showingMission;
 
+        [SerializeField] private Image _image;
+
         public void Show(DayMission dayMission)
         {
             _showingMission = dayMission;
             text.text = dayMission.ToString();
+            _image.sprite = dayMission.Mission.Sprite;
         }
     }
 }
