@@ -29,6 +29,8 @@ public class DayHandler : MonoBehaviour
     [SerializeField] private Persona persona;
 
     [SerializeField] private DayMissionReference lastAttemptedMission;
+    
+    [SerializeField] private GameEvent dayEnded;
 
     private static DayHandler _instance;
     public static DayHandler Instance => _instance;
@@ -139,8 +141,18 @@ public class DayHandler : MonoBehaviour
                 ActivateMission(nextMission);
             }
         }
+        
+        CheckForGameEnd();
     }
 
+
+    private void CheckForGameEnd()
+    {
+        if (_notYetActiveMissions.Count == 0 && _activeMissions.Count == 0)
+        {
+            dayEnded.Raise();
+        }
+    }
 
     public void FailedMission(string missionName)
     {
@@ -175,6 +187,8 @@ public class DayHandler : MonoBehaviour
                 ActivateMission(nextMission);
             }
         }
+        CheckForGameEnd();
+
     }
 
 
