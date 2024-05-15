@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Mapbox.Unity.Map;
 using MaxisGeneralPurpose.Event;
 using MaxisGeneralPurpose.Scriptable_objects;
 using Missions;
@@ -12,11 +13,19 @@ public class MissionList : MonoBehaviour
 
     [SerializeField] private UiMissionShowcase prefabMissionShowcase;
 
+    [SerializeField] private GameEvent playerMovedEvent;
+    [SerializeField] private GameEvent playerMovedScooterEvent;
+
+    [SerializeField] private Transform player;
+
+    [SerializeField] private AbstractMap map;
     private void OnEnable()
     {
         missionGottenEvent.RegisterListener(AddMission);
         missionFinishedEvent.RegisterListener(RemoveMission);
         missionFailedEvent.RegisterListener(RemoveMission);
+        playerMovedEvent.RegisterListener(UpdateDistances);
+        playerMovedScooterEvent.RegisterListener(UpdateDistances);
     }
 
     private void OnDisable()
@@ -24,10 +33,19 @@ public class MissionList : MonoBehaviour
         missionGottenEvent.UnregisterListener(AddMission);
         missionFinishedEvent.UnregisterListener(RemoveMission);
         missionFailedEvent.UnregisterListener(RemoveMission);
+        playerMovedEvent.UnregisterListener(UpdateDistances);
+        playerMovedScooterEvent.UnregisterListener(UpdateDistances);
     }
 
     private readonly Dictionary<DayMission, UiMissionShowcase> spawnedElements = new();
 
+    private void UpdateDistances()
+    {
+        foreach (var element in spawnedElements)
+        {
+            element.Value.SetDistance(player.position, map);
+        }
+    }
 
     private void AddMission(DataCarrier dataCarrier)
     {
@@ -39,7 +57,7 @@ public class MissionList : MonoBehaviour
         }
 
         UiMissionShowcase spawned = Instantiate(prefabMissionShowcase, transform);
-        spawned.Show(dayMission);
+        spawned.Show(dayMission, map);
         spawnedElements.Add(dayMission, spawned);
         
     }

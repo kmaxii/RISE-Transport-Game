@@ -1207,6 +1207,10 @@ MonoBehaviour:
   missionFinishedEvent: {fileID: 11400000, guid: f6da546253b3c154fb5acbc91b12e3e5, type: 2}
   missionFailedEvent: {fileID: 11400000, guid: 86d532d6f3b5e0c4c922ef3068e82eab, type: 2}
   prefabMissionShowcase: {fileID: 7511630227325690994, guid: 434676643fe423a43b99755c3c5f9cf0, type: 3}
+  playerMovedEvent: {fileID: 11400000, guid: 074d2a4246b109847b62b6b2657b42f5, type: 2}
+  playerMovedScooterEvent: {fileID: 11400000, guid: 74f082fc9ea82ff43b931541735fe9b3, type: 2}
+  player: {fileID: 0}
+  map: {fileID: 0}
 --- !u!1 &1509217356599944064
 GameObject:
   m_ObjectHideFlags: 0
