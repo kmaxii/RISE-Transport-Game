@@ -71,8 +71,8 @@ MonoBehaviour:
   m_Resolution: 0
   m_useNativeSize: 0
   m_points:
-  - {x: 5.7278647, y: -87.832214}
-  - {x: 5.7278647, y: -87.832214}
+  - {x: -447.12537, y: -348.9788}
+  - {x: -447.12537, y: -348.9788}
   lineThickness: 3
   relativeSize: 0
   lineList: 0

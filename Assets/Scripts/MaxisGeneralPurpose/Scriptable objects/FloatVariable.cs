@@ -16,6 +16,7 @@ namespace MaxisGeneralPurpose.Scriptable_objects
             get => value;
             set
             {
+                if (Math.Abs(this.value - value) < 0.001f) return;
                 this.value = value;
                 if (raiseOnValueChanged)
                     raiseOnValueChanged.Raise();
