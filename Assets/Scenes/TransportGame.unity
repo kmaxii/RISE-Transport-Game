@@ -1745,6 +1745,7 @@ GameObject:
   - component: {fileID: 1367835073}
   - component: {fileID: 1367835072}
   - component: {fileID: 1367835074}
+  - component: {fileID: 1367835075}
   m_Layer: 0
   m_Name: DayHandler
   m_TagString: Untagged
@@ -1764,7 +1765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2eeecf0a897aed42ae1ab29ae39f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  day: {fileID: 11400000, guid: b338493a8b4a3cc40b1bd2a0ab2a0b4a, type: 2}
+  day: {fileID: 11400000, guid: 942d129f4a30b3b418c58786e39ef1e6, type: 2}
   poiSpawner: {fileID: 2104720037}
   currentStats: {fileID: 11400000, guid: 3d36823615cfb3141ade89f65cee72fb, type: 2}
   missionGotten: {fileID: 11400000, guid: 344339e1688f0934db26e7a62b51210a, type: 2}
@@ -1815,6 +1816,34 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1367835075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1367835071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a44f222db338b5e42a3f141be68fc611, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  event: {fileID: 11400000, guid: f3da0a2ec919ba040bbb158992826ea2, type: 2}
+  response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1485154625}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!1 &1392788052
 GameObject:
@@ -2010,6 +2039,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1485154625 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7716711626905613618, guid: 0eaf30dda927d394e93dd98fcb128c44, type: 3}
+  m_PrefabInstance: {fileID: 56837756269008370}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1565917300
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3435,6 +3469,10 @@ PrefabInstance:
     - target: {fileID: 6120157636656718328, guid: 83e20e9b2999ea24689b832d431aed81, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8096499283924752874, guid: 83e20e9b2999ea24689b832d431aed81, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 145.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

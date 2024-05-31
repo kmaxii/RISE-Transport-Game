@@ -4,20 +4,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class SceneSwapper : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void NextScene()
+    public void GameScene()
     {
         SceneManager.LoadScene("TransportGame");
+    }
+
+    public void TutorialScene()
+    {
+        SceneManager.LoadScene("Tutorial");
     }
 }
