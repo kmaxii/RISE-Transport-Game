@@ -15,8 +15,8 @@ MonoBehaviour:
   gameEventWithAudio: {fileID: 11400000, guid: f40d9881b108e4949bb33efe3b0ca9d0, type: 2}
   audioClips:
   - {fileID: 8300000, guid: 9a9f9cf23d15dcf418e1726254aa883f, type: 3}
-  minimumVolume: 0.05
-  maximumVolume: 0.05
+  minimumVolume: 0.02
+  maximumVolume: 0.02
   minimumPitch: 1
   maximumPitch: 1
   loop: 1

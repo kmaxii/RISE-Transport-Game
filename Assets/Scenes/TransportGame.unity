@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.45099503, g: 0.50085473, b: 0.57433176, a: 1}
+  m_IndirectSpecularColor: {r: 0.4509946, g: 0.50085366, b: 0.57433045, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2979,6 +2979,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 5483442948713419609, guid: 0eaf30dda927d394e93dd98fcb128c44, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 1.3599854
+      objectReference: {fileID: 0}
+    - target: {fileID: 5483442948713419609, guid: 0eaf30dda927d394e93dd98fcb128c44, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 79.3
+      objectReference: {fileID: 0}
     - target: {fileID: 5931964260167408172, guid: 0eaf30dda927d394e93dd98fcb128c44, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.767334
@@ -3118,9 +3126,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5076243098416210876, guid: 1ebe1d6687e77b04bb160edcb42382c8, type: 3}
+      propertyPath: moveSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5076243098416210876, guid: 1ebe1d6687e77b04bb160edcb42382c8, type: 3}
       propertyPath: virtualJoystick
       value: 
       objectReference: {fileID: 619940955}
+    - target: {fileID: 5076243098416210876, guid: 1ebe1d6687e77b04bb160edcb42382c8, type: 3}
+      propertyPath: scooterMoveSpeed
+      value: 16
+      objectReference: {fileID: 0}
     - target: {fileID: 5076243098416210877, guid: 1ebe1d6687e77b04bb160edcb42382c8, type: 3}
       propertyPath: cam
       value: 
@@ -3289,7 +3305,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7498704153838807312, guid: 3307160b631d1be40a07cb20c8d66593, type: 3}
       propertyPath: toSetFloats.Array.data[0].value
-      value: 300
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 7498704153838807312, guid: 3307160b631d1be40a07cb20c8d66593, type: 3}
       propertyPath: toSetFloats.Array.data[1].value
@@ -3315,6 +3331,26 @@ PrefabInstance:
     - target: {fileID: 728858244595643247, guid: 83e20e9b2999ea24689b832d431aed81, type: 3}
       propertyPath: m_Name
       value: Camera Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 2901464485292525559, guid: 83e20e9b2999ea24689b832d431aed81, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2901464485292525559, guid: 83e20e9b2999ea24689b832d431aed81, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2901464485292525559, guid: 83e20e9b2999ea24689b832d431aed81, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2901464485292525559, guid: 83e20e9b2999ea24689b832d431aed81, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2901464485292525559, guid: 83e20e9b2999ea24689b832d431aed81, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 60.4
       objectReference: {fileID: 0}
     - target: {fileID: 3443244189669684549, guid: 83e20e9b2999ea24689b832d431aed81, type: 3}
       propertyPath: m_Camera
@@ -3409,8 +3445,8 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 56837756269008370}
   - {fileID: 7903854628051090785}
+  - {fileID: 56837756269008370}
   - {fileID: 1655755697}
   - {fileID: 843921208}
   - {fileID: 234181015}

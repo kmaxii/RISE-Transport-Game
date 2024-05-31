@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.45099503, g: 0.50085473, b: 0.57433176, a: 1}
+  m_IndirectSpecularColor: {r: 0.4509946, g: 0.50085366, b: 0.57433045, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2136,6 +2136,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8096499283924752874, guid: 83e20e9b2999ea24689b832d431aed81, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 145.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2793,6 +2797,14 @@ PrefabInstance:
     - target: {fileID: 5109251598846103679, guid: 0eaf30dda927d394e93dd98fcb128c44, type: 3}
       propertyPath: m_Name
       value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 5483442948713419609, guid: 0eaf30dda927d394e93dd98fcb128c44, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.0024414062
+      objectReference: {fileID: 0}
+    - target: {fileID: 5483442948713419609, guid: 0eaf30dda927d394e93dd98fcb128c44, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 55.5
       objectReference: {fileID: 0}
     - target: {fileID: 5931964260167408172, guid: 0eaf30dda927d394e93dd98fcb128c44, type: 3}
       propertyPath: m_AnchoredPosition.y
